@@ -4,20 +4,21 @@ local GetConversationListStoreModule = require(Parent.AppChat.GetConversationLis
 local SignalsModule = require(Parent.Signals)
 local FetchConversationListPageToSignalsModule = require(Parent.AppChat.fetchConversationListPageToSignals)
 local ListRecipientsStatusModule = require(ShareSheet.Recipients.ListRecipientsStatus)
+local RecipientModule = require(ShareSheet.Recipients.Recipient)
 local _ = require(ShareSheet.Types)
 
-return function() --[[ Line: 15 | Named "createChatInboxRecipientList" ]]
-	-- upvalues: GetConversationListStoreModule (copy), SignalsModule (copy), ListRecipientsStatusModule (copy), FetchConversationListPageToSignalsModule (copy)
+return function() --[[ Line: 16 | Named "createChatInboxRecipientList" ]]
+	-- upvalues: GetConversationListStoreModule (copy), SignalsModule (copy), RecipientModule (copy), ListRecipientsStatusModule (copy), FetchConversationListPageToSignalsModule (copy)
 	local ConversationListStoreModule = GetConversationListStoreModule(false)
 	local t = {}
-	local Computed = SignalsModule.createComputed(function(p1) --[[ Line: 22 ]]
-		-- upvalues: ConversationListStoreModule (copy), t (ref)
+	local Computed = SignalsModule.createComputed(function(p1) --[[ Line: 23 ]]
+		-- upvalues: ConversationListStoreModule (copy), t (ref), RecipientModule (upval)
 		local Conversations = ConversationListStoreModule.getConversations(p1)
 		local Buffer = table.create(#Conversations)
 		local t1 = {}
 		
 		for i, conversation in Conversations do
-			local Entry = t[conversation] or { id = conversation.id, conversation = conversation }
+			local Entry = t[conversation] or RecipientModule.fromConversation(conversation)
 			t1[conversation] = Entry
 			Buffer[i] = Entry
 		end

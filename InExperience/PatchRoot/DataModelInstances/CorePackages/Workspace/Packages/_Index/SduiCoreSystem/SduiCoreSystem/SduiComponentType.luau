@@ -83,6 +83,7 @@
 	RevealRowsButtonWithDivider = "RevealRowsButtonWithDivider",
 	RevealText = "RevealText",
 	SectionHeader = "SectionHeader",
+	SearchAutocompleteSuggestion = "SearchAutocompleteSuggestion",
 	SeeAllTile = "SeeAllTile",
 	ShimmerText = "ShimmerText",
 	SingleItemCollection = "SingleItemCollection",

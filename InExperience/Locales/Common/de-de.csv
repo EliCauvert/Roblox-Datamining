@@ -3291,6 +3291,7 @@ Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Anfrage zum Hinzuf�
 Feature.FriendsActivityFeed.Label.ViewRecentActivity,Kürzliche Aktivität anzeigen
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} Freunde ausgewählt
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} Freunde ausgewählt
+Feature.GameBadges.Label.Experience,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Feedback geben
 Feature.GameDetails.Action.NotInterested,Nicht interessiert

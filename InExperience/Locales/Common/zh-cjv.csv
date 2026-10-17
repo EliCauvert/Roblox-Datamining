@@ -3356,6 +3356,7 @@ Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,“信赖的好友�
 Feature.FriendsActivityFeed.Label.ViewRecentActivity,查看近期活动
 Feature.FriendsMenu.Label.SelectedFriendsCount,已选择 {numerator}/{denominator} 位好友
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,已选择 {selectedCount} 位好友
+Feature.GameBadges.Label.Experience,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,不感兴趣

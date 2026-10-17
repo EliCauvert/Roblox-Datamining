@@ -3358,6 +3358,7 @@ Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,신뢰할 수 있�
 Feature.FriendsActivityFeed.Label.ViewRecentActivity,최근 활동 보기
 Feature.FriendsMenu.Label.SelectedFriendsCount,선택된 친구({numerator}/{denominator}명)
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,선택된 친구({selectedCount}명)
+Feature.GameBadges.Label.Experience,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,관심 없음

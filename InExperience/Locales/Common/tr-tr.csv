@@ -3350,6 +3350,7 @@ Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Güvenilir arkadaş
 Feature.FriendsActivityFeed.Label.ViewRecentActivity,Son Etkinlikleri Görüntüle
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} arkadaş seçildi
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} arkadaş seçildi
+Feature.GameBadges.Label.Experience,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Geri dönüş gönder
 Feature.GameDetails.Action.NotInterested,İlgilenmiyorum

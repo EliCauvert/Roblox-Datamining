@@ -3325,6 +3325,7 @@ Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,تم إرسال ط�
 Feature.FriendsActivityFeed.Label.ViewRecentActivity,عرض النشاط الأخير
 Feature.FriendsMenu.Label.SelectedFriendsCount,تم تحديد {numerator}/{denominator} من الأصدقاء
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,تم تحديد {selectedCount} من الأصدقاء
+Feature.GameBadges.Label.Experience,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,تقديم الملاحظات
 Feature.GameDetails.Action.NotInterested,غير مهتم

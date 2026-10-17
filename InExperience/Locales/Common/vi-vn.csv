@@ -3358,6 +3358,7 @@ Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Đã gửi yêu c�
 Feature.FriendsActivityFeed.Label.ViewRecentActivity,Xem hoạt động gần đây
 Feature.FriendsMenu.Label.SelectedFriendsCount,Đã chọn {numerator}/{denominator} người bạn
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,Đã chọn {selectedCount} người bạn
+Feature.GameBadges.Label.Experience,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,Không quan tâm

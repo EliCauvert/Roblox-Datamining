@@ -3339,6 +3339,7 @@ Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,भरोसेम�
 Feature.FriendsActivityFeed.Label.ViewRecentActivity,हाल ही की ऐक्टिविटी
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} फ़्रेंड्स चुने गए
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} फ़्रेंड्स चुने गए
+Feature.GameBadges.Label.Experience,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,दिलचस्पी नहीं है

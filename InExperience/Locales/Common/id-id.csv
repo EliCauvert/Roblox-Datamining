@@ -3356,6 +3356,7 @@ Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Permintaan teman te
 Feature.FriendsActivityFeed.Label.ViewRecentActivity,Lihat Aktivitas Baru-Baru Ini
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} teman dipilih
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} teman dipilih
+Feature.GameBadges.Label.Experience,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Berikan masukan
 Feature.GameDetails.Action.NotInterested,Tidak tertarik

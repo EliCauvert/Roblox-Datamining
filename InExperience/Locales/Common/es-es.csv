@@ -3359,6 +3359,7 @@ Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Solicitud para ser 
 Feature.FriendsActivityFeed.Label.ViewRecentActivity,Ver Actividad reciente
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} amigos seleccionados
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} amigos seleccionados
+Feature.GameBadges.Label.Experience,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Envía tus comentarios
 Feature.GameDetails.Action.NotInterested,No me interesa

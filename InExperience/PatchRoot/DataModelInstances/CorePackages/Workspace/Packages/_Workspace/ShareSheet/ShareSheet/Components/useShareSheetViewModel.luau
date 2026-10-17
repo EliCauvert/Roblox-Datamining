@@ -39,6 +39,7 @@ return function(p1) --[[ Line: 46 | Named "useShareSheetViewModel" ]]
 	local UseShareSheetSendModuleResult = UseShareSheetSendModule({
 		chatShare = UseSignalStateResult,
 		context = p1.context,
+		recipients = if FFlagShareSheetFriendsSort then v2.recipients else nil,
 		recipientSource = RecipientSource,
 		formatSuccessSnackbarText = p1.formatSuccessSnackbarText,
 		onCloseWithReason = p1.onCloseWithReason,
@@ -49,6 +50,7 @@ return function(p1) --[[ Line: 46 | Named "useShareSheetViewModel" ]]
 		url = p1.url
 	})
 	local UseShareSheetConversationModelModuleResult = UseShareSheetConversationModelModule({
+		listResult = if FFlagShareSheetFriendsSort then v2 else nil,
 		chatShare = UseSignalStateResult,
 		isOpen = p1.isOpen == true,
 		isPeoplePickerDisplayed = Enabled,
@@ -60,7 +62,7 @@ return function(p1) --[[ Line: 46 | Named "useShareSheetViewModel" ]]
 		send = "CommonUI.Features.Action.Send",
 		share = "Feature.SocialShare.Action.Share"
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 89 ]]
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 91 ]]
 		-- upvalues: ShareSheetTelemetryModule (upval), p1 (copy), RecipientSource (copy)
 		ShareSheetTelemetryModule.logInteraction({
 			context = p1.context,
@@ -69,7 +71,7 @@ return function(p1) --[[ Line: 46 | Named "useShareSheetViewModel" ]]
 			interactionType = ShareSheetTelemetryModule.InteractionType.CustomMessageComposerFocused
 		})
 	end, { p1.context, RecipientSource, p1.telemetryId })
-	local UseResult1 = ReactModule.useCallback(function(RequestedConversationId) --[[ Line: 98 ]]
+	local UseResult1 = ReactModule.useCallback(function(RequestedConversationId) --[[ Line: 100 ]]
 		-- upvalues: UseShareSheetSendModuleResult (copy), SelectedConversationIds (copy), ShareSheetTelemetryModule (upval), p1 (copy), RecipientSource (copy), UseShareSheetSelectionModuleResult (copy)
 		if not UseShareSheetSendModuleResult.isSending then
 			ShareSheetTelemetryModule.logInteraction({
@@ -92,19 +94,21 @@ return function(p1) --[[ Line: 46 | Named "useShareSheetViewModel" ]]
 	local v4 = nil
 	
 	if FFlagShareSheetPeoplePickerEnabledModule then
-		UseResult2 = ReactModule.useCallback(function() --[[ Line: 126 ]]
+		UseResult2 = ReactModule.useCallback(function() --[[ Line: 128 ]]
 			-- upvalues: v1 (ref)
 			v1.setIsPeoplePickerDisplayed(true)
 		end, { v1 })
 		local PeoplePickerEligibility = UseShareSheetConversationModelModuleResult.peoplePickerEligibility
+		local PeoplePickerEligibleRecipients = UseShareSheetConversationModelModuleResult.peoplePickerEligibleRecipients
 		v4 = UsePeoplePickerViewModelModule({
-			conversations = PeoplePickerEligibility.eligibleConversations,
-			isEligibilityLoading = PeoplePickerEligibility.isLoading,
+			conversations = if FFlagShareSheetFriendsSort then nil else PeoplePickerEligibility.eligibleConversations,
+			recipients = if FFlagShareSheetFriendsSort then PeoplePickerEligibleRecipients.recipients else nil,
+			isEligibilityLoading = if FFlagShareSheetFriendsSort then PeoplePickerEligibleRecipients.isLoading else PeoplePickerEligibility.isLoading,
 			isPeoplePickerDisplayed = Enabled == true,
-			listStatus = UseShareSheetConversationModelModuleResult.listStatus,
+			listStatus = if FFlagShareSheetFriendsSort then nil else UseShareSheetConversationModelModuleResult.listStatus,
 			loadMore = if FFlagShareSheetFriendsSort then v3.loadMore else nil,
-			listResult = if FFlagShareSheetFriendsSort then v2 else nil,
-			onBack = ReactModule.useCallback(function() --[[ Line: 129 ]]
+			listResult = UseShareSheetConversationModelModuleResult.listResult,
+			onBack = ReactModule.useCallback(function() --[[ Line: 131 ]]
 				-- upvalues: v1 (ref)
 				v1.setIsPeoplePickerDisplayed(false)
 			end, { v1 }),
@@ -114,7 +118,8 @@ return function(p1) --[[ Line: 46 | Named "useShareSheetViewModel" ]]
 	end
 	return {
 		canShareLink = GetAppFeaturePoliciesFunction().getEligibleForExternalContentSharing(),
-		conversationEligibility = UseShareSheetConversationModelModuleResult.conversationEligibility,
+		conversationEligibility = if FFlagShareSheetFriendsSort then nil else UseShareSheetConversationModelModuleResult.conversationEligibility,
+		eligibleRecipients = if FFlagShareSheetFriendsSort then UseShareSheetConversationModelModuleResult.eligibleRecipients else nil,
 		context = p1.context,
 		isOpen = p1.isOpen == true,
 		isPeoplePickerDisplayed = if FFlagShareSheetPeoplePickerEnabledModule then Enabled else nil,

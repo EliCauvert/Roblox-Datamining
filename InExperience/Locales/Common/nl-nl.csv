@@ -3345,6 +3345,7 @@ Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,
 Feature.FriendsActivityFeed.Label.ViewRecentActivity,Recente activiteit bekijken
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} vrienden geselecteerd
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} vrienden geselecteerd
+Feature.GameBadges.Label.Experience,
 Feature.GameDetails.Action.GameDetails,Details van spel
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,Niet geïnteresseerd

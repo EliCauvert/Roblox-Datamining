@@ -7,7 +7,9 @@ local Skeleton = FoundationModule.Skeleton
 local View = FoundationModule.View
 local IconName = FoundationModule.Enums.IconName
 local Radius = FoundationModule.Enums.Radius
+local FFlagShareSheetFriendsSort = require(Parent.SharedFlags).FFlagShareSheetFriendsSort
 local FFlagShareSheetPeoplePickerEnabledModule = require(ShareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
+local RecipientModule = require(ShareSheet.Recipients.Recipient)
 local ShareSheetConstantsModule = require(ShareSheet.ShareSheetConstants)
 local ShareSheetRowModule = require(script.Parent.ShareSheetRow)
 local ShareSheetItemContainerModule = require(script.Parent.ShareSheetItemContainer)
@@ -15,7 +17,7 @@ local ConversationUtilsModule = if FFlagShareSheetPeoplePickerEnabledModule then
 local Players = game:GetService("Players")
 local _ = require(ShareSheet.Types)
 
-local function _(List, p1) --[[ Line: 37 | Named "getOtherParticipants" ]]
+local function _(List, p1) --[[ Line: 42 | Named "getOtherParticipants" ]]
 	local List1 = {}
 	
 	for _, value in List do
@@ -26,7 +28,7 @@ local function _(List, p1) --[[ Line: 37 | Named "getOtherParticipants" ]]
 	return List1
 end
 
-local function createSkeletonItems() --[[ Line: 47 ]]
+local function createSkeletonItems() --[[ Line: 52 ]]
 	-- upvalues: ShareSheetConstantsModule (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
 	local Elements = {}
 	
@@ -60,11 +62,11 @@ local function createSkeletonItems() --[[ Line: 47 ]]
 	return Elements
 end
 
-local function ShareSheetConversationItem(Frame) --[[ Line: 89 ]]
+local function ShareSheetConversationItem(Frame) --[[ Line: 94 ]]
 	-- upvalues: ReactModule (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), ConversationUtilsModule (copy), ShareSheetItemContainerModule (copy)
 	local Conversation = Frame.conversation
 	local Id = Conversation.id
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 92 ]]
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 97 ]]
 		-- upvalues: Frame (copy), Id (copy)
 		Frame.onConversationActivated(Id)
 	end, { Id, Frame.onConversationActivated })
@@ -99,33 +101,69 @@ local function ShareSheetConversationItem(Frame) --[[ Line: 89 ]]
 	})
 end
 
-return function(Frame) --[[ Line: 120 | Named "ShareSheetSocialRow" ]]
-	-- upvalues: Players (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), UseLocalizationFunction (copy), createSkeletonItems (copy), ReactModule (copy), ShareSheetConversationItem (copy), ShareSheetItemContainerModule (copy), IconName (copy), ShareSheetRowModule (copy)
+local function ShareSheetRecipientItem(Frame) --[[ Line: 133 ]]
+	-- upvalues: ReactModule (copy), RecipientModule (copy), ShareSheetItemContainerModule (copy)
+	local Id = Frame.recipient.id
+	local ParticipantIds = RecipientModule.getParticipantIds(Frame.recipient, Frame.localUserId)
+	
+	return ReactModule.createElement(ShareSheetItemContainerModule, {
+		primaryUserId = ParticipantIds[1] or Frame.localUserId,
+		secondUserId = ParticipantIds[2],
+		isSelected = Frame.isSelected,
+		label = RecipientModule.getName(Frame.recipient),
+		onActivated = ReactModule.useCallback(function() --[[ Line: 135 ]]
+			-- upvalues: Frame (copy), Id (copy)
+			Frame.onConversationActivated(Id)
+		end, { Id, Frame.onConversationActivated }),
+		LayoutOrder = Frame.LayoutOrder
+	})
+end
+
+return function(Frame) --[[ Line: 150 | Named "ShareSheetSocialRow" ]]
+	-- upvalues: Players (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), UseLocalizationFunction (copy), FFlagShareSheetFriendsSort (copy), createSkeletonItems (copy), ReactModule (copy), ShareSheetRecipientItem (copy), ShareSheetConversationItem (copy), ShareSheetItemContainerModule (copy), IconName (copy), ShareSheetRowModule (copy)
 	local Text = tostring(Players.LocalPlayer and Players.LocalPlayer.UserId or 0)
 	local UseLocalizationResult = if FFlagShareSheetPeoplePickerEnabledModule then UseLocalizationFunction({ more = "CommonUI.Features.Label.More" }) else nil
 	local Elements = {}
+	local IsLoading = if FFlagShareSheetFriendsSort then Frame.eligibleRecipients.isLoading else Frame.conversationEligibility.isLoading
 	
-	if Frame.isLoading or Frame.conversationEligibility.isLoading then
+	if Frame.isLoading or IsLoading then
 		Elements = createSkeletonItems()
 	else
-		local EligibleConversations = Frame.conversationEligibility.eligibleConversations
-		
-		for LayoutOrder, eligibleConversation in EligibleConversations do
-			local Id = eligibleConversation.id
-			Elements[Id] = ReactModule.createElement(ShareSheetConversationItem, {
-				conversation = eligibleConversation,
-				isSelected = Frame.selectedConversationIds[Id] == true,
-				localUserId = Text,
-				onConversationActivated = Frame.onConversationActivated,
-				LayoutOrder = LayoutOrder
-			})
+		local CountRecipients = nil
+		if FFlagShareSheetFriendsSort then
+			local Recipients = Frame.eligibleRecipients.recipients
+			
+			for LayoutOrder, recipient in Recipients do
+				Elements[recipient.id] = ReactModule.createElement(ShareSheetRecipientItem, {
+					recipient = recipient,
+					isSelected = Frame.selectedConversationIds[recipient.id] == true,
+					localUserId = Text,
+					onConversationActivated = Frame.onConversationActivated,
+					LayoutOrder = LayoutOrder
+				})
+			end
+			CountRecipients = #Recipients
+		else
+			local EligibleConversations = Frame.conversationEligibility.eligibleConversations
+			
+			for LayoutOrder1, eligibleConversation in EligibleConversations do
+				local Id = eligibleConversation.id
+				Elements[Id] = ReactModule.createElement(ShareSheetConversationItem, {
+					conversation = eligibleConversation,
+					isSelected = Frame.selectedConversationIds[Id] == true,
+					localUserId = Text,
+					onConversationActivated = Frame.onConversationActivated,
+					LayoutOrder = LayoutOrder1
+				})
+			end
+			CountRecipients = #EligibleConversations
 		end
 		if FFlagShareSheetPeoplePickerEnabledModule then
 			Elements.More = ReactModule.createElement(ShareSheetItemContainerModule, {
 				icon = IconName.ThreeDotsHorizontal,
 				label = UseLocalizationResult.more,
 				onActivated = Frame.onMoreActivated,
-				LayoutOrder = #EligibleConversations + 1
+				LayoutOrder = CountRecipients + 1
 			})
 		end
 	end

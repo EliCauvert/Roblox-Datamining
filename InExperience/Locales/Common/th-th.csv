@@ -3341,6 +3341,7 @@ Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,ส่งคำข�
 Feature.FriendsActivityFeed.Label.ViewRecentActivity,ดูกิจกรรมล่าสุด
 Feature.FriendsMenu.Label.SelectedFriendsCount,เลือกเพื่อนแล้ว {numerator} จาก {denominator} คน
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,เลือกเพื่อนแล้ว {selectedCount} คน
+Feature.GameBadges.Label.Experience,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,ไม่สนใจ
