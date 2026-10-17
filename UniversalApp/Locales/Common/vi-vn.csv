@@ -3668,6 +3668,7 @@ Feature.FriendsActivityFeed.Timestamp.OneWeekAbbreviated,1t
 Feature.FriendsActivityFeed.Timestamp.WeeksAbbreviatedPlural,{num_weeks}t
 Feature.FriendsMenu.Label.SelectedFriendsCount,Đã chọn {numerator}/{denominator} người bạn
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,Đã chọn {selectedCount} người bạn
+Feature.GameBadges.Label.Experience,
 Feature.GameDetails.Action.BuyRobux,
 Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.CopyLink,

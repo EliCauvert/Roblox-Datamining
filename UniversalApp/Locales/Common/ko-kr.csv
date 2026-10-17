@@ -3670,6 +3670,7 @@ Feature.FriendsActivityFeed.Timestamp.OneWeekAbbreviated,
 Feature.FriendsActivityFeed.Timestamp.WeeksAbbreviatedPlural,
 Feature.FriendsMenu.Label.SelectedFriendsCount,선택된 친구({numerator}/{denominator}명)
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,선택된 친구({selectedCount}명)
+Feature.GameBadges.Label.Experience,
 Feature.GameDetails.Action.BuyRobux,
 Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.CopyLink,

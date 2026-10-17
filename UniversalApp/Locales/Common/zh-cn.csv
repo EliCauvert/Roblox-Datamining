@@ -3647,6 +3647,7 @@ Feature.FriendsActivityFeed.Timestamp.OneWeekAbbreviated,
 Feature.FriendsActivityFeed.Timestamp.WeeksAbbreviatedPlural,
 Feature.FriendsMenu.Label.SelectedFriendsCount,已选择 {numerator}/{denominator} 位好友
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,已选择 {selectedCount} 位好友
+Feature.GameBadges.Label.Experience,
 Feature.GameDetails.Action.BuyRobux,
 Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.CopyLink,

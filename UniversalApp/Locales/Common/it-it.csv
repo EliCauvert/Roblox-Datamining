@@ -3650,6 +3650,7 @@ Feature.FriendsActivityFeed.Timestamp.OneWeekAbbreviated,
 Feature.FriendsActivityFeed.Timestamp.WeeksAbbreviatedPlural,
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} amici selezionati
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} amici selezionati
+Feature.GameBadges.Label.Experience,
 Feature.GameDetails.Action.BuyRobux,
 Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.CopyLink,

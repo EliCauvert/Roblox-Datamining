@@ -3651,6 +3651,7 @@ Feature.FriendsActivityFeed.Timestamp.OneWeekAbbreviated,
 Feature.FriendsActivityFeed.Timestamp.WeeksAbbreviatedPlural,
 Feature.FriendsMenu.Label.SelectedFriendsCount,เลือกเพื่อนแล้ว {numerator} จาก {denominator} คน
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,เลือกเพื่อนแล้ว {selectedCount} คน
+Feature.GameBadges.Label.Experience,
 Feature.GameDetails.Action.BuyRobux,
 Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.CopyLink,
