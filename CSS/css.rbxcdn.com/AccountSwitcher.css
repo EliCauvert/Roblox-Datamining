@@ -1,0 +1,414 @@
+.account-switcher-list {
+    margin-top: 12px;
+    max-height: 432px;
+    padding: 0
+}
+
+.account-switcher-list .account-selection-list-item {
+    width: 100%;
+    height: 72px
+}
+
+.account-switcher-list .account-selection-list-item .account-selection,
+.account-switcher-list .account-selection-list-item .active-account {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: .1s linear;
+    padding: 0 12px;
+    border-radius: 6px
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .thumbnail-2d-container,
+.account-switcher-list .account-selection-list-item .active-account .thumbnail-2d-container {
+    border-radius: 50%;
+    display: inline-block;
+    margin: 12px 12px 12px 0;
+    padding: 0;
+    height: 48px;
+    width: 48px;
+    flex-shrink: 0;
+    flex-grow: 0
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .account-switcher-icon-add,
+.account-switcher-list .account-selection-list-item .active-account .account-switcher-icon-add {
+    align-items: center;
+    display: flex;
+    flex: 0 0 48px;
+    justify-content: center;
+    text-align: center;
+    height: 48px;
+    width: 48px;
+    min-height: 48px;
+    min-width: 48px;
+    max-height: 48px;
+    max-width: 48px;
+    border-radius: 50%;
+    margin-right: 12px
+}
+
+.light-theme .account-switcher-list .account-selection-list-item .account-selection .account-switcher-icon-add,
+.light-theme .account-switcher-list .account-selection-list-item .active-account .account-switcher-icon-add {
+    background: #c7cbce
+}
+
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection .account-switcher-icon-add,
+.dark-theme .account-switcher-list .account-selection-list-item .active-account .account-switcher-icon-add {
+    background: #656668
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .account-switcher-icon-add .icon-plus,
+.account-switcher-list .account-selection-list-item .active-account .account-switcher-icon-add .icon-plus {
+    background-size: 100% auto;
+    background-position: 0 -990px;
+    background-size: 200% auto;
+    padding: 0;
+    height: 18px;
+    width: 18px;
+    flex-shrink: 0;
+    flex-grow: 0
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .account-switcher-icon-add .icon-plus:hover,
+.account-switcher-list .account-selection-list-item .active-account .account-switcher-icon-add .icon-plus:hover {
+    background-position: -18px -990px
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .account-selection-name-container,
+.account-switcher-list .account-selection-list-item .active-account .account-selection-name-container {
+    display: grid;
+    padding-right: 48px;
+    height: 100%;
+    flex: 1 1 235px
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .account-selection-name-container .account-selection-displayname,
+.account-switcher-list .account-selection-list-item .active-account .account-selection-name-container .account-selection-displayname {
+    font-weight: 700;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-self: end
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .account-selection-name-container .account-selection-username,
+.account-switcher-list .account-selection-list-item .active-account .account-selection-name-container .account-selection-username {
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 4px;
+    align-self: start
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .account-selection-name-container .account-selection-add-account,
+.account-switcher-list .account-selection-list-item .active-account .account-selection-name-container .account-selection-add-account {
+    font-weight: 700;
+    font-size: 14px;
+    align-self: center
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .spinner,
+.account-switcher-list .account-selection-list-item .active-account .spinner {
+    margin: 0
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .spinner-sm,
+.account-switcher-list .account-selection-list-item .active-account .spinner-sm {
+    flex-shrink: 0;
+    flex-basis: 55px;
+    height: 16px;
+    background-size: 55px 16px
+}
+
+.account-switcher-list .account-selection-list-item .account-selection .accept-icon-image,
+.account-switcher-list .account-selection-list-item .active-account .accept-icon-image {
+    flex-shrink: 0;
+    height: 28px;
+    width: 28px;
+    margin: 0;
+    background-size: 28px;
+    background-image: url(data:image/png;base64,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)
+}
+
+.light-theme .account-switcher-list .account-selection-list-item .account-selection {
+    color: transparent;
+    background-color: var(--color-surface-300);
+    border-color: transparent
+}
+
+.light-theme .account-switcher-list .account-selection-list-item .account-selection.active,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection:active,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection:focus,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection:hover,
+.open>.light-theme .account-switcher-list .account-selection-list-item .account-selection.dropdown-toggle {
+    color: transparent;
+    background-color: color-mix(in srgb, var(--color-surface-300), #000 10%);
+    border-color: transparent
+}
+
+.light-theme .account-switcher-list .account-selection-list-item .account-selection.active,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection:active,
+.open>.light-theme .account-switcher-list .account-selection-list-item .account-selection.dropdown-toggle {
+    background-image: none
+}
+
+.light-theme .account-switcher-list .account-selection-list-item .account-selection.disabled,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection.disabled.active,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection.disabled:active,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection.disabled:focus,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection.disabled:hover,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection[disabled],
+.light-theme .account-switcher-list .account-selection-list-item .account-selection[disabled].active,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection[disabled]:active,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection[disabled]:focus,
+.light-theme .account-switcher-list .account-selection-list-item .account-selection[disabled]:hover,
+fieldset[disabled] .light-theme .account-switcher-list .account-selection-list-item .account-selection,
+fieldset[disabled] .light-theme .account-switcher-list .account-selection-list-item .account-selection.active,
+fieldset[disabled] .light-theme .account-switcher-list .account-selection-list-item .account-selection:active,
+fieldset[disabled] .light-theme .account-switcher-list .account-selection-list-item .account-selection:focus,
+fieldset[disabled] .light-theme .account-switcher-list .account-selection-list-item .account-selection:hover {
+    background-color: var(--color-surface-300);
+    border-color: transparent
+}
+
+.light-theme .account-switcher-list .account-selection-list-item .account-selection .badge {
+    color: var(--color-surface-300);
+    background-color: transparent
+}
+
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection {
+    color: transparent;
+    background-color: var(--color-surface-300);
+    border-color: transparent
+}
+
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection.active,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection:active,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection:focus,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection:hover,
+.open>.dark-theme .account-switcher-list .account-selection-list-item .account-selection.dropdown-toggle {
+    color: transparent;
+    background-color: color-mix(in srgb, var(--color-surface-300), #000 10%);
+    border-color: transparent
+}
+
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection.active,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection:active,
+.open>.dark-theme .account-switcher-list .account-selection-list-item .account-selection.dropdown-toggle {
+    background-image: none
+}
+
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection.disabled,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection.disabled.active,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection.disabled:active,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection.disabled:focus,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection.disabled:hover,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection[disabled],
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection[disabled].active,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection[disabled]:active,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection[disabled]:focus,
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection[disabled]:hover,
+fieldset[disabled] .dark-theme .account-switcher-list .account-selection-list-item .account-selection,
+fieldset[disabled] .dark-theme .account-switcher-list .account-selection-list-item .account-selection.active,
+fieldset[disabled] .dark-theme .account-switcher-list .account-selection-list-item .account-selection:active,
+fieldset[disabled] .dark-theme .account-switcher-list .account-selection-list-item .account-selection:focus,
+fieldset[disabled] .dark-theme .account-switcher-list .account-selection-list-item .account-selection:hover {
+    background-color: var(--color-surface-300);
+    border-color: transparent
+}
+
+.dark-theme .account-switcher-list .account-selection-list-item .account-selection .badge {
+    color: var(--color-surface-300);
+    background-color: transparent
+}
+
+.account-switcher-list .account-selection-list-item .account-switcher-foundation-row {
+    border: 0;
+    background: transparent;
+    text-align: left
+}
+
+.account-switcher-list .account-selection-list-item .account-switcher-foundation-row[type=button] {
+    font: inherit;
+    color: inherit
+}
+
+.account-switcher-list .account-selection-list-item .account-switcher-foundation-row .account-switcher-foundation-check {
+    flex-shrink: 0;
+    height: 28px;
+    width: 28px;
+    margin: 0
+}
+
+.account-switcher-list.account-switcher-foundation-list {
+    background-color: var(--color-surface-100);
+    margin-top: 0;
+    padding-bottom: 12px
+}
+
+.account-switcher-list.account-switcher-foundation-list .account-selection:not(:hover):not(:focus):not(:active),
+.account-switcher-list.account-switcher-foundation-list .active-account {
+    background-color: var(--color-surface-100)
+}
+
+.dark-theme .login-revamp-account-switcher .account-switcher-container .account-switcher-list,
+.light-theme .login-revamp-account-switcher .account-switcher-container .account-switcher-list,
+.login-revamp-account-switcher .account-switcher-container .account-switcher-list .account-selection:not(:hover):not(:focus):not(:active) {
+    background-color: var(--color-surface-200)
+}
+
+@media(max-width:319px) {
+    .account-switcher-modal .modal-dialog {
+        padding: 0
+    }
+}
+
+@media(min-width:543px) {
+    .account-switcher-modal .modal-dialog {
+        width: 400px
+    }
+}
+
+.account-switcher-modal .modal-dialog .modal-content {
+    border-radius: 8px
+}
+
+.account-switcher-modal .modal-dialog .modal-content .close {
+    float: left
+}
+
+.account-switcher-modal .modal-dialog .modal-content .modal-title {
+    text-align: center;
+    padding-right: 14px;
+    font-size: 20px
+}
+
+.account-switcher-modal .modal-dialog .modal-content .base-confirmation-modal-body-container,
+.account-switcher-modal .modal-dialog .modal-content .modal-body {
+    padding: 0 12px
+}
+
+.account-switcher-modal .modal-dialog .modal-content .modal-body .account-switcher-help-text {
+    margin: 12px;
+    font-size: 15px;
+    text-align: center
+}
+
+.account-switcher-modal .modal-dialog .modal-content .modal-body .body-text {
+    text-align: center;
+    margin: 12px 0;
+    font-size: 15px;
+    font-size: 16px
+}
+
+.account-switcher-modal .modal-dialog .modal-content .modal-body .modal-section {
+    padding: 0
+}
+
+.account-switcher-modal .modal-dialog .modal-content .modal-body .account-switcher-account-limit-text {
+    font-size: 10px;
+    text-align: center
+}
+
+.account-switcher-modal .modal-dialog .modal-content .modal-body .account-switcher-button-container {
+    margin: 12px 0
+}
+
+.account-switcher-modal .modal-dialog .modal-content .modal-body .modal-button {
+    margin-top: 6px;
+    margin-bottom: 6px
+}
+
+.account-switcher-modal .modal-dialog .modal-content .modal-body .modal-text-button {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    display: block
+}
+
+div.account-switcher-modal.account-switcher-foundation-dialog {
+    border-radius: 8px;
+    background-color: var(--color-surface-100);
+    color: var(--color-content-emphasis);
+    max-width: calc(100vw - 24px);
+    min-width: 0;
+    overflow: hidden;
+    padding: 0;
+    width: 400px
+}
+
+@media(max-width:319px) {
+    div.account-switcher-modal.account-switcher-foundation-dialog {
+        max-width: 100%;
+        width: 100%
+    }
+}
+
+div.account-switcher-modal.account-switcher-foundation-dialog .account-switcher-foundation-header {
+    align-items: center;
+    border-bottom: var(--stroke-standard) solid var(--color-stroke-muted);
+    display: flex;
+    min-height: 72px;
+    padding: 0 12px
+}
+
+div.account-switcher-modal.account-switcher-foundation-dialog .account-switcher-foundation-close,
+div.account-switcher-modal.account-switcher-foundation-dialog .account-switcher-foundation-header-spacer {
+    flex: 0 0 48px
+}
+
+div.account-switcher-modal.account-switcher-foundation-dialog .account-switcher-foundation-title {
+    flex: 1 1 auto;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.4;
+    margin: 0;
+    text-align: center
+}
+
+div.account-switcher-modal.account-switcher-foundation-dialog .account-switcher-foundation-body {
+    background-color: var(--color-surface-100);
+    padding: 0 12px
+}
+
+div.account-switcher-modal.account-switcher-foundation-dialog .account-switcher-foundation-body .account-switcher-foundation-section {
+    background-color: var(--color-surface-100);
+    padding: 0
+}
+
+div.account-switcher-modal.account-switcher-foundation-dialog .account-switcher-foundation-body .account-switcher-help-text {
+    font-size: 15px;
+    margin: 12px;
+    text-align: center
+}
+
+div.account-switcher-modal.account-switcher-foundation-dialog .account-switcher-foundation-body .modal-section {
+    padding: 0
+}
+
+.login-revamp-account-switcher .account-switcher-container {
+    width: 100%
+}
+
+.login-revamp-account-switcher .account-switcher-section {
+    width: 100%;
+    background-color: transparent;
+    margin: 0;
+    padding: 0
+}
+
+.login-revamp-account-switcher .account-switcher-list {
+    border: none;
+    border-radius: var(--radius-large);
+    margin-top: var(--padding-medium);
+    overflow: hidden;
+    padding: var(--padding-medium)
+}

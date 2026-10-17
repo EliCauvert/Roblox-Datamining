@@ -1,0 +1,82 @@
+.add-password-modal-image {
+    background-image: url(https://images.rbxcdn.com/97ece22f2b7d710a8d25196c871af810-lock.png)
+}
+
+.add-password-modal-image,
+.success-modal-image {
+    height: 142px;
+    background-position: 50%;
+    background-size: auto 142px;
+    background-repeat: no-repeat;
+    margin: 12px 0
+}
+
+.success-modal-image {
+    background-image: url(https://images.rbxcdn.com/07a2b232943e5e401523f463e8401dd3-SuccessIcon.svg)
+}
+
+.facebook-sunset-modal-title-container {
+    position: relative;
+    height: 28px
+}
+
+.facebook-sunset-title-button {
+    background: transparent;
+    border: none;
+    outline: none;
+    position: absolute;
+    z-index: 1
+}
+
+#contained-modal-title-vcenter {
+    width: 100%;
+    text-align: center
+}
+
+.input-field-error {
+    border: 1px solid #f74b52 !important
+}
+
+.dark-theme .input-field:focus {
+    border: 1px solid
+}
+
+.password-error {
+    text-align: left
+}
+
+.password-input {
+    margin: 12px 0
+}
+
+.facebook-sunset-btn {
+    width: 100%;
+    margin-top: 12px;
+    margin-bottom: 12px
+}
+
+.facebook-sunset-modal {
+    min-width: 543px
+}
+
+@media (max-width:767px) {
+    .facebook-sunset-modal {
+        padding: 0
+    }
+}
+
+.facebook-sunset-modal .modal-dialog {
+    padding: 0
+}
+
+.facebook-sunset-modal .modal-dialog .modal-content {
+    border-radius: 8px
+}
+
+.facebook-sunset-modal .modal-dialog .modal-content .modal-header {
+    height: 48px
+}
+
+.facebook-sunset-modal .modal-dialog .modal-content .modal-body {
+    text-align: center
+}

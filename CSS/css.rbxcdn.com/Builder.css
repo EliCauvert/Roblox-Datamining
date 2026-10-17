@@ -1,0 +1,637 @@
+@font-face {
+    font-family: Comic Neue;
+    src: url(https://css.rbxcdn.com/7a41d8172d76c558.woff2)format("woff2");
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Comic Neue;
+    src: url(https://css.rbxcdn.com/7a22b12771b98d4d.woff2)format("woff2");
+    font-weight: 700;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://css.rbxcdn.com/751845fb13435230.woff2)format("woff2"), url(https://css.rbxcdn.com/6a0f34f41a26b66e.woff)format("woff");
+    font-weight: 100;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://css.rbxcdn.com/4f1026e53496b1d3.woff2)format("woff2"), url(https://css.rbxcdn.com/b4872f02f108cdab.woff)format("woff");
+    font-weight: 100;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://css.rbxcdn.com/9a0cad3cab3175e0.woff2)format("woff2"), url(https://css.rbxcdn.com/65a6fb4faaf36f36.woff)format("woff");
+    font-weight: 300;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://css.rbxcdn.com/46d5aa6758bddd3e.woff2)format("woff2"), url(https://css.rbxcdn.com/1aaf6d6423b57891.woff)format("woff");
+    font-weight: 300;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://css.rbxcdn.com/5f8b8d5d1962b747.woff2)format("woff2"), url(https://css.rbxcdn.com/a65216302c08dda8.woff)format("woff");
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://css.rbxcdn.com/622196842d3c64c2.woff2)format("woff2"), url(https://css.rbxcdn.com/348cff8a779b1813.woff)format("woff");
+    font-weight: 400;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://css.rbxcdn.com/7f3ddcb5a3796526.woff2)format("woff2"), url(https://css.rbxcdn.com/2a2531d511d57934.woff)format("woff");
+    font-weight: 500;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://css.rbxcdn.com/4f9472a07e64b815.woff2)format("woff2"), url(https://css.rbxcdn.com/410528d6d85fefed.woff)format("woff");
+    font-weight: 500;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://css.rbxcdn.com/77cbcd18c888e0f1.woff2)format("woff2"), url(https://css.rbxcdn.com/59280cfefe63a569.woff)format("woff");
+    font-weight: 600;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://css.rbxcdn.com/4c70c58728d4c988.woff2)format("woff2"), url(https://css.rbxcdn.com/1fed58db0025ed4f.woff)format("woff");
+    font-weight: 600;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://css.rbxcdn.com/3e19a797e2ce0522.woff2)format("woff2"), url(https://css.rbxcdn.com/ab14aff12bcddc27.woff)format("woff");
+    font-weight: 700;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://css.rbxcdn.com/a29e1d8162e123a2.woff2)format("woff2"), url(https://css.rbxcdn.com/794cfc49734a16e2.woff)format("woff");
+    font-weight: 700;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://css.rbxcdn.com/be234b98e1d313a5.woff2)format("woff2"), url(https://css.rbxcdn.com/b075e642010b513b.woff)format("woff");
+    font-weight: 800;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://css.rbxcdn.com/7c55f039ae2704c7.woff2)format("woff2"), url(https://css.rbxcdn.com/9e1e6f3d60c5013c.woff)format("woff");
+    font-weight: 800;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://css.rbxcdn.com/fc4541b407a52a92.woff2)format("woff2"), url(https://css.rbxcdn.com/cbc550e9bc3e6ff5.woff)format("woff");
+    font-weight: 300;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://css.rbxcdn.com/8c73eb363138b7d5.woff2)format("woff2"), url(https://css.rbxcdn.com/a427089d1f45e42e.woff)format("woff");
+    font-weight: 300;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://css.rbxcdn.com/e33616070474b1ec.woff2)format("woff2"), url(https://css.rbxcdn.com/426c2134590f8f5c.woff)format("woff");
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://css.rbxcdn.com/821fef81e7b819f3.woff2)format("woff2"), url(https://css.rbxcdn.com/543675eceb00fd2e.woff)format("woff");
+    font-weight: 400;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://css.rbxcdn.com/24a7ffe24ef1e616.woff2)format("woff2"), url(https://css.rbxcdn.com/e8839199d4d1895e.woff)format("woff");
+    font-weight: 600;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://css.rbxcdn.com/12937f3ca7bf40a7.woff2)format("woff2"), url(https://css.rbxcdn.com/3f5ccd571c3efd76.woff)format("woff");
+    font-weight: 600;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://css.rbxcdn.com/bbdb90c69a1ab78f.woff2)format("woff2"), url(https://css.rbxcdn.com/ae3d7668e0e4a202.woff)format("woff");
+    font-weight: 700;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://css.rbxcdn.com/7da4b595b449bac9.woff2)format("woff2"), url(https://css.rbxcdn.com/2a7ba8d66e3e4cc9.woff)format("woff");
+    font-weight: 700;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://css.rbxcdn.com/24fe8b0edbc0ca90.woff2)format("woff2"), url(https://css.rbxcdn.com/b7adb341f0e49d34.woff)format("woff");
+    font-weight: 800;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://css.rbxcdn.com/878f196c39133a6a.woff2)format("woff2"), url(https://css.rbxcdn.com/17c40ff1da118169.woff)format("woff");
+    font-weight: 800;
+    font-style: italic
+}
+
+.dark-theme.builder-font .refresh-link-icon:after,
+.light-theme.builder-font .refresh-link-icon:after,
+.dark-theme.builder-font .see-all-link-icon:after,
+.light-theme.builder-font .see-all-link-icon:after {
+    vertical-align: middle;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSI2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgdmlld0JveD0iMCAwIDMyIDY0Ij48dGl0bGU+bGlnaHRfY29tbW9uX3NtYWxsPC90aXRsZT48ZyBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0xMi43MTMgNC4yODdBNi4wMDIgNi4wMDIgMCAwIDAgMi4zNDEgNkguMjUyYTguMDAzIDguMDAzIDAgMCAxIDEzLjg4My0zLjEzNWwxLjAxMS0xLjAxMWEuNS41IDAgMCAxIC44NTQuMzUzVjZoLTMuNzkzYS41LjUgMCAwIDEtLjM1My0uODU0em0tOS40MjYgNy40MjZBNi4wMDIgNi4wMDIgMCAwIDAgMTMuNjU5IDEwaDIuMDg5YTguMDAzIDguMDAzIDAgMCAxLTEzLjg4MyAzLjEzNUwuODU0IDE0LjE0NkEuNS41IDAgMCAxIDAgMTMuNzkzVjEwaDMuNzkzYS41LjUgMCAwIDEgLjM1My44NTR6Ii8+PHBhdGggZmlsbC1vcGFjaXR5PSIuNyIgZD0ibTEzLjIwMyAzOC44MTItMS45ODguMDA4YTEuMjkgMS4yOSAwIDAgMC0xLjExNS45NzVMOC41NjggNDYuMTRhMS4zMDUgMS4zMDUgMCAwIDAgMS4xODUgMS42MDlsMS45MzItLjAwM2MuODUzIDAgMS41ODgtLjYwMyAxLjc1Ni0xLjQ0bDEuMDg0LTUuNDA2YTEuNzkgMS43OSAwIDAgMC0xLjMyMi0yLjA4OG0tNS44OTcgNy4wOTQgMS41MzItNi4zNDVjLjA2NS0uMjcxLjE3OS0uNTIuMzI3LS43NDNsLTEuMDk4LS4wMDUuODE4LTQuNDQ0QTIgMiAwIDAgMCA2LjkxOCAzMmEuNzc1Ljc3NSAwIDAgMC0uNzUyLjU4OWwtMS4yMjUgNS4wOTNjLS4xNzkuNzA0LS41MTYgMS4xNTEtMS4xNTIgMS4xNTFBMS43OSAxLjc5IDAgMCAwIDIgNDAuNjIzdjUuMzQzYzAgLjk4OS44MDEgMS43OSAxLjc4OSAxLjc5bDMuODctLjAwNmEyLjI4IDIuMjggMCAwIDEtLjM1My0xLjg0NE0xNC44NSA2MmMwLTItMS43MS0zLjg0LTMuMTYtNWE1LjkgNS45IDAgMCAwLTEuNzQtMSAzLjA1IDMuMDUgMCAwIDAgMi4xOC0yLjkydi0yYTMgMyAwIDAgMC0zLjA1LTNIN2EzLjA1IDMuMDUgMCAwIDAtMyAzLjAzdjJhMyAzIDAgMCAwIDIuMiAyLjkyIDYuNCA2LjQgMCAwIDAtMS43MS45N0MzIDU4LjEzIDEuMjggNjAgMS4yNyA2MnYuMTRjMCAuNDggMy40MSAxLjgxIDYuNzkgMS44MXM2Ljc5LTEuMzMgNi43OS0xLjgxem0tNyAuNDJhLjY0LjY0IDAgMCAxLTEtLjUxdi0zLjYzYS42NC42NCAwIDAgMSAxLS41MUwxMSA2MC4xeiIvPjxwYXRoIGQ9Ik0xMS4zNzIgMjQuODc5IDYuNDkgMjkuNzZhLjg4OS44ODkgMCAxIDAgMS4yNTcgMS4yNTdsNi4zOTgtNi4zOThhLjg5Ljg5IDAgMCAwIDAtMS4yNTdsLTYuMzk4LTYuMzk4YS44ODkuODg5IDAgMCAwLTEuMjU3IDEuMjU3bDQuODc5IDQuODc5SC44ODlhLjg4OS44ODkgMCAxIDAgMCAxLjc3OHoiLz48L2c+PC9zdmc+);
+    background-repeat: no-repeat;
+    background-size: 32px;
+    width: 16px;
+    height: 16px;
+    display: inline-block
+}
+
+.dark-theme.builder-font .refresh-link-icon:after,
+.dark-theme .light-theme.builder-font .refresh-link-icon:after,
+.light-theme.builder-font .dark-theme .refresh-link-icon:after,
+.dark-theme.builder-font .see-all-link-icon:after,
+.dark-theme .light-theme.builder-font .see-all-link-icon:after,
+.light-theme.builder-font .dark-theme .see-all-link-icon:after {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSI2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgdmlld0JveD0iMCAwIDMyIDY0Ij48dGl0bGU+bGlnaHRfY29tbW9uX3NtYWxsPC90aXRsZT48ZyBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0xMi43MTMgNC4yODdBNi4wMDIgNi4wMDIgMCAwIDAgMi4zNDEgNkguMjUyYTguMDAzIDguMDAzIDAgMCAxIDEzLjg4My0zLjEzNWwxLjAxMS0xLjAxMWEuNS41IDAgMCAxIC44NTQuMzUzVjZoLTMuNzkzYS41LjUgMCAwIDEtLjM1My0uODU0em0tOS40MjYgNy40MjZBNi4wMDIgNi4wMDIgMCAwIDAgMTMuNjU5IDEwaDIuMDg5YTguMDAzIDguMDAzIDAgMCAxLTEzLjg4MyAzLjEzNUwuODU0IDE0LjE0NkEuNS41IDAgMCAxIDAgMTMuNzkzVjEwaDMuNzkzYS41LjUgMCAwIDEgLjM1My44NTR6Ii8+PHBhdGggZmlsbC1vcGFjaXR5PSIuNyIgZD0ibTEzLjIwMyAzOC44MTItMS45ODguMDA4YTEuMjkgMS4yOSAwIDAgMC0xLjExNS45NzVMOC41NjggNDYuMTRhMS4zMDUgMS4zMDUgMCAwIDAgMS4xODUgMS42MDlsMS45MzItLjAwM2MuODUzIDAgMS41ODgtLjYwMyAxLjc1Ni0xLjQ0bDEuMDg0LTUuNDA2YTEuNzkgMS43OSAwIDAgMC0xLjMyMi0yLjA4OG0tNS44OTcgNy4wOTQgMS41MzItNi4zNDVjLjA2NS0uMjcxLjE3OS0uNTIuMzI3LS43NDNsLTEuMDk4LS4wMDUuODE4LTQuNDQ0QTIgMiAwIDAgMCA2LjkxOCAzMmEuNzc1Ljc3NSAwIDAgMC0uNzUyLjU4OWwtMS4yMjUgNS4wOTNjLS4xNzkuNzA0LS41MTYgMS4xNTEtMS4xNTIgMS4xNTFBMS43OSAxLjc5IDAgMCAwIDIgNDAuNjIzdjUuMzQzYzAgLjk4OS44MDEgMS43OSAxLjc4OSAxLjc5bDMuODctLjAwNmEyLjI4IDIuMjggMCAwIDEtLjM1My0xLjg0NE0xNC44NSA2MmMwLTItMS43MS0zLjg0LTMuMTYtNWE1LjkgNS45IDAgMCAwLTEuNzQtMSAzLjA1IDMuMDUgMCAwIDAgMi4xOC0yLjkydi0yYTMgMyAwIDAgMC0zLjA1LTNIN2EzLjA1IDMuMDUgMCAwIDAtMyAzLjAzdjJhMyAzIDAgMCAwIDIuMiAyLjkyIDYuNCA2LjQgMCAwIDAtMS43MS45N0MzIDU4LjEzIDEuMjggNjAgMS4yNyA2MnYuMTRjMCAuNDggMy40MSAxLjgxIDYuNzkgMS44MXM2Ljc5LTEuMzMgNi43OS0xLjgxem0tNyAuNDJhLjY0LjY0IDAgMCAxLTEtLjUxdi0zLjYzYS42NC42NCAwIDAgMSAxLS41MUwxMSA2MC4xeiIvPjxwYXRoIGQ9Ik0xMS4zNzIgMjQuODc5IDYuNDkgMjkuNzZhLjg4OS44ODkgMCAxIDAgMS4yNTcgMS4yNTdsNi4zOTgtNi4zOThhLjg5Ljg5IDAgMCAwIDAtMS4yNTdsLTYuMzk4LTYuMzk4YS44ODkuODg5IDAgMCAwLTEuMjU3IDEuMjU3bDQuODc5IDQuODc5SC44ODlhLjg4OS44ODkgMCAxIDAgMCAxLjc3OHoiLz48L2c+PC9zdmc+)
+}
+
+.light-theme .dark-theme.builder-font .refresh-link-icon:after,
+.dark-theme.builder-font .light-theme .refresh-link-icon:after,
+.light-theme.builder-font .refresh-link-icon:after,
+.light-theme .dark-theme.builder-font .see-all-link-icon:after,
+.dark-theme.builder-font .light-theme .see-all-link-icon:after,
+.light-theme.builder-font .see-all-link-icon:after {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSI2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgdmlld0JveD0iMCAwIDMyIDY0Ij48dGl0bGU+ZGFya19jb21tb25fc21hbGw8L3RpdGxlPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PHBhdGggZmlsbD0iIzM5M2IzZCIgZD0iTTEyLjcxMyA0LjI4N0E2LjAwMiA2LjAwMiAwIDAgMCAyLjM0MSA2SC4yNTJhOC4wMDMgOC4wMDMgMCAwIDEgMTMuODgzLTMuMTM1bDEuMDExLTEuMDExYS41LjUgMCAwIDEgLjg1NC4zNTNWNmgtMy43OTNhLjUuNSAwIDAgMS0uMzUzLS44NTR6bS05LjQyNiA3LjQyNkE2LjAwMiA2LjAwMiAwIDAgMCAxMy42NTkgMTBoMi4wODlhOC4wMDMgOC4wMDMgMCAwIDEtMTMuODgzIDMuMTM1TC44NTQgMTQuMTQ2QS41LjUgMCAwIDEgMCAxMy43OTNWMTBoMy43OTNhLjUuNSAwIDAgMSAuMzUzLjg1NHpNMTEuMzcyIDI0Ljg3OSA2LjQ5IDI5Ljc2YS44ODkuODg5IDAgMSAwIDEuMjU3IDEuMjU3bDYuMzk4LTYuMzk4YS44OS44OSAwIDAgMCAwLTEuMjU3bC02LjM5OC02LjM5OGEuODg5Ljg4OSAwIDAgMC0xLjI1NyAxLjI1N2w0Ljg3OSA0Ljg3OUguODg5YS44ODkuODg5IDAgMSAwIDAgMS43Nzh6Ii8+PHBhdGggZmlsbD0iIzAwMCIgZmlsbC1vcGFjaXR5PSIuNSIgZD0ibTEzLjIwMyAzOC44MTItMS45ODguMDA4YTEuMjkgMS4yOSAwIDAgMC0xLjExNS45NzVMOC41NjggNDYuMTRhMS4zMDUgMS4zMDUgMCAwIDAgMS4xODUgMS42MDlsMS45MzItLjAwM2MuODUzIDAgMS41ODgtLjYwMyAxLjc1Ni0xLjQ0bDEuMDg0LTUuNDA2YTEuNzkgMS43OSAwIDAgMC0xLjMyMi0yLjA4OG0tNS44OTcgNy4wOTQgMS41MzItNi4zNDVjLjA2NS0uMjcxLjE3OS0uNTIuMzI3LS43NDNsLTEuMDk4LS4wMDUuODE4LTQuNDQ0QTIgMiAwIDAgMCA2LjkxOCAzMmEuNzc1Ljc3NSAwIDAgMC0uNzUyLjU4OWwtMS4yMjUgNS4wOTNjLS4xNzkuNzA0LS41MTYgMS4xNTEtMS4xNTIgMS4xNTFBMS43OSAxLjc5IDAgMCAwIDIgNDAuNjIzdjUuMzQzYzAgLjk4OS44MDEgMS43OSAxLjc4OSAxLjc5bDMuODctLjAwNmEyLjI4IDIuMjggMCAwIDEtLjM1My0xLjg0NE0xNC44NSA2MmMwLTItMS43MS0zLjg0LTMuMTYtNWE1LjkgNS45IDAgMCAwLTEuNzQtMSAzLjA1IDMuMDUgMCAwIDAgMi4xOC0yLjkydi0yYTMgMyAwIDAgMC0zLjA1LTNIN2EzLjA1IDMuMDUgMCAwIDAtMyAzLjAzdjJhMyAzIDAgMCAwIDIuMiAyLjkyIDYuNCA2LjQgMCAwIDAtMS43MS45N0MzIDU4LjEzIDEuMjggNjAgMS4yNyA2MnYuMTRjMCAuNDggMy40MSAxLjgxIDYuNzkgMS44MXM2Ljc5LTEuMzMgNi43OS0xLjgxem0tNyAuNDJhLjY0LjY0IDAgMCAxLTEtLjUxdi0zLjYzYS42NC42NCAwIDAgMSAxLS41MUwxMSA2MC4xeiIvPjwvZz48L3N2Zz4=)
+}
+
+.dark-theme.builder-font .refresh-link-icon:after,
+.light-theme.builder-font .refresh-link-icon:after {
+    background-position: 0 0
+}
+
+.dark-theme.builder-font .see-all-link-icon:after,
+.light-theme.builder-font .see-all-link-icon:after {
+    background-position: 0 -16px
+}
+
+.builder-font .item-card-creator,
+.builder-font .item-card-creator .text-label,
+.builder-font .item-card-creator .text-link,
+.builder-font .item-card-creator .vlist .list-item .list-body .list-content a,
+.vlist .list-item .list-body .list-content .builder-font .item-card-creator a,
+.builder-font .item-card-label {
+    font-size: 12px
+}
+
+.dark-theme.builder-font .see-all-link,
+.dark-theme.builder-font .see-all-link:link,
+.dark-theme.builder-font .see-all-link:hover,
+.dark-theme.builder-font .see-all-link:visited,
+.dark-theme.builder-font .see-all-link:active,
+.dark-theme.builder-font .refresh-link,
+.dark-theme.builder-font .refresh-link:link,
+.dark-theme.builder-font .refresh-link:hover,
+.dark-theme.builder-font .refresh-link:visited,
+.dark-theme.builder-font .refresh-link:active,
+.dark-theme.builder-font .see-all-link-icon,
+.dark-theme.builder-font .see-all-link-icon:link,
+.dark-theme.builder-font .see-all-link-icon:hover,
+.dark-theme.builder-font .see-all-link-icon:visited,
+.dark-theme.builder-font .see-all-link-icon:active,
+.dark-theme.builder-font .refresh-link-icon,
+.dark-theme.builder-font .refresh-link-icon:link,
+.dark-theme.builder-font .refresh-link-icon:hover,
+.dark-theme.builder-font .refresh-link-icon:visited,
+.dark-theme.builder-font .refresh-link-icon:active,
+.dark-theme.builder-font .touch .see-all-link,
+.dark-theme.builder-font .touch .see-all-link:link,
+.dark-theme.builder-font .touch .see-all-link:hover,
+.dark-theme.builder-font .touch .see-all-link:visited,
+.dark-theme.builder-font .touch .see-all-link:active,
+.dark-theme.builder-font .touch .refresh-link,
+.dark-theme.builder-font .touch .refresh-link:link,
+.dark-theme.builder-font .touch .refresh-link:hover,
+.dark-theme.builder-font .touch .refresh-link:visited,
+.dark-theme.builder-font .touch .refresh-link:active,
+.dark-theme.builder-font .touch .see-all-link-icon,
+.dark-theme.builder-font .touch .see-all-link-icon:link,
+.dark-theme.builder-font .touch .see-all-link-icon:hover,
+.dark-theme.builder-font .touch .see-all-link-icon:visited,
+.dark-theme.builder-font .touch .see-all-link-icon:active,
+.dark-theme.builder-font .touch .refresh-link-icon,
+.dark-theme.builder-font .touch .refresh-link-icon:link,
+.dark-theme.builder-font .touch .refresh-link-icon:hover,
+.dark-theme.builder-font .touch .refresh-link-icon:visited,
+.dark-theme.builder-font .touch .refresh-link-icon:active {
+    color: #fff
+}
+
+.dark-theme.builder-font .see-all-link-icon {
+    padding: 0 20px 0 0
+}
+
+.dark-theme.builder-font .see-all-link-icon:after {
+    transform: scale(.875)
+}
+
+.dark-theme.builder-font .refresh-link-icon {
+    padding: 0 20px 0 0
+}
+
+.dark-theme.builder-font .refresh-link-icon:after {
+    transform: scale(.875)
+}
+
+.light-theme.builder-font .see-all-link,
+.light-theme.builder-font .see-all-link:link,
+.light-theme.builder-font .see-all-link:hover,
+.light-theme.builder-font .see-all-link:visited,
+.light-theme.builder-font .see-all-link:active,
+.light-theme.builder-font .refresh-link,
+.light-theme.builder-font .refresh-link:link,
+.light-theme.builder-font .refresh-link:hover,
+.light-theme.builder-font .refresh-link:visited,
+.light-theme.builder-font .refresh-link:active,
+.light-theme.builder-font .see-all-link-icon,
+.light-theme.builder-font .see-all-link-icon:link,
+.light-theme.builder-font .see-all-link-icon:hover,
+.light-theme.builder-font .see-all-link-icon:visited,
+.light-theme.builder-font .see-all-link-icon:active,
+.light-theme.builder-font .refresh-link-icon,
+.light-theme.builder-font .refresh-link-icon:link,
+.light-theme.builder-font .refresh-link-icon:hover,
+.light-theme.builder-font .refresh-link-icon:visited,
+.light-theme.builder-font .refresh-link-icon:active,
+.light-theme.builder-font .touch .see-all-link,
+.light-theme.builder-font .touch .see-all-link:link,
+.light-theme.builder-font .touch .see-all-link:hover,
+.light-theme.builder-font .touch .see-all-link:visited,
+.light-theme.builder-font .touch .see-all-link:active,
+.light-theme.builder-font .touch .refresh-link,
+.light-theme.builder-font .touch .refresh-link:link,
+.light-theme.builder-font .touch .refresh-link:hover,
+.light-theme.builder-font .touch .refresh-link:visited,
+.light-theme.builder-font .touch .refresh-link:active,
+.light-theme.builder-font .touch .see-all-link-icon,
+.light-theme.builder-font .touch .see-all-link-icon:link,
+.light-theme.builder-font .touch .see-all-link-icon:hover,
+.light-theme.builder-font .touch .see-all-link-icon:visited,
+.light-theme.builder-font .touch .see-all-link-icon:active,
+.light-theme.builder-font .touch .refresh-link-icon,
+.light-theme.builder-font .touch .refresh-link-icon:link,
+.light-theme.builder-font .touch .refresh-link-icon:hover,
+.light-theme.builder-font .touch .refresh-link-icon:visited,
+.light-theme.builder-font .touch .refresh-link-icon:active {
+    color: #393b3d
+}
+
+.light-theme.builder-font .see-all-link-icon {
+    padding: 0 20px 0 0
+}
+
+.light-theme.builder-font .see-all-link-icon:after {
+    transform: scale(.875)
+}
+
+.light-theme.builder-font .refresh-link-icon {
+    padding: 0 20px 0 0
+}
+
+.light-theme.builder-font .refresh-link-icon:after {
+    transform: scale(.875)
+}
+
+.builder-font .game-main-content.follow-button-enabled .favorite-follow-vote-share .game-favorite-button-container .favorite-button {
+    width: 68px
+}
+
+.builder-font .game-main-content .game-calls-to-action .game-buttons-container {
+    padding: 0
+}
+
+.builder-font .game-main-content .game-calls-to-action {
+    padding: 0 12px 0 18px
+}
+
+@media (max-width:991px) {
+
+    .builder-font .game-main-content .game-calls-to-action,
+    .builder-font .game-main-content .game-calls-to-action .game-buttons-container {
+        padding: 0
+    }
+}
+
+.builder-font .game-main-content .game-calls-to-action .game-play-buttons,
+.builder-font .game-main-content .game-calls-to-action .game-buttons-container .game-play-buttons {
+    border-top: 0;
+    padding-bottom: 5px
+}
+
+.builder-font .game-main-content .game-calls-to-action #game-context-menu {
+    top: 6px;
+    right: 0
+}
+
+.builder-font .game-main-content .game-calls-to-action .experimental-mode {
+    padding: 6px 0
+}
+
+.builder-font .game-main-content .game-calls-to-action .game-title-container {
+    padding: 0 12px 0 0
+}
+
+@media (max-width:543px) {
+    .builder-font .store-card .store-card-add .store-card-add-label {
+        height: 81px
+    }
+}
+
+@media (max-width:991px) and (min-width:767px) {
+
+    .game-main-content.follow-button-enabled .favorite-follow-vote-share,
+    .builder-font .game-main-content .game-calls-to-action .game-title-container {
+        padding-left: 12px;
+        padding-right: 12px
+    }
+}
+
+.builder-font input,
+.builder-font textarea,
+.builder-font select,
+.builder-font button,
+.builder-font .text {
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+.builder-font .font-title,
+.builder-font .h1 {
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 32px;
+    font-weight: var(--font-weight-800)
+}
+
+@media (max-width:767px) {
+
+    .builder-font .font-title,
+    .builder-font .h1 {
+        font-size: 24px
+    }
+}
+
+.builder-font .text-link {
+    font-weight: var(--font-weight-500)
+}
+
+.builder-font .small,
+.builder-font .small:link,
+.builder-font .small:visited,
+.builder-font .small:active,
+.builder-font .small:hover,
+.builder-font .small:focus,
+.builder-font .small-oneline,
+.builder-font .small-oneline:link,
+.builder-font .small-oneline:visited,
+.builder-font .small-oneline:active,
+.builder-font .small-oneline:hover,
+.builder-font .small-oneline:focus,
+.builder-font .font-small,
+.builder-font .font-small:link,
+.builder-font .font-small:visited,
+.builder-font .font-small:active,
+.builder-font .font-small:hover,
+.builder-font .font-small:focus,
+.builder-font .text-secondary,
+.builder-font .text-secondary:link,
+.builder-font .text-secondary:visited,
+.builder-font .text-secondary:active,
+.builder-font .text-secondary:hover,
+.builder-font .text-secondary:focus,
+.builder-font .text-date-hint,
+.builder-font .text-date-hint:link,
+.builder-font .text-date-hint:visited,
+.builder-font .text-date-hint:active,
+.builder-font .text-date-hint:hover,
+.builder-font .text-date-hint:focus,
+.builder-font .text-tooltips,
+.builder-font .text-tooltips:link,
+.builder-font .text-tooltips:visited,
+.builder-font .text-tooltips:active,
+.builder-font .text-tooltips:hover,
+.builder-font .text-tooltips:focus,
+.builder-font .ad-identification-text,
+.builder-font .ad-identification-text:link,
+.builder-font .ad-identification-text:visited,
+.builder-font .ad-identification-text:active,
+.builder-font .ad-identification-text:hover,
+.builder-font .ad-identification-text:focus {
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 12px;
+    font-weight: var(--font-weight-400)
+}
+
+.builder-font .font-header-1,
+.builder-font .h2,
+.builder-font .h3,
+.builder-font .h4,
+.builder-font .text-robux-lg {
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 20px;
+    font-weight: var(--font-weight-700)
+}
+
+@media (max-width:767px) {
+
+    .builder-font .font-header-1,
+    .builder-font .h2,
+    .builder-font .h3,
+    .builder-font .h4,
+    .builder-font .text-robux-lg {
+        font-size: 16px
+    }
+}
+
+.builder-font .font-header-2,
+.builder-font .h5,
+.builder-font .h6,
+.builder-font .font-bold,
+.builder-font .text-subject,
+.builder-font .text-footer-nav,
+.builder-font .text-name,
+.builder-font .text-lead,
+.builder-font .text-warning,
+.builder-font .text-label,
+.builder-font .font-header-2:link,
+.builder-font .font-header-2:visited,
+.builder-font .font-header-2:hover,
+.builder-font .font-header-2:active {
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 16px;
+    font-weight: var(--font-weight-500)
+}
+
+@media (max-width:767px) {
+
+    .builder-font .font-header-2,
+    .builder-font .h5,
+    .builder-font .h6,
+    .builder-font .font-bold,
+    .builder-font .text-subject,
+    .builder-font .text-footer-nav,
+    .builder-font .text-name,
+    .builder-font .text-lead,
+    .builder-font .text-warning,
+    .builder-font .text-label,
+    .builder-font .font-header-2:link,
+    .builder-font .font-header-2:visited,
+    .builder-font .font-header-2:hover,
+    .builder-font .font-header-2:active {
+        font-size: 14px
+    }
+}
+
+.builder-font .font-subheader-2 {
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 16px;
+    font-weight: var(--font-weight-500)
+}
+
+@media (max-width:767px) {
+    .builder-font .font-subheader-2 {
+        font-size: 12px
+    }
+}
+
+.builder-font .font-body,
+.builder-font .text-description,
+.builder-font .text-favorite {
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 16px;
+    font-weight: var(--font-weight-400)
+}
+
+.builder-font .font-caption-header,
+.builder-font .text-report-ads,
+.builder-font .text-report,
+.builder-font .text-error,
+.builder-font .text-pastname,
+.builder-font .font-caption-header:link,
+.builder-font .font-caption-header:visited,
+.builder-font .font-caption-header:active,
+.builder-font .font-caption-header:hover,
+.builder-font .font-caption-header:focus,
+.builder-font .small.font-caption-header,
+.builder-font .small.font-caption-header:link,
+.builder-font .small.font-caption-header:visited,
+.builder-font .small.font-caption-header:active,
+.builder-font .small.font-caption-header:hover,
+.builder-font .small.font-caption-header:focus {
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 12px;
+    font-weight: var(--font-weight-500)
+}
+
+.builder-font .font-footer,
+.builder-font .xsmall,
+.builder-font .xxsmall,
+.builder-font .text-footer,
+.builder-font .font-footer:link,
+.builder-font .font-footer:visited,
+.builder-font .font-footer:active,
+.builder-font .font-footer:hover,
+.builder-font .font-footer:focus {
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 10px;
+    font-weight: var(--font-weight-500)
+}
+
+@media (max-width:767px) {
+
+    .builder-font .font-footer,
+    .builder-font .xsmall,
+    .builder-font .xxsmall,
+    .builder-font .text-footer,
+    .builder-font .font-footer:link,
+    .builder-font .font-footer:visited,
+    .builder-font .font-footer:active,
+    .builder-font .font-footer:hover,
+    .builder-font .font-footer:focus {
+        font-size: 8px
+    }
+}
+
+.builder-font .tooltip .tooltip-inner {
+    max-width: 220px
+}
+
+.builder-font .font-caption-body,
+.builder-font .tooltip .tooltip-inner,
+.builder-font .font-caption-body:link,
+.builder-font .font-caption-body:visited,
+.builder-font .font-caption-body:active,
+.builder-font .font-caption-body:hover,
+.builder-font .font-caption-body:focus {
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 12px;
+    font-weight: var(--font-weight-400)
+}
+
+.builder-font .line-height,
+.builder-font .input-field {
+    line-height: 1.4em
+}
+
+.builder-font .game-card-container .game-card-name {
+    font-weight: var(--font-weight-700)
+}
+
+/*# sourceMappingURL=https://sourcemaps.rbxcdn.com/builder-e3f53096fe970658.css.map*/

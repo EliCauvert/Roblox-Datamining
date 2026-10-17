@@ -1,0 +1,626 @@
+.checkbox input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+    left: -9999px
+}
+
+.checkbox input[type=checkbox]:focus+label:before {
+    border: 1px solid #70a0ff
+}
+
+.checkbox input[type=checkbox]+label {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    display: inline-block;
+    width: 100%;
+    height: 16px;
+    padding-left: 20px;
+    vertical-align: middle;
+    background-color: transparent;
+    cursor: pointer;
+    line-height: 16px
+}
+
+@media(max-width:991px) {
+    .checkbox input[type=checkbox]+label {
+        height: 24px;
+        padding-left: 30px;
+        line-height: 20px
+    }
+}
+
+.checkbox input[type=checkbox]:checked+label {
+    width: 100%
+}
+
+.checkbox input[type=checkbox]:checked+label:before {
+    background-image: url(https://images.rbxcdn.com/c3ebbbd60f3655d3a078dcfb632199fd-generic_01312019.svg);
+    background-repeat: no-repeat;
+    background-size: 28px auto;
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #70a0ff;
+    border: 1px solid #70a0ff;
+    width: 16px;
+    height: 16px;
+    background-position: 0 -602px
+}
+
+@media(max-width:991px) {
+    .checkbox input[type=checkbox]:checked+label:before {
+        background-image: url(https://images.rbxcdn.com/c3ebbbd60f3655d3a078dcfb632199fd-generic_01312019.svg);
+        background-repeat: no-repeat;
+        background-size: 44px auto;
+        width: 22px;
+        height: 22px;
+        display: inline-block;
+        vertical-align: middle;
+        width: 24px;
+        height: 24px;
+        background-position: 0 -946px
+    }
+}
+
+.checkbox input[type=checkbox]:disabled+label {
+    width: 100%;
+    color: #bcbec8;
+    cursor: default
+}
+
+.checkbox input[type=checkbox]:disabled+label:before {
+    background-color: #f7f7f8;
+    border: 1px solid #e6e7ea;
+    width: 16px;
+    height: 16px
+}
+
+@media(max-width:991px) {
+    .checkbox input[type=checkbox]:disabled+label:before {
+        width: 24px;
+        height: 24px
+    }
+}
+
+.checkbox input[type=checkbox]:checked:disabled+label {
+    width: 100%;
+    color: #bcbec8;
+    cursor: default
+}
+
+.checkbox input[type=checkbox]:checked:disabled+label:before {
+    background-image: url(https://images.rbxcdn.com/c3ebbbd60f3655d3a078dcfb632199fd-generic_01312019.svg);
+    background-repeat: no-repeat;
+    background-size: 28px auto;
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #f7f7f8;
+    border: 1px solid #e6e7ea;
+    width: 16px;
+    height: 16px;
+    background-position: -14px -602px
+}
+
+@media(max-width:991px) {
+    .checkbox input[type=checkbox]:checked:disabled+label:before {
+        background-image: url(https://images.rbxcdn.com/c3ebbbd60f3655d3a078dcfb632199fd-generic_01312019.svg);
+        background-repeat: no-repeat;
+        background-size: 44px auto;
+        width: 22px;
+        height: 22px;
+        display: inline-block;
+        vertical-align: middle;
+        width: 24px;
+        height: 24px;
+        background-position: -22px -946px
+    }
+}
+
+.light-theme .checkbox input[type=checkbox]:focus-visible+label:before {
+    outline: 1px auto #168dd8
+}
+
+.dark-theme .checkbox input[type=checkbox]:focus-visible+label:before {
+    outline: 1px auto #83d1fd
+}
+
+.checkbox label {
+    position: relative
+}
+
+.checkbox label:before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #fff;
+    border: 1px solid #bcbec8;
+    border-radius: 3px
+}
+
+@media(max-width:991px) {
+    .checkbox label:before {
+        width: 24px;
+        height: 24px
+    }
+}
+
+.checkbox label:hover:before {
+    border: 1px solid #70a0ff
+}
+
+.phone-number-verification-upsell-image {
+    height: 142px;
+    background-position: 50%;
+    background-size: auto 160px;
+    background-repeat: no-repeat;
+    margin-top: 12px;
+    background-image: url(https://images.rbxcdn.com/97ece22f2b7d710a8d25196c871af810-lock.png)
+}
+
+.phone-number-text-button {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 12px;
+    display: block;
+    margin: auto
+}
+
+.phone-number-change-number-button {
+    margin-bottom: 12px;
+    color: #2bb1ff
+}
+
+.phone-number-resent-button {
+    font-size: 16px;
+    width: 100%
+}
+
+.phone-number-narrow-button {
+    margin: 12px;
+    width: 30%
+}
+
+.phone-number-verify-button {
+    width: 100%;
+    margin-bottom: 12px
+}
+
+.phone-number-verification-text-body {
+    text-align: center;
+    margin-top: 12px
+}
+
+@media(max-width:543px) {
+    .phone-number-verification-text-body {
+        margin-bottom: 24px
+    }
+}
+
+.phone-number-verification-success-page-title {
+    margin-top: 24px;
+    text-align: center
+}
+
+.remove-phone-label {
+    margin-top: 12px;
+    cursor: pointer;
+    display: inline-block
+}
+
+.delete-phone-btn {
+    margin-right: 12px
+}
+
+.verification-grid {
+    margin-top: 12px !important;
+    display: inline-grid;
+    grid-column-gap: 16px;
+    grid-row-gap: 24px;
+    grid-template-columns: 48px 1fr
+}
+
+.verification-grid-icon {
+    width: 48px;
+    height: 48px
+}
+
+.phone-discoverability-consent .discoverability-grid {
+    margin-top: 12px !important;
+    display: inline-grid;
+    grid-column-gap: 16px;
+    grid-row-gap: 24px;
+    grid-template-columns: 48px 1fr
+}
+
+.phone-discoverability-consent .discoverability-icon {
+    width: 48px;
+    height: 48px
+}
+
+.phone-discoverability-consent .discoverability-radio-button-section {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-left: -4px
+}
+
+@media(max-width:767px) {
+    .phone-discoverability-consent .discoverability-radio-button-section {
+        margin-left: 4px
+    }
+}
+
+.phone-discoverability-consent .discoverability-radio-button-section .discoverability-consent-option label {
+    padding-left: 12px
+}
+
+.phone-discoverability-consent .page-title {
+    text-align: start;
+    margin-bottom: 12px
+}
+
+.phone-discoverability-consent .page-title .modal-title {
+    padding: 0
+}
+
+.phone-discoverability-consent .learn-more-link,
+.phone-discoverability-consent .text-description {
+    text-align: start
+}
+
+.dark-theme .page-title {
+    color: #fff
+}
+
+.verification-code-input {
+    margin: 8px 0;
+    text-align: center
+}
+
+.sms-code-error {
+    margin-top: 0 !important
+}
+
+.input-field-error-text {
+    height: 36px
+}
+
+.email-verification-upsell-image {
+    height: 142px;
+    background-position: 50%;
+    background-size: auto 142px;
+    background-repeat: no-repeat;
+    background-image: url(https://images.rbxcdn.com/97ece22f2b7d710a8d25196c871af810-lock.png)
+}
+
+.privacy-policy-button {
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 24px;
+    color: #2bb1ff
+}
+
+.privacy-policy-button a {
+    font-size: 12px
+}
+
+.change-email-button {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    font-weight: 200px
+}
+
+.change-email-button,
+.resend-verification-email-button {
+    background: transparent;
+    border: none;
+    outline: none;
+    text-decoration: underline
+}
+
+.resend-verification-email-button {
+    font-size: 16px;
+    font-weight: 600;
+    display: block;
+    margin: auto
+}
+
+.resend-button-disabled {
+    opacity: .4
+}
+
+.input-field-error {
+    border: 1px solid #f74b52 !important
+}
+
+.verification-upsell-modal-input {
+    margin: 12px 0
+}
+
+.dark-theme .input-field:focus {
+    border: 1px solid
+}
+
+#verification-upsell-modal-title {
+    width: 100%;
+    font-size: 20px
+}
+
+.contact-method-prompt-links {
+    padding-top: 28px;
+    display: inline-flex;
+    gap: 24px
+}
+
+.contact-method-prompt-links .contact-method-link-button {
+    text-decoration: underline;
+    font-size: 12px;
+    border: none;
+    background-color: transparent
+}
+
+.verification-upsell-title-button {
+    background: transparent;
+    border: none;
+    outline: none;
+    position: absolute;
+    z-index: 1
+}
+
+.verification-upsell-btn {
+    width: 100%;
+    margin-bottom: 12px;
+    height: 48px
+}
+
+.phone-verification-nonpublic-text {
+    text-align: center;
+    margin: 5px
+}
+
+.phone-verification-legal-container label {
+    height: unset !important;
+    text-align: left
+}
+
+.phone-verification-legal-text {
+    margin-bottom: 12px
+}
+
+.phone-verification-legal-text a {
+    color: #70a0ff
+}
+
+.verification-upsell-text-body {
+    text-align: center;
+    margin-top: 12px;
+    margin-bottom: 24px
+}
+
+@media(max-width:543px) {
+    .verification-upsell-text-body {
+        margin-bottom: 24px
+    }
+}
+
+.modal-error-message {
+    margin-top: -9px;
+    margin-bottom: -9px
+}
+
+.phone-verification-webview {
+    padding: 0 !important
+}
+
+.phone-verification-webview .modal-dialog {
+    min-width: 100px !important;
+    width: 100VW;
+    height: 200VH
+}
+
+.phone-verification-webview .modal-dialog .modal-content {
+    width: 100VW;
+    min-height: 200VH;
+    border: 0;
+    border-radius: 0 !important
+}
+
+.phone-verification-webview .modal-dialog .modal-content .modal-header {
+    text-align: center
+}
+
+.phone-verification-webview .modal-dialog .modal-content .modal-header .modal-title {
+    padding: 0 30px
+}
+
+.phone-verification-webview .modal-dialog .modal-content .modal-header .close-button {
+    visibility: hidden
+}
+
+.phone-verification-webview .modal-dialog .modal-content .modal-footer {
+    margin-bottom: 0
+}
+
+@media(max-width:543px) {
+    .verification-modal {
+        padding: 0
+    }
+}
+
+.verification-modal .modal-dialog {
+    overflow: auto
+}
+
+@media(min-width:543px) {
+    .verification-modal .modal-dialog {
+        min-width: 540px
+    }
+}
+
+.verification-modal .modal-dialog .modal-content {
+    border-radius: 8px
+}
+
+.verification-modal .modal-dialog .modal-content .modal-header {
+    text-align: center
+}
+
+.verification-modal .modal-dialog .modal-content .modal-header .modal-title {
+    padding: 0 30px
+}
+
+.verification-modal .modal-dialog .modal-content .modal-header .close-button {
+    position: absolute;
+    top: 12px;
+    left: 12px
+}
+
+.verification-modal .modal-dialog .modal-content .modal-body {
+    margin: 0 12px 12px
+}
+
+.verification-modal .modal-dialog .modal-content .modal-footer {
+    padding: 0 12px 12px
+}
+
+.dark-theme .verification-code-label {
+    color: #fff
+}
+
+@media(min-width:543px) {
+    .phone-verification-modal .modal-dialog {
+        min-width: 400px
+    }
+}
+
+.phone-verification-modal .modal-dialog .modal-content .modal-footer {
+    margin: 0 24px 24px
+}
+
+.verification-modal.dark-theme {
+    background-color: inherit
+}
+
+.verification-android-modal.verification-modal .modal-dialog {
+    height: 100vh
+}
+
+.verification-upsell-footer-container {
+    margin: 0 12px
+}
+
+.buttons-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 36px
+}
+
+.buttons-section .accept-btn,
+.buttons-section .cancel-btn {
+    flex-grow: 1
+}
+
+.phone-number-input-container {
+    height: 38px;
+    margin: 8px 0
+}
+
+.phone-number-input-container .phone-input-row {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    align-content: center
+}
+
+.phone-number-input-container .phone-input-row .select {
+    display: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    width: 100%;
+    margin: 0
+}
+
+.phone-number-input-container .phone-input-row select:focus {
+    outline: none
+}
+
+.phone-number-input-container .phone-input-row .phone-prefix-wrapper {
+    display: inline-block;
+    height: 100%
+}
+
+.phone-number-input-container .phone-input-row .phone-prefix-selected {
+    min-width: 70px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transform: translateY(-50%);
+    position: relative;
+    top: 50%;
+    height: auto;
+    text-align: right;
+    pointer-events: none;
+    display: inline-block
+}
+
+.phone-number-input-container .phone-input-row .phone-prefix-dropdown {
+    left: 0;
+    width: 90px;
+    font-size: 16px;
+    position: absolute;
+    z-index: 1;
+    border: 0;
+    opacity: 0;
+    cursor: pointer;
+    height: 100%
+}
+
+.phone-number-input-container .phone-input-row .phone-input {
+    position: relative;
+    width: auto;
+    height: 100%;
+    flex: auto;
+    overflow: scroll;
+    border: none;
+    background: none;
+    padding-left: 10px
+}
+
+.phone-number-input-container .phone-input-row .phone-divider {
+    width: 0;
+    border-left: 1px solid #707070;
+    height: 45%
+}
+
+.age-estimation-upsell-modal .modal-dialog {
+    width: auto
+}
+
+.age-estimation-upsell-modal .modal-dialog .modal-content {
+    background-color: transparent;
+    border: none
+}
+
+.age-estimation-upsell-modal .modal-dialog .spinner {
+    color: #fff
+}

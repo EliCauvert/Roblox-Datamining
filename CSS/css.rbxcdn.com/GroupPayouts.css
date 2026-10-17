@@ -1,0 +1,247 @@
+configure-group-payouts .rbx-tab {
+    width: 50%
+}
+
+.one-time-payout .add-payout-recipient-button,
+.recurring-payout .add-payout-recipient-button {
+    max-width: 100%;
+    white-space: normal
+}
+
+@media(max-width:543px) {
+
+    .one-time-payout .add-payout-recipient-button,
+    .recurring-payout .add-payout-recipient-button {
+        margin: 0 12px
+    }
+}
+
+.one-time-payout table.payouts,
+.recurring-payout table.payouts {
+    table-layout: fixed
+}
+
+.one-time-payout table.payouts td.user,
+.recurring-payout table.payouts td.user {
+    width: 55%
+}
+
+.one-time-payout table.payouts td.amount,
+.recurring-payout table.payouts td.amount {
+    width: 35%
+}
+
+.one-time-payout table.payouts td.delete,
+.recurring-payout table.payouts td.delete {
+    width: 10%
+}
+
+.one-time-payout .submit-error,
+.recurring-payout .submit-error {
+    margin-top: 6px
+}
+
+.one-time-payout .distribute-header,
+.recurring-payout .distribute-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px
+}
+
+@media(max-width:543px) {
+
+    .one-time-payout .distribute-header,
+    .recurring-payout .distribute-header {
+        padding: 0 12px
+    }
+}
+
+.one-time-payout .distribute-header .distribute-by-text,
+.recurring-payout .distribute-header .distribute-by-text {
+    margin-right: 6px
+}
+
+.one-time-payout .distribute-header .input-group-btn,
+.recurring-payout .distribute-header .input-group-btn {
+    width: 100%;
+    position: relative
+}
+
+.one-time-payout .distribute-header .input-group-btn .dropdown-menu,
+.recurring-payout .distribute-header .input-group-btn .dropdown-menu {
+    width: auto;
+    min-width: 100%
+}
+
+.one-time-payout .payout-input,
+.recurring-payout .payout-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    justify-content: flex-end
+}
+
+.one-time-payout .payout-input .input-field,
+.recurring-payout .payout-input .input-field {
+    width: auto
+}
+
+.one-time-payout .payout-input .robux,
+.recurring-payout .payout-input .robux {
+    margin-right: 6px
+}
+
+.one-time-payout .payout-input .percent,
+.recurring-payout .payout-input .percent {
+    margin-left: 6px
+}
+
+.one-time-payout .payout-input .amount,
+.recurring-payout .payout-input .amount {
+    display: flex;
+    align-items: center
+}
+
+.one-time-payout .payout-input .calc,
+.recurring-payout .payout-input .calc {
+    margin-left: 12px
+}
+
+.one-time-payout .payout-input.display-calc,
+.recurring-payout .payout-input.display-calc {
+    justify-content: space-between
+}
+
+@media(max-width:543px) {
+
+    .one-time-payout .payout-input.display-calc,
+    .recurring-payout .payout-input.display-calc {
+        display: block
+    }
+
+    .one-time-payout .payout-input.display-calc .amount,
+    .one-time-payout .payout-input.display-calc .calc,
+    .recurring-payout .payout-input.display-calc .amount,
+    .recurring-payout .payout-input.display-calc .calc {
+        float: right
+    }
+}
+
+.one-time-payout .delete-btn,
+.recurring-payout .delete-btn {
+    cursor: pointer;
+    float: right
+}
+
+@media(max-width:543px) {
+
+    .one-time-payout .icon-trash-bin,
+    .recurring-payout .icon-trash-bin {
+        background-position: 0 -1480px;
+        background-size: 40px auto;
+        width: 20px;
+        height: 20px
+    }
+
+    .one-time-payout .icon-trash-bin:hover,
+    .recurring-payout .icon-trash-bin:hover {
+        background-position: -20px -1480px
+    }
+}
+
+.one-time-payout .save-button,
+.recurring-payout .save-button {
+    margin-top: 6px
+}
+
+@media(max-width:767px) {
+
+    .one-time-payout .save-button,
+    .recurring-payout .save-button {
+        margin-right: 12px
+    }
+}
+
+.one-time-payout .amount-calc,
+.one-time-payout .available-funds,
+.one-time-payout .payout-calc,
+.recurring-payout .amount-calc,
+.recurring-payout .available-funds,
+.recurring-payout .payout-calc {
+    text-align: right
+}
+
+#add-payout-recipient .body-text {
+    padding-bottom: 5px
+}
+
+#add-payout-recipient .form-has-feedback .form-control-label {
+    position: absolute
+}
+
+#add-payout-recipient .payout-recipient-avatar-cards {
+    height: 280px;
+    margin-top: 15px
+}
+
+#add-payout-recipient .payout-recipient-avatar-cards .avatar-card {
+    height: 62px
+}
+
+.dark-theme #add-payout-recipient .payout-recipient-avatar-cards .avatar-card:nth-child(2n) .avatar-card-container,
+.light-theme #add-payout-recipient .payout-recipient-avatar-cards .avatar-card:nth-child(2n) .avatar-card-container {
+    background-color: var(--color-surface-0)
+}
+
+#add-payout-recipient .payout-recipient-avatar-cards .avatar-card .spinner {
+    height: 62px
+}
+
+#add-payout-recipient .payout-recipient-avatar-cards .avatar-card .avatar-card-container {
+    display: flex;
+    align-items: center
+}
+
+#add-payout-recipient .payout-recipient-avatar-cards .avatar-card .avatar-card-container .avatar-headshot {
+    float: left;
+    flex-shrink: 0;
+    margin: 6px
+}
+
+#add-payout-recipient .payout-recipient-avatar-cards .avatar-card .avatar-card-container .avatar-card-caption {
+    width: 75%;
+    width: calc(100% - 98px);
+    padding: 6px
+}
+
+#add-payout-recipient .payout-recipient-avatar-cards .avatar-card .avatar-card-container .icon-trash-bin {
+    flex-shrink: 0
+}
+
+#add-funds .text-label {
+    display: block
+}
+
+#add-funds .form-icon {
+    position: relative;
+    top: 0;
+    right: 0
+}
+
+#add-funds .add-funds-input {
+    width: 430px;
+    display: inline-block
+}
+
+#add-funds .add-funds-prompt {
+    margin-bottom: 12px
+}
+
+#add-funds .btn-action {
+    float: none;
+    margin-left: 6px
+}
+
+.add-funds-robux {
+    display: inline-block
+}

@@ -1,0 +1,13 @@
+/* ~/CSS/Pages/Shared/ThumbnailLoader.css */
+.thumbnail-loader {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    transform: translateY(-50%);
+}
+
+.thumbnail-loader .loading-animated {
+    width: 150px;
+}

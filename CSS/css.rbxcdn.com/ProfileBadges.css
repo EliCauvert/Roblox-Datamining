@@ -1,0 +1,213 @@
+.icon-badge-administrator,
+.icon-badge-ambassador,
+.icon-badge-bloxxer,
+.icon-badge-bricksmith,
+.icon-badge-builders-club,
+.icon-badge-combat-initiation,
+.icon-badge-friendship,
+.icon-badge-homestead,
+.icon-badge-inviter,
+.icon-badge-official-model-maker,
+.icon-badge-outrageous-builders-club,
+.icon-badge-turbo-builders-club,
+.icon-badge-veteran,
+.icon-badge-warrior,
+.icon-badge-welcome-to-the-club,
+.icon-default-badges {
+    background-image: url(https://images.rbxcdn.com/5b562400ef0f7642252081c7f1e99a34-badges_05052025.svg);
+    background-repeat: no-repeat;
+    background-size: 280px auto;
+    width: 140px;
+    height: 140px;
+    display: inline-block;
+    vertical-align: middle
+}
+
+.icon-badge-inviter {
+    background-position: 0 0
+}
+
+.icon-badge-friendship {
+    background-position: -140px 0
+}
+
+.icon-badge-welcome-to-the-club {
+    background-position: 0 -140px
+}
+
+.icon-badge-ambassador {
+    background-position: -140px -140px
+}
+
+.icon-badge-combat-initiation {
+    background-position: 0 -280px
+}
+
+.icon-badge-warrior {
+    background-position: -140px -280px
+}
+
+.icon-badge-bloxxer {
+    background-position: 0 -420px
+}
+
+.icon-badge-homestead {
+    background-position: -140px -420px
+}
+
+.icon-badge-bricksmith {
+    background-position: 0 -560px
+}
+
+.icon-badge-official-model-maker {
+    background-position: -140px -560px
+}
+
+.icon-badge-builders-club {
+    background-position: 0 -700px
+}
+
+.icon-badge-turbo-builders-club {
+    background-position: -140px -700px
+}
+
+.icon-badge-outrageous-builders-club {
+    background-position: 0 -840px
+}
+
+.icon-badge-administrator {
+    background-position: -140px -840px
+}
+
+.icon-badge-veteran {
+    background-position: 0 -980px
+}
+
+.section-content .badge-list {
+    overflow: hidden;
+    max-height: 170px
+}
+
+@media(max-width:767px) {
+    .section-content .badge-list {
+        max-height: 115px
+    }
+}
+
+@media(max-width:767px) {
+    .section-content .badge-list .thumbnail-2d-container {
+        float: none
+    }
+}
+
+.section-content .badge-list-more {
+    overflow: auto;
+    max-height: 100%
+}
+
+@media(max-width:767px) {
+    .section-content .icon-badge-inviter {
+        background-size: 100% auto;
+        width: 85px;
+        height: 85px;
+        background-position: 0 0
+    }
+
+    .section-content .icon-badge-friendship {
+        background-size: 100% auto;
+        width: 85px;
+        height: 85px;
+        background-position: -85px 0
+    }
+
+    .section-content .icon-badge-welcome-to-the-club {
+        background-size: 100% auto;
+        width: 85px;
+        height: 85px;
+        background-position: 0 -85px
+    }
+
+    .section-content .icon-badge-ambassador {
+        background-size: 100% auto;
+        width: 85px;
+        height: 85px;
+        background-position: -85px -85px
+    }
+
+    .section-content .icon-badge-combat-initiation {
+        background-size: 100% auto;
+        width: 85px;
+        height: 85px;
+        background-position: 0 -170px
+    }
+
+    .section-content .icon-badge-warrior {
+        background-size: 100% auto;
+        width: 85px;
+        height: 85px;
+        background-position: -85px -170px
+    }
+
+    .section-content .icon-badge-bloxxer {
+        background-size: 100% auto;
+        width: 85px;
+        height: 85px;
+        background-position: 0 -255px
+    }
+
+    .section-content .icon-badge-homestead {
+        background-size: 100% auto;
+        width: 85px;
+        height: 85px;
+        background-position: -85px -255px
+    }
+
+    .section-content .icon-badge-bricksmith {
+        background-size: 100% auto;
+        width: 85px;
+        height: 85px;
+        background-position: 0 -340px
+    }
+
+    .section-content .icon-badge-official-model-maker {
+        background-size: 100% auto;
+        width: 85px;
+        height: 85px;
+        background-position: -85px -340px
+    }
+
+    .section-content .icon-badge-builders-club {
+        background-size: 100% auto;
+        width: 85px;
+        height: 85px;
+        background-position: 0 -425px
+    }
+
+    .section-content .icon-badge-turbo-builders-club {
+        background-size: 100% auto;
+        width: 85px;
+        height: 85px;
+        background-position: -85px -425px
+    }
+
+    .section-content .icon-badge-outrageous-builders-club {
+        background-size: 100% auto;
+        width: 85px;
+        height: 85px;
+        background-position: 0 -510px
+    }
+
+    .section-content .icon-badge-administrator {
+        background-size: 100% auto;
+        width: 85px;
+        height: 85px;
+        background-position: -85px -510px
+    }
+
+    .section-content .icon-badge-veteran {
+        background-size: 100% auto;
+        width: 85px;
+        height: 85px;
+        background-position: 0 -595px
+    }
+}

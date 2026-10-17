@@ -1,0 +1,29 @@
+#profile-current-wearing-avatar .thumbnail-holder {
+    width: 100%;
+    height: 100%
+}
+
+#profile-current-wearing-avatar .thumbnail-2d-container {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: transparent;
+    padding-top: 0;
+    background-size: 300px;
+    background-position: 50%
+}
+
+#profile-current-wearing-avatar .profile-accoutrements-container .profile-accoutrements-slider .accoutrement-item a {
+    width: 100px;
+    height: 100px
+}
+
+#profile-current-wearing-avatar .profile-accoutrements-container .profile-accoutrements-slider .accoutrement-item a .thumbnail-2d-container {
+    background-size: 100%;
+    border-radius: 8px
+}
+
+#profile-current-wearing-avatar .profile-accoutrements-container .profile-accoutrements-slider .accoutrement-item a .asset-restriction-icon {
+    bottom: 8px;
+    left: 2px
+}

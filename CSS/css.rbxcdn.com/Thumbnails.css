@@ -1,0 +1,94 @@
+.light-theme .thumbnail-2d-container,
+.dark-theme .thumbnail-2d-container {
+    background-color: var(--color-common-shimmer);
+    border: 0;
+    border-color: var(--color-surface-300)
+}
+
+thumbnail-2d {
+    float: left;
+    display: block;
+    overflow: hidden
+}
+
+.thumbnail-2d-container {
+    float: left;
+    background-size: 100%;
+    margin: 0;
+    overflow: hidden
+}
+
+.thumbnail-2d-container img {
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    transition: opacity .5s
+}
+
+.thumbnail-2d-container img.loading {
+    opacity: 0
+}
+
+.thumbnail-2d-container.shimmer {
+    width: 100%;
+    height: 100%;
+    display: block
+}
+
+.thumbnail-2d-container[thumbnail-type=avatarHeadshot] {
+    border: 0;
+    padding: 0
+}
+
+.thumbnail-2d-container[class*=icon-] {
+    padding-top: 100%
+}
+
+.thumbnail-2d-container[class*=icon-blocked] {
+    padding-top: 0
+}
+
+.light-theme .thumbnail-2d-container.avatar-card-image.trusted-connection-avatar-headshot,
+.light-theme .thumbnail-2d-container[thumbnail-type=AvatarHeadshot].trusted-connection-avatar-headshot,
+.dark-theme .thumbnail-2d-container.avatar-card-image.trusted-connection-avatar-headshot,
+.dark-theme .thumbnail-2d-container[thumbnail-type=AvatarHeadshot].trusted-connection-avatar-headshot {
+    border: 3px solid #335fff;
+    border-radius: 50%
+}
+
+.light-theme .avatar-headshot-xs .thumbnail-2d-container.avatar-card-image.trusted-connection-avatar-headshot,
+.light-theme .avatar-headshot-sm .thumbnail-2d-container.avatar-card-image.trusted-connection-avatar-headshot,
+.light-theme .avatar-headshot-xs .thumbnail-2d-container[thumbnail-type=AvatarHeadshot].trusted-connection-avatar-headshot,
+.light-theme .avatar-headshot-sm .thumbnail-2d-container[thumbnail-type=AvatarHeadshot].trusted-connection-avatar-headshot,
+.dark-theme .avatar-headshot-xs .thumbnail-2d-container.avatar-card-image.trusted-connection-avatar-headshot,
+.dark-theme .avatar-headshot-sm .thumbnail-2d-container.avatar-card-image.trusted-connection-avatar-headshot,
+.dark-theme .avatar-headshot-xs .thumbnail-2d-container[thumbnail-type=AvatarHeadshot].trusted-connection-avatar-headshot,
+.dark-theme .avatar-headshot-sm .thumbnail-2d-container[thumbnail-type=AvatarHeadshot].trusted-connection-avatar-headshot {
+    border-width: 1.5px
+}
+
+.avatar-headshot .thumbnail-2d-container {
+    border-radius: 50%
+}
+
+.radius-circle:has(>.thumbnail-2d-container>img[src*=-ProfileFrame]) {
+    background: radial-gradient(circle closest-side, var(--color-shift-200)0 86%, transparent 87%);
+    border-radius: 0;
+    overflow: visible
+}
+
+.thumbnail-2d-container:has(img[src*=-ProfileFrame]) {
+    background: radial-gradient(circle closest-side, var(--color-shift-200)0 86%, transparent 87%);
+    border-radius: 0;
+    overflow: visible
+}
+
+.thumbnail-2d-container:has(img[src*=-ProfileFrame]) img[src*=-ProfileFrame] {
+    object-fit: contain;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    display: block
+}
+
+/*# sourceMappingURL=https://sourcemaps.rbxcdn.com/thumbnails-3692212cbac36131.css.map*/

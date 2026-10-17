@@ -1,0 +1,266 @@
+.footer {
+    text-align: center;
+    max-width: 1070px;
+    margin: 0 auto
+}
+
+.footer .footer-links {
+    text-align: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 32px;
+    padding-left: 0;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.footer .footer-link {
+    white-space: nowrap;
+    margin: 6px
+}
+
+.footer .footer-link.footer-link-wide {
+    min-width: 25%
+}
+
+@media (max-width:543px) {
+    .footer .footer-link.footer-link-wide {
+        min-width: 50%
+    }
+}
+
+@media (max-width:991px) {
+    .footer .footer-link {
+        min-width: 15%
+    }
+}
+
+.footer .footer-postfixIcon {
+    width: 30px;
+    padding-left: 1px
+}
+
+.copyright-container {
+    border-top: 1px solid var(--color-extended-gray-300);
+    padding-top: 24px
+}
+
+.copyright-container .footer-note {
+    text-align: left;
+    width: auto;
+    margin: 0 0 0 24px
+}
+
+@media (max-width:991px) {
+    .copyright-container .footer-note {
+        text-align: center;
+        margin-top: 12px;
+        margin-left: 0
+    }
+}
+
+.copyright-container .language-selector-wrapper .icon-globe {
+    background-position: 0 -1300px
+}
+
+.copyright-container .language-selector-wrapper .icon-globe:hover {
+    background-position: -20px -1300px
+}
+
+.copyright-container .language-selector-wrapper .icon-globe {
+    vertical-align: sub;
+    background-size: 40px;
+    width: 20px;
+    height: 20px
+}
+
+.copyright-container .language-selector-wrapper .input-group-btn {
+    display: inline-block
+}
+
+.copyright-container .language-selector-wrapper .input-group-btn .input-dropdown-btn {
+    border-radius: 3px
+}
+
+.copyright-container .language-selector-wrapper .input-group-btn .input-dropdown-btn .icon-globe {
+    float: left;
+    margin-top: 3px;
+    margin-right: 6px
+}
+
+.copyright-container .language-selector-wrapper .input-group-btn .input-dropdown-btn:hover .icon-globe,
+.copyright-container .language-selector-wrapper .input-group-btn .input-dropdown-btn:focus .icon-globe {
+    background-position: -20px -1300px
+}
+
+.copyright-container .language-selector-wrapper .input-group-btn .dropdown-menu {
+    top: auto;
+    bottom: 100%
+}
+
+.light-theme .copyright-container .language-selector-wrapper .input-group-btn .dropdown-menu li a,
+.dark-theme .copyright-container .language-selector-wrapper .input-group-btn .dropdown-menu li a,
+.light-theme .footer .text-footer-nav,
+.light-theme .footer .text-footer-nav:link,
+.light-theme .footer .text-footer-nav:visited,
+.light-theme .footer .text-footer-nav:active {
+    color: var(--color-content-default)
+}
+
+.light-theme .footer .text-footer-nav:hover,
+.light-theme .footer .text-footer-nav:focus,
+.light-theme .footer .text-footer-nav.privacy,
+.light-theme .footer .text-footer-nav.privacy:link,
+.light-theme .footer .text-footer-nav.privacy:visited,
+.light-theme .footer .text-footer-nav.privacy:active {
+    color: var(--color-content-emphasis)
+}
+
+.dark-theme .footer .text-footer-nav,
+.dark-theme .footer .text-footer-nav:link,
+.dark-theme .footer .text-footer-nav:visited,
+.dark-theme .footer .text-footer-nav:active {
+    color: var(--color-content-default)
+}
+
+.dark-theme .footer .text-footer-nav:hover,
+.dark-theme .footer .text-footer-nav:focus,
+.dark-theme .footer .text-footer-nav.privacy,
+.dark-theme .footer .text-footer-nav.privacy:link,
+.dark-theme .footer .text-footer-nav.privacy:visited,
+.dark-theme .footer .text-footer-nav.privacy:active {
+    color: var(--color-content-emphasis)
+}
+
+.light-theme .copyright-container {
+    border-color: var(--color-extended-gray-500)
+}
+
+.light-theme .copyright-container .icon-dropdown select:hover option,
+.light-theme .copyright-container .icon-dropdown select:active,
+.light-theme .copyright-container .icon-dropdown select:visited {
+    color: var(--color-content-emphasis)
+}
+
+.dark-theme .copyright-container {
+    border-color: var(--color-extended-gray-700)
+}
+
+.dark-theme .copyright-container .icon-dropdown select:hover option,
+.dark-theme .copyright-container .icon-dropdown select:active,
+.dark-theme .copyright-container .icon-dropdown select:visited {
+    color: var(--color-content-emphasis)
+}
+
+.light-theme .container-footer,
+.dark-theme .container-footer {
+    background-color: var(--color-surface-0)
+}
+
+.container-footer .footer-button-link {
+    background-color: transparent;
+    border: none
+}
+
+.inset-\[0\] {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0
+}
+
+.scroll {
+    overflow: auto
+}
+
+.size-\[var\(--icon-size-large\)\] {
+    width: var(--icon-size-large);
+    height: var(--icon-size-large)
+}
+
+.size-\[var\(--icon-size-medium\)\] {
+    width: var(--icon-size-medium);
+    height: var(--icon-size-medium)
+}
+
+.size-\[var\(--icon-size-small\)\] {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small)
+}
+
+.size-\[var\(--icon-size-xlarge\)\] {
+    width: var(--icon-size-xlarge);
+    height: var(--icon-size-xlarge)
+}
+
+.size-\[var\(--icon-size-xsmall\)\] {
+    width: var(--icon-size-xsmall);
+    height: var(--icon-size-xsmall)
+}
+
+.size-\[var\(--icon-size-xxlarge\)\] {
+    width: var(--icon-size-xxlarge);
+    height: var(--icon-size-xxlarge)
+}
+
+.max-width-\[calc\(var\(--size-100\)\*50\)\] {
+    max-width: calc(var(--size-100)*50)
+}
+
+.content-\[var\(--inverse-surface-0\)\] {
+    color: var(--inverse-surface-0)
+}
+
+.opacity-\[0\.5\] {
+    opacity: .5
+}
+
+.icon-regular-chevron-large-down {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M15.2929 22.7071C15.6834 23.0976 16.3166 23.0976 16.7071 22.7071L26.7071 12.7071C27.0976 12.3166 27.0976 11.6834 26.7071 11.2929C26.3166 10.9024 25.6834 10.9024 25.2929 11.2929L16 20.5858L6.70711 11.2929C6.31658 10.9024 5.68342 10.9024 5.29289 11.2929C4.90237 11.6834 4.90237 12.3166 5.29289 12.7071L15.2929 22.7071Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-regular-circle-i {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M17 21H19.5V23H12.5V21H15V14H13V12H17V21Z' fill='black'/%3E %3Cpath d='M17 10H15V8H17V10Z' fill='black'/%3E %3Cpath d='M16 2C23.732 2 30 8.26801 30 16C30 23.732 23.732 30 16 30C8.26801 30 2 23.732 2 16C2 8.26801 8.26801 2 16 2ZM16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-regular-x {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M7.29289 8.70711C6.90237 8.31658 6.90237 7.68342 7.29289 7.29289C7.68342 6.90237 8.31658 6.90237 8.70711 7.29289L16 14.5858L23.2929 7.29289C23.6834 6.90237 24.3166 6.90237 24.7071 7.29289C25.0976 7.68342 25.0976 8.31658 24.7071 8.70711L17.4142 16L24.7071 23.2929C25.0976 23.6834 25.0976 24.3166 24.7071 24.7071C24.3166 25.0976 23.6834 25.0976 23.2929 24.7071L16 17.4142L8.70711 24.7071C8.31658 25.0976 7.68342 25.0976 7.29289 24.7071C6.90237 24.3166 6.90237 23.6834 7.29289 23.2929L14.5858 16L7.29289 8.70711Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.focus-within\:stroke-system-alert:focus-within {
+    border-color: var(--color-system-alert)
+}
+
+.focus-within\:stroke-system-emphasis:focus-within {
+    border-color: var(--color-system-emphasis)
+}
+
+.focus-visible\:outline-focus:focus-visible {
+    outline: var(--stroke-thicker)solid var(--color-selection-start);
+    outline-offset: var(--stroke-thicker)
+}
+
+.focus-visible\:hover\:outline-none:hover:focus-visible {
+    outline: var(--stroke-none)solid var(--color-none)
+}
+
+.disabled\:outline-none:disabled {
+    outline: var(--stroke-none)solid var(--color-none)
+}
+
+.group\/interactable:hover .group-hover\/interactable\:bg-\[var\(--color-state-hover\)\] {
+    background-color: var(--color-state-hover)
+}
+
+.group\/interactable:active .group-active\/interactable\:bg-\[var\(--color-state-press\)\] {
+    background-color: var(--color-state-press)
+}
+
+.group\/interactable:disabled .group-disabled\/interactable\:bg-none {
+    background-color: var(--color-none)
+}

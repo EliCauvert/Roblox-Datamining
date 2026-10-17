@@ -1,0 +1,233 @@
+.social-links .social-link {
+    cursor: pointer
+}
+
+.social-links .medallion {
+    height: 100px;
+    margin: .5em;
+    padding: 1em;
+    border-radius: 6px
+}
+
+.social-links .contents {
+    margin: .2em 0 0;
+    height: 60px
+}
+
+.social-links .title-wrapper {
+    padding-left: 4.5em;
+    position: relative;
+    margin-left: .5em;
+    top: 50%;
+    transform: translateY(-50%)
+}
+
+.social-links .title {
+    display: block;
+    width: 100%;
+    word-wrap: break-word
+}
+
+.social-links .type-img {
+    position: absolute;
+    float: left;
+    background-image: url(https://images.rbxcdn.com/f6d39fbab06f1ad69f6e6c36ffeff02e-SocialLinkSquareIconsV4.svg);
+    width: 60px;
+    height: 60px;
+    background-size: 100% auto
+}
+
+.social-links .Discord {
+    background-position: 0 0
+}
+
+.social-links .YouTube {
+    background-position: 0 -60px;
+    height: 59px
+}
+
+.social-links .Twitter {
+    background-position: 0 -120px;
+    height: 59px
+}
+
+.social-links .Twitch {
+    background-position: 0 -180px
+}
+
+.social-links .Facebook {
+    background-position: 0 -240px
+}
+
+.social-links .GitHub {
+    background-position: 0 -300px
+}
+
+.social-links .RobloxGroup {
+    background-position: 0 -420px
+}
+
+.social-links .Amazon {
+    background-position: 0 -540px
+}
+
+.social-links .Guilded {
+    background-position: 0 -660px
+}
+
+.social-link-icon-list {
+    float: right;
+    display: block
+}
+
+.social-link-icon-list li {
+    margin: 0 0 0 6px;
+    width: 32px;
+    height: 32px;
+    float: left
+}
+
+.social-link-icon-list .social-link-icon {
+    display: inline-block;
+    background-image: url(https://images.rbxcdn.com/f6d39fbab06f1ad69f6e6c36ffeff02e-SocialLinkSquareIconsV4.svg);
+    width: 32px;
+    height: 32px;
+    background-size: 100% auto
+}
+
+.social-link-icon-list .Discord {
+    background-position: 0 0
+}
+
+.social-link-icon-list .YouTube {
+    background-position: 0 -32px
+}
+
+.social-link-icon-list .Twitter {
+    background-position: 0 -64px
+}
+
+.social-link-icon-list .Twitch {
+    background-position: 0 -96px
+}
+
+.social-link-icon-list .Facebook {
+    background-position: 0 -128px
+}
+
+.social-link-icon-list .GitHub {
+    background-position: 0 -160px
+}
+
+.social-link-icon-list .RobloxGroup {
+    background-position: 0 -224px
+}
+
+.social-link-icon-list .Amazon {
+    background-position: 0 -288px
+}
+
+.social-link-icon-list .Guilded {
+    background-position: 0 -352px
+}
+
+.game-social-links {
+    display: flex;
+    flex-wrap: wrap
+}
+
+.game-social-links>.btn-secondary-lg {
+    align-items: center;
+    display: flex;
+    height: 100px;
+    width: calc(33% - 15px);
+    padding: 15px;
+    margin: 7.5px
+}
+
+.dark-theme .game-social-links>.btn-secondary-lg,
+.light-theme .game-social-links>.btn-secondary-lg {
+    color: var(--color-content-emphasis)
+}
+
+.game-social-links>.btn-secondary-lg .social-icon {
+    background-size: 100% auto;
+    flex: 0 0 auto;
+    height: 60px;
+    width: 60px
+}
+
+.game-social-links>.btn-secondary-lg .icon-social-media-discord {
+    background-size: 100% auto;
+    width: 60px;
+    height: 60px;
+    background-position: 0 0
+}
+
+.game-social-links>.btn-secondary-lg .icon-social-media-youtube {
+    background-size: 100% auto;
+    width: 60px;
+    height: 60px;
+    background-position: 0 -60px
+}
+
+.game-social-links>.btn-secondary-lg .icon-social-media-twitter {
+    background-size: 100% auto;
+    width: 60px;
+    height: 60px;
+    background-position: 0 -120px
+}
+
+.game-social-links>.btn-secondary-lg .icon-social-media-twitch {
+    background-size: 100% auto;
+    width: 60px;
+    height: 60px;
+    background-position: 0 -180px
+}
+
+.game-social-links>.btn-secondary-lg .icon-social-media-facebook {
+    background-size: 100% auto;
+    width: 60px;
+    height: 60px;
+    background-position: 0 -240px
+}
+
+.game-social-links>.btn-secondary-lg .icon-social-media-github {
+    background-size: 100% auto;
+    width: 60px;
+    height: 60px;
+    background-position: 0 -300px
+}
+
+.game-social-links>.btn-secondary-lg .icon-social-media-roblox {
+    background-size: 100% auto;
+    width: 60px;
+    height: 60px;
+    background-position: 0 -420px
+}
+
+.game-social-links>.btn-secondary-lg .icon-social-media-amazon {
+    background-size: 100% auto;
+    width: 60px;
+    height: 60px;
+    background-position: 0 -540px
+}
+
+.game-social-links>.btn-secondary-lg .icon-social-media-guilded {
+    background-size: 100% auto;
+    width: 60px;
+    height: 60px;
+    background-position: 0 -600px
+}
+
+@media(max-width:991px) {
+    .game-social-links>.btn-secondary-lg {
+        width: calc(50% - 15px)
+    }
+}
+
+@media(max-width:767px) {
+    .game-social-links>.btn-secondary-lg {
+        width: calc(100% - 15px)
+    }
+}

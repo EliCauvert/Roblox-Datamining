@@ -1,0 +1,87 @@
+.profile-about .social-links {
+    position: absolute;
+    right: 0;
+    z-index: 1
+}
+
+.profile-about .container-header h2 {
+    display: inline-block
+}
+
+.profile-about .container-header .icon-edit {
+    display: inline;
+    float: left
+}
+
+.profile-about .profile-about-text {
+    position: relative;
+    margin: 0;
+    white-space: normal
+}
+
+.profile-about .profile-about-text.para-height {
+    max-height: 72px
+}
+
+@media (max-width:991px) {
+    .profile-about .profile-about-text.para-height {
+        max-height: 96px
+    }
+}
+
+@media (max-width:543px) {
+    .profile-about .profile-about-text.para-overflow-toggle {
+        font-size: 12px
+    }
+
+    .profile-about .profile-about-text.para-height {
+        max-height: 72px
+    }
+
+    .profile-about .profile-about-text.para-overflow-toggle-off:after {
+        width: 60px
+    }
+
+    .profile-about .profile-about-text:after {
+        height: 18px
+    }
+}
+
+.profile-about .remove-panel .description-container .personal-field-description {
+    resize: vertical
+}
+
+.profile-about .remove-panel .description-container .description-event {
+    display: flex;
+    justify-content: space-between
+}
+
+.profile-about .remove-panel .description-container .description-buttons {
+    float: right
+}
+
+.profile-about .profile-about-content {
+    padding-bottom: 5px;
+    position: relative;
+    display: grid
+}
+
+.profile-about .profile-about-content .show-more-link {
+    bottom: 0;
+    color: #00a2ff;
+    position: absolute;
+    right: 0;
+    z-index: 1000
+}
+
+.profile-about .profile-about-content .show-more-link:hover {
+    cursor: pointer
+}
+
+.profile-about .profile-about-content .profile-about-content-text {
+    white-space: pre-wrap
+}
+
+.profile-about .profile-about-content .form-control-label {
+    float: right
+}

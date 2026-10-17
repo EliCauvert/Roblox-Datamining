@@ -1,0 +1,443 @@
+.inset-\[0\] {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0
+}
+
+.scroll {
+    overflow: auto
+}
+
+.size-\[1em\] {
+    width: 1em;
+    height: 1em
+}
+
+.size-\[var\(--icon-size-large\)\] {
+    width: var(--icon-size-large);
+    height: var(--icon-size-large)
+}
+
+.size-\[var\(--icon-size-medium\)\] {
+    width: var(--icon-size-medium);
+    height: var(--icon-size-medium)
+}
+
+.size-\[var\(--icon-size-small\)\] {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small)
+}
+
+.size-\[var\(--icon-size-xlarge\)\] {
+    width: var(--icon-size-xlarge);
+    height: var(--icon-size-xlarge)
+}
+
+.size-\[var\(--icon-size-xsmall\)\] {
+    width: var(--icon-size-xsmall);
+    height: var(--icon-size-xsmall)
+}
+
+.size-\[var\(--icon-size-xxlarge\)\] {
+    width: var(--icon-size-xxlarge);
+    height: var(--icon-size-xxlarge)
+}
+
+.width-\[fit-content\] {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content
+}
+
+.content-\[var\(--dark-mode-content-emphasis\)\] {
+    color: var(--dark-mode-content-emphasis)
+}
+
+.content-\[var\(--light-mode-content-emphasis\)\] {
+    color: var(--light-mode-content-emphasis)
+}
+
+.bg-\[var\(--light-mode-surface-100\)\] {
+    background-color: var(--light-mode-surface-100)
+}
+
+.opacity-\[0\.5\] {
+    opacity: .5
+}
+
+.icon-regular-arrow-up-right-from-square {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M5 3C3.89543 3 3 3.89543 3 5V27C3 28.1046 3.89543 29 5 29H27C28.1046 29 29 28.1046 29 27V16C29 15.4477 28.5523 15 28 15C27.4477 15 27 15.4477 27 16V27H5V5L16 5C16.5523 5 17 4.55228 17 4C17 3.44772 16.5523 3 16 3H5Z' fill='black'/%3E %3Cpath d='M28 11C28.5523 11 29 10.5523 29 10V4C29 3.44772 28.5523 3 28 3H22C21.4477 3 21 3.44772 21 4C21 4.55228 21.4477 5 22 5H25.5858L15.2929 15.2929C14.9024 15.6834 14.9024 16.3166 15.2929 16.7071C15.6834 17.0976 16.3166 17.0976 16.7071 16.7071L27 6.41421V10C27 10.5523 27.4477 11 28 11Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-filled-plus-large {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M14.5 26V17.5H6C5.17157 17.5 4.5 16.8284 4.5 16C4.5 15.1716 5.17157 14.5 6 14.5H14.5V6C14.5 5.17157 15.1716 4.5 16 4.5C16.8284 4.5 17.5 5.17157 17.5 6V14.5H26L26.1533 14.5078C26.9097 14.5846 27.5 15.2233 27.5 16C27.5 16.7767 26.9097 17.4154 26.1533 17.4922L26 17.5H17.5V26C17.5 26.8284 16.8284 27.5 16 27.5C15.1716 27.5 14.5 26.8284 14.5 26Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-filled-premium {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M23 4C25.7614 4 28 6.23858 28 9V23C28 25.7614 25.7614 28 23 28H15C14.4477 28 14 27.5523 14 27C14 26.4477 14.4477 26 15 26H23C24.6569 26 26 24.6569 26 23V9C26 7.34315 24.6569 6 23 6H9C7.34315 6 6 7.34315 6 9V27C6 27.5523 5.55228 28 5 28C4.44772 28 4 27.5523 4 27V9C4 6.23858 6.23858 4 9 4H23Z' fill='black'/%3E %3Cpath d='M20 10C21.1046 10 22 10.8954 22 12V20C22 21.1046 21.1046 22 20 22H15C14.4477 22 14 21.5523 14 21C14 20.4477 14.4477 20 15 20H20V12H12V27C12 27.5523 11.5523 28 11 28C10.4477 28 10 27.5523 10 27V12C10 10.8954 10.8954 10 12 10H20Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-regular-roblox-plus {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M13.8555 2.5606C15.1824 1.81313 16.8176 1.81313 18.1445 2.5606L26.8555 7.46782C28.1824 8.21534 28.9999 9.59781 29 11.0928V20.9073C29 22.4024 28.1824 23.7847 26.8555 24.5323L18.1445 29.4395L17.8926 29.5704C16.6996 30.143 15.3004 30.143 14.1074 29.5704L13.8555 29.4395L11.0176 27.8409C10.3887 27.4864 10 26.8196 10 26.0977V12.001C10.0002 10.8967 10.8957 10.0012 12 10.001L20 10.0001C21.1044 10 21.9998 10.8957 22 12.0001V19.0001C22 20.1046 21.1046 21.0001 20 21.0001H16C15.4477 21.0001 15 20.5523 15 20.0001C15.0002 19.4479 15.4478 19.0001 16 19.0001H20V12.0001L12 12.001V26.0987L14.8369 27.6973C15.5545 28.1016 16.4455 28.1016 17.1631 27.6973L25.874 22.7891C26.5863 22.3877 27 21.6636 27 20.9073V11.0928C26.9999 10.3366 26.5863 9.61234 25.874 9.21099L17.1631 4.30278C16.4456 3.89864 15.5544 3.89864 14.8369 4.30278L6.12598 9.21099C5.41372 9.61234 5.00013 10.3366 5 11.0928V20.9073C5 21.6636 5.4137 22.3877 6.12598 22.7891L6.49023 22.9942C6.80495 23.1714 7 23.5051 7 23.8663C6.99984 24.6314 6.17549 25.1128 5.50879 24.7374L5.14453 24.5323C3.81763 23.7847 3 22.4024 3 20.9073V11.0928C3.00012 9.69126 3.71827 8.38846 4.90137 7.61528L5.14453 7.46782L13.8555 2.5606Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-filled-tilt {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M7.91703 2L2 24.083L24.083 30L30 7.91703L7.91703 2ZM18.2592 19.9135L12.0885 18.2592L13.7427 12.0885L19.916 13.7427L18.2592 19.9135Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-filled-verified-backplate {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M7.71897 4.48022C8.00434 3.41518 9.09906 2.78315 10.1641 3.06852L27.5198 7.71897C28.5848 8.00434 29.2169 9.09906 28.9315 10.1641L24.281 27.5198C23.9957 28.5848 22.9009 29.2169 21.8359 28.9315L4.48022 24.281C3.41518 23.9957 2.78315 22.9009 3.06852 21.8359L7.71897 4.48022Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-filled-verified-check {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M19.9393 11.9393C20.5251 11.3536 21.4746 11.3536 22.0604 11.9393C22.646 12.5251 22.6461 13.4747 22.0604 14.0604L15.0604 21.0604C14.4747 21.6461 13.5251 21.646 12.9393 21.0604L9.93934 18.0604C9.35355 17.4746 9.35355 16.5251 9.93934 15.9393C10.5251 15.3536 11.4746 15.3536 12.0604 15.9393L13.9999 17.8788L19.9393 11.9393Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.\[--icon-size-small\:1em\] {
+    --icon-size-small: 1em
+}
+
+.\[text-align\:inherit\] {
+    text-align: inherit
+}
+
+.verified-badge-icon,
+.verified-badge-text-container {
+    display: none
+}
+
+.badgeSizeCaptionheader,
+.badgeSizeSubheader,
+.badgeSizeHeader,
+.badgeSizeFooter,
+.badgeSizeTitle {
+    position: relative;
+    overflow: hidden
+}
+
+.badgeSizeTitle {
+    width: 28px;
+    height: 28px
+}
+
+.badgeSizeFooter {
+    width: 12px;
+    height: 12px
+}
+
+.badgeSizeHeader,
+.badgeSizeSubheader,
+.badgeSizeCaptionheader {
+    width: 16px;
+    height: 16px
+}
+
+.hz-centered-badge-container {
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 5px 0;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.content .people-list-header .friends-count {
+    margin: 0 0 0 6px
+}
+
+.content .friends-carousel-container {
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden
+}
+
+.content .friends-carousel-list-container {
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden
+}
+
+.content .friends-carousel-list-container-not-full {
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden
+}
+
+.content .react-friends-carousel-container {
+    height: 187px
+}
+
+.content .add-friends-icon-container {
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 90px;
+    height: 90px;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative
+}
+
+.light-theme .content .add-friends-icon-container:before,
+.dark-theme .content .add-friends-icon-container:before {
+    content: "";
+    background-color: var(--color-surface-300);
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    position: absolute
+}
+
+.content .add-friends-icon {
+    width: 50px;
+    height: 50px;
+    position: relative
+}
+
+.content .friend-request-badge {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 0
+}
+
+@media (max-width:991px) {
+    .content .react-friends-carousel-container {
+        height: 177px
+    }
+}
+
+.content .friends-carousel-tile {
+    cursor: pointer;
+    margin-bottom: 16px;
+    margin-left: 3px;
+    margin-right: 3px
+}
+
+.content .friends-carousel-tile:hover {
+    text-decoration: underline
+}
+
+.content .friends-carousel-tile-label {
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 5px;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.content .friends-carousel-tile-name {
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 2px;
+    max-width: 96px;
+    font-size: .8em;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.content .friends-carousel-display-name {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    min-width: 0;
+    overflow: hidden
+}
+
+.content .friends-carousel-tile-sublabel {
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2px;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.content .friends-carousel-tile-experience {
+    font-size: .6em
+}
+
+.dark-theme .friends-carousel-tile-experience {
+    color: #b8b8b8
+}
+
+.light-theme .friends-carousel-tile-experience {
+    color: #737373
+}
+
+#friend-tile-button {
+    background: 0 0;
+    border: none
+}
+
+.in-game-friend-card {
+    cursor: default;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    padding: 10px;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.in-game-friend-card--iarc {
+    cursor: default
+}
+
+.presence-thumbnail-container {
+    border-radius: 10px;
+    margin-right: 5px
+}
+
+.friend-presence-info {
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.light-theme .friend-tile-dropdown,
+.dark-theme .friend-tile-dropdown {
+    background-color: var(--color-surface-300);
+    border-radius: 5px
+}
+
+.light-theme .friend-tile-dropdown-button {
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    color: var(--color-content-muted);
+    background-color: transparent;
+    border: 0;
+    border-top: .5px solid rgba(0, 0, 0, .1);
+    padding: 10px;
+    overflow: hidden
+}
+
+.dark-theme .friend-tile-dropdown-button {
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    color: var(--color-content-muted);
+    background-color: transparent;
+    border: 0;
+    border-top: .5px solid rgba(255, 255, 255, .1);
+    padding: 10px;
+    overflow: hidden
+}
+
+.light-theme .friend-tile-dropdown-button:hover {
+    background-color: rgba(0, 0, 0, .1)
+}
+
+.dark-theme .friend-tile-dropdown-button:hover {
+    background-color: rgba(255, 255, 255, .1)
+}
+
+.friend-tile-non-styled-button {
+    text-align: left;
+    background-color: transparent;
+    border: 0;
+    padding: 0
+}
+
+.friend-tile-content:hover {
+    text-decoration: underline
+}
+
+.friend-tile-game-card,
+.thumbnail-2d-container.shimmer.friend-tile-game-card {
+    border-radius: 5px;
+    width: 100px;
+    height: 100px;
+    margin-right: 10px
+}
+
+.friend-tile-verified-badge {
+    -ms-flex-direction: row;
+    flex-direction: row;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.friend-tile-spacer {
+    width: 3px
+}
+
+.hover\:underline:hover {
+    -webkit-text-decoration-skip-ink: none;
+    text-decoration-skip-ink: none;
+    -webkit-text-decoration-line: underline;
+    text-decoration-line: underline
+}
+
+.hover\:cursor-pointer:hover {
+    cursor: pointer
+}
+
+.hover\:\[opacity\:0\.8\]:hover {
+    opacity: .8
+}
+
+.focus-visible\:outline-focus:focus-visible {
+    outline: var(--stroke-thicker)solid var(--color-selection-start);
+    outline-offset: var(--stroke-thicker)
+}
+
+.focus-visible\:\[outline-color\:var\(--color-system-emphasis\)\]:focus-visible {
+    outline-color: var(--color-system-emphasis)
+}
+
+.focus-visible\:\[outline-style\:solid\]:focus-visible {
+    outline-style: solid
+}
+
+.focus-visible\:\[outline-width\:var\(--stroke-standard\)\]:focus-visible {
+    outline-width: var(--stroke-standard)
+}
+
+.disabled\:outline-none:disabled {
+    outline: var(--stroke-none)solid var(--color-none)
+}
+
+.group\/interactable:hover .group-hover\/interactable\:bg-\[var\(--color-state-hover\)\] {
+    background-color: var(--color-state-hover)
+}
+
+.group\/interactable:active .group-active\/interactable\:bg-\[var\(--color-state-press\)\] {
+    background-color: var(--color-state-press)
+}
+
+.group\/interactable:disabled .group-disabled\/interactable\:bg-none {
+    background-color: var(--color-none)
+}
+
+@media (prefers-reduced-motion:no-preference) {
+    .motion-safe\:transition-opacity {
+        transition-property: opacity;
+        transition-timing-function: var(--ease-linear);
+        transition-duration: var(--time-100)
+    }
+}

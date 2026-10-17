@@ -1,0 +1,38 @@
+.verified-badge-icon,
+.verified-badge-text-container {
+    display: none
+}
+
+.badgeSizeCaptionheader,
+.badgeSizeSubheader,
+.badgeSizeHeader,
+.badgeSizeFooter,
+.badgeSizeTitle {
+    position: relative;
+    overflow: hidden
+}
+
+.badgeSizeTitle {
+    width: 28px;
+    height: 28px
+}
+
+.badgeSizeFooter {
+    width: 12px;
+    height: 12px
+}
+
+.badgeSizeHeader,
+.badgeSizeSubheader,
+.badgeSizeCaptionheader {
+    width: 16px;
+    height: 16px
+}
+
+.hz-centered-badge-container {
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 5px 0;
+    display: -ms-flexbox;
+    display: flex
+}

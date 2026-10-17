@@ -1,0 +1,197 @@
+button.btn-common-play-game-lg,
+button.btn-economy-robux-white-lg,
+button.btn-common-play-game-action-needed-lg,
+button.btn-common-play-game-unplayable-lg {
+    height: auto
+}
+
+@media (max-width:543px) {
+    .upsell-modal-container {
+        padding: 0
+    }
+}
+
+.upsell-modal-container .modal-dialog {
+    overflow: auto
+}
+
+@media (min-width:543px) {
+    .upsell-modal-container .modal-dialog {
+        min-width: 540px
+    }
+}
+
+.upsell-modal-container .modal-dialog .modal-content {
+    border-radius: 8px
+}
+
+.upsell-modal-container .modal-dialog .modal-content .modal-header .close {
+    float: left
+}
+
+@media (max-width:767px) {
+    .upsell-modal-container .modal-dialog .modal-content .modal-header .close {
+        margin-top: -2px
+    }
+}
+
+.upsell-modal-container .modal-dialog .modal-content .modal-header .modal-title {
+    text-align: center;
+    width: 100%;
+    padding: 0
+}
+
+.upsell-modal-container .modal-dialog .modal-content .modal-body {
+    white-space: pre-wrap;
+    margin: 0 12px
+}
+
+.upsell-modal-container .modal-dialog .modal-content .modal-footer {
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 12px;
+    margin: 0 24px 24px;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.upsell-modal-container .modal-dialog .modal-content .modal-footer:before,
+.upsell-modal-container .modal-dialog .modal-content .modal-footer:after {
+    content: none;
+    display: none
+}
+
+.upsell-modal-container .modal-dialog .modal-content .modal-footer .modal-button {
+    -ms-flex: 1;
+    flex: 1
+}
+
+.inset-\[0\] {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0
+}
+
+.size-\[var\(--icon-size-large\)\] {
+    width: var(--icon-size-large);
+    height: var(--icon-size-large)
+}
+
+.size-\[var\(--icon-size-medium\)\] {
+    width: var(--icon-size-medium);
+    height: var(--icon-size-medium)
+}
+
+.size-\[var\(--icon-size-small\)\] {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small)
+}
+
+.size-\[var\(--icon-size-xlarge\)\] {
+    width: var(--icon-size-xlarge);
+    height: var(--icon-size-xlarge)
+}
+
+.size-\[var\(--icon-size-xsmall\)\] {
+    width: var(--icon-size-xsmall);
+    height: var(--icon-size-xsmall)
+}
+
+.size-\[var\(--icon-size-xxlarge\)\] {
+    width: var(--icon-size-xxlarge);
+    height: var(--icon-size-xxlarge)
+}
+
+.bg-\[white\] {
+    background-color: #fff
+}
+
+.opacity-\[0\.5\] {
+    opacity: .5
+}
+
+.icon-filled-amazon {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M24.6609 23.3764C14.9457 28 8.91642 24.1316 5.05687 21.782C4.81804 21.6339 4.41211 21.8166 4.76431 22.2211C6.05012 23.7802 10.264 27.538 15.7643 27.538C21.2684 27.538 24.5429 24.5347 24.9525 24.0108C25.3593 23.4913 25.0721 23.2048 24.6609 23.3764ZM27.3893 21.8696C27.1284 21.5298 25.8029 21.4665 24.9687 21.569C24.1333 21.6685 22.8792 22.1791 22.9882 22.4857C23.0442 22.6006 23.1584 22.549 23.7323 22.4974C24.3078 22.44 25.9201 22.2365 26.256 22.6757C26.5935 23.1179 25.7418 25.2244 25.5863 25.5642C25.436 25.9039 25.6437 25.9915 25.926 25.7652C26.2044 25.5391 26.7085 24.9533 27.0467 24.1244C27.3827 23.2909 27.5876 22.1283 27.3893 21.8696Z' fill='black'/%3E %3Cpath d='M18.1285 13.942V13.2675C15.8773 13.2675 13.4991 13.7492 13.4991 16.4034C13.4991 17.7479 14.1955 18.6589 15.3912 18.6589C16.2671 18.6589 17.0511 18.1202 17.546 17.2442C18.1592 16.1669 18.1285 15.1551 18.1285 13.942ZM21.2688 21.5321C21.0629 21.716 20.7651 21.7292 20.533 21.6065C19.4994 20.7481 19.3154 20.3495 18.7461 19.5305C17.038 21.2737 15.8292 21.7948 13.6131 21.7948C10.994 21.7948 8.95299 20.1787 8.95299 16.9421C8.95299 14.415 10.3239 12.6937 12.2728 11.8529C13.9634 11.1083 16.3241 10.9769 18.1285 10.7711V10.3681C18.1285 9.62793 18.1854 8.75201 17.7519 8.11261C17.3708 7.53885 16.6438 7.30233 16.0043 7.30233C14.8174 7.30233 13.7575 7.91108 13.4991 9.17243C13.4465 9.4528 13.2407 9.72874 12.9605 9.74185L9.9384 9.41782C9.68443 9.36076 9.40415 9.15498 9.47422 8.76512C10.1706 5.10376 13.4772 4 16.4378 4C17.9532 4 19.9328 4.40297 21.1285 5.55049C22.6439 6.96509 22.4994 8.85273 22.4994 10.9068V15.7596C22.4994 17.218 23.1038 17.8574 23.6731 18.6458C23.8746 18.9261 23.9184 19.2634 23.6643 19.4735C23.0293 20.0034 21.8993 20.9889 21.2774 21.5408L21.2688 21.5321Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-filled-android {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M24.7305 8.00518C24.9236 8.02188 25.1105 8.08029 25.2773 8.17705C25.4608 8.28365 25.6143 8.43411 25.7236 8.61358C25.8176 8.76788 25.8776 8.93994 25.8984 9.11846C25.9192 9.29706 25.9007 9.47854 25.8447 9.64971C25.6986 10.0954 25.3745 10.5034 25.1377 10.9036C24.5739 11.8584 24.0009 12.8083 23.4453 13.7679C24.3449 14.3182 25.1783 14.967 25.9297 15.7005C26.4943 16.2508 27.0107 16.8469 27.4727 17.4827C27.8512 18.0041 28.1933 18.551 28.4951 19.1185C29.3347 20.6982 29.8104 22.2845 30 24.0003H2C2.18786 22.2978 2.69983 20.6381 3.50684 19.1194C3.80794 18.5519 4.1494 18.0055 4.52832 17.4847C4.99071 16.8489 5.50777 16.2523 6.07227 15.7015C6.83049 14.9616 7.67171 14.3082 8.58008 13.7542C8.57809 13.7503 8.5751 13.7464 8.57324 13.7425C7.81694 12.4601 7.05902 11.1786 6.30176 9.89678C6.13085 9.60702 6.08439 9.26232 6.17188 8.93877C6.25773 8.61987 6.46762 8.34651 6.75684 8.17803C6.92366 8.08045 7.11112 8.02123 7.30469 8.00518C7.54792 7.98452 7.7922 8.03239 8.00879 8.14287C8.22526 8.25332 8.40502 8.42218 8.52734 8.6292C9.31195 9.95989 10.0959 11.2844 10.8857 12.6214C12.4594 12.0143 14.1561 11.6961 15.8564 11.681C17.6565 11.6584 19.4638 11.9785 21.1426 12.6312C21.9327 11.2833 22.7183 9.96259 23.5068 8.6292C23.5915 8.48579 23.7046 8.35975 23.8389 8.25909C23.973 8.15857 24.1259 8.08481 24.2891 8.04229C24.4327 8.00519 24.5825 7.99286 24.7305 8.00518ZM10.8691 17.7776C9.99391 17.1436 8.88786 17.6674 8.36133 18.5296C8.08575 18.9812 7.96653 19.4967 8.00781 19.9739C8.04911 20.4492 8.25588 20.924 8.6709 21.2249C9.54578 21.8588 10.65 21.3346 11.1768 20.473L11.1777 20.4739C11.4537 20.0223 11.5725 19.506 11.5312 19.0286C11.4873 18.5214 11.2549 18.0987 10.8691 17.7776ZM23.6387 18.5267C23.112 17.6649 22.006 17.1412 21.1309 17.7757C20.716 18.0766 20.5099 18.5514 20.4688 19.0267C20.4276 19.504 20.5464 20.0194 20.8223 20.471C21.3488 21.3324 22.4542 21.8567 23.3291 21.223C23.715 20.9018 23.948 20.4795 23.9922 19.972C24.0336 19.4945 23.9145 18.9785 23.6387 18.5267Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-filled-apple {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M21.2441 8.77246C22.3105 8.82312 24.6395 9.17372 26.2412 11.541C26.0858 11.6656 23.3224 13.2854 23.3223 16.8809C23.3223 21.0283 26.8283 22.5064 26.9492 22.542C26.9138 22.6341 26.3779 24.5545 25.084 26.5107C23.9269 28.2196 22.7007 29.9648 20.8701 29.9648C19.005 29.9648 18.5382 28.8428 16.4141 28.8428C14.3248 28.8429 13.5822 29.9999 11.9072 30C10.2148 30 9.0404 28.3975 7.69336 26.4395C6.12191 24.1254 4.84377 20.5479 4.84375 17.166C4.84375 11.7192 8.28025 8.83511 11.665 8.83496C13.4436 8.83496 14.9462 10.0456 16.0859 10.0459C17.1394 10.0459 18.815 8.76367 20.8701 8.76367L21.2441 8.77246Z' fill='black'/%3E %3Cpath d='M21.2842 2C21.3187 2.16019 21.3359 2.35597 21.3359 2.55176C21.3359 3.99347 20.7322 5.43537 19.9033 6.46777C18.988 7.60697 17.4507 8.46187 16.2246 8.46191C16.0867 8.46191 15.9487 8.44355 15.8623 8.42578C15.845 8.35456 15.8096 8.14123 15.8096 7.92773C15.8096 6.4681 16.5178 5.04356 17.2949 4.13574C18.2792 2.94324 19.92 2.05354 21.2842 2Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-filled-microsoft {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M15.0713 29H3V16.9287H15.0713V29Z' fill='black'/%3E %3Cpath d='M29 29H16.9287V16.9287H29V29Z' fill='black'/%3E %3Cpath d='M15.0713 15.0713H3V3H15.0713V15.0713Z' fill='black'/%3E %3Cpath d='M29 15.0713H16.9287V3H29V15.0713Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-regular-x {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M7.29289 8.70711C6.90237 8.31658 6.90237 7.68342 7.29289 7.29289C7.68342 6.90237 8.31658 6.90237 8.70711 7.29289L16 14.5858L23.2929 7.29289C23.6834 6.90237 24.3166 6.90237 24.7071 7.29289C25.0976 7.68342 25.0976 8.31658 24.7071 8.70711L17.4142 16L24.7071 23.2929C25.0976 23.6834 25.0976 24.3166 24.7071 24.7071C24.3166 25.0976 23.6834 25.0976 23.2929 24.7071L16 17.4142L8.70711 24.7071C8.31658 25.0976 7.68342 25.0976 7.29289 24.7071C6.90237 24.3166 6.90237 23.6834 7.29289 23.2929L14.5858 16L7.29289 8.70711Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.download-dialog {
+    width: 350px;
+    min-width: unset !important
+}
+
+.download-instructions-list>li::marker {
+    font: var(--typography-body-medium-font);
+    letter-spacing: var(--typography-body-medium-letter-spacing);
+    content: counter(list-item)".";
+    color: var(--color-content-emphasis);
+    width: var(--size-600)
+}
+
+.download-link-underline {
+    cursor: pointer;
+    text-decoration: underline
+}
+
+button.download-link-underline {
+    all: unset;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+    text-decoration: underline
+}
+
+.install-dialog {
+    width: 728px;
+    max-width: unset !important
+}
+
+.focus-visible\:outline-focus:focus-visible {
+    outline: var(--stroke-thicker)solid var(--color-selection-start);
+    outline-offset: var(--stroke-thicker)
+}
+
+.disabled\:outline-none:disabled {
+    outline: var(--stroke-none)solid var(--color-none)
+}
+
+.group\/interactable:hover .group-hover\/interactable\:bg-\[var\(--color-state-hover\)\] {
+    background-color: var(--color-state-hover)
+}
+
+.group\/interactable:active .group-active\/interactable\:bg-\[var\(--color-state-press\)\] {
+    background-color: var(--color-state-press)
+}
+
+.group\/interactable:disabled .group-disabled\/interactable\:bg-none {
+    background-color: var(--color-none)
+}
+
+.\[\&_a\]\:underline a {
+    -webkit-text-decoration-skip-ink: none;
+    text-decoration-skip-ink: none;
+    -webkit-text-decoration-line: underline;
+    text-decoration-line: underline
+}
+
+.\[\&_a\]\:\[font-weight\:700\] a {
+    font-weight: 700
+}

@@ -1,0 +1,98 @@
+.modal-dialog .modal-body .item-preview {
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 300px;
+    max-width: 300px;
+    margin: 12px auto;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.modal-dialog .modal-body .item-preview .item-info {
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    margin: auto;
+    padding-left: 10px;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.modal-dialog .modal-body .item-preview .item-card-thumb img {
+    max-width: 150px
+}
+
+.modal-dialog .modal-body .modal-message-block {
+    margin: 12px auto;
+    padding: 12px 9px 0
+}
+
+.modal-dialog .modal-body .item-content {
+    margin-bottom: 12px
+}
+
+.modal-dialog .modal-body a.terms-of-use-link {
+    text-decoration: underline
+}
+
+.modal-dialog .modal-body .icon-warning {
+    background-position: 0 -540px;
+    background-size: 180px;
+    width: 90px;
+    height: 90px;
+    margin: 12px auto 0
+}
+
+#loading-overlay.loading-overlay {
+    opacity: .7;
+    z-index: 1040;
+    background-color: #000;
+    display: -ms-flexbox;
+    display: flex;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0
+}
+
+#loading-overlay.loading-overlay .loading-overlay-content {
+    z-index: 1045;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+    display: -ms-flexbox;
+    display: flex
+}
+
+#loading-overlay.loading-overlay .loading-message {
+    color: #fff;
+    margin-top: 12px
+}
+
+@media (-ms-high-contrast:none),
+(-ms-high-contrast:active) {
+    #loading-overlay.loading-overlay .loading-overlay-content {
+        text-align: center;
+        vertical-align: middle;
+        margin-top: 40vh;
+        display: block
+    }
+
+    #loading-overlay.loading-overlay .spinner {
+        padding: 20px;
+        display: inline-block
+    }
+
+    #loading-overlay.loading-overlay .loading-message {
+        display: inline-block
+    }
+}

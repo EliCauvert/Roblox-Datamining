@@ -1,0 +1,45 @@
+@media(max-width:543px) {
+    .access-management-upsell-modal {
+        padding: 0
+    }
+}
+
+.access-management-upsell-modal #access-management-modal-title {
+    width: 100%;
+    text-align: center;
+    padding: 0
+}
+
+.access-management-upsell-modal .close {
+    float: left
+}
+
+@media(max-width:767px) {
+    .access-management-upsell-modal #access-management-upsell-close-button {
+        margin-top: -2px
+    }
+}
+
+.access-management-upsell-modal .modal-dialog {
+    overflow: auto
+}
+
+@media(min-width:543px) {
+    .access-management-upsell-modal .modal-dialog {
+        min-width: 540px
+    }
+}
+
+.access-management-upsell-modal .modal-dialog .modal-content {
+    border-radius: 8px
+}
+
+.access-management-upsell-modal .modal-dialog .modal-content .modal-body {
+    white-space: pre-wrap;
+    padding-bottom: 20px;
+    margin: 0 12px 24px
+}
+
+.access-management-upsell-modal .modal-dialog .modal-content .modal-footer {
+    margin: 0 24px 24px
+}

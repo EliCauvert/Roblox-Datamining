@@ -1,0 +1,139 @@
+@media (min-width:767px) {
+    .avatar-shop-homepage-recommendations-container .item-card .item-card {
+        width: 100%
+    }
+}
+
+.avatar-shop-homepage-recommendations-container .item-card .item-card-name-link .item-card-name .icon-premium-small {
+    float: left;
+    margin-right: 4px
+}
+
+@media (min-width:991px) {
+    .avatar-shop-homepage-recommendations-container .item-card .item-card-container {
+        width: 100%;
+        margin: 0 auto
+    }
+}
+
+@media (min-width:767px) {
+    .avatar-shop-homepage-recommendations-container .item-card .item-card-thumb-container {
+        float: none;
+        height: 0;
+        padding-bottom: 100%;
+        padding-top: 0;
+        width: 100%
+    }
+
+    .avatar-shop-homepage-recommendations-container .item-card .item-card-thumb-container .icon-placeholder-asset {
+        background-size: 100% auto;
+        width: 150px;
+        height: 150px;
+        background-position: 0 -150px
+    }
+}
+
+.avatar-shop-homepage-recommendations-container .avatar-shop-homepage-carousel-title {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px
+}
+
+.avatar-shop-homepage-recommendations-container .avatar-shop-homepage-carousel-title .see-all-link-icon:after {
+    top: 50%;
+    transform: translateY(-50%) scale(.875)
+}
+
+.avatar-shop-homepage-recommendations-container .avatar-shop-homepage-carousel {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 24px;
+    overflow-x: auto;
+    overflow-y: hidden
+}
+
+.avatar-shop-homepage-recommendations-container .avatar-shop-homepage-carousel .grid-item-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    flex: 0 0 auto;
+    margin: 0 11px 0 0;
+    width: 150px
+}
+
+.avatar-shop-homepage-recommendations-container .avatar-shop-homepage-carousel .restriction-icon {
+    position: absolute;
+    bottom: -2px;
+    left: -2px
+}
+
+@media (max-width:767px) {
+
+    .avatar-shop-homepage-recommendations-container .avatar-shop-homepage-carousel>.grid-item-container,
+    .avatar-shop-homepage-recommendations-container .avatar-shop-homepage-carousel>.grid-item-container .item-card-link {
+        width: 120px
+    }
+}
+
+@media (max-width:543px) {
+
+    .avatar-shop-homepage-recommendations-container .avatar-shop-homepage-carousel>.grid-item-container,
+    .avatar-shop-homepage-recommendations-container .avatar-shop-homepage-carousel>.grid-item-container .item-card-link {
+        width: 100px
+    }
+}
+
+.avatar-shop-homepage-recommendations-container .avatar-home-page-loading-title {
+    height: 28px;
+    line-height: 0;
+    margin-bottom: 12px;
+    width: 187px
+}
+
+.light-theme .avatar-shop-homepage-recommendations-container .avatar-home-page-loading-title {
+    background-color: rgba(0, 0, 0, .1)
+}
+
+.dark-theme .avatar-shop-homepage-recommendations-container .avatar-home-page-loading-title {
+    background-color: rgba(57, 59, 61, .5)
+}
+
+.avatar-shop-homepage-recommendations-container .item-card-loading {
+    align-items: flex-start
+}
+
+.avatar-shop-homepage-recommendations-container .item-card-loading .item-card-link {
+    width: 100%
+}
+
+.avatar-shop-homepage-recommendations-container .item-card-loading .item-card-thumb-container:before {
+    background: none
+}
+
+.avatar-shop-homepage-recommendations-container .item-card-loading .item-card-thumb-container {
+    margin-bottom: 5px
+}
+
+.avatar-shop-homepage-recommendations-container .item-card-loading .item-card-name.shimmer {
+    height: 22px;
+    margin: 0 0 5px;
+    width: 100%
+}
+
+.light-theme .avatar-shop-homepage-recommendations-container .item-card-loading .item-card-name.shimmer {
+    background-color: rgba(0, 0, 0, .1)
+}
+
+.dark-theme .avatar-shop-homepage-recommendations-container .item-card-loading .item-card-name.shimmer {
+    background-color: rgba(57, 59, 61, .5)
+}
+
+.avatar-shop-homepage-recommendations-container .item-card-loading .item-card-name.shimmer.item-name-title-half {
+    width: 70%
+}
+
+.item-card .item-card-container .thumbnail-2d-container {
+    border-radius: 8px
+}

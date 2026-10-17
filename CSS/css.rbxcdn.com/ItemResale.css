@@ -1,0 +1,495 @@
+.grid {
+    display: grid
+}
+
+.verified-badge-icon,
+.verified-badge-text-container {
+    display: none
+}
+
+.badgeSizeCaptionheader,
+.badgeSizeSubheader,
+.badgeSizeHeader,
+.badgeSizeFooter,
+.badgeSizeTitle {
+    position: relative;
+    overflow: hidden
+}
+
+.badgeSizeTitle {
+    width: 28px;
+    height: 28px
+}
+
+.badgeSizeFooter {
+    width: 12px;
+    height: 12px
+}
+
+.badgeSizeHeader,
+.badgeSizeSubheader,
+.badgeSizeCaptionheader {
+    width: 16px;
+    height: 16px
+}
+
+.hz-centered-badge-container {
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 5px 0;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.resale-pricechart-tabs .nav-tabs {
+    display: none
+}
+
+@media (max-width:767px) {
+    .resale-pricechart-tabs .nav-tabs {
+        display: -ms-flexbox;
+        display: flex
+    }
+
+    .resale-pricechart-tabs .nav-tabs .rbx-tab {
+        -ms-flex: 1;
+        flex: 1
+    }
+}
+
+.resale-pricechart-tabs .tab-content>.tab-pane {
+    display: block
+}
+
+@media (max-width:767px) {
+    .resale-pricechart-tabs .tab-content>.tab-pane {
+        display: none
+    }
+
+    .resale-pricechart-tabs .tab-content>.active {
+        display: block
+    }
+}
+
+.resale-pricechart-tabs .rbx-tab {
+    width: 50%
+}
+
+@media (max-width:767px) {
+    .price-chart-section h2 {
+        display: none
+    }
+}
+
+.price-chart-legend {
+    float: left
+}
+
+.price-chart-legend .legend-text {
+    margin-right: 18px;
+    display: inline-block
+}
+
+.price-chart-legend .line {
+    background-color: #01854b;
+    border-radius: 4px;
+    width: 14px;
+    height: 5px;
+    margin-top: 0;
+    margin-bottom: 2px;
+    margin-right: 6px;
+    display: inline-block
+}
+
+.price-chart-legend .volume {
+    background-color: #e6e7ea;
+    border-radius: 0
+}
+
+@media (max-width:767px) {
+    .price-chart-legend {
+        float: none;
+        margin-bottom: 12px
+    }
+}
+
+.price-chart-range-dropdown {
+    float: right;
+    width: 240px;
+    margin-bottom: 12px
+}
+
+@media (max-width:767px) {
+    .price-chart-range-dropdown {
+        float: none;
+        width: 100%
+    }
+}
+
+.price-chart-info-container {
+    float: left;
+    text-align: center;
+    width: 33.33%
+}
+
+.price-chart-info-container .text-robux {
+    vertical-align: middle
+}
+
+.price-chart-info-container .text-label {
+    margin-bottom: 9px
+}
+
+@media (max-width:767px) {
+    .price-chart-info-container {
+        float: none;
+        width: auto;
+        padding: 5px 0
+    }
+
+    .price-chart-info-container .text-label {
+        float: left;
+        margin-bottom: 0
+    }
+
+    .price-chart-info-container .info-content {
+        float: right
+    }
+}
+
+.price-chart-volume-container {
+    margin-top: 12px
+}
+
+.price-chart-spinner {
+    padding-top: 0;
+    padding-bottom: 0
+}
+
+@media (max-width:767px) {
+    .resellers-container h2 {
+        display: none
+    }
+}
+
+.resellers-container .section-content {
+    padding-top: 0;
+    padding-bottom: 0
+}
+
+.resellers-container .vlist .reseller-item {
+    -ms-flex-flow: wrap;
+    flex-flow: wrap;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.resellers-container .vlist .reseller-item .reseller-item-avatar {
+    -ms-flex-order: 1;
+    order: 1
+}
+
+.resellers-container .vlist .reseller-item .resale-info {
+    -ms-flex: 11 1 0;
+    flex: 11 1 0;
+    -ms-flex-order: 2;
+    order: 2;
+    padding: 0 12px 0 0
+}
+
+.resellers-container .vlist .reseller-item .trade-button-container {
+    -ms-flex-order: 3;
+    order: 3;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin: 12px 12px 0 0;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative
+}
+
+@media (max-width:543px) {
+    .resellers-container .vlist .reseller-item .trade-button-container {
+        margin-right: 0
+    }
+}
+
+.resellers-container .vlist .reseller-item .trade-button-container .reseller-trade-link {
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-item-align: stretch;
+    align-self: stretch;
+    justify-self: stretch;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-inline-flexbox;
+    display: inline-flex
+}
+
+.resellers-container .vlist .reseller-item .trade-button-container .reseller-trade-link.fetching-trade-permissions {
+    visibility: hidden
+}
+
+.resellers-container .vlist .reseller-item .trade-button-container .spinner-circle {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.resellers-container .vlist .reseller-item .trade-button-container .popover {
+    max-width: unset;
+    bottom: calc(100% + 2px);
+    right: 0
+}
+
+.resellers-container .vlist .reseller-item .trade-button-container .popover.show {
+    display: block
+}
+
+.resellers-container .vlist .reseller-item .trade-button-container .popover.top>.arrow {
+    left: unset;
+    right: 12px
+}
+
+.resellers-container .vlist .reseller-item .trade-button-container .popover .popover-content {
+    padding: 12px 15px
+}
+
+.resellers-container .vlist .reseller-item .trade-button-container .popover .popover-content h3 {
+    white-space: nowrap;
+    -ms-flex-align: center;
+    align-items: center;
+    column-gap: 8px;
+    margin: 0 0 9px;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.2em;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.resellers-container .vlist .reseller-item .trade-button-container .popover .popover-content .btn-growth-sm {
+    margin-top: 12px
+}
+
+.resellers-container .vlist .reseller-item .reseller-buttons-container {
+    -ms-flex-order: 3;
+    order: 3;
+    display: -ms-flexbox;
+    display: flex
+}
+
+@media (max-width:543px) {
+    .resellers-container .vlist .reseller-item .reseller-buttons-container.has-trade-btn {
+        -ms-flex-direction: column-reverse;
+        flex-direction: column-reverse
+    }
+}
+
+.resellers-container .vlist .reseller-item .reseller-purchase-button,
+.resellers-container .vlist .reseller-item .remove-sale {
+    -ms-flex-order: 4;
+    order: 4
+}
+
+@media (max-width:543px) {
+
+    .resellers-container .vlist .reseller-item .reseller-purchase-button,
+    .resellers-container .vlist .reseller-item .remove-sale {
+        margin-top: 0
+    }
+}
+
+.resellers-container .vlist .list-item {
+    padding-top: 12px
+}
+
+.resellers-container .vlist .list-item:first-child {
+    border-top-style: none
+}
+
+.resellers-container .vlist .list-item button {
+    float: right;
+    margin-top: 12px
+}
+
+.resellers-container .vlist .list-item .trade-button-container button {
+    margin-top: 0
+}
+
+.resellers-container .vlist .list-item .btn-buy-md[disabled],
+.resellers-container .vlist .list-item .btn-control-md[disabled] {
+    opacity: .4
+}
+
+.resellers-container .vlist .list-header {
+    margin-top: 0;
+    margin-bottom: 0
+}
+
+@media (max-width:767px) {
+    .resellers-container .vlist .list-header {
+        margin-right: 12px
+    }
+}
+
+.resellers-container .resale-info:before,
+.resellers-container .resale-info:after {
+    content: " ";
+    display: table
+}
+
+.resellers-container .resale-info:after {
+    clear: both
+}
+
+.resellers-container .resale-info {
+    width: 75%;
+    width: calc(100% - 186px);
+    margin-top: 20px;
+    display: inline-block
+}
+
+@media (max-width:767px) {
+    .resellers-container .resale-info {
+        width: 50%;
+        width: calc(100% - 171px);
+        margin-top: 0
+    }
+}
+
+.resellers-container .resale-info .separator {
+    padding: 0 5px
+}
+
+@media (max-width:767px) {
+    .resellers-container .resale-info .separator {
+        display: none
+    }
+}
+
+.resellers-container .resale-info .serial-number,
+.resellers-container .resale-info .username {
+    display: inline-block
+}
+
+@media (max-width:767px) {
+
+    .resellers-container .resale-info .serial-number,
+    .resellers-container .resale-info .username {
+        display: block
+    }
+}
+
+@media (max-width:543px) {
+    .resellers-container .resale-info .username {
+        text-overflow: ellipsis;
+        overflow: hidden
+    }
+}
+
+.resellers-container .resale-info .item-reseller-container {
+    max-width: -webkit-fit-content;
+    max-width: -moz-fit-content;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-align: center;
+    align-items: center;
+    max-width: fit-content;
+    display: -ms-inline-flexbox;
+    display: inline-flex
+}
+
+.resellers-container .resale-info .verified-badge-icon-item-resellers {
+    visibility: hidden;
+    display: none
+}
+
+.resellers-container .resale-info .verified-badge-icon-item-resellers-rendered {
+    width: 16px;
+    height: 16px;
+    margin-left: 4px
+}
+
+@media (max-width:767px) {
+    .resellers-container .resale-info .verified-badge-icon-item-resellers-rendered {
+        width: 12px;
+        height: 12px;
+        margin-left: 2px
+    }
+}
+
+.resellers-container .reseller-price-container {
+    float: right
+}
+
+.resellers-container .reseller-price-container .icon-robux-16x16 {
+    display: none
+}
+
+.resellers-container .reseller-price-container .text-robux {
+    vertical-align: middle
+}
+
+.resellers-container .reseller-price-container .reseller-original-price {
+    vertical-align: middle;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 2px;
+    margin-left: 6px;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    position: relative
+}
+
+.light-theme .resellers-container .reseller-price-container .reseller-original-price,
+.dark-theme .resellers-container .reseller-price-container .reseller-original-price {
+    color: var(--color-content-muted)
+}
+
+.resellers-container .reseller-price-container .reseller-original-price {
+    opacity: .7
+}
+
+.resellers-container .reseller-price-container .reseller-original-price:after {
+    content: "";
+    border-top: 1.5px solid;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0
+}
+
+.resellers-container .reseller-price-container .reseller-original-price .icon-robux-16x16 {
+    display: inline-block
+}
+
+@media (max-width:767px) {
+    .resellers-container .reseller-price-container {
+        float: none
+    }
+
+    .resellers-container .reseller-price-container .icon-robux-28x28 {
+        display: none
+    }
+
+    .resellers-container .reseller-price-container .icon-robux-16x16 {
+        display: inline-block
+    }
+}
+
+.resellers-container .see-more-resellers {
+    width: 100%;
+    margin-bottom: 12px
+}
+
+.section-content-off button.refresh-link-icon {
+    vertical-align: middle;
+    width: 16px;
+    height: 16px
+}
