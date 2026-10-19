@@ -1056,6 +1056,7 @@ CoreScripts.InGameMenu.GameSettings.UINavToggle,界面导航切换
 CoreScripts.InGameMenu.GameSettings.Volume,音量
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,邀请好友
+CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,
 CoreScripts.InGameMenu.Traversal.HistoryDescription,加入之前访问过的游戏
 CoreScripts.InGameMenu.Traversal.LeaveBody,你即将离开此游戏并返回“{PREVIOUS_EXPERIENCE}”。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,你要离开吗？

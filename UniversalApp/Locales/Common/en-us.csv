@@ -1065,6 +1065,7 @@ CoreScripts.InGameMenu.GameSettings.UINavToggle,UI Navigation Toggle
 CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Invite Friends
+CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,Join or Invite Friends
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Join previously visited games
 CoreScripts.InGameMenu.Traversal.LeaveBody,You're about to leave this game and return to {PREVIOUS_EXPERIENCE}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Are you leaving?
