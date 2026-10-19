@@ -46,6 +46,7 @@ local UseValidTileBadgesFunction = GameTileModule.useValidTileBadges
 local UseTagAsViewportAutoplayCandidateFunction = require(Parent.VideoUtils).useTagAsViewportAutoplayCandidate
 local UseTagAsSponsoredAdViewabilityCandidateFunction = require(Parent.SponsoredAdViewability).useTagAsSponsoredAdViewabilityCandidate
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local FFlagLuaAppSponsoredTileBadgeContentPaddingModule = require(SponsoredTiles.Flags.FFlagLuaAppSponsoredTileBadgeContentPadding)
 local LuaAppTwoByOneTileSmallScreenBreakpoint = game:DefineFastInt("LuaAppTwoByOneTileSmallScreenBreakpoint", 600)
 local FFlagLuaAppHomePageFirstImageLoadObserver = SharedFlagsModule.FFlagLuaAppHomePageFirstImageLoadObserver
 local FFlagLuaAppFeatureTileHapticsFix = SharedFlagsModule.FFlagLuaAppFeatureTileHapticsFix
@@ -87,8 +88,8 @@ local config = {
 	}
 }
 
-return function(p1) --[[ Line: 186 ]]
-	-- upvalues: UseNavigateToGameDetailsFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), AppSessionService (copy), UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), ResponsiveModule (copy), LuaAppTwoByOneTileSmallScreenBreakpoint (copy), ButtonSize (copy), ReactModule (copy), GetTextSizeFunction (copy), LuaAppTwoByOneTileLogoHeightPercentLandscapeRatio (copy), LuaAppTwoByOneTileLogoHeightPercentSquareRatio (copy), UseValidTileBadgesFunction (copy), UseTriggerFeedbackFunction (copy), UseOverflowMenuOpenFunction (copy), UseIsHoveredTileFunction (copy), FFlagLuaAppSduiSponsoredTwoByOneTile (copy), SponsoredGamesRecordClickFunction (copy), GameCollectionItemTypes (copy), TwoByOneGameTileTelemetry (copy), GetAvailableGameTileOverflowMenuItemsFunction (copy), FFlagLuaAppEnableReportExperience (copy), TileLongPress (copy), GetOverflowMenuSignalStoreFunction (copy), SetGamePlaySessionFunction (copy), SessionType (copy), HoverTileCoordinator (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), UsePlayButtonStateFunction (copy), UseOnPlayButtonCallbackFunction (copy), FFlagMigrateGameInfoToStore (copy), UseSelectorFunction (copy), GameInfosReducer (copy), FFlagLuaAppHomeThumbnailPrefetch (copy), ResolveGameTileThumbnailUri (copy), FormatExperienceThumbnailFunction (copy), GetGameTileLayoutDataFunction (copy), ItemLayoutDataParsingUtils (copy), ImpressionsTagUtility (copy), UseTagAsViewportAutoplayCandidateFunction (copy), FFlagLuaAppTileVideoCandidateOnly (copy), UseTagAsSponsoredAdViewabilityCandidateFunction (copy), HiddenTileContent (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), LuaAppTwoByOneTileGradientWidthPercentRatio (copy), _Color3 (copy), LuaAppTwoByOneTileGradientStartOpacityPercentRatio (copy), LuaAppTwoByOneTileGradientEndOpacityPercentRatio (copy), _Color3_1 (copy), GameTileThumbnailBadges (copy), Image (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), PlayButton (copy), SpanTileOverflowMenuModule (copy)
+return function(p1) --[[ Line: 188 ]]
+	-- upvalues: UseNavigateToGameDetailsFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), AppSessionService (copy), UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), ResponsiveModule (copy), LuaAppTwoByOneTileSmallScreenBreakpoint (copy), ButtonSize (copy), ReactModule (copy), GetTextSizeFunction (copy), LuaAppTwoByOneTileLogoHeightPercentLandscapeRatio (copy), LuaAppTwoByOneTileLogoHeightPercentSquareRatio (copy), UseValidTileBadgesFunction (copy), UseTriggerFeedbackFunction (copy), UseOverflowMenuOpenFunction (copy), UseIsHoveredTileFunction (copy), FFlagLuaAppSduiSponsoredTwoByOneTile (copy), SponsoredGamesRecordClickFunction (copy), GameCollectionItemTypes (copy), TwoByOneGameTileTelemetry (copy), GetAvailableGameTileOverflowMenuItemsFunction (copy), FFlagLuaAppEnableReportExperience (copy), TileLongPress (copy), GetOverflowMenuSignalStoreFunction (copy), SetGamePlaySessionFunction (copy), SessionType (copy), HoverTileCoordinator (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), UsePlayButtonStateFunction (copy), UseOnPlayButtonCallbackFunction (copy), FFlagMigrateGameInfoToStore (copy), UseSelectorFunction (copy), GameInfosReducer (copy), FFlagLuaAppHomeThumbnailPrefetch (copy), ResolveGameTileThumbnailUri (copy), FormatExperienceThumbnailFunction (copy), GetGameTileLayoutDataFunction (copy), ItemLayoutDataParsingUtils (copy), ImpressionsTagUtility (copy), UseTagAsViewportAutoplayCandidateFunction (copy), FFlagLuaAppTileVideoCandidateOnly (copy), UseTagAsSponsoredAdViewabilityCandidateFunction (copy), HiddenTileContent (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), LuaAppTwoByOneTileGradientWidthPercentRatio (copy), _Color3 (copy), LuaAppTwoByOneTileGradientStartOpacityPercentRatio (copy), LuaAppTwoByOneTileGradientEndOpacityPercentRatio (copy), _Color3_1 (copy), GameTileThumbnailBadges (copy), FFlagLuaAppSponsoredTileBadgeContentPaddingModule (copy), Image (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), PlayButton (copy), SpanTileOverflowMenuModule (copy)
 	local UseNavigateToGameDetailsResult = UseNavigateToGameDetailsFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppSessionService)
@@ -101,14 +102,14 @@ return function(p1) --[[ Line: 186 ]]
 	local UseTokensResult = UseTokensFunction()
 	local _UDim = UDim.new(0, UseTokensResult.Radius.Medium)
 	local TitleSmall = nil
-	local CaptionSmall = nil
 	local Medium1 = nil
 	local Medium = nil
 	local TitleLarge = nil
-	local Size800 = nil
 	local BodySmall = nil
-	local XXSmall = nil
+	local CaptionSmall = nil
 	local Small = nil
+	local XXSmall = nil
+	local Size800 = nil
 	
 	if ResponsiveModule.useResponsive({
 		{
@@ -137,7 +138,7 @@ return function(p1) --[[ Line: 186 ]]
 		TitleSmall = UseTokensResult.Typography.TitleMedium
 	end
 	local ScaledLarge = UseTokensResult.Padding.Large * 4
-	local UseMemoResult = ReactModule.useMemo(function(): UDim --[[ Line: 233 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): UDim --[[ Line: 235 ]]
 		-- upvalues: GetTextSizeFunction (upval), CtaText (copy), TitleSmall (ref), ScaledLarge (copy)
 		return UDim.new(0, GetTextSizeFunction(CtaText, TitleSmall.FontSize, TitleSmall.Font, Vector2.new(1e999, 1e999)).X + ScaledLarge)
 	end, { CtaText, TitleSmall, ScaledLarge })
@@ -156,7 +157,7 @@ return function(p1) --[[ Line: 186 ]]
 	local UseOverflowMenuOpenResult = UseOverflowMenuOpenFunction(HoverKey)
 	local UseIsHoveredTileResult = UseIsHoveredTileFunction(UseRefResult, HoverKey, true)
 	local UseRefResult1 = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 279 ]]
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 281 ]]
 		-- upvalues: p1 (copy), FFlagLuaAppSduiSponsoredTwoByOneTile (upval), SponsoredGamesRecordClickFunction (upval), UseRoactServiceResult (copy)
 		if p1.isSponsored and p1.adId and (not FFlagLuaAppSduiSponsoredTwoByOneTile or not p1.disableSponsoredClickRecording) then
 			SponsoredGamesRecordClickFunction(UseRoactServiceResult, p1.adId)
@@ -167,11 +168,11 @@ return function(p1) --[[ Line: 186 ]]
 		p1.adId,
 		if FFlagLuaAppSduiSponsoredTwoByOneTile then p1.disableSponsoredClickRecording else nil
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 296 ]]
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 298 ]]
 		-- upvalues: UseRefResult1 (copy)
 		UseRefResult1.current = false
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 301 ]]
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 303 ]]
 		-- upvalues: FFlagLuaAppSduiSponsoredTwoByOneTile (upval), p1 (copy), GameCollectionItemTypes (upval), UseNavigateToGameDetailsResult (copy), UniverseId (copy), TwoByOneGameTileTelemetry (upval)
 		if FFlagLuaAppSduiSponsoredTwoByOneTile and p1.onOpenGameDetails then
 			p1.onOpenGameDetails()
@@ -201,7 +202,7 @@ return function(p1) --[[ Line: 186 ]]
 		p1.launchDataOverride, p1.reportGameDetailOpened, p1.adId,
 		if FFlagLuaAppSduiSponsoredTwoByOneTile then p1.onOpenGameDetails else nil
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 343 ]]
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 345 ]]
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(true)
 		
@@ -209,7 +210,7 @@ return function(p1) --[[ Line: 186 ]]
 			p1.onSelectionGained()
 		end
 	end, { p1.onSelectionGained })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 355 ]]
+	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 357 ]]
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(false)
 		
@@ -218,7 +219,7 @@ return function(p1) --[[ Line: 186 ]]
 		end
 	end, { p1.onSelectionLost })
 	local IsSponsored = p1.isSponsored
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 368 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 370 ]]
 		-- upvalues: GetAvailableGameTileOverflowMenuItemsFunction (upval), IsSponsored (copy), p1 (copy), FFlagLuaAppEnableReportExperience (upval)
 		return GetAvailableGameTileOverflowMenuItemsFunction({
 			isSponsored = IsSponsored,
@@ -234,7 +235,7 @@ return function(p1) --[[ Line: 186 ]]
 		if FFlagLuaAppEnableReportExperience then p1.enableReportExperience else nil,
 		p1.enableExplicitFeedback
 	})
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 389 ]]
+	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 391 ]]
 		-- upvalues: UseRefResult1 (copy), FFlagLuaAppSduiSponsoredTwoByOneTile (upval), p1 (copy), UseMemoResult1 (copy), UseTriggerFeedbackResult (copy), UseOverflowMenuOpenResult (copy), UniverseId (copy), TileLongPress (upval), GetOverflowMenuSignalStoreFunction (upval), HoverKey (copy)
 		local Current = UseRefResult1.current
 		UseRefResult1.current = true
@@ -255,7 +256,7 @@ return function(p1) --[[ Line: 186 ]]
 		UseOverflowMenuOpenResult, UniverseId,
 		if FFlagLuaAppSduiSponsoredTwoByOneTile then p1.onTouchLongPress else nil
 	})
-	local UseResult6 = ReactModule.useCallback(function(p2) --[[ Line: 419 ]]
+	local UseResult6 = ReactModule.useCallback(function(p2) --[[ Line: 421 ]]
 		-- upvalues: UseRoactServiceResult1 (copy), SetGamePlaySessionFunction (upval), SessionType (upval), UseIsHoveredTileResult (copy), HoverTileCoordinator (upval), p1 (copy), PlaceId (copy), UniverseId (copy), GameCollectionItemTypes (upval), FFlagLuaAppDemoModePlayButtonTelemetry (upval)
 		if UseRoactServiceResult1 then
 			SetGamePlaySessionFunction(UseRoactServiceResult1, SessionType.StructuralIdentifier.GamePlayFromHoverTile, true)
@@ -284,19 +285,19 @@ return function(p1) --[[ Line: 186 ]]
 		tileType = GameCollectionItemTypes.GameCollectionItemType.TwoByOneTile,
 		nativeAdData = p1.adId
 	}, if p1.placeIdOverride then p1.placeIdOverride else p1.placeId)
-	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 477 ]]
+	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 479 ]]
 		-- upvalues: TwoByOneGameTileTelemetry (upval), UseResult (copy)
 		TwoByOneGameTileTelemetry.logTwoByOneTileGameJoinInitiated()
 		TwoByOneGameTileTelemetry.logTwoByOneTileCtaActivated()
 		UseResult()
 	end, { UseResult })
-	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 483 ]]
+	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 485 ]]
 		-- upvalues: TwoByOneGameTileTelemetry (upval), UseResult (copy), UseResult2 (copy)
 		TwoByOneGameTileTelemetry.logTwoByOneTileCtaActivated()
 		UseResult()
 		UseResult2()
 	end, { UseResult, UseResult2 })
-	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 489 ]]
+	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 491 ]]
 		-- upvalues: TwoByOneGameTileTelemetry (upval), TwoByOneTile (copy), UsePlayButtonStateResult (copy), UseResult6 (copy)
 		TwoByOneGameTileTelemetry.logTwoByOneTileGameJoinInitiated()
 		TwoByOneTile(UsePlayButtonStateResult.playButtonState, UseResult6)
@@ -305,7 +306,7 @@ return function(p1) --[[ Line: 186 ]]
 		UsePlayButtonStateResult.playButtonState,
 		UseResult6
 	})
-	local UseResult10 = ReactModule.useCallback(function() --[[ Line: 501 ]]
+	local UseResult10 = ReactModule.useCallback(function() --[[ Line: 503 ]]
 		-- upvalues: UseRefResult1 (copy), UseIsHoveredTileResult (copy), HoverTileCoordinator (upval), TwoByOneGameTileTelemetry (upval), UseResult (copy), Entry (copy), UseResult2 (copy), UseResult9 (copy)
 		if UseRefResult1.current then
 			UseRefResult1.current = false
@@ -333,7 +334,7 @@ return function(p1) --[[ Line: 186 ]]
 		UseResult9,
 		UseResult
 	})
-	local UseSelectorResult = if FFlagMigrateGameInfoToStore then nil else UseSelectorFunction(function(p2) --[[ Line: 533 ]]
+	local UseSelectorResult = if FFlagMigrateGameInfoToStore then nil else UseSelectorFunction(function(p2) --[[ Line: 535 ]]
 		-- upvalues: GameInfosReducer (upval), UniverseId (copy)
 		return p2.Personalization[GameInfosReducer.key][UniverseId]
 	end)
@@ -356,11 +357,11 @@ return function(p1) --[[ Line: 186 ]]
 	end
 	local AgeRatingLabel = if FFlagMigrateGameInfoToStore then p1.ageRatingLabel else UseSelectorResult and UseSelectorResult.ageRecommendationDisplayName or nil
 	local UseRefResult2 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 568 ]]
+	ReactModule.useEffect(function() --[[ Line: 570 ]]
 		-- upvalues: ImpressionsTagUtility (upval), UseRefResult2 (copy), p1 (copy)
 		ImpressionsTagUtility.AddTag(UseRefResult2, p1.impressionsTag, p1.index)
 		
-		return function() --[[ Line: 570 ]]
+		return function() --[[ Line: 572 ]]
 			-- upvalues: ImpressionsTagUtility (upval), UseRefResult2 (upval), p1 (upval)
 			ImpressionsTagUtility.RemoveTag(UseRefResult2, p1.impressionsTag, p1.index)
 		end
@@ -474,7 +475,10 @@ return function(p1) --[[ Line: 186 ]]
 				ZIndex = 2,
 				Size = UDim2.fromScale(1, 1)
 			}, {
-				Badge = ReactModule.createElement(GameTileThumbnailBadges, { tileBadgesByPosition = UseValidTileBadgesResult })
+				Badge = ReactModule.createElement(GameTileThumbnailBadges, {
+					tileBadgesByPosition = UseValidTileBadgesResult,
+					padding = if FFlagLuaAppSponsoredTileBadgeContentPaddingModule then Medium else nil
+				})
 			}),
 			ContentOverlay = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -606,7 +610,7 @@ return function(p1) --[[ Line: 186 ]]
 				appPage = p1.appPage,
 				topicId = p1.topicId,
 				isSponsored = p1.isSponsored,
-				setGameHidden = p1.setGameHidden or function() --[[ Line: 872 ]] end,
+				setGameHidden = p1.setGameHidden or function() --[[ Line: 875 ]] end,
 				isHovered = UseIsHoveredTileResult,
 				isSelected = UseStateResult,
 				availableMenuItems = UseMemoResult1

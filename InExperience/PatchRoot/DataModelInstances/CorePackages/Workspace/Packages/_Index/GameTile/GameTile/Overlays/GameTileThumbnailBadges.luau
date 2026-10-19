@@ -9,7 +9,7 @@ local _ = require(GameTile.GameTileTypes)
 local TileBadgeIconNamesByType = GameTileConstantsModule.TileBadgeIconNamesByType
 local TileBadgeComponentTypeValues = GameTileConstantsModule.TileBadgeComponentTypeValues
 
-local function getBadgeStyleOptions(p1, TileBadgeComponentType) --[[ Line: 19 ]]
+local function getBadgeStyleOptions(p1, TileBadgeComponentType) --[[ Line: 20 ]]
 	-- upvalues: TileBadgeComponentTypeValues (copy), FlaggedMutedErrorFunction (copy)
 	local config = {
 		[TileBadgeComponentTypeValues.Pill] = {
@@ -33,16 +33,16 @@ local function getBadgeStyleOptions(p1, TileBadgeComponentType) --[[ Line: 19 ]]
 	return Entry or config[TileBadgeComponentTypeValues.Pill]
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 47 | Named "GameTileThumbnailBadges" ]]
+return ReactModule.memo(function(p1) --[[ Line: 48 | Named "GameTileThumbnailBadges" ]]
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), GameTileConstantsModule (copy), FlaggedMutedErrorFunction (copy), TileBadgeIconNamesByType (copy), GameTileOverlayBadgeModule (copy), getBadgeStyleOptions (copy)
-	local Medium = nil
+	local Padding = nil
 	local UseTokensResult = UseTokensFunction()
-	Medium = UseTokensResult.Padding.Medium
+	Padding = p1.padding or UseTokensResult.Padding.Medium
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 55 ]]
-		-- upvalues: UseBindingResult2 (copy), Medium (ref)
-		UseBindingResult2(Frame.AbsoluteSize.X - Medium * 2)
-	end, { Medium })
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 56 ]]
+		-- upvalues: UseBindingResult2 (copy), Padding (ref)
+		UseBindingResult2(Frame.AbsoluteSize.X - Padding * 2)
+	end, { Padding })
 	local Elements = {}
 	
 	for i, value in p1.tileBadgesByPosition do
@@ -51,7 +51,7 @@ return ReactModule.memo(function(p1) --[[ Line: 47 | Named "GameTileThumbnailBad
 		local TileBadgePositionCalculator = GameTileConstantsModule.TileBadgePositionCalculators[i]
 		
 		if TileBadgePositionCalculator then
-			Position, AnchorPoint = TileBadgePositionCalculator(Medium)
+			Position, AnchorPoint = TileBadgePositionCalculator(Padding)
 		else
 			FlaggedMutedErrorFunction("GameTileOverlayBadgeInvalidPositionError", `Unsupported game tile badge position: {i}`)
 		end
