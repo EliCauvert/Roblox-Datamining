@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "889328cc-3e05-d653-5211-75852c09fc27")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "4b3f8333-1d31-8e69-8c63-ae94d56b17c1")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 239328, e => {
@@ -14,12 +14,12 @@
             name: "enableTaxonomyBasedCreatorDashboard",
             defaultValue: !1
         }),
-        r = (0, t.defineFlag)({
+        n = (0, t.defineFlag)({
             namespace: "avatar-marketplace",
             name: "enableCreatorShowcases",
             defaultValue: !1
         }),
-        n = (0, t.defineFlag)({
+        r = (0, t.defineFlag)({
             namespace: "avatar-marketplace",
             name: "enableAvatarCreationTokenCategories",
             defaultValue: !1
@@ -44,7 +44,7 @@
             name: "enableCoreContentGatedBanner",
             defaultValue: !1
         });
-    e.s(["enableAvatarCreationTokenCategories", 0, n, "enableBulkMakeupTokenCreation", 0, s, "enableCoreContentGatedBanner", 0, o, "enableCreatorShowcases", 0, r, "enableTaxonomyBasedCreatorDashboard", 0, a, "isAutoPublishPreferencesEnabled", 0, i, "showTaxonomyOnAvatarItemAnalyticsTab", 0, l])
+    e.s(["enableAvatarCreationTokenCategories", 0, r, "enableBulkMakeupTokenCreation", 0, s, "enableCoreContentGatedBanner", 0, o, "enableCreatorShowcases", 0, n, "enableTaxonomyBasedCreatorDashboard", 0, a, "isAutoPublishPreferencesEnabled", 0, i, "showTaxonomyOnAvatarItemAnalyticsTab", 0, l])
 }, 134731, e => {
     "use strict";
     var t = e.i(157700);
@@ -53,12 +53,12 @@
             name: "isAssetPrivacyOptOutSurveyEnabled",
             defaultValue: !1
         }),
-        r = (0, t.defineFlag)({
+        n = (0, t.defineFlag)({
             namespace: "content-access-and-inventory",
             name: "isAssetAccessRequestsEnabled",
             defaultValue: !1
         }),
-        n = (0, t.defineFlag)({
+        r = (0, t.defineFlag)({
             namespace: "content-access-and-inventory",
             name: "isModelCustomThumbnailUploadEnabled",
             defaultValue: !1
@@ -83,7 +83,7 @@
             name: "isPublishBeforeExposeEnabled",
             defaultValue: !1
         });
-    e.s(["isAssetAccessRequestsEnabled", 0, r, "isAssetDependenciesViewerEnabled", 0, s, "isAssetPrivacyOptOutSurveyEnabled", 0, a, "isCreatorStoreVideoMultipartUploadEnabled", 0, i, "isModelCustomThumbnailUploadEnabled", 0, n, "isPricingEligibilityV2Enabled", 0, l, "isPublishBeforeExposeEnabled", 0, o])
+    e.s(["isAssetAccessRequestsEnabled", 0, n, "isAssetDependenciesViewerEnabled", 0, s, "isAssetPrivacyOptOutSurveyEnabled", 0, a, "isCreatorStoreVideoMultipartUploadEnabled", 0, i, "isModelCustomThumbnailUploadEnabled", 0, r, "isPricingEligibilityV2Enabled", 0, l, "isPublishBeforeExposeEnabled", 0, o])
 }, 9436, e => {
     "use strict";
     var t = e.i(157700);
@@ -92,12 +92,12 @@
             name: "isBadgeDefaultIconEnabled",
             defaultValue: !1
         }),
-        r = (0, t.defineFlag)({
+        n = (0, t.defineFlag)({
             namespace: "creator-creations",
             name: "isMomentsUploadEnabled",
             defaultValue: !1
         }),
-        n = (0, t.defineFlag)({
+        r = (0, t.defineFlag)({
             namespace: "creator-creations",
             name: "isMomentsSitetestUrlParsingEnabled",
             defaultValue: !1
@@ -127,13 +127,13 @@
             name: "isMomentsPostCreationEnabled",
             defaultValue: !1
         });
-    e.s(["isBadgeDefaultIconEnabled", 0, a, "isMomentsFeedIdEnabled", 0, l, "isMomentsPostCreationEnabled", 0, u, "isMomentsShareLinkEnabled", 0, o, "isMomentsSitetestUrlParsingEnabled", 0, n, "isMomentsUploadEnabled", 0, r, "isMomentsUploadLanguageSelectEnabled", 0, i, "isTextDocumentEnabled", 0, s])
+    e.s(["isBadgeDefaultIconEnabled", 0, a, "isMomentsFeedIdEnabled", 0, l, "isMomentsPostCreationEnabled", 0, u, "isMomentsShareLinkEnabled", 0, o, "isMomentsSitetestUrlParsingEnabled", 0, r, "isMomentsUploadEnabled", 0, n, "isMomentsUploadLanguageSelectEnabled", 0, i, "isTextDocumentEnabled", 0, s])
 }, 203450, e => {
     "use strict";
     var t = e.i(221628),
         a = e.i(416340),
-        r = e.i(540459),
-        n = e.i(79187),
+        n = e.i(540459),
+        r = e.i(79187),
         s = e.i(814975),
         i = e.i(156071),
         l = e.i(881670),
@@ -148,9 +148,9 @@
         isGroupEligible: void 0
     });
     d.displayName = "AffiliateProgram";
-    let c = (0, n.withTranslation)(e => {
+    let c = (0, r.withTranslation)(e => {
         let {
-            children: n
+            children: r
         } = e, {
             user: l
         } = (0, s.useAuthentication)(), c = (0, o.useCurrentGroup)(), [m, p] = (0, a.useState)(void 0), [h, y] = (0, a.useState)(), [f, v] = (0, a.useState)(), [g, A] = (0, a.useState)(), [T, b] = (0, a.useState)(), I = (0, a.useMemo)(() => {
@@ -181,7 +181,7 @@
                 return
             }
             y(null)
-        }, [E, I]), k = (0, a.useCallback)(async () => {
+        }, [E, I]), D = (0, a.useCallback)(async () => {
             if (I && (null == c ? void 0 : c.id)) try {
                 let e = await (0, u.getGroupEligibility)(c.id);
                 v(e.isEligible)
@@ -201,15 +201,15 @@
                 e && l && S(e === l.id)
             })
         }, [null == c ? void 0 : c.id, I, l]), (0, a.useEffect)(() => {
-            x || !h || I && !E ? A(void 0) : A((null == h ? void 0 : h.length) === 0 || (null == h ? void 0 : h.length) === 1 && h[0] === r.Requirements.Payable)
+            x || !h || I && !E ? A(void 0) : A((null == h ? void 0 : h.length) === 0 || (null == h ? void 0 : h.length) === 1 && h[0] === n.Requirements.Payable)
         }, [E, I, x, h]), (0, a.useEffect)(() => {
             C()
         }, [C]), (0, a.useEffect)(() => {
             w()
         }, [w]), (0, a.useEffect)(() => {
-            k()
-        }, [k]);
-        let D = (0, a.useMemo)(() => ({
+            D()
+        }, [D]);
+        let k = (0, a.useMemo)(() => ({
             isAffiliateProgramLoading: x,
             requiresActionToJoinProgram: T,
             compliantWithAllUserRequirements: g,
@@ -219,8 +219,8 @@
             isGroupEligible: null != f ? f : void 0
         }), [x, T, g, m, h, E, f]);
         return (0, t.jsx)(d.Provider, {
-            value: D,
-            children: n
+            value: k,
+            children: r
         })
     }, [l.TranslationNamespace.Organization]);
     e.s(["default", 0, c, "useAffiliateProgram", 0, function() {
@@ -230,26 +230,26 @@
     "use strict";
     let t = (0, e.i(650502).getBEDEV2ServiceBasePath)("access-management"),
         a = encodeURIComponent("studio/CollaborationSettings"),
-        r = async function(e) {
+        n = async function(e) {
             let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0,
                 a = await fetch(e, {
                     credentials: "include"
                 }),
-                n = a.status % 100 * 100;
-            if (!a.ok && 500 === n && t < 2) return await new Promise(e => {
+                r = a.status % 100 * 100;
+            if (!a.ok && 500 === r && t < 2) return await new Promise(e => {
                 setTimeout(e, 2 ** (t + 1) * 500)
-            }), r(e, t + 1);
-            if (500 === n && 2 === t) throw Error("Failed to get feature access after 3 attempts");
+            }), n(e, t + 1);
+            if (500 === r && 2 === t) throw Error("Failed to get feature access after 3 attempts");
             let s = await a.json();
             if ("object" != typeof s || null === s || !("access" in s)) throw Error('"access" not found in response');
             return s.access
-        }, n = async () => await r("".concat(t, "/v1/upsell-feature-access?nameSpace=").concat(a, "&featureName=").concat("ShouldShowCreatorHubBanner")) === "Granted";
-    e.s(["getAgeVerificationUpsellFeatureAccess", 0, n])
+        }, r = async () => await n("".concat(t, "/v1/upsell-feature-access?nameSpace=").concat(a, "&featureName=").concat("ShouldShowCreatorHubBanner")) === "Granted";
+    e.s(["getAgeVerificationUpsellFeatureAccess", 0, r])
 }, 714039, 540082, e => {
     "use strict";
     var t, a = e.i(221628),
-        r = e.i(416340),
-        n = e.i(79187),
+        n = e.i(416340),
+        r = e.i(79187),
         s = e.i(335681),
         i = e.i(367808),
         l = e.i(686762),
@@ -301,7 +301,7 @@
     }));
     e.s(["default", 0, g], 540082);
     var A = ((t = {}).Home = "home", t.Creations = "creations", t);
-    let T = (0, n.withTranslation)(e => {
+    let T = (0, r.withTranslation)(e => {
         let t, y, A, T, {
                 trackingPage: b,
                 alertRedesignVariant: I
@@ -315,15 +315,15 @@
             {
                 classes: w
             } = g(),
-            k = (0, r.useRef)(null),
+            D = (0, n.useRef)(null),
             {
-                unifiedLogger: D
+                unifiedLogger: k
             } = (0, h.useUnifiedLoggerProvider)(),
             {
                 translate: N
-            } = (0, n.useTranslation)(),
-            M = (0, r.useCallback)(() => {
-                E && D.logImpressionEvent({
+            } = (0, r.useTranslation)(),
+            M = (0, n.useCallback)(() => {
+                E && k.logImpressionEvent({
                     eventName: p.default.AgeVerificationUpsellBanner,
                     parameters: {
                         page: b,
@@ -333,10 +333,10 @@
                         }
                     }
                 })
-            }, [D, b, x, I, E]);
-        (0, m.default)(k, M);
-        let P = (0, r.useCallback)(() => {
-                D.logClickEvent({
+            }, [k, b, x, I, E]);
+        (0, m.default)(D, M);
+        let P = (0, n.useCallback)(() => {
+                k.logClickEvent({
                     eventName: p.default.AgeVerificationUpsellBannerClick,
                     parameters: {
                         page: b,
@@ -347,9 +347,9 @@
                         }
                     }
                 })
-            }, [D, b, x, I]),
-            L = (0, r.useCallback)(() => {
-                D.logClickEvent({
+            }, [k, b, x, I]),
+            L = (0, n.useCallback)(() => {
+                k.logClickEvent({
                     eventName: p.default.AgeVerificationUpsellBannerClick,
                     parameters: {
                         page: b,
@@ -360,9 +360,9 @@
                         }
                     }
                 })
-            }, [D, b, x, I]),
-            U = (0, r.useCallback)(() => {
-                D.logClickEvent({
+            }, [k, b, x, I]),
+            U = (0, n.useCallback)(() => {
+                k.logClickEvent({
                     eventName: p.default.AgeVerificationUpsellBannerClick,
                     parameters: {
                         page: b,
@@ -373,9 +373,9 @@
                         }
                     }
                 }), C()
-            }, [D, C, b, x, I]);
+            }, [k, C, b, x, I]);
         return ("establishTrust" === x ? (t = "Title.EstablishTrustBanner", y = "Label.EstablishTrustBanner2", A = f.ESTABLISH_TRUST_UPSELL_GET_STARTED_URL, T = f.ESTABLISH_TRUST_UPSELL_VIEW_DETAILS_URL) : (t = "Title.AgeVerificationBanner", y = "Label.AgeVerificationBanner", A = f.AGE_VERIFICATION_UPSELL_GET_STARTED_URL, T = f.AGE_VERIFICATION_UPSELL_VIEW_DETAILS_URL), E) ? (0, a.jsx)("div", {
-            ref: k,
+            ref: D,
             children: (0, a.jsxs)(s.Alert, {
                 className: w.alertContainer,
                 severity: "ageVerification" === x && S ? "warning" : "info",
@@ -418,8 +418,8 @@
     "use strict";
     var t = e.i(221628),
         a = e.i(416340),
-        r = e.i(458451),
-        n = e.i(889311),
+        n = e.i(458451),
+        r = e.i(889311),
         s = e.i(823062),
         i = e.i(814984),
         l = e.i(904969);
@@ -468,7 +468,7 @@
         } = e, [o, u] = (0, a.useState)(!0), [y, f] = (0, a.useState)("doNotShow"), {
             isFetched: v,
             user: g
-        } = (0, r.useRobloxAuthentication)(), {
+        } = (0, n.useRobloxAuthentication)(), {
             unifiedLogger: A
         } = (0, s.useUnifiedLoggerProvider)(), {
             isHighPriority: T,
@@ -477,10 +477,10 @@
             let e = p(l.AGE_VERIFICATION_UPSELL_BANNER_START_DATE),
                 t = p(l.AGE_VERIFICATION_UPSELL_BANNER_END_DATE),
                 a = p(l.AGE_VERIFICATION_UPSELL_BANNER_HIGH_PRIORITY_DATE),
-                r = new Date;
+                n = new Date;
             return {
-                isHighPriority: a <= r,
-                isEnabled: e <= r && r < t
+                isHighPriority: a <= n,
+                isEnabled: e <= n && n < t
             }
         }, []), I = (0, a.useCallback)(async () => {
             await c(), u(!0)
@@ -492,7 +492,7 @@
                     e = await d()
                 } catch (e) {
                     A.logErrorEvent({
-                        eventName: n.default.AgeVerificationUpsellBannerError,
+                        eventName: r.default.AgeVerificationUpsellBannerError,
                         parameters: {
                             branch: "isDismissedToday",
                             error: e instanceof Error ? e.message : String(e)
@@ -505,7 +505,7 @@
                     t = await h()
                 } catch (e) {
                     A.logErrorEvent({
-                        eventName: n.default.AgeVerificationUpsellBannerError,
+                        eventName: r.default.AgeVerificationUpsellBannerError,
                         parameters: {
                             branch: "getEligibility",
                             error: e instanceof Error ? e.message : String(e)
@@ -515,7 +515,7 @@
                 f(t)
             })().catch(e => {
                 A.logErrorEvent({
-                    eventName: n.default.AgeVerificationUpsellBannerError,
+                    eventName: r.default.AgeVerificationUpsellBannerError,
                     parameters: {
                         branch: "runAsync",
                         error: e instanceof Error ? e.message : String(e)
@@ -549,19 +549,19 @@
     "use strict";
     var t = e.i(221628),
         a = e.i(416340),
-        r = e.i(419652);
+        n = e.i(419652);
     e.s(["default", 0, e => {
         let {
-            children: n
+            children: r
         } = e, [s, i] = (0, a.useState)(), l = e => {
             i(e)
         }, o = (0, a.useMemo)(() => ({
             droppedFile: s,
             updateDroppedFile: l
         }), [s]);
-        return (0, t.jsx)(r.default.Provider, {
+        return (0, t.jsx)(n.default.Provider, {
             value: o,
-            children: n
+            children: r
         })
     }])
 }, 799972, e => {
@@ -569,8 +569,8 @@
     var t = e.i(376618),
         a = e.i(671376);
     let {
-        docs: r
-    } = e.i(829425).creatorHub, n = {
+        docs: n
+    } = e.i(829425).creatorHub, r = {
         [a.Asset.Decal]: t.AssetType.Decal,
         [a.Asset.Audio]: t.AssetType.Audio,
         [a.Asset.Video]: t.AssetType.Video,
@@ -601,22 +601,22 @@
             default:
                 return []
         }
-    }, "assetTypeInfoTextMessage", 0, s, "dashboardAssetTypeToOpenCloudAssetType", 0, n, "getInfoUrl", 0, e => {
+    }, "assetTypeInfoTextMessage", 0, s, "dashboardAssetTypeToOpenCloudAssetType", 0, r, "getInfoUrl", 0, e => {
         switch (e) {
             case a.Asset.Decal:
-                return r.getDecalReferenceUrl();
+                return n.getDecalReferenceUrl();
             case a.Asset.TShirt:
             case a.Asset.Shirt:
             case a.Asset.Pants:
-                return r.getClassicClothingUrl();
+                return n.getClassicClothingUrl();
             case a.Asset.Audio:
-                return r.getAudioAssetsUrl();
+                return n.getAudioAssetsUrl();
             case a.Asset.Video:
-                return r.getAssetsUrl();
+                return n.getAssetsUrl();
             case a.Asset.AvatarBackground:
-                return r.getAvatarItemsUrl();
+                return n.getAvatarItemsUrl();
             case a.Asset.TextDocument:
-                return r.getAssetsUrl();
+                return n.getAssetsUrl();
             default:
                 return ""
         }
@@ -672,8 +672,8 @@
     "use strict";
     var t = e.i(221628),
         a = e.i(416340),
-        r = e.i(589624),
-        n = e.i(812077),
+        n = e.i(589624),
+        r = e.i(812077),
         s = e.i(41466),
         i = e.i(197649),
         l = e.i(79187),
@@ -688,24 +688,24 @@
         f = e.i(917852),
         v = e.i(576069),
         g = e.i(663563);
-    let A = "".concat("https://assets.create.roblox.com/5d789367c032a3f49412c04d8f8d67972b446828/assets", "/home/publish_eligibility_banner.webp"),
+    let A = "".concat("https://assets.create.roblox.com/e9d56cebb282861e55dde256175bbd2538dbc7be/assets", "/home/publish_eligibility_banner.webp"),
         T = (0, l.withTranslation)(e => {
             var T;
             let {
                 universeId: b,
                 showCallToAction: I = !0
-            } = e, E = (0, r.useRouter)(), {
+            } = e, E = (0, n.useRouter)(), {
                 translateWithNamespace: S
             } = (0, l.useTranslation)(), {
                 params: x,
                 isFetched: C
             } = (0, m.useIXPParameters)(u.IXPLayers.CreatorHubCreationsPermission), w = x[u.CreatorHubCreationsPermissionParameters.EnableAudienceReachGrowthOpportunitiesBanner], {
-                gameDetails: k
-            } = (0, h.useCurrentGame)(), D = null == k ? void 0 : k.id, N = null != b ? b : D && D > 0 ? D : void 0, {
+                gameDetails: D
+            } = (0, h.useCurrentGame)(), k = null == D ? void 0 : D.id, N = null != b ? b : k && k > 0 ? k : void 0, {
                 data: M,
                 isLoading: P,
                 isFetching: L
-            } = (0, v.useCreatorEligibility)(), U = (0, a.useRef)(!1), [F, _] = (0, a.useState)(!1), V = (null == M ? void 0 : M.ageBracket) === n.AgeBracketEnum.Over18, B = (null == M ? void 0 : M.ageBracket) === n.AgeBracketEnum.Between13And18, R = null != (T = null == M ? void 0 : M.creatorEligibility.includes(n.CreatorEligibilityEnum.IdVerified)) && T, O = V || B, j = C && w && !(P || L) && !!M && !R;
+            } = (0, v.useCreatorEligibility)(), U = (0, a.useRef)(!1), [F, _] = (0, a.useState)(!1), V = (null == M ? void 0 : M.ageBracket) === r.AgeBracketEnum.Over18, B = (null == M ? void 0 : M.ageBracket) === r.AgeBracketEnum.Between13And18, R = null != (T = null == M ? void 0 : M.creatorEligibility.includes(r.CreatorEligibilityEnum.IdVerified)) && T, O = V || B, j = C && w && !(P || L) && !!M && !R;
             (0, a.useEffect)(() => {
                 j && !U.current && (U.current = !0, c.default.logImpressionEvent({
                     eventName: d.default.AudienceReachGrowthOpportunitiesBannerImpression,
@@ -796,29 +796,48 @@
     e.s(["default", 0, T])
 }, 899441, e => {
     "use strict";
-    var t, a, r = e.i(102211),
-        n = e.i(272593),
+    var t, a, n = e.i(102211),
+        r = e.i(272593),
         s = ((t = {}).Animation = "Animation", t.Audio = "Audio", t.Decal = "Decal", t.Image = "Image", t.Mesh = "Mesh", t.MeshPart = "MeshPart", t.Model = "Model", t.Plugin = "Plugin", t.TextDocument = "TextDocument", t.Video = "Video", t),
         i = ((a = {}).Group = "groups", a.User = "users", a);
-    let l = new r.CreatorInventoryApi((0, n.createClientConfiguration)("creator-inventory-api", "bedev2"));
-    e.s(["CreatorInventoryAssetType", () => s, "CreatorInventoryScopeType", () => i, "default", 0, l])
+    let l = new n.CreatorInventoryApi((0, r.createClientConfiguration)("creator-inventory-api", "bedev2"));
+    e.s(["CreatorInventoryAssetType", () => s, "CreatorInventoryScopeType", () => i, "searchCreatorInventoryItems", 0, (e, t, a) => (null == t.isArchived && null == t.orderBy ? l : l.withPreMiddleware(async e => {
+        let {
+            url: a,
+            init: n
+        } = e;
+        return {
+            url: ((e, t) => {
+                let {
+                    isArchived: a,
+                    orderBy: n
+                } = t;
+                if (null == a && null == n) return e;
+                let r = e.indexOf("?"),
+                    s = -1 === r ? e : e.slice(0, r),
+                    i = (-1 === r ? [] : e.slice(r + 1).split("&")).map(e => null != a && e.startsWith("filter=") ? "".concat(e).concat(encodeURIComponent(";isArchived=".concat(a))) : e);
+                return null != n && i.push("orderBy=".concat(encodeURIComponent(n))), "".concat(s, "?").concat(i.join("&"))
+            })(a, t),
+            init: n
+        }
+    })).creatorInventorySearchCreatorInventoryItems(e, a)])
 }, 445550, e => {
     "use strict";
     var t = e.i(721281),
         a = e.i(309999),
-        r = e.i(307529),
-        n = e.i(272593);
+        n = e.i(307529),
+        r = e.i(272593);
     let s = {
-            [r.default.Model]: a.CategoryType.Model,
-            [r.default.Plugin]: a.CategoryType.Plugin
+            [n.default.Model]: a.CategoryType.Model,
+            [n.default.Plugin]: a.CategoryType.Plugin
         },
         i = {
-            3: r.default.Audio,
-            10: r.default.Model,
-            13: r.default.Decal,
-            38: r.default.Plugin,
-            40: r.default.MeshPart,
-            62: r.default.Video
+            3: n.default.Audio,
+            10: n.default.Model,
+            13: n.default.Decal,
+            38: n.default.Plugin,
+            40: n.default.MeshPart,
+            62: n.default.Video
         },
         l = new class {
             async getUserSettingsFeatureKey(e) {
@@ -848,19 +867,19 @@
                     assetType: e
                 })
             }
-            async getCreations(e, t, a, r, n, i, l) {
+            async getCreations(e, t, a, n, r, i, l) {
                 return a ? this.toolboxApi.toolboxGetCreationAssets({
                     ownerId: a,
                     assetType: s[t],
-                    limit: r,
-                    cursor: n,
+                    limit: n,
+                    cursor: r,
                     separateModelsAndPackages: i,
                     includeSharedAssets: l
                 }) : this.toolboxApi.toolboxGetUserCreationAssets({
                     userId: e,
                     assetType: s[t],
-                    limit: r,
-                    cursor: n
+                    limit: n,
+                    cursor: r
                 })
             }
             async getMarketplaceAssets(e) {
@@ -871,7 +890,7 @@
             }
             constructor() {
                 (0, t._)(this, "frontendFlagsApi", void 0), (0, t._)(this, "toolboxApi", void 0);
-                const e = (0, n.createClientConfiguration)("toolbox-service", "bedev2");
+                const e = (0, r.createClientConfiguration)("toolbox-service", "bedev2");
                 this.frontendFlagsApi = new a.FrontendFlagsApi(e), this.toolboxApi = new a.ToolboxApi(e)
             }
         };
@@ -880,8 +899,8 @@
     "use strict";
     var t = e.i(721281),
         a = e.i(176936),
-        r = e.i(272593);
-    let n = new class {
+        n = e.i(272593);
+    let r = new class {
             getAgeBracket() {
                 return this.usersApi.v1UsersAuthenticatedAgeBracketGet()
             }
@@ -912,20 +931,20 @@
             }
             constructor() {
                 (0, t._)(this, "displayNameApi", void 0), (0, t._)(this, "usersApi", void 0), (0, t._)(this, "userSearchApi", void 0);
-                const e = (0, r.createClientConfiguration)("users", "bedev1");
+                const e = (0, n.createClientConfiguration)("users", "bedev1");
                 this.displayNameApi = new a.DisplayNamesApi(e), this.usersApi = new a.UsersApi(e), this.userSearchApi = new a.UserSearchApi(e)
             }
         },
-        s = new a.UsersApi((0, r.createClientConfiguration)("users", "bedev1"));
+        s = new a.UsersApi((0, n.createClientConfiguration)("users", "bedev1"));
     e.s(["UsersClient", 0, {
         usersApi: s
-    }, "default", 0, n])
+    }, "default", 0, r])
 }, 131385, e => {
     "use strict";
     var t = e.i(416340),
         a = e.i(780880),
-        r = e.i(339544),
-        n = e.i(643093),
+        n = e.i(339544),
+        r = e.i(643093),
         s = e.i(130778),
         i = e.i(157310),
         l = e.i(913893),
@@ -940,13 +959,13 @@
                 enabled: e,
                 staleTime: 3e5
             }),
-            r = (0, i.useQuery)({
+            n = (0, i.useQuery)({
                 queryKey: ["getAvatarItemsEntryPointAssetTypes"],
                 queryFn: d.getAvatarItemsEntryPointAssetTypes,
                 enabled: e,
                 staleTime: 3e5
             }),
-            s = r.data,
+            s = n.data,
             c = (0, t.useMemo)(() => {
                 var e, t;
                 return {
@@ -954,13 +973,13 @@
                     enableAvatarBackgrounds: null != (t = null == s ? void 0 : s.has(u.Asset.AvatarBackground)) && t
                 }
             }, [s]),
-            m = (0, t.useMemo)(() => (0, n.transformCreatorDashboardTree)(a.data, c), [a.data, c]),
-            p = (0, t.useMemo)(() => (0, n.buildTaxonomyL1Options)(m), [m]);
+            m = (0, t.useMemo)(() => (0, r.transformCreatorDashboardTree)(a.data, c), [a.data, c]),
+            p = (0, t.useMemo)(() => (0, r.buildTaxonomyL1Options)(m), [m]);
         return {
             response: a.data,
             categories: m,
             l1Options: p,
-            isLoading: a.isLoading || r.isLoading,
+            isLoading: a.isLoading || n.isLoading,
             isError: a.isError
         }
     };
@@ -973,8 +992,8 @@
             l1Options: m,
             categories: p,
             isLoading: h
-        } = c(e), y = (0, s.isAllAssetTypesActiveTab)(u) || (0, s.isRecentsActiveTab)(u) || (0, s.isAvatarLooksActiveTab)(u) ? void 0 : null != (i = (0, s.parseTaxonomyActiveTab)(u)) ? i : null == (o = m[0]) ? void 0 : o.taxonomyKey, f = (0, t.useMemo)(() => (0, n.findL1Category)(p, y), [p, y]), v = (0, t.useMemo)(() => (0, n.buildTaxonomyL2Options)(f), [f]), g = parseInt(null != (l = null == d ? void 0 : d.toString()) ? l : "", 10), A = (0, r.isValidIndex)(g, v) ? g : 0, T = (0, t.useMemo)(() => {
-            if (f) return v.length > 0 ? v[A] : f.webStableId ? (0, n.categoryToDropdown)(f) : void 0
+        } = c(e), y = (0, s.isAllAssetTypesActiveTab)(u) || (0, s.isRecentsActiveTab)(u) || (0, s.isAvatarLooksActiveTab)(u) ? void 0 : null != (i = (0, s.parseTaxonomyActiveTab)(u)) ? i : null == (o = m[0]) ? void 0 : o.taxonomyKey, f = (0, t.useMemo)(() => (0, r.findL1Category)(p, y), [p, y]), v = (0, t.useMemo)(() => (0, r.buildTaxonomyL2Options)(f), [f]), g = parseInt(null != (l = null == d ? void 0 : d.toString()) ? l : "", 10), A = (0, n.isValidIndex)(g, v) ? g : 0, T = (0, t.useMemo)(() => {
+            if (f) return v.length > 0 ? v[A] : f.webStableId ? (0, r.categoryToDropdown)(f) : void 0
         }, [f, v, A]);
         return {
             l1Options: m,
@@ -990,15 +1009,15 @@
     "use strict";
     var t = e.i(780880),
         a = e.i(723538),
-        r = e.i(130778);
+        n = e.i(130778);
     e.s(["default", 0, e => {
         let [{
-            activeTab: n
-        }] = (0, t.useQueryParams)(["activeTab"]), s = (0, a.default)(), i = s && (0, r.isTaxonomyActiveTab)(n), l = s && (0, r.isAvatarLooksActiveTab)(n);
+            activeTab: r
+        }] = (0, t.useQueryParams)(["activeTab"]), s = (0, a.default)(), i = s && (0, n.isTaxonomyActiveTab)(r), l = s && (0, n.isAvatarLooksActiveTab)(r);
         return {
-            canUseTaxonomy: s && (i || (0, r.isTaxonomyEligibleAssetTab)(e)),
+            canUseTaxonomy: s && (i || (0, n.isTaxonomyEligibleAssetTab)(e)),
             isTaxonomyMode: i,
-            isTaxonomyView: i && !(0, r.isAllAssetTypesActiveTab)(n) && !(0, r.isRecentsActiveTab)(n) && !(0, r.isAvatarLooksActiveTab)(n),
+            isTaxonomyView: i && !(0, n.isAllAssetTypesActiveTab)(r) && !(0, n.isRecentsActiveTab)(r) && !(0, n.isAvatarLooksActiveTab)(r),
             isAvatarLooksView: l
         }
     }])
@@ -1009,14 +1028,14 @@
     e.s(["invertAvatarMenuMap", 0, e => {
         let t = new Map;
         return Object.entries(e).forEach(e => {
-            let [r, n] = e;
-            n.forEach((e, n) => {
-                t.set(a(r, e.nameKey), n)
+            let [n, r] = e;
+            r.forEach((e, r) => {
+                t.set(a(n, e.nameKey), r)
             })
         }), t
     }, "isOnItemTab", 0, e => e === t.Asset.TShirt, "isValidIndex", 0, (e, t) => void 0 !== t && void 0 !== e && e > 0 && e < t.length, "serializeMenuMapKey", 0, a], 339544);
-    var r = e.i(266213),
-        n = e.i(418162);
+    var n = e.i(266213),
+        r = e.i(418162);
     let s = new Set([2, 11, 12]),
         i = new Set([76, 77, 88, 89, 90]),
         l = new Set([92]),
@@ -1057,23 +1076,23 @@
         var t;
         let a = (null != (t = null == e ? void 0 : e.children) ? t : []).filter(e => e.webStableId).map(c);
         return (null == e ? void 0 : e.isMakeup) && a.push({
-            lookType: r.default.Makeup,
+            lookType: n.default.Makeup,
             nameKey: "Label.Looks"
         }), a
     }, "categoryToDropdown", 0, m, "findL1Category", 0, function(e, t) {
         if (t) return e.find(e => e.key === t)
     }, "taxonomyOptionLabel", 0, function(e, t) {
         var a;
-        return e.skipTranslation ? (0, n.getTaxonomyDisplayName)(e.nameKey, t) : null != (a = t(e.nameKey)) ? a : e.nameKey
+        return e.skipTranslation ? (0, r.getTaxonomyDisplayName)(e.nameKey, t) : null != (a = t(e.nameKey)) ? a : e.nameKey
     }, "taxonomyOptionValue", 0, function(e) {
         return void 0 !== e.taxonomy ? e.taxonomy : void 0 !== e.lookType ? "look:".concat(e.lookType) : e.nameKey
     }, "transformCreatorDashboardTree", 0, function(e, t) {
         var a;
-        let r = null != (a = null == e ? void 0 : e.categories) ? a : [],
-            n = [],
+        let n = null != (a = null == e ? void 0 : e.categories) ? a : [],
+            r = [],
             o = [];
-        return r.forEach(e => {
-            var a, r, c;
+        return n.forEach(e => {
+            var a, n, c;
             let m = null != (a = e.children) ? a : [];
             if (0 === m.length) {
                 if (!d(e) || u(e, l) && !t.enableAvatarBackgrounds || !e.webStableId) return;
@@ -1094,32 +1113,32 @@
                     return
                 }
                 if (d(e)) {
-                    if (u(e, s)) return void n.push(e);
+                    if (u(e, s)) return void r.push(e);
                     p.push(e)
                 }
             }), 0 !== p.length && e.webStableId && o.push({
                 key: e.webStableId,
-                name: null != (r = e.name) ? r : "",
+                name: null != (n = e.name) ? n : "",
                 webStableId: e.webStableId,
                 assetTypeIds: e.assetTypeIds,
                 isMakeup: h,
                 children: p
             })
-        }), n.length > 0 && o.push({
+        }), r.length > 0 && o.push({
             key: "classics",
             name: "Classics",
             webStableId: void 0,
-            children: n
+            children: r
         }), o
     }], 643093)
 }, 130778, e => {
     "use strict";
-    var t, a, r, n = e.i(671376),
+    var t, a, n, r = e.i(671376),
         s = e.i(692587),
         i = e.i(117236);
     let l = "AvatarItems",
         o = "".concat(l, "-"),
-        u = n.Asset.HairAccessory;
+        u = r.Asset.HairAccessory;
 
     function d(e) {
         let t = (0, s.readQueryValue)(e);
@@ -1128,7 +1147,7 @@
         return a.length > 0 ? a : void 0
     }
     let c = "looks",
-        m = new Set(null != (t = null == (r = i.default.find(e => "Label.AvatarItems" === e.nameKey)) || null == (a = r.submenuItems) ? void 0 : a.map(e => e.type)) ? t : []);
+        m = new Set(null != (t = null == (n = i.default.find(e => "Label.AvatarItems" === e.nameKey)) || null == (a = n.submenuItems) ? void 0 : a.map(e => e.type)) ? t : []);
 
     function p(e) {
         return m.has(e)
@@ -1149,29 +1168,29 @@
         let {
             isTaxonomyEnabled: t,
             isChangingSection: a,
-            nextAssetType: r
+            nextAssetType: n
         } = e;
-        return t && a && p(r)
+        return t && a && p(n)
     }])
 }, 456810, e => {
     "use strict";
     var t = e.i(416340),
         a = e.i(9618),
-        r = e.i(54842),
-        n = e.i(252842),
+        n = e.i(54842),
+        r = e.i(252842),
         s = e.i(671376);
     let i = {
             [s.Asset.Place]: a.SearchSortParameter.LastUpdated,
-            [s.Asset.UpcomingEvent]: r.EventSortBy.StartUtc,
-            [s.Asset.PastEvent]: r.EventSortBy.StartUtc,
-            [s.Asset.DraftEvent]: r.EventSortBy.StartUtc
+            [s.Asset.UpcomingEvent]: n.EventSortBy.StartUtc,
+            [s.Asset.PastEvent]: n.EventSortBy.StartUtc,
+            [s.Asset.DraftEvent]: n.EventSortBy.StartUtc
         },
         l = {
             sort: i,
             setSort: () => {
                 throw Error("NotImplemented")
             },
-            sortOrder: n.SortOrder.Desc,
+            sortOrder: r.SortOrder.Desc,
             setSortOrder: () => {
                 throw Error("NotImplemented")
             },
@@ -1210,44 +1229,55 @@
     }])
 }, 211461, e => {
     "use strict";
-    var t, a = e.i(102211),
+    var t, a, n = e.i(102211),
         r = e.i(899441),
-        n = e.i(361738),
-        s = e.i(671376),
-        i = ((t = {}).All = "All", t);
-    let l = [r.CreatorInventoryAssetType.Model, r.CreatorInventoryAssetType.Plugin, r.CreatorInventoryAssetType.Audio, r.CreatorInventoryAssetType.Decal, r.CreatorInventoryAssetType.Image, r.CreatorInventoryAssetType.Video, r.CreatorInventoryAssetType.Mesh, r.CreatorInventoryAssetType.MeshPart, r.CreatorInventoryAssetType.Animation],
-        o = [...l, r.CreatorInventoryAssetType.TextDocument],
-        u = new Set([r.CreatorInventoryAssetType.Audio, r.CreatorInventoryAssetType.Decal, r.CreatorInventoryAssetType.MeshPart, r.CreatorInventoryAssetType.TextDocument, r.CreatorInventoryAssetType.Video]),
-        d = new Set([...u, r.CreatorInventoryAssetType.Image]),
-        c = new Set(o),
-        m = new Set([r.CreatorInventoryAssetType.TextDocument]),
-        p = new Set(["All", n.CreatorInventorySourceType.Created, n.CreatorInventorySourceType.Purchased, n.CreatorInventorySourceType.Shared]),
-        h = new Set([s.Asset.Animation, s.Asset.Audio, s.Asset.Decal, s.Asset.Image, s.Asset.Mesh, s.Asset.MeshPart, s.Asset.Model, s.Asset.Plugin, s.Asset.Video]),
-        y = {
-            [r.CreatorInventoryAssetType.Animation]: s.Asset.Animation,
-            [r.CreatorInventoryAssetType.Audio]: s.Asset.Audio,
-            [r.CreatorInventoryAssetType.Decal]: s.Asset.Decal,
-            [r.CreatorInventoryAssetType.Image]: s.Asset.Image,
-            [r.CreatorInventoryAssetType.Mesh]: s.Asset.Mesh,
-            [r.CreatorInventoryAssetType.MeshPart]: s.Asset.MeshPart,
-            [r.CreatorInventoryAssetType.Model]: s.Asset.Model,
-            [r.CreatorInventoryAssetType.Plugin]: s.Asset.Plugin,
-            [r.CreatorInventoryAssetType.TextDocument]: s.Asset.TextDocument,
-            [r.CreatorInventoryAssetType.Video]: s.Asset.Video
+        s = e.i(361738),
+        i = e.i(671376),
+        l = ((t = {}).All = "All", t),
+        o = ((a = {}).All = "All", a);
+    let u = {
+            created: {
+                ascending: "created_asc",
+                descending: "created_desc"
+            },
+            updated: {
+                ascending: "updated_asc",
+                descending: "updated_desc"
+            }
         },
-        f = {
-            [r.CreatorInventoryAssetType.Animation]: a.AssetType.Animation,
-            [r.CreatorInventoryAssetType.Audio]: a.AssetType.Audio,
-            [r.CreatorInventoryAssetType.Decal]: a.AssetType.Decal,
-            [r.CreatorInventoryAssetType.Image]: a.AssetType.Image,
-            [r.CreatorInventoryAssetType.Mesh]: a.AssetType.Mesh,
-            [r.CreatorInventoryAssetType.MeshPart]: a.AssetType.MeshPart,
-            [r.CreatorInventoryAssetType.Model]: a.AssetType.Model,
-            [r.CreatorInventoryAssetType.Plugin]: a.AssetType.Plugin,
-            [r.CreatorInventoryAssetType.TextDocument]: a.AssetType.TextDocument,
-            [r.CreatorInventoryAssetType.Video]: a.AssetType.Video
+        d = [r.CreatorInventoryAssetType.Model, r.CreatorInventoryAssetType.Plugin, r.CreatorInventoryAssetType.Audio, r.CreatorInventoryAssetType.Decal, r.CreatorInventoryAssetType.Image, r.CreatorInventoryAssetType.Video, r.CreatorInventoryAssetType.Mesh, r.CreatorInventoryAssetType.MeshPart, r.CreatorInventoryAssetType.Animation],
+        c = [...d, r.CreatorInventoryAssetType.TextDocument],
+        m = new Set([r.CreatorInventoryAssetType.Audio, r.CreatorInventoryAssetType.Decal, r.CreatorInventoryAssetType.MeshPart, r.CreatorInventoryAssetType.TextDocument, r.CreatorInventoryAssetType.Video]),
+        p = new Set([...m, r.CreatorInventoryAssetType.Image]),
+        h = new Set(c),
+        y = new Set([r.CreatorInventoryAssetType.TextDocument]),
+        f = new Set(["All", s.CreatorInventorySourceType.Created, s.CreatorInventorySourceType.Purchased, s.CreatorInventorySourceType.Shared]),
+        v = new Set([i.Asset.Animation, i.Asset.Audio, i.Asset.Decal, i.Asset.Image, i.Asset.Mesh, i.Asset.MeshPart, i.Asset.Model, i.Asset.Plugin, i.Asset.Video]),
+        g = {
+            [r.CreatorInventoryAssetType.Animation]: i.Asset.Animation,
+            [r.CreatorInventoryAssetType.Audio]: i.Asset.Audio,
+            [r.CreatorInventoryAssetType.Decal]: i.Asset.Decal,
+            [r.CreatorInventoryAssetType.Image]: i.Asset.Image,
+            [r.CreatorInventoryAssetType.Mesh]: i.Asset.Mesh,
+            [r.CreatorInventoryAssetType.MeshPart]: i.Asset.MeshPart,
+            [r.CreatorInventoryAssetType.Model]: i.Asset.Model,
+            [r.CreatorInventoryAssetType.Plugin]: i.Asset.Plugin,
+            [r.CreatorInventoryAssetType.TextDocument]: i.Asset.TextDocument,
+            [r.CreatorInventoryAssetType.Video]: i.Asset.Video
         },
-        v = {
+        A = {
+            [r.CreatorInventoryAssetType.Animation]: n.AssetType.Animation,
+            [r.CreatorInventoryAssetType.Audio]: n.AssetType.Audio,
+            [r.CreatorInventoryAssetType.Decal]: n.AssetType.Decal,
+            [r.CreatorInventoryAssetType.Image]: n.AssetType.Image,
+            [r.CreatorInventoryAssetType.Mesh]: n.AssetType.Mesh,
+            [r.CreatorInventoryAssetType.MeshPart]: n.AssetType.MeshPart,
+            [r.CreatorInventoryAssetType.Model]: n.AssetType.Model,
+            [r.CreatorInventoryAssetType.Plugin]: n.AssetType.Plugin,
+            [r.CreatorInventoryAssetType.TextDocument]: n.AssetType.TextDocument,
+            [r.CreatorInventoryAssetType.Video]: n.AssetType.Video
+        },
+        T = {
             3: r.CreatorInventoryAssetType.Audio,
             10: r.CreatorInventoryAssetType.Model,
             13: r.CreatorInventoryAssetType.Decal,
@@ -1277,29 +1307,31 @@
             TEXTDOCUMENT: r.CreatorInventoryAssetType.TextDocument,
             VIDEO: r.CreatorInventoryAssetType.Video
         },
-        g = {
-            createdDetails: n.CreatorInventorySourceType.Created,
-            purchasedDetails: n.CreatorInventorySourceType.Purchased,
-            sharedDetails: n.CreatorInventorySourceType.Shared
+        b = {
+            createdDetails: s.CreatorInventorySourceType.Created,
+            purchasedDetails: s.CreatorInventorySourceType.Purchased,
+            sharedDetails: s.CreatorInventorySourceType.Shared
         },
-        A = {
-            [a.State.Active]: "Active",
-            [a.State.Archived]: "Archived"
+        I = {
+            [n.State.Active]: "Active",
+            [n.State.Archived]: "Archived"
         },
-        T = e => !0 === e ? o : l,
-        b = e => {
+        E = e => !0 === e ? c : d,
+        S = e => {
             if (null == e) return;
             let t = e instanceof Date ? e : new Date(e);
             return Number.isNaN(t.getTime()) ? void 0 : t
         };
-    e.s(["DevelopmentItemsSourceFilter", () => i, "buildCreatorInventoryScope", 0, (e, t) => null != t ? {
+    e.s(["DevelopmentItemsAssetTypeFilter", () => o, "DevelopmentItemsSourceFilter", () => l, "buildCreatorInventoryScope", 0, (e, t) => null != t ? {
         type: r.CreatorInventoryScopeType.Group,
         id: t
     } : null != e ? {
         type: r.CreatorInventoryScopeType.User,
         id: e
     } : void 0, "buildCreatorInventorySearchFilter", 0, (e, t, a) => ({
-        assetTypes: [f[t]],
+        ...0 === t.length ? {} : {
+            assetTypes: t.map(e => A[e])
+        },
         ...e.type === r.CreatorInventoryScopeType.Group ? {
             groupIds: [e.id]
         } : {
@@ -1308,43 +1340,43 @@
         ..."All" === a ? {} : {
             sources: [a]
         }
-    }), "canConfigureDevelopmentItem", 0, e => e.sources.includes(n.CreatorInventorySourceType.Created), "filterDevelopmentItemsByArchivedState", 0, (e, t) => e.filter(e => t ? "Archived" === e.state : "Archived" !== e.state), "getDevelopmentItemsAssetTypes", 0, T, "getDevelopmentItemsSearchAssetTypes", 0, (e, t) => [e, ...T(t).filter(t => t !== e)], "getLegacyDevelopmentItemsAssetType", 0, e => y[e], "hasActiveDevelopmentItemsInventoryFilters", 0, e => {
+    }), "canConfigureDevelopmentItem", 0, e => e.sources.includes(s.CreatorInventorySourceType.Created), "filterDevelopmentItemsByArchivedState", 0, (e, t) => e.filter(e => t ? "Archived" === e.state : "Archived" !== e.state), "getDevelopmentItemsAssetTypes", 0, E, "getDevelopmentItemsColumnSortDirection", 0, (e, t) => e === u[t].ascending ? "ascending" : e === u[t].descending ? "descending" : "none", "getDevelopmentItemsSearchAssetTypes", 0, (e, t) => [e, ...E(t).filter(t => t !== e)], "getLegacyDevelopmentItemsAssetType", 0, e => g[e], "getNextDevelopmentItemsColumnSort", 0, (e, t) => e === u[t].descending ? u[t].ascending : u[t].descending, "hasActiveDevelopmentItemsInventoryFilters", 0, e => {
         let {
             query: t,
             showArchived: a,
-            source: r
+            source: n
         } = e;
-        return t.trim().length > 0 || a || r !== n.CreatorInventorySourceType.Created
-    }, "hasDevelopmentItemCreatorStorePage", 0, e => e !== r.CreatorInventoryAssetType.TextDocument, "hasDevelopmentItemThumbnail", 0, e => e !== r.CreatorInventoryAssetType.TextDocument, "isDevelopmentItemArchivedViewAvailable", 0, e => null != e && d.has(e), "isDevelopmentItemAsset", 0, (e, t) => e === s.Asset.TextDocument ? !0 === t : h.has(e), "isDevelopmentItemDirectlyArchivable", 0, e => null != e && u.has(e), "isDevelopmentItemsAssetTypeSelection", 0, (e, t) => null != e && !!c.has(e) && (!m.has(e) || !0 === t), "isDevelopmentItemsSourceSelection", 0, e => null != e && p.has(e), "isDevelopmentItemsView", 0, e => "grid" === e || "list" === e, "mapCreatorInventoryItem", 0, e => {
-        var t, a, r, n, s, i, l;
-        let o, u = null == (r = e.assetItem) ? void 0 : r.asset;
+        return t.trim().length > 0 || a || n !== s.CreatorInventorySourceType.Created
+    }, "hasDevelopmentItemCreatorStorePage", 0, e => e !== r.CreatorInventoryAssetType.TextDocument, "hasDevelopmentItemThumbnail", 0, e => e !== r.CreatorInventoryAssetType.TextDocument, "isDevelopmentItemArchivedViewAvailable", 0, e => null != e && p.has(e), "isDevelopmentItemAsset", 0, (e, t) => e === i.Asset.TextDocument ? !0 === t : v.has(e), "isDevelopmentItemDirectlyArchivable", 0, e => null != e && m.has(e), "isDevelopmentItemsAllAssetTypes", 0, e => "All" === e, "isDevelopmentItemsAssetType", 0, (e, t) => null != e && !!h.has(e) && (!y.has(e) || !0 === t), "isDevelopmentItemsSourceSelection", 0, e => null != e && f.has(e), "isDevelopmentItemsView", 0, e => "grid" === e || "list" === e, "mapCreatorInventoryItem", 0, e => {
+        var t, a, n, r, s, i, l;
+        let o, u = null == (n = e.assetItem) ? void 0 : n.asset;
         if (null == u) return;
         let d = "number" == typeof u.assetId ? u.assetId : Number.parseInt(null != (t = u.assetId) ? t : "", 10);
         if (Number.isNaN(d)) return;
-        let c = null == (n = u.displayName) ? void 0 : n.trim();
+        let c = null == (r = u.displayName) ? void 0 : r.trim();
         return {
             id: null != (a = e.path) ? a : d.toString(),
             assetId: d,
             assetType: (e => {
-                if (null != e) return v[e.toString().toUpperCase()]
+                if (null != e) return T[e.toString().toUpperCase()]
             })(u.assetType),
-            created: b(u.createTime),
+            created: S(u.createTime),
             isPackage: (null == (s = e.assetItem) ? void 0 : s.isPackage) === !0,
             name: null == c || 0 === c.length ? d.toString() : c,
             sources: (l = null == (i = e.assetItem) ? void 0 : i.sources, o = new Set, null == l || l.forEach(e => {
                 Object.entries(e).forEach(e => {
                     let [t, a] = e;
                     if (null == a) return;
-                    let r = g[t];
-                    null != r && o.add(r)
+                    let n = b[t];
+                    null != n && o.add(n)
                 })
             }), [...o]),
-            state: null == u.state ? void 0 : A[u.state],
-            updated: b(u.updateTime)
+            state: null == u.state ? void 0 : I[u.state],
+            updated: S(u.updateTime)
         }
     }, "mergeOptimisticArchivedDevelopmentItems", 0, (e, t, a) => {
-        let r = new Set(e.map(e => e.assetId));
-        return [...e, ...[...t.values()].filter(e => e.assetType === a && !r.has(e.assetId))]
+        let n = new Set(e.map(e => e.assetId));
+        return [...e, ...[...t.values()].filter(e => null != e.assetType && (0 === a.length || a.includes(e.assetType)) && !n.has(e.assetId))]
     }])
 }, 494601, e => {
     "use strict";
@@ -1372,9 +1404,9 @@
     e.s(["default", 0, () => {
         let {
             ready: e,
-            value: r
+            value: n
         } = (0, t.useFlag)(a.enableTaxonomyBasedCreatorDashboard);
-        return e && null != r && r
+        return e && null != n && n
     }])
 }, 348558, e => {
     "use strict";
@@ -1383,16 +1415,16 @@
     e.s(["default", 0, () => {
         let {
             ready: e,
-            value: r
+            value: n
         } = (0, t.useFlag)(a.isTextDocumentEnabled);
-        if (e) return r
+        if (e) return n
     }])
 }, 427149, e => {
     "use strict";
     var t = e.i(799972),
         a = e.i(671376),
-        r = e.i(759283),
-        n = e.i(475360),
+        n = e.i(759283),
+        r = e.i(475360),
         s = e.i(949599),
         i = e.i(117236);
     let l = i.default.reduce((e, t) => {
@@ -1401,9 +1433,9 @@
                 menuItem: t
             }), null == (a = t.submenuItems) || a.forEach(a => {
                 if (a.submenuItems) {
-                    var r;
-                    null == (r = a.submenuItems) || r.forEach(r => {
-                        e.set(r.type, {
+                    var n;
+                    null == (n = a.submenuItems) || n.forEach(n => {
+                        e.set(n.type, {
                             menuItem: t,
                             submenuItem: a
                         })
@@ -1422,20 +1454,20 @@
         c = a.Asset.AvatarBackground,
         m = a.Asset.Showcase;
     e.s(["default", 0, {
-        isMenuItemEnabled(e, r, s, i, l, o, p, h) {
+        isMenuItemEnabled(e, n, s, i, l, o, p, h) {
             var y, f;
-            return ((null == e ? void 0 : e.type) !== a.Asset.TextDocument || !!h) && ((null == e ? void 0 : e.type) === a.Asset.AllCatalogAsset || ((null == e ? void 0 : e.type) === a.Asset.SharedExperiences ? null == s : (null == e ? void 0 : e.type) === a.Asset.Moments ? null != o && o : (null == e ? void 0 : e.itemType) === n.Item.Bundle || (null == e ? void 0 : e.type) === d || ((null == e ? void 0 : e.type) === c ? null != (y = null == l ? void 0 : l.has(e.type)) && y : (null == e ? void 0 : e.type) === m ? null != p && p : (null == e ? void 0 : e.type) === u ? null != (f = null == l ? void 0 : l.has(null == e ? void 0 : e.type)) && f : (null == e ? void 0 : e.type) === void 0 || !!(0, t.is2DAsset)(null == e ? void 0 : e.type) || (null == e ? void 0 : e.type) !== void 0 && void 0 === i || null != i && i)))
+            return ((null == e ? void 0 : e.type) !== a.Asset.TextDocument || !!h) && ((null == e ? void 0 : e.type) === a.Asset.AllCatalogAsset || ((null == e ? void 0 : e.type) === a.Asset.SharedExperiences ? null == s : (null == e ? void 0 : e.type) === a.Asset.Moments ? null != o && o : (null == e ? void 0 : e.itemType) === r.Item.Bundle || (null == e ? void 0 : e.type) === d || ((null == e ? void 0 : e.type) === c ? null != (y = null == l ? void 0 : l.has(e.type)) && y : (null == e ? void 0 : e.type) === m ? null != p && p : (null == e ? void 0 : e.type) === u ? null != (f = null == l ? void 0 : l.has(null == e ? void 0 : e.type)) && f : (null == e ? void 0 : e.type) === void 0 || !!(0, t.is2DAsset)(null == e ? void 0 : e.type) || (null == e ? void 0 : e.type) !== void 0 && void 0 === i || null != i && i)))
         },
-        getValidMenuState(e, t, a, r, n, s, i, l, o) {
+        getValidMenuState(e, t, a, n, r, s, i, l, o) {
             var d, m, p, h, y, f;
             let v, g, A = (null == (d = t.submenuItem) ? void 0 : d.type) !== u && (null == (m = t.submenuItem) ? void 0 : m.type) !== c || void 0 !== s;
-            if (void 0 === t.menuItem || this.isMenuItemEnabled(t.menuItem, a, r, n, s, i, l, o)) {
-                if (void 0 !== t.submenuItem && A && !this.isMenuItemEnabled(t.submenuItem, a, r, n, s, i, l, o))
+            if (void 0 === t.menuItem || this.isMenuItemEnabled(t.menuItem, a, n, r, s, i, l, o)) {
+                if (void 0 !== t.submenuItem && A && !this.isMenuItemEnabled(t.submenuItem, a, n, r, s, i, l, o))
                     if (void 0 !== t.menuItem.submenuItems) {
                         let e = 0,
                             u = 0;
                         for (; u < (null == (h = t.menuItem.submenuItems) ? void 0 : h.length);) {
-                            if (this.isMenuItemEnabled(t.menuItem.submenuItems[u], a, r, n, s, i, l, o)) {
+                            if (this.isMenuItemEnabled(t.menuItem.submenuItems[u], a, n, r, s, i, l, o)) {
                                 e = u;
                                 break
                             }
@@ -1453,18 +1485,18 @@
         isAssetTypeArchivable(e, t) {
             if (void 0 !== t && s.AvatarMenuMap[e]) {
                 let a = s.AvatarMenuMap[e][t],
-                    r = null == a ? void 0 : a.assetType;
-                return (null == a ? void 0 : a.bundleType) !== void 0 || void 0 !== r && i.allowedAssetTypesForArchiving.has(r)
+                    n = null == a ? void 0 : a.assetType;
+                return (null == a ? void 0 : a.bundleType) !== void 0 || void 0 !== n && i.allowedAssetTypesForArchiving.has(n)
             }
             return i.allowedAssetTypesForArchiving.has(e)
         },
         isAssetTypeSortable: e => i.allowedAssetTypesForSorting.has(e),
         isItemTypeUploadable: e => i.allowedItemTypesForUploading.has(e),
-        getAssetFullNameKey: e => r.assetFullNameKeys[e],
-        getItemFullNameKey: e => r.itemFullNameKeys[e],
+        getAssetFullNameKey: e => n.assetFullNameKeys[e],
+        getItemFullNameKey: e => n.itemFullNameKeys[e],
         getAssetType: e => e.submenuItem ? e.submenuItem.type : e.menuItem.type,
         getItemType(e) {
-            return e.submenuItem && e.submenuItem.itemType ? e.submenuItem.itemType : e.menuItem.itemType ? e.menuItem.itemType : r.assetTypeToItemType[this.getAssetType(e)]
+            return e.submenuItem && e.submenuItem.itemType ? e.submenuItem.itemType : e.menuItem.itemType ? e.menuItem.itemType : n.assetTypeToItemType[this.getAssetType(e)]
         },
         getMenuState(e, t) {
             var a;
@@ -1478,9 +1510,9 @@
     e.s(["default", 0, () => {
         let {
             ready: e,
-            value: r
+            value: n
         } = (0, t.useFlag)(a.enableCreatorShowcases);
-        if (e) return r
+        if (e) return n
     }])
 }, 668091, 418564, e => {
     "use strict";
@@ -1489,8 +1521,8 @@
     e.s(["default", 0, function() {
         return (0, t.useContext)(a.default)
     }], 668091);
-    var r = e.i(221628),
-        n = e.i(842051),
+    var n = e.i(221628),
+        r = e.i(842051),
         s = e.i(79187);
     let i = {
         info: "Info",
@@ -1518,19 +1550,19 @@
         } : {
             hasCloseAffordance: !1
         };
-        return (0, r.jsx)(n.Alert, {
+        return (0, n.jsx)(r.Alert, {
             severity: i[o],
             variant: "Feedback",
             className: "width-full",
             primaryActionLabel: d,
             primaryActionHref: u,
             ...f,
-            children: (0, r.jsxs)("div", {
+            children: (0, n.jsxs)("div", {
                 className: "flex flex-col gap-xsmall",
-                children: [a && (0, r.jsx)("span", {
+                children: [a && (0, n.jsx)("span", {
                     className: "text-label-medium content-emphasis",
                     children: a
-                }), (0, r.jsx)("span", {
+                }), (0, n.jsx)("span", {
                     className: "text-body-medium text-truncate-split content-default width-full",
                     children: l
                 })]
@@ -1558,16 +1590,16 @@
             ["ja-jp", t.Locale.Japanese],
             ["ko-kr", t.Locale.Korean]
         ]),
-        r = [t.Locale.Indonesian, t.Locale.German, t.Locale.English, t.Locale.Spanish, t.Locale.French, t.Locale.Italian, t.Locale.Polish, t.Locale.BrazilPortuguese, t.Locale.Vietnamese, t.Locale.Turkish, t.Locale.Arabic, t.Locale.Thai, t.Locale.SimplifiedChinese, t.Locale.TraditionalChinese, t.Locale.Japanese, t.Locale.Korean];
-    e.s(["StringLocaleMap", 0, a, "availableDocsLocales", 0, r])
+        n = [t.Locale.Indonesian, t.Locale.German, t.Locale.English, t.Locale.Spanish, t.Locale.French, t.Locale.Italian, t.Locale.Polish, t.Locale.BrazilPortuguese, t.Locale.Vietnamese, t.Locale.Turkish, t.Locale.Arabic, t.Locale.Thai, t.Locale.SimplifiedChinese, t.Locale.TraditionalChinese, t.Locale.Japanese, t.Locale.Korean];
+    e.s(["StringLocaleMap", 0, a, "availableDocsLocales", 0, n])
 }, 321211, e => {
     "use strict";
     var t = e.i(221628),
         a = e.i(416340);
     e.s(["default", 0, e => {
         let {
-            className: r,
-            onChange: n,
+            className: n,
+            onChange: r,
             onDragActiveHandler: s,
             onDragLeaveHandler: i,
             size: l,
@@ -1586,14 +1618,14 @@
                     files: t
                 }
             } = e;
-            n && n(t)
+            r && r(t)
         }, e => {
             e.preventDefault(), s && s()
         }, e => {
             e.preventDefault(), i && i()
         }) : null;
         return (0, t.jsxs)("div", {
-            className: r,
+            className: n,
             children: [y, (0, t.jsx)("input", {
                 ...c,
                 accept: d,
@@ -1605,7 +1637,7 @@
                     let {
                         target: t
                     } = e;
-                    n && n(t.files), m.current && (m.current.value = "")
+                    r && r(t.files), m.current && (m.current.value = "")
                 },
                 style: {
                     display: "none"
@@ -1617,8 +1649,8 @@
     "use strict";
     var t = e.i(221628),
         a = e.i(416340),
-        r = e.i(79187),
-        n = e.i(751846),
+        n = e.i(79187),
+        r = e.i(751846),
         s = e.i(623983),
         i = e.i(345886),
         l = e.i(697973),
@@ -1715,8 +1747,8 @@
                 obfuscate: x = !1,
                 hideThumbnail: C = !1,
                 hideSecondaryLabel: w = !1,
-                textVariant: k = "primary",
-                labelTooltip: D,
+                textVariant: D = "primary",
+                labelTooltip: k,
                 secondaryLabelClassName: N
             } = e,
             {
@@ -1738,8 +1770,8 @@
             }),
             {
                 translate: G
-            } = (0, r.useTranslation)(),
-            H = (0, a.useMemo)(() => v === p.default.User ? n.ThumbnailTypes.avatarHeadshot : v === p.default.Group ? n.ThumbnailTypes.groupIcon : "Ugc" === v ? n.ThumbnailTypes.assetThumbnail : n.ThumbnailTypes.universeThumbnail, [v]),
+            } = (0, n.useTranslation)(),
+            H = (0, a.useMemo)(() => v === p.default.User ? r.ThumbnailTypes.avatarHeadshot : v === p.default.Group ? r.ThumbnailTypes.groupIcon : "Ugc" === v ? r.ThumbnailTypes.assetThumbnail : r.ThumbnailTypes.universeThumbnail, [v]),
             K = (0, a.useMemo)(() => {
                 if (!S && f.id && !x) {
                     if (v === p.default.User) return h.www.getUserUrl(f.id);
@@ -1773,12 +1805,12 @@
                         columnGap: 1,
                         children: [(0, t.jsx)(s.Typography, {
                             className: O,
-                            variant: "secondary" === k ? "body1" : "compact" === E ? "captionHeader" : "large" === E ? "h2" : "h5",
+                            variant: "secondary" === D ? "body1" : "compact" === E ? "captionHeader" : "large" === E ? "h2" : "h5",
                             color: I ? "disabled" : "inherit",
                             children: x ? G("Label.Other") : l
                         }), b && b.length > 0 && (0, t.jsx)(m.Tooltip, {
                             arrow: !0,
-                            title: D,
+                            title: k,
                             placement: "right",
                             enterTouchDelay: 0,
                             leaveTouchDelay: 3e3,
@@ -1797,9 +1829,9 @@
                                 width: 192,
                                 height: 20
                             }) : (0, t.jsx)(s.Typography, {
-                                variant: "secondary" === k ? "body2" : "captionBody",
+                                variant: "secondary" === D ? "body2" : "captionBody",
                                 className: j(O, {
-                                    [B]: void 0 === N && ("secondary" === k || "compact" === E)
+                                    [B]: void 0 === N && ("secondary" === D || "compact" === E)
                                 }),
                                 color: I ? "disabled" : "inherit",
                                 children: (e = x ? G("Label.Other") : "@".concat("name" in f ? f.name : ""), N ? (0, t.jsx)("span", {
@@ -1810,7 +1842,7 @@
                         }), (v === p.default.Group || "Experience" === v) && (0, t.jsx)(s.Typography, {
                             variant: "captionBody",
                             className: j(O, {
-                                [B]: void 0 === N && ("secondary" === k || "compact" === E)
+                                [B]: void 0 === N && ("secondary" === D || "compact" === E)
                             }),
                             color: I ? "disabled" : "inherit",
                             children: N ? (0, t.jsx)("span", {
@@ -1820,7 +1852,7 @@
                         })]
                     })]
                 })
-            }, [q, l, v, f, O, I, x, G, b, w, j, B, k, E, D, N]);
+            }, [q, l, v, f, O, I, x, G, b, w, j, B, D, E, k, N]);
         return (0, t.jsx)(i.Grid, {
             container: !0,
             direction: "row",
@@ -1848,12 +1880,12 @@
                                 [_]: v !== p.default.User,
                                 [R]: I
                             }),
-                            children: (0, t.jsx)(n.Thumbnail2d, {
+                            children: (0, t.jsx)(r.Thumbnail2d, {
                                 targetId: f.id,
                                 type: H,
                                 imgClassName: U,
                                 alt: "thumbnail",
-                                returnPolicy: n.ReturnPolicy.PlaceHolder,
+                                returnPolicy: r.ReturnPolicy.PlaceHolder,
                                 includeBackground: !1
                             })
                         })
@@ -1879,7 +1911,7 @@
     "use strict";
     var t = e.i(416340),
         a = e.i(29929);
-    let r = function(e) {
+    let n = function(e) {
             let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
             try {
                 let a = window.localStorage.getItem(e);
@@ -1888,7 +1920,7 @@
                 return t
             }
         },
-        n = function(e) {
+        r = function(e) {
             let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
             try {
                 window.localStorage.setItem(e, JSON.stringify(t))
@@ -1900,11 +1932,11 @@
         var i;
         let l = null != (i = null == s ? void 0 : s.cacheOnly) && i,
             [o, u] = (0, t.useState)(() => l ? {
-                params: r(e),
+                params: n(e),
                 status: "success",
                 isFetched: !0
             } : {
-                params: (null == s ? void 0 : s.restoreInitialValueFromCache) ? r(e) : {},
+                params: (null == s ? void 0 : s.restoreInitialValueFromCache) ? n(e) : {},
                 status: "initial",
                 isFetched: !1
             });
@@ -1919,7 +1951,7 @@
                         params: t,
                         isFetched: !0,
                         status: "success"
-                    }), n(e, t)
+                    }), r(e, t)
                 } catch (e) {
                     u(e => ({
                         ...e,
@@ -1953,11 +1985,11 @@
     let t;
     var a = e.i(798280);
 
-    function r(e) {
-        var t, a, r, n;
+    function n(e) {
+        var t, a, n, r;
         if ((null == e ? void 0 : e.mode) === "standalone") return {
             mode: "standalone",
-            shouldUnmountOnClose: null == (n = e.shouldUnmountOnClose) || n
+            shouldUnmountOnClose: null == (r = e.shouldUnmountOnClose) || r
         };
         let s = null != e ? e : {};
         return {
@@ -1969,10 +2001,10 @@
             hasMarginTop: s.hasMarginTop,
             hasMarginBottom: s.hasMarginBottom,
             hasDescription: s.hasDescription,
-            shouldUnmountOnClose: null == (r = s.shouldUnmountOnClose) || r
+            shouldUnmountOnClose: null == (n = s.shouldUnmountOnClose) || n
         }
     }
-    let n = r(),
+    let r = n(),
         s = {
             ...t = (0, a.createStore)({
                 render: null,
@@ -1982,7 +2014,7 @@
             open: (e, a) => {
                 t.setState({
                     render: e,
-                    options: r(a),
+                    options: n(a),
                     isOpen: !0
                 })
             },
@@ -1998,7 +2030,7 @@
                 })
             }
         };
-    e.s(["DEFAULT_RESOLVED_CONTENT_OPTIONS", 0, n, "dialogStore", 0, s])
+    e.s(["DEFAULT_RESOLVED_CONTENT_OPTIONS", 0, r, "dialogStore", 0, s])
 }, 798280, e => {
     "use strict";
     e.s(["createStore", 0, e => {
@@ -2009,11 +2041,11 @@
                 return a
             },
             setState: function(e) {
-                let r = a;
+                let n = a;
                 a = {
                     ...a,
                     ...e
-                }, t.forEach(e => e(a, r))
+                }, t.forEach(e => e(a, n))
             },
             subscribe: function(e) {
                 return t.add(e), () => {
@@ -2035,15 +2067,15 @@
     "use strict";
     var t = e.i(798280);
     let a = 0,
-        r = (0, t.createStore)({
+        n = (0, t.createStore)({
             current: null
         }),
-        n = {
-            ...r,
+        r = {
+            ...n,
             enqueue: function(e) {
-                var t, n;
-                let s = r.getSnapshot().current;
-                null == s || null == (t = (n = s.props).onClose) || t.call(n), a += 1, r.setState({
+                var t, r;
+                let s = n.getSnapshot().current;
+                null == s || null == (t = (r = s.props).onClose) || t.call(r), a += 1, n.setState({
                     current: {
                         id: "snackbar-".concat(a),
                         props: e
@@ -2054,27 +2086,27 @@
                 var e, t;
                 let {
                     current: a
-                } = r.getSnapshot();
-                a && (null == (e = (t = a.props).onClose) || e.call(t), r.setState({
+                } = n.getSnapshot();
+                a && (null == (e = (t = a.props).onClose) || e.call(t), n.setState({
                     current: null
                 }))
             }
         };
-    e.s(["snackbarStore", 0, n])
+    e.s(["snackbarStore", 0, r])
 }, 125677, 20227, e => {
     "use strict";
     var t = e.i(416340);
     e.s(["useCurrentPage", 0, function(e, a) {
         let {
-            page: r,
-            rowsPerPage: n,
+            page: n,
+            rowsPerPage: r,
             hasNextPage: s,
             fetchNextPage: i,
-            fetchLimit: l = n
+            fetchLimit: l = r
         } = a, o = (0, t.useMemo)(() => {
-            let t = r * n;
-            return e.slice(t, t + n)
-        }, [e, r, n]), u = (r + 1) * l >= e.length;
+            let t = n * r;
+            return e.slice(t, t + r)
+        }, [e, n, r]), u = (n + 1) * l >= e.length;
         return (0, t.useEffect)(() => {
             u && s && (null == i || i())
         }, [u, s, i]), {
@@ -2083,10 +2115,10 @@
     }], 125677), e.s(["useTablePagination", 0, function(e) {
         let {
             count: a,
-            initialRowsPerPage: r = 50,
-            resetKey: n
-        } = e, [s, i] = (0, t.useState)(0), [l, o] = (0, t.useState)(r), [u, d] = (0, t.useState)(n);
-        n !== u && (d(n), i(0));
+            initialRowsPerPage: n = 50,
+            resetKey: r
+        } = e, [s, i] = (0, t.useState)(0), [l, o] = (0, t.useState)(n), [u, d] = (0, t.useState)(r);
+        r !== u && (d(r), i(0));
         let c = Math.max(0, Math.ceil(a / l) - 1),
             m = Math.min(s, c);
         return {
@@ -2106,25 +2138,25 @@
     e.s(["useBackgroundPageLoader", 0, function(e) {
         let {
             hasNextPage: a,
-            fetchNextPage: r,
-            disabled: n,
+            fetchNextPage: n,
+            disabled: r,
             intervalMs: s = 1e3
-        } = e, i = (0, t.useRef)(r);
-        i.current = r, (0, t.useEffect)(() => {
-            if (!a || n) return;
+        } = e, i = (0, t.useRef)(n);
+        i.current = n, (0, t.useEffect)(() => {
+            if (!a || r) return;
             i.current();
             let e = setInterval(() => {
                 i.current()
             }, s);
             return () => clearInterval(e)
-        }, [a, n, s])
+        }, [a, r, s])
     }])
 }, 85057, e => {
     "use strict";
     var t = e.i(221628),
         a = e.i(602635),
-        r = e.i(79187),
-        n = e.i(623983),
+        n = e.i(79187),
+        r = e.i(623983),
         s = e.i(345886),
         i = e.i(697973),
         l = e.i(260782);
@@ -2203,7 +2235,7 @@
             classes: h
         } = o(), {
             ready: y
-        } = (0, r.useTranslation)();
+        } = (0, n.useTranslation)();
         return y ? (0, t.jsxs)(s.Grid, {
             classes: {
                 root: h.container
@@ -2218,7 +2250,7 @@
                             root: h.icon
                         },
                         children: d
-                    }), (0, t.jsx)(n.Typography, {
+                    }), (0, t.jsx)(r.Typography, {
                         variant: "largeLabel2",
                         classes: {
                             root: h.header
@@ -2242,7 +2274,7 @@
                 selected: c,
                 defaultExpanded: m,
                 children: u.map(e => {
-                    var r;
+                    var n;
                     return (0, t.jsx)(a.NavigationTreeItem, {
                         label: e.label,
                         nodeId: e.key,
@@ -2250,13 +2282,13 @@
                         adornment: e.adornment,
                         variant: "smallLabel2",
                         onClick: e.onClick,
-                        children: null == (r = e.subItems) ? void 0 : r.map(r => (0, t.jsx)(a.NavigationTreeItem, {
-                            label: r.label,
-                            nodeId: r.key,
-                            onClick: r.onClick,
-                            href: r.href,
-                            adornment: r.adornment
-                        }, "".concat(e.key, "-").concat(r.key)))
+                        children: null == (n = e.subItems) ? void 0 : n.map(n => (0, t.jsx)(a.NavigationTreeItem, {
+                            label: n.label,
+                            nodeId: n.key,
+                            onClick: n.onClick,
+                            href: n.href,
+                            adornment: n.adornment
+                        }, "".concat(e.key, "-").concat(n.key)))
                     }, e.key)
                 })
             })]
@@ -2266,8 +2298,8 @@
     "use strict";
     var t = e.i(221628),
         a = e.i(41466),
-        r = e.i(984656),
-        n = e.i(79187),
+        n = e.i(984656),
+        r = e.i(79187),
         s = e.i(623983);
     e.s(["default", 0, e => {
         let {
@@ -2277,18 +2309,18 @@
             onAddParent: u
         } = e, {
             translate: d
-        } = (0, n.useTranslation)();
-        return (0, t.jsx)(r.Dialog, {
+        } = (0, r.useTranslation)();
+        return (0, t.jsx)(n.Dialog, {
             open: i,
             onOpenChange: l,
             size: "Small",
             isModal: !0,
             hasCloseAffordance: !0,
             closeLabel: d("Action.Close"),
-            children: (0, t.jsxs)(r.DialogContent, {
-                children: [(0, t.jsxs)(r.DialogBody, {
+            children: (0, t.jsxs)(n.DialogContent, {
+                children: [(0, t.jsxs)(n.DialogBody, {
                     className: "flex flex-col gap-medium",
-                    children: [(0, t.jsx)(r.DialogTitle, {
+                    children: [(0, t.jsx)(n.DialogTitle, {
                         className: "text-heading-medium margin-y-none",
                         children: d("Label.IdVerification")
                     }), (0, t.jsx)(s.Typography, {
@@ -2298,7 +2330,7 @@
                         className: "text-body-medium",
                         children: d("Description.IdVerifiedDialogReverify")
                     })]
-                }), (0, t.jsxs)(r.DialogFooter, {
+                }), (0, t.jsxs)(n.DialogFooter, {
                     className: "flex flex-col gap-xsmall",
                     children: [(0, t.jsx)(a.Button, {
                         variant: "Emphasis",
@@ -2322,9 +2354,9 @@
     "use strict";
     var t = e.i(157310),
         a = e.i(814975),
-        r = e.i(605050);
-    let n = ["creatorEligibility"];
-    e.s(["creatorEligibilityQueryKeyPrefix", 0, n, "useCreatorEligibility", 0, function() {
+        n = e.i(605050);
+    let r = ["creatorEligibility"];
+    e.s(["creatorEligibilityQueryKeyPrefix", 0, r, "useCreatorEligibility", 0, function() {
         let {
             overrideUserId: e,
             isReady: s = !0,
@@ -2333,8 +2365,8 @@
             user: l
         } = (0, a.useAuthentication)(), o = null == l ? void 0 : l.id, u = null != e ? e : o;
         return (0, t.useQuery)({
-            queryKey: [...n, null != u ? u : null],
-            queryFn: async () => r.default.coreContentGetCreatorEligibility({
+            queryKey: [...r, null != u ? u : null],
+            queryFn: async () => n.default.coreContentGetCreatorEligibility({
                 userId: u
             }),
             enabled: s && !!u,
@@ -2345,8 +2377,8 @@
 }, 845592, 448005, e => {
     "use strict";
     var t, a = e.i(221628),
-        r = e.i(416340),
-        n = e.i(445550),
+        n = e.i(416340),
+        r = e.i(445550),
         s = ((t = {}).FrontendFlagEnableNonPluginDistributionRestrictions = "PublicFrontendMDR", t.FrontendFlagEnableModelPricingTransition = "PublicFrontendEMPT", t.FrontendFlagEnableSocialLinkCustomTitles = "PublicFrontendSLCT", t.FrontendFlagEnableAudioWavUpload = "PublicFrontendAWU", t.FrontendFlagEnableAudioFlacUpload = "PublicFrontendAFU", t.FrontendFlagEnableCreatorInsightsPage = "PublicFrontendCIP", t.FrontendFlagEnableTryAssetSocialLink = "PublicFrontendETIR", t.FrontendFlagEnableTryAssetDefaultExperience = "PublicFrontendETADE", t.FrontendFlagEnablePaidModelDependenciesModal = "PublicFrontendPMDM", t.FrontendFlagTaxonomyExperiment = "PublicFrontendTE", t.FrontendFlagUniverseBansManagerLabelUpdate = "PublicFrontendUBMLU", t.FrontendFlagEnableHiddenFromSearchVisibilityAlert = "PublicFrontendHFS", t);
     let i = Object.values(s),
         l = (e => {
@@ -2356,23 +2388,23 @@
             return t
         })(() => !1);
     e.s(["DEFAULT_FRONTEND_FLAGS", 0, l, "FRONTEND_FLAG_NAMES", 0, i, "FrontendFlagName", () => s], 448005);
-    let o = (0, r.createContext)(null);
+    let o = (0, n.createContext)(null);
     e.s(["default", 0, e => {
         let {
             children: t
-        } = e, [s, u] = (0, r.useState)(l), [d, c] = (0, r.useState)(!1), m = (0, r.useCallback)(async e => {
+        } = e, [s, u] = (0, n.useState)(l), [d, c] = (0, n.useState)(!1), m = (0, n.useCallback)(async e => {
             try {
-                let t = await n.default.getFrontendFlagsValues(e),
+                let t = await r.default.getFrontendFlagsValues(e),
                     a = Object.assign({}, ...i.map(e => {
-                        var a, r;
+                        var a, n;
                         return {
-                            [e]: null != (a = null == t || null == (r = t.data) ? void 0 : r[e]) && a
+                            [e]: null != (a = null == t || null == (n = t.data) ? void 0 : n[e]) && a
                         }
                     }));
                 u(a)
             } catch (e) {}
         }, []);
-        (0, r.useEffect)(() => {
+        (0, n.useEffect)(() => {
             let e = !0,
                 t = {
                     flags: [...i]
@@ -2383,7 +2415,7 @@
                 e = !1
             }
         }, [m]);
-        let p = (0, r.useMemo)(() => ({
+        let p = (0, n.useMemo)(() => ({
             frontendFlags: s,
             getFrontendFlags: m,
             loadingFrontendFlags: d
@@ -2393,7 +2425,7 @@
             children: t
         })
     }, "useToolboxServiceApiProvider", 0, function() {
-        let e = (0, r.useContext)(o);
+        let e = (0, n.useContext)(o);
         if (null === e) throw Error("useToolboxServiceApiProvider must be used within a ToolboxServiceApiProvider");
         return e
     }], 845592)
@@ -2401,8 +2433,8 @@
     "use strict";
     var t = e.i(416340),
         a = e.i(589624),
-        r = e.i(745873);
-    let n = e => {
+        n = e.i(745873);
+    let r = e => {
         let t = Array.isArray(e) ? e[0] : e;
         if (!t) return null;
         let a = Number(t);
@@ -2415,13 +2447,13 @@
                 isFetched: i,
                 currentGroup: l,
                 setCurrentGroup: o
-            } = (0, r.useGroups)(),
+            } = (0, n.useGroups)(),
             u = (0, t.useRef)(!1),
             d = (0, t.useRef)(!1),
             c = (0, t.useMemo)(() => {
                 if (!e.isReady) return null;
-                let t = n(e.query.groupId),
-                    a = n(e.query.userId);
+                let t = r(e.query.groupId),
+                    a = r(e.query.userId);
                 return null !== t && null !== a ? null : null !== a ? {
                     kind: "user"
                 } : null !== t ? {
@@ -2462,8 +2494,8 @@
     "use strict";
     var t = e.i(75584),
         a = e.i(41466),
-        r = e.i(408832),
-        n = e.i(607895),
+        n = e.i(408832),
+        r = e.i(607895),
         s = e.i(225032),
         i = e.i(197649),
         l = e.i(416340);
@@ -2494,19 +2526,19 @@
         m = e => {
             let {
                 label: t,
-                href: r,
-                linkTarget: n,
+                href: n,
+                linkTarget: r,
                 onAction: s,
                 variant: i
             } = e;
-            return n ? l.default.createElement(a.Button, {
+            return r ? l.default.createElement(a.Button, {
                 asChild: !0,
                 size: "Small",
                 variant: i,
                 onClick: s
-            }, l.default.cloneElement(n, {}, t)) : r ? l.default.createElement(a.Button, {
+            }, l.default.cloneElement(r, {}, t)) : n ? l.default.createElement(a.Button, {
                 as: "a",
-                href: r,
+                href: n,
                 size: "Small",
                 variant: i,
                 onClick: s
@@ -2520,22 +2552,22 @@
             let {
                 label: t,
                 href: a,
-                linkTarget: r,
+                linkTarget: n,
                 onAction: s
             } = e;
-            return r ? l.default.createElement(n.Link, {
+            return n ? l.default.createElement(r.Link, {
                 asChild: !0,
                 onClick: s,
                 size: "Medium",
                 variant: "Standalone",
                 underline: "always"
-            }, l.default.cloneElement(r, {}, t)) : a ? l.default.createElement(n.Link, {
+            }, l.default.cloneElement(n, {}, t)) : a ? l.default.createElement(r.Link, {
                 href: a,
                 onClick: s,
                 size: "Medium",
                 variant: "Standalone",
                 underline: "always"
-            }, t) : l.default.createElement(n.Link, {
+            }, t) : l.default.createElement(r.Link, {
                 as: "button",
                 onClick: s,
                 size: "Medium",
@@ -2545,7 +2577,7 @@
         },
         h = (0, l.forwardRef)((e, a) => {
             let {
-                children: n,
+                children: r,
                 variant: h = "System",
                 severity: y = "Info",
                 primaryActionLabel: f,
@@ -2560,9 +2592,9 @@
                 closeLabel: x = "Dismiss alert",
                 onDismiss: C,
                 className: w,
-                style: k,
-                ...D
-            } = e, N = (0, r.default)("foundation-web-alert-message-"), M = !!f, P = !!T, L = !!(S && C), U = "Feedback" === h && (M || P || L), F = "Warning" === y || "Error" === y ? "alert" : "status", _ = null;
+                style: D,
+                ...k
+            } = e, N = (0, n.default)("foundation-web-alert-message-"), M = !!f, P = !!T, L = !!(S && C), U = "Feedback" === h && (M || P || L), F = "Warning" === y || "Error" === y ? "alert" : "status", _ = null;
             M && (_ = P ? l.default.createElement(m, {
                 label: f || "",
                 href: v,
@@ -2587,7 +2619,7 @@
                 role: U ? "region" : F,
                 "aria-labelledby": U ? N : void 0,
                 className: (0, i.default)("foundation-web-alert relative width-full stroke-standard", "System" === h ? "[border-left-width:0] [border-right-width:0]" : "radius-medium", d[y], w),
-                ...D
+                ...k
             }, l.default.createElement("div", {
                 "aria-hidden": "true",
                 className: (0, i.default)("absolute inset-[0] pointer-events-none", "Feedback" === h && "radius-medium"),
@@ -2622,7 +2654,7 @@
                 id: U ? N : void 0,
                 role: U ? F : void 0,
                 className: (0, i.default)("flex items-center padding-top-[var(--size-150)] text-body-medium text-wrap content-emphasis [overflow-wrap:anywhere]", P ? "width-full min-width-0" : "grow-1 basis-0 min-width-[min(200px,100%)]")
-            }, n), (_ || V) && l.default.createElement("div", {
+            }, r), (_ || V) && l.default.createElement("div", {
                 className: (0, i.default)("flex items-center gap-small wrap shrink-0", !P && "padding-y-[var(--size-150)]")
             }, _, V)), L && l.default.createElement(s.CloseAffordance, {
                 variant: "Utility",
@@ -2638,8 +2670,8 @@
     "use strict";
     var t = e.i(659332),
         a = e.i(306607),
-        r = e.i(197649),
-        n = e.i(416340),
+        n = e.i(197649),
+        r = e.i(416340),
         s = e.i(425353);
     let i = e => {
             let {
@@ -2656,16 +2688,16 @@
                 onEscapeKeyDown: h,
                 onInteractOutside: y
             } = e;
-            return n.default.createElement(s.Portal, null, n.default.createElement(s.Overlay, {
+            return r.default.createElement(s.Portal, null, r.default.createElement(s.Overlay, {
                 "data-testid": "fui-base-sheet-overlay",
                 "data-type": t,
                 "data-side": "sideSheet" === t ? a : void 0,
                 "data-flush": "sideSheet" === t ? i : void 0,
                 "data-size": "centerSheet" === t ? l : void 0,
-                className: (0, r.default)("fui-base-sheet-overlay", "foundation-web-portal-zindex fixed inset-[0] flex", u)
-            }, n.default.createElement(s.Content, {
+                className: (0, n.default)("fui-base-sheet-overlay", "foundation-web-portal-zindex fixed inset-[0] flex", u)
+            }, r.default.createElement(s.Content, {
                 "data-testid": "fui-base-sheet-content",
-                className: (0, r.default)("fui-base-sheet-content relative bg-surface-100 stroke-muted stroke-standard shadow-transient-high", "flex flex-col clip", d),
+                className: (0, n.default)("fui-base-sheet-content relative bg-surface-100 stroke-muted stroke-standard shadow-transient-high", "flex flex-col clip", d),
                 onOpenAutoFocus: c,
                 onCloseAutoFocus: m,
                 onPointerDownOutside: p,
@@ -2678,35 +2710,35 @@
             if (!t) return;
             let a = t.querySelectorAll("[data-autofocus-priority]");
             if (0 === a.length) return;
-            let r = [];
+            let n = [];
             a.forEach(e => {
                 let t = parseInt(e.getAttribute("data-autofocus-priority") || "", 10);
-                !Number.isNaN(t) && e instanceof HTMLElement && r.push({
+                !Number.isNaN(t) && e instanceof HTMLElement && n.push({
                     element: e,
                     priority: t
                 })
-            }), r.sort((e, t) => e.priority - t.priority);
-            let n = r.find(e => {
+            }), n.sort((e, t) => e.priority - t.priority);
+            let r = n.find(e => {
                 var t, a;
                 return ("function" != typeof(a = t = e.element).checkVisibility || a.checkVisibility()) && !("disabled" in t && t.disabled || "true" === t.getAttribute("aria-disabled"))
             });
-            if (n) {
+            if (r) {
                 var s;
                 e.preventDefault();
-                let t = document.activeElement === n.element;
-                n.element.focus(), !t && (s = n.element) instanceof HTMLInputElement && "function" == typeof s.select && s.select()
+                let t = document.activeElement === r.element;
+                r.element.focus(), !t && (s = r.element) instanceof HTMLInputElement && "function" == typeof s.select && s.select()
             }
         };
     var o = e.i(167878),
         u = e.i(199512);
-    let d = (0, n.createContext)(null),
+    let d = (0, r.createContext)(null),
         c = () => {
-            let e = (0, n.useContext)(d);
+            let e = (0, r.useContext)(d);
             if (!e) throw Error("Sheet components must be used within a Sheet");
             return e
         },
         m = "padding-x-xlarge",
-        p = (0, n.forwardRef)((e, t) => {
+        p = (0, r.forwardRef)((e, t) => {
             let {
                 children: a,
                 className: s,
@@ -2715,9 +2747,9 @@
             } = e, {
                 type: o
             } = c();
-            return n.default.createElement("div", {
+            return r.default.createElement("div", {
                 ref: t,
-                className: (0, r.default)("scroll-y", i && m, "sideSheet" === o ? "grow-1" : "", s),
+                className: (0, n.default)("scroll-y", i && m, "sideSheet" === o ? "grow-1" : "", s),
                 ...l
             }, a)
         });
@@ -2727,8 +2759,8 @@
             className: s,
             ...i
         } = e;
-        return n.default.createElement(n.default.Fragment, null, n.default.createElement(a.Divider, null), n.default.createElement("div", {
-            className: (0, r.default)(m, "margin-y-small shrink-0", s),
+        return r.default.createElement(r.default.Fragment, null, r.default.createElement(a.Divider, null), r.default.createElement("div", {
+            className: (0, n.default)(m, "margin-y-small shrink-0", s),
             ...i
         }, t))
     }, "SheetBody", 0, p, "SheetContent", 0, e => {
@@ -2750,7 +2782,7 @@
             b = (0, o.useMediaQuery)("(orientation: portrait) and (max-width: 600px)"),
             I = (0, o.useMediaQuery)("(orientation: landscape) and (max-height: 600px)");
         t = b ? "bottomSheet" : I || "side" === u ? "sideSheet" : "centerSheet";
-        let E = (0, n.useMemo)(() => ({
+        let E = (0, r.useMemo)(() => ({
                 centerSheetSize: s,
                 largeScreenVariant: u,
                 closeLabel: c,
@@ -2758,10 +2790,10 @@
                 isLandscapeMobile: I,
                 type: t
             }), [s, u, c, b, I, t]),
-            S = (0, r.default)(m, b && p, I && h, !b && !I && y);
-        return n.default.createElement(d.Provider, {
+            S = (0, n.default)(m, b && p, I && h, !b && !I && y);
+        return r.default.createElement(d.Provider, {
             value: E
-        }, n.default.createElement(i, {
+        }, r.default.createElement(i, {
             type: t,
             sideSheetSide: "right",
             isSideSheetFlush: I,
@@ -2773,20 +2805,20 @@
             onEscapeKeyDown: A,
             onInteractOutside: T
         }, a))
-    }, "SheetDescription", 0, e => n.default.createElement(s.Description, {
+    }, "SheetDescription", 0, e => r.default.createElement(s.Description, {
         asChild: !0,
         ...e
     }), "SheetRoot", 0, e => {
         let {
             open: t,
             onOpenChange: a,
-            defaultOpen: r,
+            defaultOpen: n,
             children: i
         } = e;
-        return n.default.createElement(s.Root, {
+        return r.default.createElement(s.Root, {
             open: t,
             onOpenChange: a,
-            defaultOpen: r,
+            defaultOpen: n,
             modal: !0
         }, i)
     }, "SheetTitle", 0, e => {
@@ -2798,27 +2830,27 @@
             visuallyHideTitleText: d
         } = e, {
             closeLabel: m
-        } = c(), p = n.default.createElement(s.Title, {
+        } = c(), p = r.default.createElement(s.Title, {
             className: "text-heading-small margin-none"
         }, i);
-        return n.default.createElement("div", {
-            className: (0, r.default)(a, l ? "padding-left-medium" : "padding-left-xlarge", "padding-right-small padding-y-small", "flex items-center justify-between")
-        }, n.default.createElement("div", {
-            className: (0, r.default)("flex items-center", l && "gap-xsmall")
-        }, l, d ? n.default.createElement(u.VisuallyHidden, null, p) : p), n.default.createElement("div", {
-            className: (0, r.default)("flex items-center", o && "gap-xxsmall")
-        }, o, n.default.createElement("div", {
+        return r.default.createElement("div", {
+            className: (0, n.default)(a, l ? "padding-left-medium" : "padding-left-xlarge", "padding-right-small padding-y-small", "flex items-center justify-between")
+        }, r.default.createElement("div", {
+            className: (0, n.default)("flex items-center", l && "gap-xsmall")
+        }, l, d ? r.default.createElement(u.VisuallyHidden, null, p) : p), r.default.createElement("div", {
+            className: (0, n.default)("flex items-center", o && "gap-xxsmall")
+        }, o, r.default.createElement("div", {
             className: "fui-sheet-close-affordance-container"
-        }, n.default.createElement(s.Close, {
+        }, r.default.createElement(s.Close, {
             asChild: !0
-        }, n.default.createElement(t.IconButton, {
+        }, r.default.createElement(t.IconButton, {
             variant: "Utility",
             size: "Medium",
             icon: "icon-regular-x",
             ariaLabel: m || "",
             "data-autofocus-priority": "1000"
         })))))
-    }, "SheetTrigger", 0, e => n.default.createElement(s.Trigger, {
+    }, "SheetTrigger", 0, e => r.default.createElement(s.Trigger, {
         asChild: !0,
         ...e
     })], 517359)
@@ -2826,8 +2858,8 @@
     "use strict";
     var t = e.i(603955),
         a = e.i(408832),
-        r = e.i(750615),
-        n = e.i(197649),
+        n = e.i(750615),
+        r = e.i(197649),
         s = e.i(416340);
     let i = {
             XSmall: "padding-x-small",
@@ -2869,21 +2901,21 @@
                 textareaStyle: I,
                 id: E,
                 ...S
-            } = e, x = (0, a.default)(), C = E || x, w = "".concat(C, "-description"), k = null != c ? c : "Large";
+            } = e, x = (0, a.default)(), C = E || x, w = "".concat(C, "-description"), D = null != c ? c : "Large";
             return s.default.createElement("div", {
-                className: (0, n.default)("flex fill flex-col width-full gap-small", {
+                className: (0, r.default)("flex fill flex-col width-full gap-small", {
                     [t.disabledOpacity]: f
                 }, A),
                 style: T
             }, p && s.default.createElement("label", {
                 htmlFor: C,
-                className: (0, n.default)(o[k], "content-emphasis")
+                className: (0, r.default)(o[D], "content-emphasis")
             }, p), s.default.createElement("textarea", {
                 ref: d,
                 id: C,
                 "data-testid": "text-area-container",
                 style: I,
-                className: (0, n.default)("foundation-web-text-area foundation-web-input outline-none", "radius-medium content-emphasis placeholder:content-muted", r.INPUT_BACKGROUND_BY_VARIANT[m], r.INPUT_STROKE_BY_VARIANT[m], v ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis", u[k], i[k], l[k], b),
+                className: (0, r.default)("foundation-web-text-area foundation-web-input outline-none", "radius-medium content-emphasis placeholder:content-muted", n.INPUT_BACKGROUND_BY_VARIANT[m], n.INPUT_STROKE_BY_VARIANT[m], v ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis", u[D], i[D], l[D], b),
                 value: h,
                 defaultValue: null == h ? y : void 0,
                 disabled: f,
@@ -2891,7 +2923,7 @@
                 ...S
             }), g && s.default.createElement("span", {
                 id: w,
-                className: (0, n.default)("text-caption-small", {
+                className: (0, r.default)("text-caption-small", {
                     "content-system-alert": v,
                     "content-default": !v
                 })
@@ -2908,5 +2940,5 @@
     e.s(["ArrowUpwardIcon", () => t.ArrowUpward])
 }]);
 
-//# debugId=889328cc-3e05-d653-5211-75852c09fc27
-//# sourceMappingURL=36z9j5f7tupaj.js.map
+//# debugId=4b3f8333-1d31-8e69-8c63-ae94d56b17c1
+//# sourceMappingURL=3r-j382n9p9f0.js.map
