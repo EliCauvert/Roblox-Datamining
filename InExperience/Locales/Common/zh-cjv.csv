@@ -936,6 +936,7 @@ CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,控制方式...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,
+CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,
 CoreScripts.InGameMenu.PageTitle.Players,用户
 CoreScripts.InGameMenu.PageTitle.Report,举报
 CoreScripts.InGameMenu.PageTitle.VRComfortSettings,舒适度设置

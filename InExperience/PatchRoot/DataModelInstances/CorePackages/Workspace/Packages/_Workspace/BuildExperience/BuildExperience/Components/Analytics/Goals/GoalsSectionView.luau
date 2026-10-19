@@ -5,7 +5,7 @@ local View = require(Parent.Foundation).View
 local _ = require(Parent.DataHydration.ExperienceAnalytics)
 local _ = require(BuildExperience.Analytics.AnalyticsWindow)
 local GoalCardModule = require(script.Parent.GoalCard)
-local _ = require(BuildExperience.Analytics.Goals.GoalLockedActionId)
+local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
 local _ = require(script.Parent.useGoalsSectionViewModel)
 
 return function(p1) --[[ Line: 32 | Named "GoalsSectionView" ]]
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 32 | Named "GoalsSectionView" ]]
 			latestByMetric = p1.latestByMetric,
 			metadataStatus = p1.metadataStatus,
 			isLocked = entry.isLocked,
-			onLockedAction = p1.onLockedAction,
+			lockedActions = p1.lockedActions,
 			layoutOrder = entry.layoutOrder,
 			testId = `{TestId}.{Goal.id}`
 		})

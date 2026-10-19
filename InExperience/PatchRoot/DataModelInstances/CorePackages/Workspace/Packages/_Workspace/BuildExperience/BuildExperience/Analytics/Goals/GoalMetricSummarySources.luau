@@ -1,21 +1,51 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local ExperienceAnalyticsModule = require(BuildExperience.Parent.DataHydration.ExperienceAnalytics)
 local DeriveMetricSummaryModule = require(BuildExperience.Analytics.deriveMetricSummary)
 local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
-local MetricGranularity = require(BuildExperience.Parent.DataHydration.ExperienceAnalytics).MetricGranularity
+local MetricGranularity = ExperienceAnalyticsModule.MetricGranularity
+
+local function retentionRatio(p1, DurationSeconds, EndUnixDelta, EndUnix) --[[ Line: 111 ]]
+	local NewValue: number? = nil
+	local NewValue1 = nil
+	local Values = p1.values or {}
+	for _, value in Values do
+		local BreakdownValue = value.breakdownValues[1]
+		
+		if BreakdownValue ~= nil and BreakdownValue.dimension == "SessionTimeBucket" then
+			local Number: number? = tonumber(BreakdownValue.value)
+			
+			if Number == 0 or Number == DurationSeconds then
+				for _, dataPoint in value.dataPoints do
+					local _DateTime = DateTime.fromIsoDate(dataPoint.time)
+					
+					if _DateTime ~= nil and _DateTime.UnixTimestamp > EndUnixDelta and EndUnix >= _DateTime.UnixTimestamp then
+						if Number == 0 then
+							NewValue = (NewValue or 0) + dataPoint.value
+						end
+						if Number == DurationSeconds then
+							NewValue1 = (NewValue1 or 0) + dataPoint.value
+						end
+					end
+				end
+			end
+		end
+	end
+	return if NewValue == nil or NewValue <= 0 or NewValue1 == nil then nil else NewValue1 / NewValue
+end
 
 return {
-	summary = function(p1) --[[ Line: 33 ]]
+	summary = function(p2) --[[ Line: 37 ]]
 		-- upvalues: DeriveMetricSummaryModule (copy)
 		return {
 			query = {
 				lookbackWindows = 2,
-				metric = p1.metric,
-				endOffsetDays = p1.endOffsetDays,
-				filters = p1.filters
+				metric = p2.metric,
+				endOffsetDays = p2.endOffsetDays,
+				filters = p2.filters
 			},
-			derive = function(p2, p3) --[[ Line: 41 ]]
+			derive = function(p3, p4) --[[ Line: 45 ]]
 				-- upvalues: DeriveMetricSummaryModule (upval)
-				local DeriveMetricSummaryModuleResult = DeriveMetricSummaryModule(p2, p3)
+				local DeriveMetricSummaryModuleResult = DeriveMetricSummaryModule(p3, p4)
 				
 				return if DeriveMetricSummaryModuleResult.hasData and DeriveMetricSummaryModuleResult.latest ~= nil then {
 					kind = "number",
@@ -26,25 +56,25 @@ return {
 			end
 		}
 	end,
-	topBreakdown = function(p1) --[[ Line: 60 ]]
+	topBreakdown = function(p2) --[[ Line: 64 ]]
 		-- upvalues: MetricGranularity (copy)
-		local Dimension = p1.dimension
+		local Dimension = p2.dimension
 		
 		return {
 			query = {
 				lookbackWindows = 1,
-				metric = p1.metric,
+				metric = p2.metric,
 				granularity = MetricGranularity.None,
-				filters = p1.filters,
+				filters = p2.filters,
 				breakdowns = { { dimensions = { Dimension } } }
 			},
-			derive = function(p2, _) --[[ Line: 71 ]]
-				-- upvalues: Dimension (copy), p1 (copy)
+			derive = function(p3, _) --[[ Line: 75 ]]
+				-- upvalues: Dimension (copy), p2 (copy)
 				local Breakdown = nil
 				local v1 = -1e999
 				local NewValue = nil
 				
-				for _, value in p2.values or {} do
+				for _, value in p3.values or {} do
 					for _, breakdownValue in value.breakdownValues do
 						if breakdownValue.dimension == Dimension then
 							NewValue = 0
@@ -63,9 +93,47 @@ return {
 				end
 				return if Breakdown == nil then nil else {
 					kind = "breakdown",
-					metric = p1.metric,
+					metric = p2.metric,
 					breakdown = Breakdown
 				}
+			end
+		}
+	end,
+	firstSessionRetention = function(p4) --[[ Line: 149 ]]
+		-- upvalues: ExperienceAnalyticsModule (copy), MetricGranularity (copy), retentionRatio (copy)
+		local DurationSeconds = p4.durationSeconds
+		
+		return {
+			query = {
+				lookbackWindows = 2,
+				metric = ExperienceAnalyticsModule.MetricId.TotalSessionsEndedInBucket,
+				granularity = MetricGranularity.OneDay,
+				breakdowns = { { dimensions = { "SessionTimeBucket" } } },
+				filters = {
+					{
+						dimension = "SessionTimeBucket",
+						operation = "Equals",
+						values = { "0", (tostring(DurationSeconds)) }
+					}
+				}
+			},
+			derive = function(p5, p6) --[[ Line: 168 ]]
+				-- upvalues: retentionRatio (upval), DurationSeconds (copy)
+				local EndUnixDelta = p6.endUnix - p6.lookbackSeconds
+				local RetentionRatioResult: number = retentionRatio(p5, DurationSeconds, EndUnixDelta, p6.endUnix)
+				
+				if RetentionRatioResult == nil then
+					return nil
+				else
+					local RetentionRatioResult1: number = retentionRatio(p5, DurationSeconds, EndUnixDelta - p6.lookbackSeconds, EndUnixDelta)
+					
+					return {
+						kind = "number",
+						value = RetentionRatioResult,
+						priorValue = RetentionRatioResult1,
+						trendPct = if RetentionRatioResult1 == nil or RetentionRatioResult1 <= 0 then nil else (RetentionRatioResult - RetentionRatioResult1) / RetentionRatioResult1
+					}
+				end
 			end
 		}
 	end

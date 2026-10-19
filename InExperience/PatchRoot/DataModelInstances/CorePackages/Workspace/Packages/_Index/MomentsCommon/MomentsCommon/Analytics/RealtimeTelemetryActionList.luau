@@ -9,16 +9,16 @@ local config = {
 	flyout_menu = "flyout_menu"
 }
 
-local function _(p1) --[[ Line: 167 | Named "normalizeViewSource" ]]
+local function _(p1) --[[ Line: 170 | Named "normalizeViewSource" ]]
 	-- upvalues: config (copy)
 	return config[p1] or "unknown"
 end
 
-local function normalizeRequestFailureReason(p1) --[[ Line: 171 ]]
+local function normalizeRequestFailureReason(p1) --[[ Line: 174 ]]
 	return if p1 == nil or p1 == "" then "unknown" elseif p1 == "requestFailed" or p1 == "malformedResponse" then p1 else "unknown"
 end
 
-local function normalizeMediaFailureReason(Text: string): string --[[ Line: 178 ]]
+local function normalizeMediaFailureReason(Text: string): string --[[ Line: 181 ]]
 	return if Text == nil or Text == "" then "unknown" elseif string.find(Text, "video load errored:", 1, true) == 1 then "videoLoadErrored" elseif string.find(Text, "video load failed:", 1, true) == 1 then "videoLoadFailed" elseif string.find(Text, "screenshot load failed:", 1, true) == 1 then "screenshotLoadFailed" else "unknown"
 end
 
@@ -31,7 +31,7 @@ local config1 = {
 	report_click = "report_click"
 }
 
-local _ = function(p1) --[[ Line: 201 | Named "normalizeEngagementAction" ]]
+local _ = function(p1) --[[ Line: 204 | Named "normalizeEngagementAction" ]]
 	-- upvalues: config1 (copy)
 	return config1[p1] or "unknown"
 end
@@ -40,15 +40,16 @@ local config2 = {
 	create_intent = "create_intent",
 	gallery_selected = "gallery_selected",
 	published = "published",
-	upload = "upload"
+	upload = "upload",
+	post_review = "post_review"
 }
 
-local _ = function(p1) --[[ Line: 212 | Named "normalizeCreationStep" ]]
+local _ = function(p1) --[[ Line: 216 | Named "normalizeCreationStep" ]]
 	-- upvalues: config2 (copy)
 	return config2[p1] or "unknown"
 end
 
-local _ = function(p1) --[[ Line: 216 | Named "normalizeCreationStatus" ]]
+local _ = function(p1) --[[ Line: 220 | Named "normalizeCreationStatus" ]]
 	return if p1 == "success" or p1 == "failed" then p1 else "unknown"
 end
 
@@ -60,10 +61,13 @@ local config3 = {
 	StartUploadFailed = "startFailed",
 	RegistrationFailed = "registrationFailed",
 	PollError = "pollError",
+	NetworkError = "network",
+	ServerError = "serverError",
+	InvalidRequest = "invalidRequest",
 	GenericFailure = "generic"
 }
 
-local _ = function(p1) --[[ Line: 234 | Named "normalizeUploadFailureReason" ]]
+local _ = function(p1) --[[ Line: 241 | Named "normalizeUploadFailureReason" ]]
 	-- upvalues: config3 (copy)
 	return config3[p1] or "unknown"
 end
@@ -75,7 +79,7 @@ local config4 = {
 	deleted = "deleted"
 }
 
-local _ = function(p1) --[[ Line: 245 | Named "normalizeFilterReason" ]]
+local _ = function(p1) --[[ Line: 252 | Named "normalizeFilterReason" ]]
 	-- upvalues: config4 (copy)
 	return config4[p1] or "unknown"
 end
@@ -89,7 +93,7 @@ local config5 = {
 	tts = "tts"
 }
 
-local _ = function(p1) --[[ Line: 258 | Named "normalizePublishedEditType" ]]
+local _ = function(p1) --[[ Line: 265 | Named "normalizePublishedEditType" ]]
 	-- upvalues: config5 (copy)
 	return config5[p1] or "unknown"
 end
@@ -103,20 +107,20 @@ local config6 = {
 	voice = "voice"
 }
 
-local _ = function(p1) --[[ Line: 271 | Named "normalizeEditTool" ]]
+local _ = function(p1) --[[ Line: 278 | Named "normalizeEditTool" ]]
 	-- upvalues: config6 (copy)
 	return config6[p1] or "unknown"
 end
 
-local _ = function(p1) --[[ Line: 275 | Named "normalizeCaptureType" ]]
+local _ = function(p1) --[[ Line: 282 | Named "normalizeCaptureType" ]]
 	return if p1 == "screenshot" or p1 == "video" then p1 else "unknown"
 end
 
-local _ = function(p1) --[[ Line: 279 | Named "normalizeGenerateTextStatus" ]]
+local _ = function(p1) --[[ Line: 286 | Named "normalizeGenerateTextStatus" ]]
 	return if p1 == "succeeded" or p1 == "failed" or p1 == "filtered" then p1 else "unknown"
 end
 
-local _ = function(p1) --[[ Line: 283 | Named "normalizeCommentsSurface" ]]
+local _ = function(p1) --[[ Line: 290 | Named "normalizeCommentsSurface" ]]
 	return if p1 == "watch_tab" or p1 == "profile" then p1 else "unknown"
 end
 
@@ -126,7 +130,7 @@ local config7 = {
 	failed = "failed"
 }
 
-local _ = function(p1) --[[ Line: 293 | Named "normalizeCommentsListLoadStatus" ]]
+local _ = function(p1) --[[ Line: 300 | Named "normalizeCommentsListLoadStatus" ]]
 	-- upvalues: config7 (copy)
 	return config7[p1] or "unknown"
 end
@@ -137,7 +141,7 @@ local config8 = {
 	refresh = "refresh"
 }
 
-local _ = function(p1) --[[ Line: 303 | Named "normalizeCommentsLoadType" ]]
+local _ = function(p1) --[[ Line: 310 | Named "normalizeCommentsLoadType" ]]
 	-- upvalues: config8 (copy)
 	return config8[p1] or "unknown"
 end
@@ -151,12 +155,12 @@ local config9 = {
 	cancelled = "cancelled"
 }
 
-local _ = function(p1) --[[ Line: 316 | Named "normalizeCommentPostStatus" ]]
+local _ = function(p1) --[[ Line: 323 | Named "normalizeCommentPostStatus" ]]
 	-- upvalues: config9 (copy)
 	return config9[p1] or "unknown"
 end
 
-local _ = function(Text: string): string --[[ Line: 322 | Named "normalizeCommentsFailureReason" ]]
+local _ = function(Text: string): string --[[ Line: 329 | Named "normalizeCommentsFailureReason" ]]
 	return if Text == nil or string.find(Text, "^unknown_") ~= nil then "unknown" else Text
 end
 
@@ -167,25 +171,25 @@ local config11 = {
 	failed = "failed"
 }
 
-local _ = function(p1) --[[ Line: 338 | Named "normalizeCommentRequestStatus" ]]
+local _ = function(p1) --[[ Line: 345 | Named "normalizeCommentRequestStatus" ]]
 	-- upvalues: config11 (copy)
 	return config11[p1] or "unknown"
 end
 
-local _ = function(p1) --[[ Line: 342 | Named "normalizeCommentReactionAction" ]]
+local _ = function(p1) --[[ Line: 349 | Named "normalizeCommentReactionAction" ]]
 	return if p1 == "add" or p1 == "remove" then p1 else "unknown"
 end
 
-local _ = function(p1) --[[ Line: 346 | Named "normalizeCommentDeleteStatus" ]]
+local _ = function(p1) --[[ Line: 353 | Named "normalizeCommentDeleteStatus" ]]
 	-- upvalues: config11 (copy)
 	return if p1 == "already_deleted" then p1 else config11[p1] or "unknown"
 end
 
-local _ = function(p1) --[[ Line: 350 | Named "normalizeCommentReportStatus" ]]
+local _ = function(p1) --[[ Line: 357 | Named "normalizeCommentReportStatus" ]]
 	return if p1 == "clicked" then p1 else "unknown"
 end
 
-local _ = function(p1, Callback) --[[ Line: 354 | Named "formatFeedOperationInfo" ]]
+local _ = function(p1, Callback) --[[ Line: 361 | Named "formatFeedOperationInfo" ]]
 	local config = { status = p1.status, feedType = p1.feedType }
 	
 	if p1.status == "failed" then
@@ -204,7 +208,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 375 ]]
+				format = function(p1) --[[ Line: 382 ]]
 					return { feedType = p1.feedType }
 				end
 			}
@@ -219,7 +223,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 392 ]]
+				format = function(p1) --[[ Line: 399 ]]
 					local config = { status = p1.status, feedType = p1.feedType }
 					
 					if p1.status == "failed" then
@@ -240,7 +244,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 414 ]]
+				format = function(p1) --[[ Line: 421 ]]
 					-- upvalues: normalizeRequestFailureReason (copy)
 					local config = { status = p1.status, feedType = p1.feedType }
 					
@@ -262,7 +266,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 429 ]]
+				format = function(p1) --[[ Line: 436 ]]
 					-- upvalues: normalizeMediaFailureReason (copy)
 					local config = { status = p1.status, feedType = p1.feedType }
 					
@@ -283,7 +287,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 444 ]]
+				format = function(p1) --[[ Line: 451 ]]
 					return { reason = p1.reason }
 				end
 			}
@@ -298,7 +302,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 459 ]]
+				format = function(p1) --[[ Line: 466 ]]
 					-- upvalues: config (copy)
 					return { source = config[p1.source] or "unknown" }
 				end
@@ -314,7 +318,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 476 ]]
+				format = function(p1) --[[ Line: 483 ]]
 					-- upvalues: config (copy)
 					return { source = config[p1.source] or "unknown" }
 				end
@@ -330,7 +334,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 493 ]]
+				format = function(p1) --[[ Line: 500 ]]
 					-- upvalues: config (copy)
 					return { source = config[p1.source] or "unknown" }
 				end
@@ -346,7 +350,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 510 ]]
+				format = function(p1) --[[ Line: 517 ]]
 					-- upvalues: config (copy)
 					return { source = config[p1.source] or "unknown" }
 				end
@@ -362,7 +366,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 527 ]]
+				format = function(p1) --[[ Line: 534 ]]
 					-- upvalues: config1 (copy)
 					return { action = config1[p1.action] or "unknown" }
 				end
@@ -378,7 +382,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 544 ]]
+				format = function(p1) --[[ Line: 551 ]]
 					-- upvalues: config2 (copy), config3 (copy)
 					local config = { step = config2[p1.step] or "unknown" }
 					
@@ -403,7 +407,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 570 ]]
+				format = function(p1) --[[ Line: 577 ]]
 					return { feedType = p1.feedType }
 				end
 			}
@@ -418,7 +422,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 587 ]]
+				format = function(p1) --[[ Line: 594 ]]
 					-- upvalues: config4 (copy)
 					return {
 						reason = config4[p1.reason] or "unknown",
@@ -437,7 +441,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 605 ]]
+				format = function(p1) --[[ Line: 612 ]]
 					-- upvalues: config5 (copy)
 					return { editType = config5[p1.editType] or "unknown" }
 				end
@@ -453,7 +457,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 622 ]]
+				format = function(p1) --[[ Line: 629 ]]
 					return { bucket = p1.bucket }
 				end
 			}
@@ -468,7 +472,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 639 ]]
+				format = function(p1) --[[ Line: 646 ]]
 					local CaptureType = p1.captureType
 					
 					return {
@@ -487,7 +491,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 656 ]]
+				format = function(p1) --[[ Line: 663 ]]
 					-- upvalues: config6 (copy)
 					return { tool = config6[p1.tool] or "unknown" }
 				end
@@ -503,7 +507,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 673 ]]
+				format = function(p1) --[[ Line: 680 ]]
 					-- upvalues: config6 (copy)
 					return { tool = config6[p1.tool] or "unknown" }
 				end
@@ -519,7 +523,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 690 ]]
+				format = function(p1) --[[ Line: 697 ]]
 					local Status = p1.status
 					
 					return {
@@ -538,7 +542,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 707 ]]
+				format = function(p1) --[[ Line: 714 ]]
 					-- upvalues: config7 (copy), config8 (copy)
 					local Entry = config7[p1.status] or "unknown"
 					local Surface = p1.surface
@@ -566,7 +570,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 731 ]]
+				format = function(p1) --[[ Line: 738 ]]
 					-- upvalues: config9 (copy), config10 (copy)
 					local Entry = config9[p1.status] or "unknown"
 					local Surface = p1.surface
@@ -593,7 +597,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 754 ]]
+				format = function(p1) --[[ Line: 761 ]]
 					-- upvalues: config11 (copy)
 					local Entry = config11[p1.status] or "unknown"
 					local Action = p1.action
@@ -623,7 +627,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 778 ]]
+				format = function(p1) --[[ Line: 785 ]]
 					-- upvalues: config11 (copy)
 					local Status = p1.status
 					local Status1 = if Status == "already_deleted" then Status else config11[Status] or "unknown"
@@ -651,7 +655,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 801 ]]
+				format = function(p1) --[[ Line: 808 ]]
 					local Status = p1.status
 					local Surface = p1.surface
 					
@@ -672,7 +676,7 @@ return {
 			{
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1) --[[ Line: 819 ]]
+				format = function(p1) --[[ Line: 826 ]]
 					-- upvalues: config11 (copy)
 					local Surface = p1.surface
 					

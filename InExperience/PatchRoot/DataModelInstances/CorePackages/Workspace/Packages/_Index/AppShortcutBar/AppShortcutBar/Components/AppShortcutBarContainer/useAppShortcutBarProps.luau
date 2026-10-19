@@ -15,8 +15,10 @@ local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local UseIsTvRemoteDeviceFunction = require(Parent.RoactUtils).Hooks.useIsTvRemoteDevice
+local UseExternalEventFunction = require(Parent.RoactUtils).Hooks.useExternalEvent
 local DisplayModule = require(Parent.Display)
 local NoShortcutBarWithTvRemote = game:DefineFastFlag("NoShortcutBarWithTvRemote", false)
+local ShortcutBarPlatformGamepadIcons = game:DefineFastFlag("ShortcutBarPlatformGamepadIcons", false)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagAXMigrateEquipSlotsInputBindingsToRoactGamepad = SharedFlagsModule.FFlagAXMigrateEquipSlotsInputBindingsToRoactGamepad
 local FFlagAXMigrateEmoteMenuFromRoactGamepad = SharedFlagsModule.FFlagAXMigrateEmoteMenuFromRoactGamepad
@@ -298,34 +300,75 @@ local config10 = {
 	[FocusNavigationEventNameEnum.HoldToJoinFriend] = true
 }
 
-local function getLegacyInputBindings(p1, p2, p3) --[[ Line: 402 ]]
-	-- upvalues: config (copy), config3 (copy)
-	if not p2.axes then
-		return if p2.key then { { icon = config3[p1], text = p3:Format(p2.key) } } else {}
+local function getLegacyInputBindings(p1, p2, p3, p4) --[[ Line: 406 ]]
+	-- upvalues: config (copy), config3 (copy), ShortcutBarPlatformGamepadIcons (copy)
+	if p2.axes then
+		local Vertical = p2.axes.vertical
+		local Horizontal = p2.axes.horizontal
+		local Entry = config[p1]
+		local List = {}
+		
+		if Vertical then
+			table.insert(List, { icon = Entry.vertical, text = p3:Format(Vertical.key) })
+		end
+		if Horizontal then
+			table.insert(List, {
+				icon = Entry.horizontal,
+				text = p3:Format(Horizontal.key)
+			})
+		end
+		return List
+	else
+		if not p2.key then
+			return {}
+		end
+		local Entry = config3[p1]
+		
+		if ShortcutBarPlatformGamepadIcons and p4 then
+			Entry = p4[p1] or Entry
+		end
+		return { { icon = Entry, text = p3:Format(p2.key) } }
 	end
-	local Vertical = p2.axes.vertical
-	local Horizontal = p2.axes.horizontal
-	local Entry = config[p1]
-	local List = {}
-	
-	if Vertical then
-		table.insert(List, { icon = Entry.vertical, text = p3:Format(Vertical.key) })
-	end
-	if Horizontal then
-		table.insert(List, {
-			icon = Entry.horizontal,
-			text = p3:Format(Horizontal.key)
-		})
-	end
-	return List
 end
 
-local function selectRoactGamepadBindings(p1) --[[ Line: 435 ]]
+local function selectRoactGamepadBindings(p1) --[[ Line: 448 ]]
 	return if p1.GamepadBottomBar then p1.GamepadBottomBar.boundInputs else nil
 end
 
-local function getGamepadItems(UseActiveEventMapResult, p1, UseContextResult, p2, p3) --[[ Line: 439 ]]
-	-- upvalues: list (copy), config1 (copy), config2 (copy), getLegacyInputBindings (copy), config5 (copy), config6 (copy), config8 (copy), config7 (copy), config9 (copy), config10 (copy), FocusNavigationEventNameEnum (copy), config3 (copy)
+local function getPlatformGamepadImages() --[[ Line: 452 ]]
+	-- upvalues: config3 (copy), UserInputService (copy)
+	local ImageForKeyCodes = {}
+	
+	for KeyCode in config3 do
+		local IsThumbstickMatch: boolean = KeyCode == Enum.KeyCode.Thumbstick1 or KeyCode == Enum.KeyCode.Thumbstick2
+		local ImageForKeyCode = nil
+		
+		if not IsThumbstickMatch then
+			ImageForKeyCode = UserInputService:GetImageForKeyCode(KeyCode)
+			IsThumbstickMatch = ImageForKeyCode == ""
+		end
+		if not IsThumbstickMatch then
+			ImageForKeyCodes[KeyCode] = ImageForKeyCode
+		end
+	end
+	return ImageForKeyCodes
+end
+
+local function usePlatformGamepadImages() --[[ Line: 468 ]]
+	-- upvalues: ReactModule (copy), getPlatformGamepadImages (copy), UseExternalEventFunction (copy), UserInputService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(getPlatformGamepadImages)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 471 ]]
+		-- upvalues: UseStateResult2 (copy), getPlatformGamepadImages (upval)
+		UseStateResult2((getPlatformGamepadImages()))
+	end, {})
+	UseExternalEventFunction(UserInputService.GamepadConnected, UseResult)
+	UseExternalEventFunction(UserInputService.GamepadDisconnected, UseResult)
+	
+	return UseStateResult
+end
+
+local function getGamepadItems(UseActiveEventMapResult, p1, UseContextResult, p2, p3, p4) --[[ Line: 481 ]]
+	-- upvalues: list (copy), config1 (copy), config2 (copy), getLegacyInputBindings (copy), config5 (copy), config6 (copy), ShortcutBarPlatformGamepadIcons (copy), config8 (copy), config7 (copy), config9 (copy), config10 (copy), FocusNavigationEventNameEnum (copy), config3 (copy)
 	local List = {}
 	
 	for _, value in list do
@@ -335,7 +378,7 @@ local function getGamepadItems(UseActiveEventMapResult, p1, UseContextResult, p2
 					local v1 = p2[value]
 					
 					if v1 then
-						for _, value1 in getLegacyInputBindings(value, v1, UseContextResult) do
+						for _, value1 in getLegacyInputBindings(value, v1, UseContextResult, p4) do
 							table.insert(List, value1)
 						end
 					end
@@ -351,6 +394,10 @@ local function getGamepadItems(UseActiveEventMapResult, p1, UseContextResult, p2
 				local Entry2 = if p3 and Entry then Entry[UseActiveEventMapResultEntry] else nil
 				local Entry3 = if p3 and Entry1 then Entry1[UseActiveEventMapResultEntry] else nil
 				local Entry3_1 = if p3 then Entry3 or Entry2 elseif Entry then Entry[UseActiveEventMapResultEntry] else nil
+				
+				if ShortcutBarPlatformGamepadIcons and p4 and Entry3_1 then
+					Entry3_1 = p4[value] or Entry3_1
+				end
 				local Entry4 = if p3 then config8[UseActiveEventMapResultEntry] else nil
 				local Entry41 = config7[UseActiveEventMapResultEntry]
 				local Entry5 = if p3 then Entry4 or Entry41 else config7[UseActiveEventMapResultEntry]
@@ -378,8 +425,13 @@ local function getGamepadItems(UseActiveEventMapResult, p1, UseContextResult, p2
 		local UseActiveEventMapResultEntry = UseActiveEventMapResult[Enum.KeyCode.ButtonB]
 		
 		if UseActiveEventMapResultEntry == FocusNavigationEventNameEnum.NavigateBack then
+			local Entry = config3[Enum.KeyCode.ButtonB]
+			
+			if ShortcutBarPlatformGamepadIcons and p4 then
+				Entry = p4[Enum.KeyCode.ButtonB] or Entry
+			end
 			table.insert(List, {
-				icon = config3[Enum.KeyCode.ButtonB],
+				icon = Entry,
 				text = UseContextResult:Format(config7[UseActiveEventMapResultEntry]),
 				inputKeyCode = Enum.KeyCode.ButtonB,
 				eventName = UseActiveEventMapResultEntry
@@ -389,7 +441,7 @@ local function getGamepadItems(UseActiveEventMapResult, p1, UseContextResult, p2
 	return List
 end
 
-local function getKeyboardItems(UseActiveEventMapResult, p4, UseContextResult, p5) --[[ Line: 521 ]]
+local function getKeyboardItems(UseActiveEventMapResult, p5, UseContextResult, p6) --[[ Line: 572 ]]
 	-- upvalues: config1 (copy), List (copy), config7 (copy), config9 (copy), config10 (copy)
 	local List1 = {}
 	local t = {}
@@ -411,18 +463,18 @@ local function getKeyboardItems(UseActiveEventMapResult, p4, UseContextResult, p
 			local FormatResult = if Entry1 then UseContextResult:Format(Entry1) else nil
 			local Entry2 = config9[value1]
 			local FormatResult1 = if Entry2 then UseContextResult:Format(Entry2) else nil
-			local Progress = p4[value1]
+			local Progress = p5[value1]
 			local Entry3 = config10[value1]
 			
 			if FormatResult then
 				table.insert(List1, {
 					icon = Entry,
 					text = FormatResult,
-					actionText = if p5 then nil else FormatResult1,
+					actionText = if p6 then nil else FormatResult1,
 					progress = Progress,
 					hasProgress = Entry3,
-					inputKeyCode = if p5 then Entry[1] else nil,
-					eventName = if p5 then value1 else nil
+					inputKeyCode = if p6 then Entry[1] else nil,
+					eventName = if p6 then value1 else nil
 				})
 			end
 		end
@@ -430,7 +482,7 @@ local function getKeyboardItems(UseActiveEventMapResult, p4, UseContextResult, p
 	return List1
 end
 
-local function useShortcutBarFrameProps() --[[ Line: 566 ]]
+local function useShortcutBarFrameProps() --[[ Line: 617 ]]
 	-- upvalues: UseDesignTokensFunction (copy), UseSignalStateFunction (copy), DisplayModule (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseSignalStateResult = UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding)
@@ -441,24 +493,25 @@ local function useShortcutBarFrameProps() --[[ Line: 566 ]]
 	}
 end
 
-local function useShortcutBarItems() --[[ Line: 582 ]]
-	-- upvalues: ReactFocusNavigationModule (copy), ReactModule (copy), LocalizationRoactContext (copy), UseHeldProgressByEventFunction (copy), UseLastInputMethodFunction (copy), FFlagLuaAppResponsiveEnginePreferredInput (copy), ResponsiveModule (copy), NoShortcutBarWithTvRemote (copy), UseIsTvRemoteDeviceFunction (copy), UseSelectorFunction (copy), selectRoactGamepadBindings (copy), UseAppPolicyFunction (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (copy), getGamepadItems (copy), getKeyboardItems (copy)
+local function useShortcutBarItems() --[[ Line: 633 ]]
+	-- upvalues: ReactFocusNavigationModule (copy), ReactModule (copy), LocalizationRoactContext (copy), UseHeldProgressByEventFunction (copy), UseLastInputMethodFunction (copy), FFlagLuaAppResponsiveEnginePreferredInput (copy), ResponsiveModule (copy), NoShortcutBarWithTvRemote (copy), UseIsTvRemoteDeviceFunction (copy), ShortcutBarPlatformGamepadIcons (copy), usePlatformGamepadImages (copy), UseSelectorFunction (copy), selectRoactGamepadBindings (copy), UseAppPolicyFunction (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (copy), getGamepadItems (copy), getKeyboardItems (copy)
 	local UseActiveEventMapResult = ReactFocusNavigationModule.useActiveEventMap()
 	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
 	local UseHeldProgressByEventResult = UseHeldProgressByEventFunction()
 	local UseLastInputMethodResult = UseLastInputMethodFunction()
 	local UsePreferredInputResult = if FFlagLuaAppResponsiveEnginePreferredInput then ResponsiveModule.usePreferredInput() else nil
 	local UseIsTvRemoteDeviceResult = if NoShortcutBarWithTvRemote then UseIsTvRemoteDeviceFunction() else nil
+	local UsePlatformGamepadImagesResult = if ShortcutBarPlatformGamepadIcons then usePlatformGamepadImages() else nil
 	local UseSelectorResult = UseSelectorFunction(selectRoactGamepadBindings)
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p6) --[[ Line: 593 ]]
-		return p6.getStickyShortcutBarEnabled()
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p7) --[[ Line: 645 ]]
+		return p7.getStickyShortcutBarEnabled()
 	end) or FFlagEnableStickyShortcutBarOnAllPlatforms
 	local IsUsePreferredInputResultMatch: boolean = if FFlagLuaAppResponsiveEnginePreferredInput then UsePreferredInputResult == ResponsiveModule.Input.Directional else UseLastInputMethodResult == "Gamepad"
 	
-	return if IsUsePreferredInputResultMatch then if UseIsTvRemoteDeviceResult then {} else getGamepadItems(UseActiveEventMapResult, UseHeldProgressByEventResult, UseContextResult, UseSelectorResult, UseAppPolicyResult) else getKeyboardItems(UseActiveEventMapResult, UseHeldProgressByEventResult, UseContextResult, UseAppPolicyResult)
+	return if IsUsePreferredInputResultMatch then if UseIsTvRemoteDeviceResult then {} else getGamepadItems(UseActiveEventMapResult, UseHeldProgressByEventResult, UseContextResult, UseSelectorResult, UseAppPolicyResult, UsePlatformGamepadImagesResult) else getKeyboardItems(UseActiveEventMapResult, UseHeldProgressByEventResult, UseContextResult, UseAppPolicyResult)
 end
 
-function useAppShortcutBarProps() --[[ Line: 620 ]]
+function useAppShortcutBarProps() --[[ Line: 673 ]]
 	-- upvalues: useShortcutBarFrameProps (copy), useShortcutBarItems (copy), CryoModule (copy)
 	return CryoModule.Dictionary.union(useShortcutBarFrameProps(), { items = useShortcutBarItems() })
 end

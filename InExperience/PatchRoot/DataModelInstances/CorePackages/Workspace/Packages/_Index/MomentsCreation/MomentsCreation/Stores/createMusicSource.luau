@@ -89,10 +89,10 @@ return function(p1) --[[ Line: 147 | Named "createMusicSource" ]]
 			AudioSearchParams.MinDuration = MinDuration
 			
 			if FFlagMomentsCreationAudioSearchV2SortTypeModule then
-				pcall(function() --[[ Line: 197 ]]
+				pcall(function() --[[ Line: 198 ]]
 					-- upvalues: AudioSearchParams (copy), SearchKeyword (copy)
 					local AudioSortType = Enum.AudioSortType
-					AudioSearchParams.SortType = if SearchKeyword == "" then AudioSortType.Top else AudioSortType.Relevance
+					AudioSearchParams.SortType = if SearchKeyword == "" then AudioSortType.MostUsed else AudioSortType.Relevance
 				end)
 			end
 			local SearchAudioResult = P2:SearchAudio(AudioSearchParams)

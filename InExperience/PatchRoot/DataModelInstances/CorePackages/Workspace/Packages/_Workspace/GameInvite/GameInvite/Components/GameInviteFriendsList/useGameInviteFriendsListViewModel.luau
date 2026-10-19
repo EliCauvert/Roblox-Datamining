@@ -2,19 +2,61 @@
 local Parent = GameInvite.Parent
 local ReactModule = require(Parent.React)
 local FriendsMenuModule = require(Parent.FriendsMenu)
+local _ = require(Parent.DataHydration)
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local GameInviteConstantsModule = require(GameInvite.GameInviteConstants)
+local _ = require(GameInvite.gameInviteModalType)
 local GameDetailsContextModule = require(GameInvite.Context.GameDetailsContext)
 local GameInviteFriendRowModule = require(script.Parent.GameInviteFriendRow)
 local _ = require(script.Parent.GameInviteFriendsListView)
 local CanShareGameInviteLinkModule = require(script.Parent.canShareGameInviteLink)
+local IsInThisServerModule = require(GameInvite.utils.isInThisServer)
+local IsJoinExpectedModule = require(GameInvite.utils.isJoinExpected)
+local ShouldShowJoinCtaModule = require(GameInvite.utils.shouldShowJoinCta)
+local FFlagGameInviteInExpJoinCtaModule = require(GameInvite.Flags.FFlagGameInviteInExpJoinCta)
 local User = require(Parent.UserList).Enums.EntityType.User
 
-local function ignoreRowSelection() --[[ Line: 31 ]] end
+local function ignoreRowSelection() --[[ Line: 40 ]] end
 
-return function(p1) --[[ Line: 33 | Named "useGameInviteFriendsListViewModel" ]]
-	-- upvalues: ReactModule (copy), FriendsMenuModule (copy), GameDetailsContextModule (copy), UseAppPolicyFunction (copy), User (copy), GameInviteFriendRowModule (copy), ignoreRowSelection (copy), CanShareGameInviteLinkModule (copy)
+local function onJoinActivated(_) --[[ Line: 43 ]] end
+
+local function isJoinVisible(p1): boolean --[[ Line: 45 ]]
+	-- upvalues: IsInThisServerModule (copy)
+	return not IsInThisServerModule(p1, game.JobId)
+end
+
+local function createJoinCtaConfig(p1) --[[ Line: 49 ]]
+	-- upvalues: GameInviteConstantsModule (copy), onJoinActivated (copy), isJoinVisible (copy), IsJoinExpectedModule (copy)
+	return {
+		supportedActions = { "JoinExperience" },
+		primaryCtaMinWidth = GameInviteConstantsModule.Layout.JoinCtaMinWidth,
+		primaryCtaMaxWidth = GameInviteConstantsModule.Layout.JoinCtaMaxWidth,
+		join = {
+			onActivated = onJoinActivated,
+			isVisible = isJoinVisible,
+			isJoinExpected = function(p2, p3) --[[ Line: 57 ]]
+				-- upvalues: IsJoinExpectedModule (upval), p1 (copy)
+				return IsJoinExpectedModule(p3, p1[p2], game.JobId)
+			end
+		}
+	}
+end
+
+local function useJoinCtaConfig(FriendsById, UseContextResult) --[[ Line: 64 ]]
+	-- upvalues: ShouldShowJoinCtaModule (copy), ReactModule (copy), createJoinCtaConfig (copy)
+	local ShouldShowJoinCtaModule1 = ShouldShowJoinCtaModule(UseContextResult)
+	
+	return ReactModule.useMemo(function() --[[ Line: 69 ]]
+		-- upvalues: ShouldShowJoinCtaModule1 (copy), createJoinCtaConfig (upval), FriendsById (copy)
+		return if ShouldShowJoinCtaModule1 then createJoinCtaConfig(FriendsById) else nil
+	end, { ShouldShowJoinCtaModule1, FriendsById })
+end
+
+return function(p1) --[[ Line: 74 | Named "useGameInviteFriendsListViewModel" ]]
+	-- upvalues: ReactModule (copy), FriendsMenuModule (copy), GameDetailsContextModule (copy), UseAppPolicyFunction (copy), User (copy), FFlagGameInviteInExpJoinCtaModule (copy), useJoinCtaConfig (copy), GameInviteFriendRowModule (copy), ignoreRowSelection (copy), CanShareGameInviteLinkModule (copy)
 	local Friends = ReactModule.useContext(FriendsMenuModule.FriendsListContext).friends
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 40 ]]
+	local UseContextResult = ReactModule.useContext(GameDetailsContextModule)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 81 ]]
 		-- upvalues: Friends (copy), User (upval)
 		local Entities = {}
 		local FriendsById = {}
@@ -28,12 +70,13 @@ return function(p1) --[[ Line: 33 | Named "useGameInviteFriendsListViewModel" ]]
 		return { entities = Entities, friendsById = FriendsById }
 	end, { Friends })
 	local FriendsById = UseMemoResult.friendsById
+	local UseJoinCtaConfigResult = if FFlagGameInviteInExpJoinCtaModule then useJoinCtaConfig(FriendsById, UseContextResult) else nil
 	
 	return {
 		layoutOrder = p1.layoutOrder,
 		size = p1.size,
 		entities = UseMemoResult.entities,
-		renderRow = ReactModule.useCallback(function(CreateRow, p2, RowNumber) --[[ Line: 55 ]]
+		renderRow = ReactModule.useCallback(function(CreateRow, p2, RowNumber) --[[ Line: 98 ]]
 			-- upvalues: FriendsById (copy), ReactModule (upval), GameInviteFriendRowModule (upval)
 			local FriendsByIdEntry = FriendsById[p2.id]
 			
@@ -44,8 +87,9 @@ return function(p1) --[[ Line: 33 | Named "useGameInviteFriendsListViewModel" ]]
 			})
 		end, { FriendsById }),
 		onRowSelected = ignoreRowSelection,
-		showShareGameInviteLink = CanShareGameInviteLinkModule(game.GameId, ReactModule.useContext(GameDetailsContextModule), (UseAppPolicyFunction(function(p2) --[[ Line: 36 ]]
+		showShareGameInviteLink = CanShareGameInviteLinkModule(game.GameId, UseContextResult, (UseAppPolicyFunction(function(p2) --[[ Line: 77 ]]
 			return p2.getExperienceInviteShareLinkEnabled()
-		end)))
+		end))),
+		ctaConfig = if FFlagGameInviteInExpJoinCtaModule then UseJoinCtaConfigResult else nil
 	}
 end

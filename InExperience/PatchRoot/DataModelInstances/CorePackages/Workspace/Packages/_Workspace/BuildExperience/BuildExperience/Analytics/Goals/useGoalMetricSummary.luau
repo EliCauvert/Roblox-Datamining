@@ -8,8 +8,10 @@ local GetExperienceAnalyticsStoreFunction = ExperienceAnalyticsModule.getExperie
 local DataStatus = ExperienceAnalyticsModule.DataStatus
 local _ = require(BuildExperience.Analytics.AnalyticsWindow)
 local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
+local FFlagBuildAnalyticsGoalsModule = require(BuildExperience.Flags.FFlagBuildAnalyticsGoals)
 
-local function toParams(UniverseId, Params, Params1, DateInfo) --[[ Line: 33 ]]
+local function toParams(UniverseId, Params, Params1, DateInfo) --[[ Line: 34 ]]
+	-- upvalues: FFlagBuildAnalyticsGoalsModule (copy), ExperienceAnalyticsModule (copy)
 	local DateInfo1: string = DateInfo
 	local EndOffsetDays: number = Params.endOffsetDays
 	
@@ -20,23 +22,28 @@ local function toParams(UniverseId, Params, Params1, DateInfo) --[[ Line: 33 ]]
 			DateInfo1 = os.date("!%Y-%m-%dT%H:%M:%SZ", _DateTime.UnixTimestamp - EndOffsetDays * 86400)
 		end
 	end
+	local ScaledLookbackSeconds = Params1.lookbackSeconds * (Params.lookbackWindows or 1)
+	
+	if FFlagBuildAnalyticsGoalsModule and Params.metric == ExperienceAnalyticsModule.MetricId.TotalSessionsEndedInBucket then
+		ScaledLookbackSeconds -= 86400
+	end
 	return {
 		universeId = UniverseId,
 		metric = Params.metric,
 		granularity = Params.granularity or Params1.granularity,
-		lookbackSeconds = Params1.lookbackSeconds * (Params.lookbackWindows or 1),
+		lookbackSeconds = ScaledLookbackSeconds,
 		endTime = DateInfo1,
 		filters = Params.filters,
 		breakdowns = Params.breakdowns
 	}
 end
 
-return function(UniverseId, p1, p2, p3) --[[ Line: 59 | Named "useGoalMetricSummary" ]]
+return function(UniverseId, p1, p2, p3) --[[ Line: 65 | Named "useGoalMetricSummary" ]]
 	-- upvalues: ReactModule (copy), SignalsModule (copy), DataStatus (copy), GetExperienceAnalyticsStoreFunction (copy), toParams (copy), SignalsReactModule (copy)
 	local Query = p1.query
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 67 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 73 ]]
 		-- upvalues: SignalsModule (upval), p3 (copy), DataStatus (upval), GetExperienceAnalyticsStoreFunction (upval), toParams (upval), UniverseId (copy), Query (copy), p2 (copy)
-		return SignalsModule.createComputed(function(p4) --[[ Line: 68 ]]
+		return SignalsModule.createComputed(function(p4) --[[ Line: 74 ]]
 			-- upvalues: p3 (upval), DataStatus (upval), GetExperienceAnalyticsStoreFunction (upval), toParams (upval), UniverseId (upval), Query (upval), p2 (upval)
 			if p3 == nil then
 				return { series = nil, status = DataStatus.NotReady }
@@ -53,7 +60,7 @@ return function(UniverseId, p1, p2, p3) --[[ Line: 59 | Named "useGoalMetricSumm
 	
 	return {
 		status = UseSignalStateResult.status,
-		value = ReactModule.useMemo(function() --[[ Line: 86 ]]
+		value = ReactModule.useMemo(function() --[[ Line: 92 ]]
 			-- upvalues: UseSignalStateResult (copy), p3 (copy), p1 (copy), p2 (copy), Query (copy)
 			if UseSignalStateResult.series == nil or p3 == nil then
 				return nil

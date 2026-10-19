@@ -1,6 +1,12 @@
 ﻿return {
 	ParentComponentName = "GameInviteModal",
-	Layout = { TitleHeight = 50, TitleIconSize = 28, SidePadding = 24 },
+	Layout = {
+		TitleHeight = 50,
+		TitleIconSize = 28,
+		SidePadding = 24,
+		JoinCtaMinWidth = 64,
+		JoinCtaMaxWidth = 90
+	},
 	PageRoute = {
 		NONE = "NONE",
 		SETTINGS_HUB = "SETTINGS_HUB",

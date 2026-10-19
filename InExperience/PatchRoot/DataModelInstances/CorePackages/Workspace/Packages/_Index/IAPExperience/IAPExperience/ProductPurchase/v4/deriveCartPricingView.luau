@@ -1,9 +1,10 @@
 ﻿local CartPricingResponseLineItemModule = require(script.Parent.cartPricingResponseLineItem)
 local FFlagPurchasePromptFetchCartPricingForLooks = require(script:FindFirstAncestor("IAPExperience").Parent.SharedFlags).FFlagPurchasePromptFetchCartPricingForLooks
+local AXAllowFreeItemsFromOffer = game:DefineFastFlag("AXAllowFreeItemsFromOffer", false)
 local _ = require(script.Parent.Parent.PricingTypes)
 
-return function(p1) --[[ Line: 44 | Named "deriveCartPricingView" ]]
-	-- upvalues: CartPricingResponseLineItemModule (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy)
+return function(p1) --[[ Line: 45 | Named "deriveCartPricingView" ]]
+	-- upvalues: CartPricingResponseLineItemModule (copy), AXAllowFreeItemsFromOffer (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy)
 	if type(p1) ~= "table" then
 		return nil
 	end
@@ -29,7 +30,10 @@ return function(p1) --[[ Line: 44 | Named "deriveCartPricingView" ]]
 		PriceAfterDiscount += CartLineSalePriceInRobux
 		NewCartLineRegularPriceInRobux += CartPricingResponseLineItemModule.getCartLineRegularPriceInRobux(item, CartLineSalePriceInRobux)
 	end
-	if PriceAfterDiscount <= 0 then
+	if not AXAllowFreeItemsFromOffer and PriceAfterDiscount <= 0 then
+		return nil
+	end
+	if AXAllowFreeItemsFromOffer and PriceAfterDiscount < 0 then
 		return nil
 	end
 	local ExtractCartPricingMarketingOffersResult = CartPricingResponseLineItemModule.extractCartPricingMarketingOffers(p1)

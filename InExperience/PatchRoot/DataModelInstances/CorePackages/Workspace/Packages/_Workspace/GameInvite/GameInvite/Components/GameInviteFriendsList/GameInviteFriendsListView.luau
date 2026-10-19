@@ -1,12 +1,14 @@
-﻿local Parent = script:FindFirstAncestor("GameInvite").Parent
+﻿local GameInvite = script:FindFirstAncestor("GameInvite")
+local Parent = GameInvite.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local FFlagGameInviteInExpJoinCtaModule = require(GameInvite.Flags.FFlagGameInviteInExpJoinCta)
 local VerticalUserList = require(Parent.UserList).VerticalUserList.VerticalUserList
 local FriendsMenuShareGameInviteLink = require(Parent.FriendsMenu).FriendsMenuShareGameInviteLink
 local Configs = { disableRowActivation = true }
 
-return function(p1) --[[ Line: 29 | Named "GameInviteFriendsListView" ]]
-	-- upvalues: ReactModule (copy), FoundationModule (copy), FriendsMenuShareGameInviteLink (copy), VerticalUserList (copy), Configs (copy)
+return function(p1) --[[ Line: 32 | Named "GameInviteFriendsListView" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy), FriendsMenuShareGameInviteLink (copy), VerticalUserList (copy), Configs (copy), FFlagGameInviteInExpJoinCtaModule (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "col",
 		testId = "GameInviteFriendsListView",
@@ -24,7 +26,8 @@ return function(p1) --[[ Line: 29 | Named "GameInviteFriendsListView" ]]
 				entities = p1.entities,
 				renderRow = p1.renderRow,
 				onRowSelected = p1.onRowSelected,
-				configs = Configs
+				configs = Configs,
+				ctaConfig = if FFlagGameInviteInExpJoinCtaModule then p1.ctaConfig else nil
 			})
 		})
 	})

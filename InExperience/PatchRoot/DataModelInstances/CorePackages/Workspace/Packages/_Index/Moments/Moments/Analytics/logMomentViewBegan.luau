@@ -4,10 +4,10 @@ local MakeMomentViewBeganFieldsModule = require(script.Parent.makeMomentViewBega
 local Analytics = require(Parent.MomentsCommon).Analytics
 local EventNames = Analytics.EventNames
 
-return function(p1, p2, p3) --[[ Line: 14 | Named "logMomentViewBegan" ]]
+return function(p1, p2, p3, p4) --[[ Line: 15 | Named "logMomentViewBegan" ]]
 	-- upvalues: Analytics (copy), MakeMomentViewBeganFieldsModule (copy), EventNames (copy)
 	Analytics.reportMomentsViewBegan(p2)
-	local MomentViewBeganFieldsModule = MakeMomentViewBeganFieldsModule(p1, p2, p3)
+	local MomentViewBeganFieldsModule = MakeMomentViewBeganFieldsModule(p1, p2, p3, p4)
 	
 	if MomentViewBeganFieldsModule ~= nil then
 		Analytics.fireAnalyticsEvent(EventNames.MomentViewBegan, MomentViewBeganFieldsModule)

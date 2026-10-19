@@ -64,6 +64,7 @@
 	ANALYTICS_METRIC_TITLE_D1_RETENTION = "Feature.Build.Analytics.Title.D1Retention",
 	ANALYTICS_METRIC_TITLE_D7_RETENTION = "Feature.Build.Analytics.Title.D7Retention",
 	ANALYTICS_METRIC_TITLE_DAILY_ACTIVE_USERS = "Feature.Build.Analytics.Title.DailyActiveUsers",
+	ANALYTICS_METRIC_TITLE_FIRST_SESSION_RETENTION = "CreatorDashboard.Analytics.Overview.Title.FirstSessionRetention",
 	ANALYTICS_METRIC_TITLE_NEW_USER_SESSION_TIME = "Feature.Build.Analytics.Title.NewUserSessionTime",
 	ANALYTICS_METRIC_TITLE_PAYER_CONVERSION = "Feature.Build.Analytics.Title.PayerConversion",
 	ANALYTICS_METRIC_TITLE_PLAYTHROUGH_RATE = "Feature.Build.Analytics.Title.PlaythroughRate",

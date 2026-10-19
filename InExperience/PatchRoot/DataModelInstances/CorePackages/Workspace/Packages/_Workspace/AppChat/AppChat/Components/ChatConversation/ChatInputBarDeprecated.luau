@@ -27,7 +27,6 @@ local SendButtonClickActionResultModule = require(AppChat.Analytics.Enums.SendBu
 local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
 local IsVRAppBuildFunction = require(Parent.AppCommonLib).IsVRAppBuild
 local GetFIntAppChatBehaviorCollectionEnabledPercentageModule = require(AppChat.Flags.getFIntAppChatBehaviorCollectionEnabledPercentage)
-local FFlagAppChatGamepadSendButtonNavModule = require(AppChat.Flags.FFlagAppChatGamepadSendButtonNav)
 local FFlagAppChatOnConsoles = require(Parent.SharedFlags).FFlagAppChatOnConsoles
 local AppChatUseTextBoxTextOnSend = game:DefineFastFlag("AppChatUseTextBoxTextOnSend", false)
 local ChatInputBarDeprecated = RoactModule.PureComponent:extend("ChatInputBarDeprecated")
@@ -49,16 +48,16 @@ ChatInputBarDeprecated.defaultProps = {
 	inputBarRef = nil,
 	textChangedFallback = false,
 	userInputService = UserInputService,
-	onDisabledInputBarActivated = function() --[[ Line: 56 ]] end,
+	onDisabledInputBarActivated = function() --[[ Line: 55 ]] end,
 	maxCharacterLength = require(script.Parent.MessageCharacterLimit),
-	onHeightChanged = function() --[[ Line: 62 ]] end,
-	onPositionChanged = function() --[[ Line: 63 ]] end,
-	onFocusLost = function() --[[ Line: 64 ]] end,
-	onTextChanged = function() --[[ Line: 71 ]] end,
+	onHeightChanged = function() --[[ Line: 61 ]] end,
+	onPositionChanged = function() --[[ Line: 62 ]] end,
+	onFocusLost = function() --[[ Line: 63 ]] end,
+	onTextChanged = function() --[[ Line: 70 ]] end,
 	eventLoggingFunc = Default.logRobloxTelemetryEvent
 }
 
-function ChatInputBarDeprecated.init(p1) --[[ Line: 80 ]]
+function ChatInputBarDeprecated.init(p1) --[[ Line: 79 ]]
 	-- upvalues: RoactModule (copy), UserInputService (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), GetAppFeaturePoliciesFunction (copy), GetFIntAppChatBehaviorCollectionEnabledPercentageModule (copy), Players (copy), IsMessageValidModule (copy), IsKeyCodePressedModule (copy), AppChatUseTextBoxTextOnSend (copy), SendButtonClickActionResultModule (copy), FFlagAppChatOnConsoles (copy), IsTenFootInterfaceFunction (copy)
 	p1.isMounted = false
 	p1.state = {
@@ -76,17 +75,17 @@ function ChatInputBarDeprecated.init(p1) --[[ Line: 80 ]]
 	p1.eventHandlerRegistration = nil
 	p1.textChangedFallback = p1.props.textChangedFallback or not UserInputService.KeyboardEnabled
 	
-	function p1.heightOfFourLines(p2, p3, X) --[[ Line: 99 ]]
+	function p1.heightOfFourLines(p2, p3, X) --[[ Line: 98 ]]
 		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval)
 		return if FoundationFontFaceMigration then GetTextSizeFunction("A\nB\nC\nD", p3, p2, Vector2.new(X, 10000)).Y else Text.GetTextHeight("A\nB\nC\nD", p2, p3, X)
 	end
 	
-	function p1.isMoreMenuEnabled() --[[ Line: 106 ]]
+	function p1.isMoreMenuEnabled() --[[ Line: 105 ]]
 		-- upvalues: p1 (copy)
 		return p1.props.moreMenuEnabled
 	end
 	
-	function p1.calculateInputBoxHeight(InputText, BodyLargeFont, ScaledBaseSize, X): number --[[ Line: 110 ]]
+	function p1.calculateInputBoxHeight(InputText, BodyLargeFont, ScaledBaseSize, X): number --[[ Line: 109 ]]
 		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval), p1 (copy)
 		local Y = if FoundationFontFaceMigration then GetTextSizeFunction(InputText, ScaledBaseSize, BodyLargeFont, Vector2.new(X, 10000)).Y else Text.GetTextHeight(InputText, BodyLargeFont, ScaledBaseSize, X)
 		local HeightOfFourLinesResult: number = p1.heightOfFourLines(BodyLargeFont, ScaledBaseSize, X)
@@ -111,7 +110,7 @@ function ChatInputBarDeprecated.init(p1) --[[ Line: 80 ]]
 	if FIntAppChatBehaviorCollectionEnabledPercentageModule > 0 and Players.LocalPlayer and KeystrokeCollectionEnabled then
 		p1.shouldCollectKeystrokes = Players.LocalPlayer.UserId % 100 < FIntAppChatBehaviorCollectionEnabledPercentageModule
 	end
-	function p1.onTextChanged(InputText, p2, p3, p4) --[[ Line: 143 ]]
+	function p1.onTextChanged(InputText, p2, p3, p4) --[[ Line: 142 ]]
 		-- upvalues: p1 (copy), IsMessageValidModule (upval)
 		if not p1.isMounted then return end
 		p1:setState({
@@ -126,7 +125,7 @@ function ChatInputBarDeprecated.init(p1) --[[ Line: 80 ]]
 		end
 	end
 	
-	function p1.onInputBeganEvent(Input) --[[ Line: 170 ]]
+	function p1.onInputBeganEvent(Input) --[[ Line: 169 ]]
 		-- upvalues: p1 (copy), IsKeyCodePressedModule (upval)
 		if p1.shouldCollectKeystrokes and not p1.textChangedFallback and Input.UserInputType == Enum.UserInputType.Keyboard then
 			p1:recordKeystroke(true, Input.KeyCode)
@@ -136,14 +135,14 @@ function ChatInputBarDeprecated.init(p1) --[[ Line: 80 ]]
 		end
 	end
 	
-	function p1.onInputEndedEvent(Input) --[[ Line: 189 ]]
+	function p1.onInputEndedEvent(Input) --[[ Line: 188 ]]
 		-- upvalues: p1 (copy)
 		if p1.shouldCollectKeystrokes and not p1.textChangedFallback and Input.UserInputType == Enum.UserInputType.Keyboard then
 			p1:recordKeystroke(false, Input.KeyCode)
 		end
 	end
 	
-	function p1.focusChanged(p2) --[[ Line: 197 ]]
+	function p1.focusChanged(p2) --[[ Line: 196 ]]
 		-- upvalues: p1 (copy)
 		if p2 and not p1.inputConnectionActive then
 			p1.inputBeganConnection = p1.props.userInputService.InputBegan:Connect(p1.onInputBeganEvent)
@@ -158,7 +157,7 @@ function ChatInputBarDeprecated.init(p1) --[[ Line: 80 ]]
 		end
 	end
 	
-	function p1.onSendActivated() --[[ Line: 208 ]]
+	function p1.onSendActivated() --[[ Line: 207 ]]
 		-- upvalues: AppChatUseTextBoxTextOnSend (upval), p1 (copy), IsMessageValidModule (upval), Text (upval), SendButtonClickActionResultModule (upval), FFlagAppChatOnConsoles (upval), IsTenFootInterfaceFunction (upval)
 		local Text1 = if AppChatUseTextBoxTextOnSend then if p1.inputBoxRef.current then p1.inputBoxRef.current.Text else "" else p1.state.inputText
 		local IsMessageValidModule1 = if AppChatUseTextBoxTextOnSend then Text1 and IsMessageValidModule(Text1, p1.props.maxCharacterLength) else p1.state.showSendChat
@@ -202,7 +201,7 @@ function ChatInputBarDeprecated.init(p1) --[[ Line: 80 ]]
 		end
 	end
 	
-	function p1.chatBoxSizeChanged(Frame: Frame, InputText, BodyLargeFont, ScaledBaseSize) --[[ Line: 275 ]]
+	function p1.chatBoxSizeChanged(Frame: Frame, InputText, BodyLargeFont, ScaledBaseSize) --[[ Line: 274 ]]
 		-- upvalues: p1 (copy)
 		p1:setState({
 			chatBarWidth = Frame.AbsoluteSize.X,
@@ -210,19 +209,19 @@ function ChatInputBarDeprecated.init(p1) --[[ Line: 80 ]]
 		})
 	end
 	
-	function p1.onDisabledInputBarActivated() --[[ Line: 283 ]]
+	function p1.onDisabledInputBarActivated() --[[ Line: 282 ]]
 		-- upvalues: p1 (copy)
 		p1.props.onDisabledInputBarActivated()
 	end
 	
-	function p1.focusChatInputBox() --[[ Line: 287 ]]
+	function p1.focusChatInputBox() --[[ Line: 286 ]]
 		-- upvalues: p1 (copy)
 		if p1.inputBoxRef and p1.inputBoxRef.current then
 			p1.inputBoxRef.current:CaptureFocus()
 		end
 	end
 	
-	function p1.focusNavigationEventHandler(p2) --[[ Line: 293 ]]
+	function p1.focusNavigationEventHandler(p2) --[[ Line: 292 ]]
 		-- upvalues: p1 (copy)
 		if p2.eventData and p1.inputBoxFocusLossKeyCodeRef.current == p2.eventData.KeyCode then
 			p2:cancel()
@@ -231,12 +230,12 @@ function ChatInputBarDeprecated.init(p1) --[[ Line: 80 ]]
 	end
 end
 
-function ChatInputBarDeprecated.render(p1) --[[ Line: 301 ]]
+function ChatInputBarDeprecated.render(p1) --[[ Line: 300 ]]
 	-- upvalues: RoactModule (copy), ReactFocusNavigationModule (copy)
 	local IsDisabled = p1.props.isDisabled
 	
 	return RoactModule.createElement(ReactFocusNavigationModule.FocusNavigationContext.Consumer, {
-		render = function(FocusNavigationService) --[[ Line: 304 ]]
+		render = function(FocusNavigationService) --[[ Line: 303 ]]
 			-- upvalues: p1 (copy), IsDisabled (copy)
 			p1.focusNavigationService = FocusNavigationService
 			
@@ -245,14 +244,14 @@ function ChatInputBarDeprecated.render(p1) --[[ Line: 301 ]]
 	})
 end
 
-function ChatInputBarDeprecated.renderContent(p1, IsDisabled) --[[ Line: 311 ]]
-	-- upvalues: WithStyleFunction (copy), WithChatPagePaddingModule (copy), WithSelectionCursorProviderFunction (copy), FoundationFontFaceMigration (copy), FFlagAppChatOnConsoles (copy), IsVRAppBuildFunction (copy), IsTenFootInterfaceFunction (copy), RoactModule (copy), ImageSetLabel (copy), Images (copy), Interactable (copy), CursorKind (copy), FFlagAppChatGamepadSendButtonNavModule (copy), ChatInputBoxDisabledModule (copy), CallbackInputBox (copy), IconSize (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 312 ]]
-		-- upvalues: WithChatPagePaddingModule (upval), WithSelectionCursorProviderFunction (upval), FoundationFontFaceMigration (upval), FFlagAppChatOnConsoles (upval), IsVRAppBuildFunction (upval), IsTenFootInterfaceFunction (upval), p1 (copy), IsDisabled (copy), RoactModule (upval), ImageSetLabel (upval), Images (upval), Interactable (upval), CursorKind (upval), FFlagAppChatGamepadSendButtonNavModule (upval), ChatInputBoxDisabledModule (upval), CallbackInputBox (upval), IconSize (upval)
-		return WithChatPagePaddingModule(function(p3) --[[ Line: 313 ]]
-			-- upvalues: WithSelectionCursorProviderFunction (upval), p2 (copy), FoundationFontFaceMigration (upval), FFlagAppChatOnConsoles (upval), IsVRAppBuildFunction (upval), IsTenFootInterfaceFunction (upval), p1 (upval), IsDisabled (upval), RoactModule (upval), ImageSetLabel (upval), Images (upval), Interactable (upval), CursorKind (upval), FFlagAppChatGamepadSendButtonNavModule (upval), ChatInputBoxDisabledModule (upval), CallbackInputBox (upval), IconSize (upval)
-			return WithSelectionCursorProviderFunction(function(Callback) --[[ Line: 314 ]]
-				-- upvalues: p2 (upval), FoundationFontFaceMigration (upval), FFlagAppChatOnConsoles (upval), IsVRAppBuildFunction (upval), IsTenFootInterfaceFunction (upval), p1 (upval), p3 (copy), IsDisabled (upval), RoactModule (upval), ImageSetLabel (upval), Images (upval), Interactable (upval), CursorKind (upval), FFlagAppChatGamepadSendButtonNavModule (upval), ChatInputBoxDisabledModule (upval), CallbackInputBox (upval), WithSelectionCursorProviderFunction (upval), IconSize (upval)
+function ChatInputBarDeprecated.renderContent(p1, IsDisabled) --[[ Line: 310 ]]
+	-- upvalues: WithStyleFunction (copy), WithChatPagePaddingModule (copy), WithSelectionCursorProviderFunction (copy), FoundationFontFaceMigration (copy), FFlagAppChatOnConsoles (copy), IsVRAppBuildFunction (copy), IsTenFootInterfaceFunction (copy), RoactModule (copy), ImageSetLabel (copy), Images (copy), Interactable (copy), CursorKind (copy), ChatInputBoxDisabledModule (copy), CallbackInputBox (copy), IconSize (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 311 ]]
+		-- upvalues: WithChatPagePaddingModule (upval), WithSelectionCursorProviderFunction (upval), FoundationFontFaceMigration (upval), FFlagAppChatOnConsoles (upval), IsVRAppBuildFunction (upval), IsTenFootInterfaceFunction (upval), p1 (copy), IsDisabled (copy), RoactModule (upval), ImageSetLabel (upval), Images (upval), Interactable (upval), CursorKind (upval), ChatInputBoxDisabledModule (upval), CallbackInputBox (upval), IconSize (upval)
+		return WithChatPagePaddingModule(function(p3) --[[ Line: 312 ]]
+			-- upvalues: WithSelectionCursorProviderFunction (upval), p2 (copy), FoundationFontFaceMigration (upval), FFlagAppChatOnConsoles (upval), IsVRAppBuildFunction (upval), IsTenFootInterfaceFunction (upval), p1 (upval), IsDisabled (upval), RoactModule (upval), ImageSetLabel (upval), Images (upval), Interactable (upval), CursorKind (upval), ChatInputBoxDisabledModule (upval), CallbackInputBox (upval), IconSize (upval)
+			return WithSelectionCursorProviderFunction(function(Callback) --[[ Line: 313 ]]
+				-- upvalues: p2 (upval), FoundationFontFaceMigration (upval), FFlagAppChatOnConsoles (upval), IsVRAppBuildFunction (upval), IsTenFootInterfaceFunction (upval), p1 (upval), p3 (copy), IsDisabled (upval), RoactModule (upval), ImageSetLabel (upval), Images (upval), Interactable (upval), CursorKind (upval), ChatInputBoxDisabledModule (upval), CallbackInputBox (upval), WithSelectionCursorProviderFunction (upval), IconSize (upval)
 				local _Font = p2.Font
 				local BodyLargeFont = if FoundationFontFaceMigration then p2.Tokens.Typography.BodyLarge.Font else _Font.Body.Font
 				local ScaledBaseSize = _Font.BaseSize * _Font.Body.RelativeSize
@@ -300,7 +299,7 @@ function ChatInputBarDeprecated.renderContent(p1, IsDisabled) --[[ Line: 311 ]]
 							BackgroundTransparency = 1,
 							LayoutOrder = 1,
 							Selectable = true,
-							NextSelectionRight = if FFlagAppChatGamepadSendButtonNavModule then p1.sendButtonRef else nil,
+							NextSelectionRight = p1.sendButtonRef,
 							onActivated = p1.focusChatInputBox,
 							[RoactModule.Ref] = p1.inputBarRef
 						}, {
@@ -342,11 +341,11 @@ function ChatInputBarDeprecated.renderContent(p1, IsDisabled) --[[ Line: 311 ]]
 									focusChangedCallback = p1.focusChanged,
 									clearButtonDisabled = true,
 									clearButtonSize = 0,
-									textChangedCallback = function(p4) --[[ Line: 439 ]]
+									textChangedCallback = function(p4) --[[ Line: 438 ]]
 										-- upvalues: p1 (upval), BodyLargeFont (copy), ScaledBaseSize (copy)
 										p1.onTextChanged(p4, BodyLargeFont, ScaledBaseSize, p1.state.chatBarWidth)
 									end,
-									[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 442 ]]
+									[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 441 ]]
 										-- upvalues: p1 (upval), BodyLargeFont (copy), ScaledBaseSize (copy)
 										p1.chatBoxSizeChanged(Frame, p1.state.inputText, BodyLargeFont, ScaledBaseSize)
 									end,
@@ -356,7 +355,7 @@ function ChatInputBarDeprecated.renderContent(p1, IsDisabled) --[[ Line: 311 ]]
 							})
 						})
 					}),
-					sendButton = if IsDisabled then nil else WithSelectionCursorProviderFunction(function(Callback) --[[ Line: 454 ]]
+					sendButton = if IsDisabled then nil else WithSelectionCursorProviderFunction(function(Callback) --[[ Line: 453 ]]
 						-- upvalues: RoactModule (upval), p1 (upval), CursorKind (upval), ImageSetLabel (upval), IconSize (upval), p2 (upval), Images (upval)
 						return RoactModule.createElement("TextButton", {
 							Name = "sendButton",
@@ -389,13 +388,13 @@ function ChatInputBarDeprecated.renderContent(p1, IsDisabled) --[[ Line: 311 ]]
 	end)
 end
 
-function ChatInputBarDeprecated.didMount(p1) --[[ Line: 490 ]]
+function ChatInputBarDeprecated.didMount(p1) --[[ Line: 489 ]]
 	-- upvalues: FocusNavigationEventNameEnum (copy)
 	p1.isMounted = true
 	
 	if p1.inputBoxRef and p1.inputBoxRef.current then
 		p1.inputBoxRef.current.Selectable = false
-		p1.focusLostConnection = p1.inputBoxRef.current.FocusLost:Connect(function(_, CauseInput) --[[ Line: 495 ]]
+		p1.focusLostConnection = p1.inputBoxRef.current.FocusLost:Connect(function(_, CauseInput) --[[ Line: 494 ]]
 			-- upvalues: p1 (copy)
 			p1.inputBoxFocusLossKeyCodeRef.current = if CauseInput then CauseInput.KeyCode else Enum.KeyCode.None
 		end)
@@ -405,7 +404,7 @@ function ChatInputBarDeprecated.didMount(p1) --[[ Line: 490 ]]
 	end
 end
 
-function ChatInputBarDeprecated.willUnmount(p1) --[[ Line: 513 ]]
+function ChatInputBarDeprecated.willUnmount(p1) --[[ Line: 512 ]]
 	p1.isMounted = false
 	
 	if p1.inputConnectionActive then
@@ -422,7 +421,7 @@ function ChatInputBarDeprecated.willUnmount(p1) --[[ Line: 513 ]]
 	end
 end
 
-function ChatInputBarDeprecated.recordKeystroke(p1, p2, KeyCode) --[[ Line: 533 ]]
+function ChatInputBarDeprecated.recordKeystroke(p1, p2, KeyCode) --[[ Line: 532 ]]
 	if p2 then
 		table.insert(p1.keyPressedData, KeyCode.Name)
 		table.insert(p1.eventTypeData, 0)
@@ -437,7 +436,7 @@ function ChatInputBarDeprecated.recordKeystroke(p1, p2, KeyCode) --[[ Line: 533 
 	end
 end
 
-function ChatInputBarDeprecated.recordTextChange(p1, Text: string) --[[ Line: 553 ]]
+function ChatInputBarDeprecated.recordTextChange(p1, Text: string) --[[ Line: 552 ]]
 	table.insert(p1.keyPressedData, Text:sub(-1))
 	table.insert(p1.timestampData, DateTime.now().UnixTimestampMillis)
 	
@@ -446,7 +445,7 @@ function ChatInputBarDeprecated.recordTextChange(p1, Text: string) --[[ Line: 55
 	end
 end
 
-function ChatInputBarDeprecated.sendKeystrokeEvent(p1, ChatContext) --[[ Line: 563 ]]
+function ChatInputBarDeprecated.sendKeystrokeEvent(p1, ChatContext) --[[ Line: 562 ]]
 	-- upvalues: Default (copy), KeystrokeEventModule (copy)
 	if #p1.keyPressedData >= 0 then
 		p1.props.eventLoggingFunc(Default, KeystrokeEventModule, {}, {
@@ -461,7 +460,7 @@ function ChatInputBarDeprecated.sendKeystrokeEvent(p1, ChatContext) --[[ Line: 5
 	end
 end
 
-function ChatInputBarDeprecated.disconnectInputConnection(p1) --[[ Line: 577 ]]
+function ChatInputBarDeprecated.disconnectInputConnection(p1) --[[ Line: 576 ]]
 	if p1.inputBeganConnection then
 		p1.inputBeganConnection:Disconnect()
 		p1.inputBeganConnection = nil

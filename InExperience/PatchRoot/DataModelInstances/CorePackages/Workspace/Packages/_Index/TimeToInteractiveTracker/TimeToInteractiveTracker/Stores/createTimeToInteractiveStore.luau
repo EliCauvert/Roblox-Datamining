@@ -2,6 +2,8 @@
 local Parent = TimeToInteractiveTracker.Parent
 local CreateSignalFunction = require(Parent.Signals).createSignal
 local FFlagEnableTTIRecordWebViewMilestones = require(Parent.SharedFlags).FFlagEnableTTIRecordWebViewMilestones
+local FFlagTTITrackerDropEventsOnAppHideModule = require(TimeToInteractiveTracker.Utils.FFlagTTITrackerDropEventsOnAppHide)
+local GetAppLifecycleObserverServiceModule = require(TimeToInteractiveTracker.Utils.getAppLifecycleObserverService)
 local UpdateTTIEventMetadataModule = require(script.Parent.Actions.updateTTIEventMetadata)
 local TrackTTIEventStartModule = require(script.Parent.Actions.trackTTIEventStart)
 local TrackTTIEventEndModule = require(script.Parent.Actions.trackTTIEventEnd)
@@ -11,14 +13,22 @@ local TrackRequestModule = require(script.Parent.Actions.trackRequest)
 local RecordWebViewMilestonesModule = require(script.Parent.Actions.recordWebViewMilestones)
 local ResetTTIEventModule = require(script.Parent.Actions.resetTTIEvent)
 local DestroyTTIEventModule = require(script.Parent.Actions.destroyTTIEvent)
+local DropInFlightTTIEventsModule = require(script.Parent.Actions.dropInFlightTTIEvents)
 local ConstantsModule = require(TimeToInteractiveTracker.Milestones.constants)
 local UseTTIRenderAndMountedTrackingModule = require(TimeToInteractiveTracker.Hooks.useTTIRenderAndMountedTracking)
 local _ = require(script.Parent.types)
 
-return function() --[[ Line: 28 ]]
-	-- upvalues: CreateSignalFunction (copy), UpdateTTIEventMetadataModule (copy), TrackTTIEventStartModule (copy), TrackTTIEventEndModule (copy), TrackMilestoneModule (copy), TrackSubphaseModule (copy), TrackRequestModule (copy), FFlagEnableTTIRecordWebViewMilestones (copy), RecordWebViewMilestonesModule (copy), ResetTTIEventModule (copy), DestroyTTIEventModule (copy), ConstantsModule (copy), UseTTIRenderAndMountedTrackingModule (copy)
+return function() --[[ Line: 31 ]]
+	-- upvalues: CreateSignalFunction (copy), FFlagTTITrackerDropEventsOnAppHideModule (copy), GetAppLifecycleObserverServiceModule (copy), DropInFlightTTIEventsModule (copy), UpdateTTIEventMetadataModule (copy), TrackTTIEventStartModule (copy), TrackTTIEventEndModule (copy), TrackMilestoneModule (copy), TrackSubphaseModule (copy), TrackRequestModule (copy), FFlagEnableTTIRecordWebViewMilestones (copy), RecordWebViewMilestonesModule (copy), ResetTTIEventModule (copy), DestroyTTIEventModule (copy), ConstantsModule (copy), UseTTIRenderAndMountedTrackingModule (copy)
 	local Signal, Signal2 = CreateSignalFunction({})
 	
+	if FFlagTTITrackerDropEventsOnAppHideModule then
+		local AppLifecycleObserverServiceModule = GetAppLifecycleObserverServiceModule()
+		
+		if AppLifecycleObserverServiceModule then
+			AppLifecycleObserverServiceModule.OnHide:Connect(DropInFlightTTIEventsModule(Signal2))
+		end
+	end
 	return {
 		getEvents = Signal,
 		setEvents = Signal2,

@@ -9,28 +9,68 @@ local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
-local _ = require(BuildExperience.Analytics.Goals.GoalLockedActionId)
 local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
 
-return function(p1) --[[ Line: 29 | Named "GoalLockedContent" ]]
+return function(p1) --[[ Line: 30 | Named "GoalLockedContent" ]]
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), View (copy), Text (copy)
 	local TestId = p1.testId or "GoalLockedContent"
 	local Locked = p1.locked
 	local Actions = Locked.actions
-	local config = { message = Locked.messageKey }
+	
+	local function _(p2) --[[ Line: 35 | Named "getEligibleHandler" ]]
+		-- upvalues: p1 (copy)
+		if p2 == nil or p1.actionHandlers == nil then
+			return nil
+		else
+			local ActionHandler = p1.actionHandlers[p2.id]
+			
+			return if ActionHandler == nil or not ActionHandler.isEligible then nil else ActionHandler
+		end
+	end
+	
+	local Primary = nil
+	local v1 = nil
+	local Secondary = nil
+	local v2 = nil
 	
 	if Actions ~= nil then
-		config.primary = Actions.primary.textKey
+		Primary = Actions.primary
+		local Primary1 = Actions.primary
 		
-		if Actions.secondary ~= nil then
-			config.secondary = Actions.secondary.textKey
+		if Primary1 == nil or p1.actionHandlers == nil then
+			v1 = nil
+		else
+			local ActionHandler = p1.actionHandlers[Primary1.id]
+			v1 = if ActionHandler == nil or not ActionHandler.isEligible then nil else ActionHandler
 		end
+		Secondary = Actions.secondary
+		local Secondary1 = Actions.secondary
+		
+		if Secondary1 == nil or p1.actionHandlers == nil then
+			v2 = nil
+		else
+			local ActionHandler = p1.actionHandlers[Secondary1.id]
+			v2 = if ActionHandler == nil or not ActionHandler.isEligible then nil else ActionHandler
+		end
+		if v1 == nil then
+			Primary = Secondary
+			v1 = v2
+			Secondary = nil
+			v2 = nil
+		end
+	end
+	local config = { message = Locked.messageKey }
+	
+	if Primary ~= nil and v1 ~= nil then
+		config.primary = Primary.textKey
+	end
+	if Secondary ~= nil and v2 ~= nil then
+		config.secondary = Secondary.textKey
 	end
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local t = {}
 	
-	if Actions ~= nil then
-		local Primary = Actions.primary
+	if v1 ~= nil then
 		t.Primary = ReactModule.createElement(Button, {
 			LayoutOrder = 1,
 			text = UseLocalizationResult.primary,
@@ -38,17 +78,11 @@ return function(p1) --[[ Line: 29 | Named "GoalLockedContent" ]]
 			variant = ButtonVariant.SoftEmphasis,
 			fillBehavior = FillBehavior.Fill,
 			width = UDim.new(1, 0),
-			onActivated = function() --[[ Line: 53 ]]
-				-- upvalues: p1 (copy), Primary (copy)
-				if p1.onAction then
-					p1.onAction(Primary.id)
-				end
-			end,
+			onActivated = v1.onActivate,
 			testId = `{TestId}.Primary`
 		})
-		local Secondary = Actions.secondary
 		
-		if Secondary ~= nil then
+		if v2 ~= nil then
 			t.Secondary = ReactModule.createElement(Button, {
 				LayoutOrder = 2,
 				text = UseLocalizationResult.secondary,
@@ -56,12 +90,7 @@ return function(p1) --[[ Line: 29 | Named "GoalLockedContent" ]]
 				variant = ButtonVariant.Standard,
 				fillBehavior = FillBehavior.Fill,
 				width = UDim.new(1, 0),
-				onActivated = function() --[[ Line: 70 ]]
-					-- upvalues: p1 (copy), Secondary (copy)
-					if p1.onAction then
-						p1.onAction(Secondary.id)
-					end
-				end,
+				onActivated = v2.onActivate,
 				testId = `{TestId}.Secondary`
 			})
 		end
@@ -77,7 +106,7 @@ return function(p1) --[[ Line: 29 | Named "GoalLockedContent" ]]
 			Text = UseLocalizationResult.message,
 			testId = `{TestId}.Message`
 		}),
-		Actions = if Actions == nil then nil else ReactModule.createElement(View, {
+		Actions = if v1 == nil then nil else ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "row gap-small size-full-0 auto-y",
 			testId = `{TestId}.Actions`

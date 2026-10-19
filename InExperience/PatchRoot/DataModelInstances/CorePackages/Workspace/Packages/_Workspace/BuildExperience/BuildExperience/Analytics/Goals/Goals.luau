@@ -92,6 +92,13 @@ return {
 					format = { unit = AnalyticsUnitModule.Minutes }
 				},
 				{
+					kind = "number",
+					id = "FirstSessionRetention",
+					titleKey = AnalyticsKeysModule.ANALYTICS_METRIC_TITLE_FIRST_SESSION_RETENTION,
+					source = GoalMetricSummarySourcesModule.firstSessionRetention({ durationSeconds = 300 }),
+					format = { unit = AnalyticsUnitModule.Percent }
+				},
+				{
 					kind = "breakdown",
 					id = "TopDropOffStep",
 					titleKey = AnalyticsKeysModule.ANALYTICS_METRIC_TITLE_TOP_DROP_OFF_STEP,
@@ -108,7 +115,7 @@ return {
 					}),
 					format = {
 						type = "custom",
-						formatter = function(_, p1) --[[ Line: 108 ]]
+						formatter = function(_, p1) --[[ Line: 115 ]]
 							local DisplayValue = p1.displayValue
 							
 							return if DisplayValue == nil or DisplayValue == "" then p1.value else `{p1.value}. {DisplayValue}`
