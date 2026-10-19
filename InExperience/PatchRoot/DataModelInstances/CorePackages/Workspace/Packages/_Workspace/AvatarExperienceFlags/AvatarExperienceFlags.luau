@@ -345,6 +345,8 @@
 	FStringAXTaxonomyM20ExperimentLayerName = require(script.FStringAXTaxonomyM20ExperimentLayerName),
 	FStringAXTaxonomyM21ExperimentLayerName = require(script.FStringAXTaxonomyM21ExperimentLayerName),
 	FFlagAXFetchItemDetailsFromAvatarEditorService = require(script.FFlagAXFetchItemDetailsFromAvatarEditorService),
+	FFlagAXAvatarEditorServiceTelemetryV2 = require(script.FFlagAXAvatarEditorServiceTelemetryV2),
+	FFlagAXDeprecateAvatarEditorServiceTelemetryV1 = require(script.FFlagAXDeprecateAvatarEditorServiceTelemetryV1),
 	FFlagAXCatalogSduiUseOpaqueRouteForSearch = require(script.FFlagAXCatalogSduiUseOpaqueRouteForSearch),
 	FFlagAXCatalogSduiDisableOnSearchRoute = require(script.FFlagAXCatalogSduiDisableOnSearchRoute),
 	FFlagAXCatalogUseFixedWidgetPadding = require(script.FFlagAXCatalogUseFixedWidgetPadding),

@@ -13,20 +13,24 @@ local AVATAREDITORCONSTANTS = AvatarExperienceCommonModule.Constants.AVATAR_EDIT
 local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastMessage
 local IsMakeupOrEyebrowEyelashAssetTypeFunction = AvatarExperienceCommonModule.Utils.isMakeupOrEyebrowEyelashAssetType
 local Constants1 = AvatarExperienceAnalyticsModule.Constants
+local AVATAREDITORSERVICECOUNTERSTATUS = Constants1.AVATAR_EDITOR_SERVICE_COUNTER_STATUS
 local ReportAvatarEventCounterNoAnalyticsArgumentFunction = AvatarExperienceAnalyticsModule.reportAvatarEventCounterNoAnalyticsArgument
+local ReportAvatarEditorServiceCounterFunction = AvatarExperienceAnalyticsModule.reportAvatarEditorServiceCounter
 local ReportAvatarEventCounterV1Function = AvatarExperienceAnalyticsModule.reportAvatarEventCounterV1
 local FIntAXLookOutfitCreationDelayMs = AvatarExperienceFlagsModule.FIntAXLookOutfitCreationDelayMs
 local FFlagAXMISSaveWearFix = AvatarExperienceFlagsModule.FFlagAXMISSaveWearFix
+local FFlagAXAvatarEditorServiceTelemetryV2 = AvatarExperienceFlagsModule.FFlagAXAvatarEditorServiceTelemetryV2
+local FFlagAXDeprecateAvatarEditorServiceTelemetryV1 = AvatarExperienceFlagsModule.FFlagAXDeprecateAvatarEditorServiceTelemetryV1
 local config = {
 	toastMessage = "Feature.Avatar.Message.UnknownErrorCreatingMakeupLook",
 	isLocalized = false,
 	toastType = ToastRoduxModule.Enums.ToastType.InformationMessage
 }
 
-return function(p1, Name, p2, Callback1, Callback) --[[ Line: 35 ]]
-	-- upvalues: PerformFetch (copy), AVATAREDITORCONSTANTS (copy), FFlagAXMISSaveWearFix (copy), IsMakeupOrEyebrowEyelashAssetTypeFunction (copy), MutedErrorFunction (copy), PromiseModule (copy), Constants (copy), FIntAXLookOutfitCreationDelayMs (copy), CreateMakeupLookModule (copy), ReportAvatarEventCounterV1Function (copy), Constants1 (copy), SetCurrentToastMessageFunction (copy), config (copy), ReportAvatarEventCounterNoAnalyticsArgumentFunction (copy)
-	return PerformFetch.Single(AVATAREDITORCONSTANTS.CreateMakeupLookKey, function(p3) --[[ Line: 42 ]]
-		-- upvalues: FFlagAXMISSaveWearFix (upval), p2 (copy), IsMakeupOrEyebrowEyelashAssetTypeFunction (upval), MutedErrorFunction (upval), PromiseModule (upval), Callback (copy), Constants (upval), Name (copy), FIntAXLookOutfitCreationDelayMs (upval), CreateMakeupLookModule (upval), p1 (copy), Callback1 (copy), ReportAvatarEventCounterV1Function (upval), Constants1 (upval), SetCurrentToastMessageFunction (upval), config (upval), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval)
+return function(p1, Name, p2, Callback1, Callback) --[[ Line: 40 ]]
+	-- upvalues: PerformFetch (copy), AVATAREDITORCONSTANTS (copy), FFlagAXMISSaveWearFix (copy), IsMakeupOrEyebrowEyelashAssetTypeFunction (copy), MutedErrorFunction (copy), PromiseModule (copy), Constants (copy), FIntAXLookOutfitCreationDelayMs (copy), FFlagAXAvatarEditorServiceTelemetryV2 (copy), ReportAvatarEditorServiceCounterFunction (copy), Constants1 (copy), AVATAREDITORSERVICECOUNTERSTATUS (copy), CreateMakeupLookModule (copy), ReportAvatarEventCounterV1Function (copy), SetCurrentToastMessageFunction (copy), config (copy), FFlagAXDeprecateAvatarEditorServiceTelemetryV1 (copy), ReportAvatarEventCounterNoAnalyticsArgumentFunction (copy)
+	return PerformFetch.Single(AVATAREDITORCONSTANTS.CreateMakeupLookKey, function(p3) --[[ Line: 47 ]]
+		-- upvalues: FFlagAXMISSaveWearFix (upval), p2 (copy), IsMakeupOrEyebrowEyelashAssetTypeFunction (upval), MutedErrorFunction (upval), PromiseModule (upval), Callback (copy), Constants (upval), Name (copy), FIntAXLookOutfitCreationDelayMs (upval), FFlagAXAvatarEditorServiceTelemetryV2 (upval), ReportAvatarEditorServiceCounterFunction (upval), Constants1 (upval), AVATAREDITORSERVICECOUNTERSTATUS (upval), CreateMakeupLookModule (upval), p1 (copy), Callback1 (copy), ReportAvatarEventCounterV1Function (upval), SetCurrentToastMessageFunction (upval), config (upval), FFlagAXDeprecateAvatarEditorServiceTelemetryV1 (upval), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval)
 		local State = p3:getState()
 		local AvatarScales = State.AvatarExperience.AvatarEditor.Character.AvatarScales
 		local AvatarType = State.AvatarExperience.AvatarEditor.Character.AvatarType
@@ -83,22 +87,35 @@ return function(p1, Name, p2, Callback1, Callback) --[[ Line: 35 ]]
 			scale = AvatarScales,
 			playerAvatarType = AvatarType
 		}
-		task.spawn(function() --[[ Line: 117 ]]
-			-- upvalues: FIntAXLookOutfitCreationDelayMs (upval), CreateMakeupLookModule (upval), p1 (upval), config1 (copy), Callback1 (upval), ReportAvatarEventCounterV1Function (upval), Constants1 (upval), p3 (copy), SetCurrentToastMessageFunction (upval), config (upval), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval)
+		task.spawn(function() --[[ Line: 122 ]]
+			-- upvalues: FIntAXLookOutfitCreationDelayMs (upval), FFlagAXAvatarEditorServiceTelemetryV2 (upval), ReportAvatarEditorServiceCounterFunction (upval), Constants1 (upval), AVATAREDITORSERVICECOUNTERSTATUS (upval), CreateMakeupLookModule (upval), p1 (upval), config1 (copy), Callback1 (upval), ReportAvatarEventCounterV1Function (upval), p3 (copy), SetCurrentToastMessageFunction (upval), config (upval), FFlagAXDeprecateAvatarEditorServiceTelemetryV1 (upval), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval)
 			task.wait(FIntAXLookOutfitCreationDelayMs / 1000)
+			
+			if FFlagAXAvatarEditorServiceTelemetryV2 then
+				ReportAvatarEditorServiceCounterFunction(Constants1.AVATAR_EDITOR_SERVICE_EVENTS.CreateMakeupLook, AVATAREDITORSERVICECOUNTERSTATUS.Request)
+			end
 			local MakeupLookModule, _ = CreateMakeupLookModule(p1, config1)
 			
-			return MakeupLookModule:andThen(function(_) --[[ Line: 122 ]]
-				-- upvalues: Callback1 (upval), ReportAvatarEventCounterV1Function (upval), Constants1 (upval)
+			return MakeupLookModule:andThen(function(_) --[[ Line: 134 ]]
+				-- upvalues: FFlagAXAvatarEditorServiceTelemetryV2 (upval), ReportAvatarEditorServiceCounterFunction (upval), Constants1 (upval), AVATAREDITORSERVICECOUNTERSTATUS (upval), Callback1 (upval), ReportAvatarEventCounterV1Function (upval)
+				if FFlagAXAvatarEditorServiceTelemetryV2 then
+					ReportAvatarEditorServiceCounterFunction(Constants1.AVATAR_EDITOR_SERVICE_EVENTS.CreateMakeupLook, AVATAREDITORSERVICECOUNTERSTATUS.Success)
+				end
 				if Callback1 then
 					Callback1()
 				end
 				ReportAvatarEventCounterV1Function(Constants1.AVATAR_EVENT_COUNTER_NAME.AXCreateMakeupLook)
-			end):catch(function(Err) --[[ Line: 129 ]]
-				-- upvalues: p3 (upval), SetCurrentToastMessageFunction (upval), config (upval), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval), Constants1 (upval)
+			end):catch(function(Err) --[[ Line: 147 ]]
+				-- upvalues: p3 (upval), SetCurrentToastMessageFunction (upval), config (upval), FFlagAXDeprecateAvatarEditorServiceTelemetryV1 (upval), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval), Constants1 (upval), FFlagAXAvatarEditorServiceTelemetryV2 (upval), ReportAvatarEditorServiceCounterFunction (upval), AVATAREDITORSERVICECOUNTERSTATUS (upval)
 				warn("Failed to create makeup look", Err)
 				p3:dispatch(SetCurrentToastMessageFunction(config))
-				ReportAvatarEventCounterNoAnalyticsArgumentFunction(Constants1.AVATAR_EDITOR_SERVICE_ERRORS.CreateOutfit)
+				
+				if not FFlagAXDeprecateAvatarEditorServiceTelemetryV1 then
+					ReportAvatarEventCounterNoAnalyticsArgumentFunction(Constants1.AVATAR_EDITOR_SERVICE_ERRORS.CreateOutfit)
+				end
+				if FFlagAXAvatarEditorServiceTelemetryV2 then
+					ReportAvatarEditorServiceCounterFunction(Constants1.AVATAR_EDITOR_SERVICE_EVENTS.CreateMakeupLook, AVATAREDITORSERVICECOUNTERSTATUS.Error, if typeof(Err) == "table" and typeof(Err.HttpError) == "EnumItem" then Err.HttpError else nil)
+				end
 			end)
 		end)
 		

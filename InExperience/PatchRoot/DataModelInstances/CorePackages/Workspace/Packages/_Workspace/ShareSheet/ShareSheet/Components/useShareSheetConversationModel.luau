@@ -115,8 +115,8 @@ return function(p1) --[[ Line: 102 | Named "useShareSheetConversationModel" ]]
 			})
 			EligibleRecipients = {
 				recipients = getCompactRecipients(UseEligibleRecipientsResult.recipients, Recipients, p1.selectedConversationIds, function(p2) --[[ Line: 165 ]]
-					-- upvalues: p1 (copy)
-					return p1.chatShare ~= nil and p1.chatShare.canSendToConversation(p2.conversation)
+					-- upvalues: p1 (copy), RecipientModule (upval)
+					return p1.chatShare ~= nil and RecipientModule.canSend(p1.chatShare, p2)
 				end),
 				isLoading = UseEligibleRecipientsResult.isLoading
 			}

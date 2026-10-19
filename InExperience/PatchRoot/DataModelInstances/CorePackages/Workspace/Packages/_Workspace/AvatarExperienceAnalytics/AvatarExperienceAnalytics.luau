@@ -1,4 +1,6 @@
-﻿return {
+﻿local Parent = script.Parent
+
+return {
 	AnalyticsService = require(script.AnalyticsService),
 	AvatarExperienceAnalyticsService = require(script.AvatarExperienceAnalyticsService),
 	AXUnifiedEventFilter = require(script.AXUnifiedEventFilter),
@@ -27,9 +29,12 @@
 	getAvatarEventCounterNameWithPlatform = require(script.getAvatarEventCounterNameWithPlatform),
 	reportAvatarEventCounterNoAnalyticsArgument = require(script.reportAvatarEventCounterNoAnalyticsArgument),
 	reportAvatarEventCounterV1 = require(script.reportAvatarEventCounterV1),
+	reportAvatarEditorServiceCounter = require(script.reportAvatarEditorServiceCounter),
 	Flags = {
 		FFlagAllowCustomUnifiedEventFilter = require(script.FFlagAllowCustomUnifiedEventFilter),
-		FFlagAXUnifiedEventCounters = require(script.Parent.AvatarExperienceFlags).FFlagAXUnifiedEventCounters
+		FFlagAXAvatarEditorServiceTelemetryV2 = require(Parent.AvatarExperienceFlags).FFlagAXAvatarEditorServiceTelemetryV2,
+		FFlagAXDeprecateAvatarEditorServiceTelemetryV1 = require(Parent.AvatarExperienceFlags).FFlagAXDeprecateAvatarEditorServiceTelemetryV1,
+		FFlagAXUnifiedEventCounters = require(Parent.AvatarExperienceFlags).FFlagAXUnifiedEventCounters
 	},
 	reportBackgroundUserActionCounter = require(script.reportBackgroundUserActionCounter),
 	Enums = {

@@ -53,6 +53,31 @@ return {
 		PromptApplyProfileConfigurationCompleted = "AvatarEditorServicePromptApplyProfileConfigurationCompletedError",
 		GetProfileConfiguration = "AvatarEditorServiceGetProfileConfigurationError"
 	},
+	AVATAR_EDITOR_SERVICE_EVENTS = {
+		GetRecommendedAssets = "AvatarEditorServiceGetRecommendedAssets",
+		GetOutfits = "AvatarEditorServiceGetOutfits",
+		NoPromptCreateOutfit = "AvatarEditorServiceNoPromptCreateOutfit",
+		GetAvatarRules = "AvatarEditorServiceGetAvatarRules",
+		GetInventory = "AvatarEditorServiceGetInventory",
+		SearchCatalog = "AvatarEditorServiceSearchCatalog",
+		GetBatchItemDetails = "AvatarEditorServiceGetBatchItemDetails",
+		GetRecommendedBundles = "AvatarEditorServiceGetRecommendedBundles",
+		NoPromptSetFavorite = "AvatarEditorServiceNoPromptSetFavorite",
+		NoPromptSaveAvatarThumbnailCustomization = "AvatarEditorServiceNoPromptSaveAvatarThumbnailCustomization",
+		GetOutfitDetails = "AvatarEditorServiceGetOutfitDetails",
+		GetItemDetails = "AvatarEditorServiceGetItemDetails",
+		GetFavorite = "AvatarEditorServiceGetFavorite",
+		CheckApplyDefaultClothing = "AvatarEditorServiceCheckApplyDefaultClothing",
+		NoPromptSaveAvatar = "AvatarEditorServiceNoPromptSaveAvatar",
+		NoPromptApplyProfileConfiguration = "AvatarEditorServiceNoPromptApplyProfileConfiguration",
+		GetProfileConfiguration = "AvatarEditorServiceGetProfileConfiguration",
+		CreateMakeupLook = "AvatarEditorServiceCreateMakeupLook"
+	},
+	AVATAR_EDITOR_SERVICE_COUNTER_STATUS = {
+		Request = "request",
+		Success = "success",
+		Error = "error"
+	},
 	IMPRESSIONS_EVENTS = {
 		AvatarItems = "avatarItemImpressions",
 		AvatarItemsCatalog = "avatarItemImpressionsCatalog"

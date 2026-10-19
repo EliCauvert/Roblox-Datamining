@@ -3,17 +3,22 @@ local Parent = ShareSheet.Parent
 local ReactModule = require(Parent.React)
 local ConversationUtilsModule = require(ShareSheet.Utils.ConversationUtils)
 local _ = require(Parent.AppChat.GetConversationListStore)
+local _ = require(Parent.AppChat.GetExternalChatMessageSenderStore)
+local _ = require(Parent.LuauPolyfill)
 local UseExternalChatConversationEligibilityModule = require(Parent.AppChat.useExternalChatConversationEligibility)
 
 return {
-	fromConversation = function(Conversation) --[[ Line: 80 ]]
+	canSend = function(p1, p2) --[[ Line: 68 ]]
+		return p1.canSendToConversation(p2.conversation)
+	end,
+	fromConversation = function(Conversation) --[[ Line: 93 ]]
 		return { id = Conversation.id, conversation = Conversation }
 	end,
-	getName = function(p1) --[[ Line: 64 ]]
+	getName = function(p1) --[[ Line: 77 ]]
 		-- upvalues: ConversationUtilsModule (copy)
 		return ConversationUtilsModule.getDisplayName(p1.conversation)
 	end,
-	getParticipantIds = function(p1, p2) --[[ Line: 69 ]]
+	getParticipantIds = function(p1, p2) --[[ Line: 82 ]]
 		local List = {}
 		
 		for _, value in p1.conversation.participants or {} do
@@ -23,10 +28,13 @@ return {
 		end
 		return List
 	end,
-	useEligibleRecipients = function(p3) --[[ Line: 32 ]]
+	send = function(p3, p4, p5) --[[ Line: 72 ]]
+		return p3.sendToConversation(p4.conversation, p5)
+	end,
+	useEligibleRecipients = function(p3) --[[ Line: 37 ]]
 		-- upvalues: ReactModule (copy), UseExternalChatConversationEligibilityModule (copy)
 		local UseExternalChatConversationEligibilityModuleResult = UseExternalChatConversationEligibilityModule({
-			conversations = ReactModule.useMemo(function() --[[ Line: 33 ]]
+			conversations = ReactModule.useMemo(function() --[[ Line: 38 ]]
 				-- upvalues: p3 (copy)
 				local Buffer = table.create(#p3.recipients)
 				
@@ -40,7 +48,7 @@ return {
 			maxConversationCount = p3.maxCount
 		})
 		
-		return ReactModule.useMemo(function() --[[ Line: 48 ]]
+		return ReactModule.useMemo(function() --[[ Line: 53 ]]
 			-- upvalues: UseExternalChatConversationEligibilityModuleResult (copy), p3 (copy)
 			local t = {}
 			
