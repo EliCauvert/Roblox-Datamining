@@ -88,6 +88,11 @@
     height: var(--size-900) !important
 }
 
+.size-\[1em\] {
+    width: 1em;
+    height: 1em
+}
+
 .size-\[50px\] {
     width: 50px;
     height: 50px
@@ -165,8 +170,8 @@
     min-width: 96px
 }
 
-.width-\[200px\] {
-    width: 200px
+.width-\[150px\] {
+    width: 150px
 }
 
 .width-\[235px\] {
@@ -229,6 +234,10 @@
 
 .icon-regular-arrow-up-from-landscape-rectangle {
     --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M27 14C27.5523 14 28 14.4477 28 15V27C28 28.1046 27.1046 29 26 29H6C4.89543 29 4 28.1046 4 27V15C4 14.4477 4.44772 14 5 14C5.55228 14 6 14.4477 6 15V27H26V15C26 14.4477 26.4477 14 27 14ZM16 2C16.2652 2 16.5195 2.10543 16.707 2.29297L20.707 6.29297C21.0976 6.68349 21.0976 7.31651 20.707 7.70703C20.3165 8.09756 19.6835 8.09756 19.293 7.70703L17 5.41406V20C17 20.5523 16.5523 21 16 21C15.4477 21 15 20.5523 15 20V5.41406L12.707 7.70703C12.3165 8.09756 11.6835 8.09756 11.293 7.70703C10.9024 7.31651 10.9024 6.68349 11.293 6.29297L15.293 2.29297C15.4805 2.10543 15.7348 2 16 2Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-regular-arrow-up-right-from-square {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M5 3C3.89543 3 3 3.89543 3 5V27C3 28.1046 3.89543 29 5 29H27C28.1046 29 29 28.1046 29 27V16C29 15.4477 28.5523 15 28 15C27.4477 15 27 15.4477 27 16V27H5V5L16 5C16.5523 5 17 4.55228 17 4C17 3.44772 16.5523 3 16 3H5Z' fill='black'/%3E %3Cpath d='M28 11C28.5523 11 29 10.5523 29 10V4C29 3.44772 28.5523 3 28 3H22C21.4477 3 21 3.44772 21 4C21 4.55228 21.4477 5 22 5H25.5858L15.2929 15.2929C14.9024 15.6834 14.9024 16.3166 15.2929 16.7071C15.6834 17.0976 16.3166 17.0976 16.7071 16.7071L27 6.41421V10C27 10.5523 27.4477 11 28 11Z' fill='black'/%3E%3C/svg%3E")
 }
 
 .icon-regular-calendar {
@@ -355,6 +364,10 @@
     grid-template-columns: repeat(2, minmax(0, 1fr))
 }
 
+.\[height\:0\] {
+    height: 0
+}
+
 .\[list-style\:none\] {
     list-style: none
 }
@@ -367,8 +380,16 @@
     scroll-padding-inline: var(--padding-xxlarge)
 }
 
+.\[text-align\:inherit\] {
+    text-align: inherit
+}
+
 .\[transform\:rotate\(-15deg\)\] {
     transform: rotate(-15deg)
+}
+
+.\[width\:0\] {
+    width: 0
 }
 
 #content {
@@ -479,8 +500,23 @@
     border-color: var(--color-system-emphasis)
 }
 
+.hover\:underline:hover {
+    -webkit-text-decoration-skip-ink: none;
+    text-decoration-skip-ink: none;
+    -webkit-text-decoration-line: underline;
+    text-decoration-line: underline
+}
+
 .hover\:bg-surface-100:hover {
     background-color: var(--color-surface-100)
+}
+
+.hover\:cursor-pointer:hover {
+    cursor: pointer
+}
+
+.hover\:\[opacity\:0\.8\]:hover {
+    opacity: .8
 }
 
 .focus\:outline-focus:focus {
@@ -491,6 +527,18 @@
 .focus-visible\:outline-focus:focus-visible {
     outline: var(--stroke-thicker)solid var(--color-selection-start);
     outline-offset: var(--stroke-thicker)
+}
+
+.focus-visible\:\[outline-color\:var\(--color-system-emphasis\)\]:focus-visible {
+    outline-color: var(--color-system-emphasis)
+}
+
+.focus-visible\:\[outline-style\:solid\]:focus-visible {
+    outline-style: solid
+}
+
+.focus-visible\:\[outline-width\:var\(--stroke-standard\)\]:focus-visible {
+    outline-width: var(--stroke-standard)
 }
 
 .disabled\:outline-none:disabled {
@@ -507,6 +555,14 @@
 
 .group\/interactable:disabled .group-disabled\/interactable\:bg-none {
     background-color: var(--color-none)
+}
+
+@media (prefers-reduced-motion:no-preference) {
+    .motion-safe\:transition-opacity {
+        transition-property: opacity;
+        transition-timing-function: var(--ease-linear);
+        transition-duration: var(--time-100)
+    }
 }
 
 @media (min-width:361px) {
@@ -548,8 +604,22 @@
         max-width: 600px
     }
 
+    .medium\:width-\[200px\] {
+        width: 200px
+    }
+
     .medium\:width-\[240px\] {
         width: 240px
+    }
+
+    .medium\:padding-x-xlarge {
+        padding-left: var(--padding-xlarge);
+        padding-right: var(--padding-xlarge)
+    }
+
+    .medium\:padding-y-medium {
+        padding-top: var(--padding-medium);
+        padding-bottom: var(--padding-medium)
     }
 
     .medium\:padding-bottom-large {

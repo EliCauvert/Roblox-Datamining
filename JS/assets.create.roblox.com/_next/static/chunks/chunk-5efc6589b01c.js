@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "bb739354-7cfe-edfd-7d1c-1cd898b2ec21")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "412bb309-0b90-c1e1-ff46-f53918b99c01")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 239328, e => {
@@ -235,7 +235,7 @@
     let n = (0, t.defineFlag)({
             namespace: "game-discovery-serving",
             name: "isAcquisitionThumbnailUpsellEnabled",
-            defaultValue: !1
+            defaultValue: !0
         }),
         a = (0, t.defineFlag)({
             namespace: "game-discovery-serving",
@@ -3054,5 +3054,5 @@
     }])
 }]);
 
-//# debugId=bb739354-7cfe-edfd-7d1c-1cd898b2ec21
-//# sourceMappingURL=3glh18afjbe1p.js.map
+//# debugId=412bb309-0b90-c1e1-ff46-f53918b99c01
+//# sourceMappingURL=2m0pptgk8ac94.js.map
