@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "0162ff29-fff3-4d18-7eb2-e19096eada0e")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "c2752d21-c464-36b1-af76-eabcf8bceb54")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 156071, e => {
@@ -47,16 +47,17 @@
         p = new r.GroupFeaturesApi(s),
         l = new r.RolesApi(s),
         c = new r.MembershipApi(s),
-        v = new r.SocialLinksApi(s),
-        h = new r.RevenueApi(s),
-        I = {
+        v = new t.MembershipV2Api(s),
+        h = new r.SocialLinksApi(s),
+        I = new r.RevenueApi(s),
+        g = {
             On: r.RobloxGroupsApiSetFeaturesRequestModelFeaturesPayoutsEnum.On,
             Blocked: r.RobloxGroupsApiSetFeaturesRequestModelFeaturesPayoutsEnum.Blocked
         },
-        g = r.V1GroupsGroupIdAuditLogGetActionTypeEnum,
-        m = r.V1GroupsGroupIdAuditLogGetLimitEnum,
-        G = r.RobloxGroupsApiGroupFeatureResponseFeatureEnum;
-    e.s(["GroupAuditLimitEnum", 0, m, "GroupAuditLogActionTypeEnum", 0, g, "GroupFeatureTypeEnum", 0, G, "SetGroupFeaturesEnum", 0, I, "default", 0, {
+        m = r.V1GroupsGroupIdAuditLogGetActionTypeEnum,
+        G = r.V1GroupsGroupIdAuditLogGetLimitEnum,
+        R = r.RobloxGroupsApiGroupFeatureResponseFeatureEnum;
+    e.s(["GroupAuditLimitEnum", 0, G, "GroupAuditLogActionTypeEnum", 0, m, "GroupFeatureTypeEnum", 0, R, "SetGroupFeaturesEnum", 0, g, "default", 0, {
         searchGroups: (e, r, t) => u.v1GroupsSearchGet({
             keyword: e,
             limit: r,
@@ -82,6 +83,7 @@
         getUsersGroupRoles: e => c.v1UsersUserIdGroupsRolesGet({
             userId: e
         }),
+        getGroupUsersWithRoles: e => v.v2GroupsGroupIdUsersGet(e),
         getUsersGroupRolesV2(e) {
             let r = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
                 o = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
@@ -100,24 +102,24 @@
         createGroup: e => a.v1GroupsCreatePost(e),
         postGroupOwner: e => c.v1GroupsGroupIdChangeOwnerPost(e),
         postGroupDeactivate: e => c.v1GroupsGroupIdDeactivatePost(e),
-        getGroupSocialLinks: e => v.v1GroupsGroupIdSocialLinksGet({
+        getGroupSocialLinks: e => h.v1GroupsGroupIdSocialLinksGet({
             groupId: e
         }),
-        patchGroupSocialLink: e => v.v1GroupsGroupIdSocialLinksSocialLinkIdPatch(e),
-        postGroupSocialLink: e => v.v1GroupsGroupIdSocialLinksPost(e),
-        deleteGroupSocialLink: e => v.v1GroupsGroupIdSocialLinksSocialLinkIdDelete(e),
-        getGroupPayouts: e => h.v1GroupsGroupIdPayoutsGet({
+        patchGroupSocialLink: e => h.v1GroupsGroupIdSocialLinksSocialLinkIdPatch(e),
+        postGroupSocialLink: e => h.v1GroupsGroupIdSocialLinksPost(e),
+        deleteGroupSocialLink: e => h.v1GroupsGroupIdSocialLinksSocialLinkIdDelete(e),
+        getGroupPayouts: e => I.v1GroupsGroupIdPayoutsGet({
             groupId: e
         }),
-        updateGroupRecurringPayouts: (e, r) => h.v1GroupsGroupIdPayoutsRecurringPost({
+        updateGroupRecurringPayouts: (e, r) => I.v1GroupsGroupIdPayoutsRecurringPost({
             groupId: e,
             request: r
         }),
-        updateGroupPayouts: (e, r) => h.v1GroupsGroupIdPayoutsPost({
+        updateGroupPayouts: (e, r) => I.v1GroupsGroupIdPayoutsPost({
             groupId: e,
             request: r
         }),
-        getGroupPayoutRestriction: e => h.v1GroupsGroupIdPayoutRestrictionGet({
+        getGroupPayoutRestriction: e => I.v1GroupsGroupIdPayoutRestrictionGet({
             groupId: e
         }),
         getGroupAuditLog: (e, r, t, o, s) => a.v1GroupsGroupIdAuditLogGet({
@@ -5221,5 +5223,5 @@
     }])
 }]);
 
-//# debugId=0162ff29-fff3-4d18-7eb2-e19096eada0e
-//# sourceMappingURL=3xy423ropt04s.js.map
+//# debugId=c2752d21-c464-36b1-af76-eabcf8bceb54
+//# sourceMappingURL=1tbpvnb7ri8n9.js.map

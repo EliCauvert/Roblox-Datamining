@@ -616,8 +616,13 @@ table.summary .summary-view-details {
     right: var(--size-100)
 }
 
+.top-\[0\],
 .top-\[0px\] {
     top: 0
+}
+
+.top-\[5px\] {
+    top: 5px
 }
 
 .top-\[var\(--size-50\)\] {
@@ -658,6 +663,15 @@ table.summary .summary-view-details {
     height: var(--icon-size-xsmall)
 }
 
+.size-\[var\(--icon-size-xxlarge\)\] {
+    width: var(--icon-size-xxlarge);
+    height: var(--icon-size-xxlarge)
+}
+
+.height-\[14px\] {
+    height: 14px
+}
+
 .height-\[90vh\] {
     height: 90vh
 }
@@ -668,6 +682,10 @@ table.summary .summary-view-details {
 
 .height-\[var\(--stroke-thick\)\] {
     height: var(--stroke-thick)
+}
+
+.max-height-\[2lh\] {
+    max-height: 2lh
 }
 
 .max-height-\[calc\(var\(--size-600\)\*3\+var\(--gap-small\)\*2\)\] {
@@ -700,6 +718,10 @@ table.summary .summary-view-details {
 
 .max-width-\[320px\] {
     max-width: 320px
+}
+
+.max-width-\[340px\] {
+    max-width: 340px
 }
 
 .max-width-\[480px\] {
@@ -746,8 +768,16 @@ table.summary .summary-view-details {
     min-width: min(100% - max(2 * var(--margin-small), env(safe-area-inset-left) + env(safe-area-inset-right)), 393px)
 }
 
+.min-width-\[min\(200px\2c 100\%\)\] {
+    min-width: min(200px, 100%)
+}
+
 .min-width-\[var\(--size-1200\)\] {
     min-width: var(--size-1200)
+}
+
+.width-\[10px\] {
+    width: 10px
 }
 
 .width-\[fit-content\] {
@@ -757,6 +787,15 @@ table.summary .summary-view-details {
 
 .width-\[var\(--size-1200\)\] {
     width: var(--size-1200)
+}
+
+.padding-\[var\(--size-150\)\] {
+    padding: var(--size-150)
+}
+
+.padding-y-\[var\(--size-150\)\] {
+    padding-top: var(--size-150);
+    padding-bottom: var(--size-150)
 }
 
 .padding-bottom-\[1px\] {
@@ -777,6 +816,10 @@ table.summary .summary-view-details {
 
 .padding-right-\[var\(--size-250\)\] {
     padding-right: var(--size-250)
+}
+
+.padding-top-\[var\(--size-150\)\] {
+    padding-top: var(--size-150)
 }
 
 .content-\[var\(--dark-mode-content-emphasis\)\] {
@@ -911,6 +954,10 @@ table.summary .summary-view-details {
     --svg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M4.293 5.293a1 1 0 011.414 0l10 10 .068.076a1 1 0 01-.068 1.338l-10 10a1 1 0 01-1.414-1.414L13.586 16 4.293 6.707a1 1 0 010-1.414z'/%3E%3Cpath d='M16.293 5.293a1 1 0 011.414 0l10 10 .068.076a1 1 0 01-.068 1.338l-10 10a1 1 0 01-1.414-1.414L25.586 16l-9.293-9.293a1 1 0 010-1.414z'/%3E%3C/svg%3E")
 }
 
+.icon-filled-flag {
+    --svg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M3.74 2.034a1 1 0 011.226.706l.304 1.128 4.498-1.406a7.254 7.254 0 016.324.981 5.254 5.254 0 004.523.729l5.097-1.53c1.61-.482 3.06 1.114 2.428 2.67l-1.973 4.849 3.465 3.725a2 2 0 01-.897 3.28l-6.444 1.905a7.508 7.508 0 01-6.433-1.05 5.508 5.508 0 00-4.494-.831l-2.35.587 2.952 10.963a1 1 0 01-1.931.52l-7-26a1 1 0 01.705-1.226z'/%3E%3C/svg%3E")
+}
+
 .icon-regular-magnifying-glass {
     --svg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M14.75 2.5C21.515 2.5 27 7.985 27 14.75c0 2.98-1.065 5.709-2.833 7.832l4.955 4.135c.239.195.378.488.378.797 0 1.096-.89 1.986-1.986 1.986a1.03 1.03 0 01-.797-.378l-4.135-4.955A12.198 12.198 0 0114.75 27C7.985 27 2.5 21.515 2.5 14.75S7.985 2.5 14.75 2.5zm0 2C9.09 4.5 4.5 9.09 4.5 14.75S9.09 25 14.75 25 25 20.41 25 14.75 20.41 4.5 14.75 4.5z'/%3E%3C/svg%3E")
 }
@@ -921,6 +968,10 @@ table.summary .summary-view-details {
 
 .icon-regular-minus-small {
     --svg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M23 15a1 1 0 110 2H9a1 1 0 110-2h14z'/%3E%3C/svg%3E")
+}
+
+.icon-regular-moon {
+    --svg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M26.498 21.006a13.27 13.27 0 01-2.532.242c-7.298 0-13.214-5.916-13.214-13.214 0-.864.083-1.711.242-2.532a.783.783 0 00-.014-.337 11.663 11.663 0 00-2.567 1.943c-4.55 4.55-4.55 11.929 0 16.48 4.55 4.55 11.928 4.55 16.479 0a11.665 11.665 0 001.943-2.568.783.783 0 00-.337-.014zm-.381-1.964c1.659-.322 3.47 1.003 2.701 2.509A13.637 13.637 0 0126.306 25c-5.332 5.332-13.976 5.332-19.307 0-5.332-5.331-5.332-13.975 0-19.307a13.642 13.642 0 013.45-2.512c1.506-.768 2.83 1.042 2.509 2.701a11.272 11.272 0 00-.206 2.151c0 6.193 5.02 11.214 11.214 11.214.736 0 1.455-.07 2.15-.206z'/%3E%3C/svg%3E")
 }
 
 .icon-filled-person {
@@ -985,6 +1036,30 @@ table.summary .summary-view-details {
     appearance: none
 }
 
+.\[background-image\:linear-gradient\(var\(--color-shift-200\)\2c var\(--color-shift-200\)\)\] {
+    background-image: linear-gradient(var(--color-shift-200), var(--color-shift-200))
+}
+
+.\[border-left-width\:0\] {
+    border-left-width: 0
+}
+
+.\[border-right-width\:0\] {
+    border-right-width: 0
+}
+
+.\[box-shadow\:inset_0_0_0_var\(--stroke-standard\)_var\(--color-stroke-default\)\] {
+    box-shadow: inset 0 0 0 var(--stroke-standard) var(--color-stroke-default)
+}
+
+.\[box-shadow\:inset_0_calc\(var\(--stroke-standard\)\*-1\)_0_0_var\(--color-stroke-default\)\] {
+    box-shadow: inset 0 calc(var(--stroke-standard)*-1) 0 0 var(--color-stroke-default)
+}
+
+.\[box-sizing\:border-box\] {
+    box-sizing: border-box
+}
+
 .\[display\:-webkit-box\] {
     display: -webkit-box
 }
@@ -1009,6 +1084,10 @@ table.summary .summary-view-details {
     opacity: 0
 }
 
+.\[overflow-wrap\:anywhere\] {
+    overflow-wrap: anywhere
+}
+
 .\[overflow-x\:auto\] {
     overflow-x: auto
 }
@@ -1027,18 +1106,6 @@ table.summary .summary-view-details {
 
 .\[text-align\:inherit\] {
     text-align: inherit
-}
-
-.\[text-decoration-color\:var\(--color-content-default\)\] {
-    text-decoration-color: var(--color-content-default)
-}
-
-.\[text-decoration-color\:var\(--color-content-link\)\] {
-    text-decoration-color: var(--color-content-link)
-}
-
-.\[text-decoration-color\:var\(--inverse-content-default\)\] {
-    text-decoration-color: var(--inverse-content-default)
 }
 
 .\[z-index\:0\] {
@@ -1087,6 +1154,14 @@ table.summary .summary-view-details {
     color: var(--color-content-muted)
 }
 
+.focus-within\:stroke-system-alert:focus-within {
+    border-color: var(--color-system-alert)
+}
+
+.focus-within\:stroke-system-emphasis:focus-within {
+    border-color: var(--color-system-emphasis)
+}
+
 .hover\:underline:hover {
     text-decoration-line: underline;
     -webkit-text-decoration-skip-ink: none;
@@ -1107,10 +1182,6 @@ table.summary .summary-view-details {
 
 .hover\:\[opacity\:0\.8\]:hover {
     opacity: .8
-}
-
-.hover\:\[text-decoration-color\:var\(--color-content-emphasis\)\]:hover {
-    text-decoration-color: var(--color-content-emphasis)
 }
 
 .focus-visible\:outline-focus:focus-visible,

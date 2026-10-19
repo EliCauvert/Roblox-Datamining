@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "496e19c6-ebbd-d7ee-f06c-154ba8b3f797")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "731108ce-d4bd-3c0d-b3dc-e0c79b1a0fa0")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 718067, e => {
@@ -99,7 +99,7 @@
             AdCreated: [n.GroupAuditLogActionTypeEnum.BuyAd]
         },
         y = new Set([s.EventType.ExperiencePermissionsUpdated, s.EventType.ExperienceCreated, s.EventType.PayoutsConfigured, s.EventType.PlaceModerated]);
-    e.s(["ActivityHistoryPageSize", 0, 20, "DefaultMemberIdPlaceholder", 0, "-1", "DefaultMemberRoleId", 0, "12884901889", "GroupActivityHistoryEventTypesMapping", 0, m, "GroupActivityHistoryFilterCategoriesMapping", 0, {
+    e.s(["ActivityHistoryPageSize", 0, 20, "DefaultMemberRoleId", 0, "12884901889", "GroupActivityHistoryEventTypesMapping", 0, m, "GroupActivityHistoryFilterCategoriesMapping", 0, {
         Creator: [],
         Content: [],
         Membership: ["Roles", "GroupMembers"],
@@ -762,5 +762,5 @@
     e.s(["QueryClient", 0, _], 387125)
 }]);
 
-//# debugId=496e19c6-ebbd-d7ee-f06c-154ba8b3f797
-//# sourceMappingURL=0ye6w845vsra3.js.map
+//# debugId=731108ce-d4bd-3c0d-b3dc-e0c79b1a0fa0
+//# sourceMappingURL=2ws-mm3aogght.js.map

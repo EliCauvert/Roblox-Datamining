@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "f8de3183-63ef-9826-1e4e-6bd307a36ae5")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "b8ee162c-4431-9a63-3be8-8b248bcffd0e")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 523426, e => {
@@ -259,42 +259,42 @@
     "use strict";
     var t, a, n, r, i, o, s, l, u, d, c, p, g, m, f, b, v, h = e.i(650502),
         y = e.i(864392),
-        P = ((t = {}).ShowVrDeviceOption = "showVrDeviceOption", t.ShowIXPClientTest = "showIXPClientTest", t.ShowMemoryStoresDashboard = "showMemoryStoresDashboard", t.ShowAdvancedSettingsPage = "showAdvancedSettingsPage", t.EnableIA = "enableIA", t.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", t.EnableDevexEarnedRobux = "enableDevexEarnedRobux", t.EnableExperienceGenre = "enableExperienceGenre", t.EnablePlayerFeedbackTranslationsWeb = "EnablePlayerFeedbackTranslationsWeb", t.EnablePlayerFeedbackTranslationRetries = "EnablePlayerFeedbackTranslationRetries", t.EnablePlayerFeedbackDetailedFilter = "enablePlayerFeedbackDetailedFilter", t.EnableEventRequestFeaturing = "enableEventRequestFeaturing", t.EnableCollaboratorsPageV2 = "enableCollaboratorsPageV2", t),
-        C = ((a = {}).EnableRightsManager = "enableRightsManager", a.EnableBulkFiling = "enableBulkFiling", a.EnableOnDemandSearch = "enableOnDemandSearch", a.EnableEditRegistration = "enableEditRegistration", a.EnableImageSearch = "enableImageSearch", a.EnableClaimsAgainstMe = "enableClaimsAgainstMe", a.EnableGenAiOptOut = "enableGenAiOptOut", a.EnableInExperienceIpReporting = "enableInExperienceIpReporting", a.EnableIpContentSearch = "enableIpContentSearch", a.EnableTrademark = "enableTrademark", a),
+        C = ((t = {}).ShowVrDeviceOption = "showVrDeviceOption", t.ShowIXPClientTest = "showIXPClientTest", t.ShowMemoryStoresDashboard = "showMemoryStoresDashboard", t.ShowAdvancedSettingsPage = "showAdvancedSettingsPage", t.EnableIA = "enableIA", t.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", t.EnableDevexEarnedRobux = "enableDevexEarnedRobux", t.EnableExperienceGenre = "enableExperienceGenre", t.EnablePlayerFeedbackTranslationsWeb = "EnablePlayerFeedbackTranslationsWeb", t.EnablePlayerFeedbackTranslationRetries = "EnablePlayerFeedbackTranslationRetries", t.EnablePlayerFeedbackDetailedFilter = "enablePlayerFeedbackDetailedFilter", t.EnableEventRequestFeaturing = "enableEventRequestFeaturing", t.EnableCollaboratorsPageV2 = "enableCollaboratorsPageV2", t),
+        P = ((a = {}).EnableRightsManager = "enableRightsManager", a.EnableBulkFiling = "enableBulkFiling", a.EnableOnDemandSearch = "enableOnDemandSearch", a.EnableEditRegistration = "enableEditRegistration", a.EnableImageSearch = "enableImageSearch", a.EnableClaimsAgainstMe = "enableClaimsAgainstMe", a.EnableGenAiOptOut = "enableGenAiOptOut", a.EnableInExperienceIpReporting = "enableInExperienceIpReporting", a.EnableIpContentSearch = "enableIpContentSearch", a.EnableTrademark = "enableTrademark", a),
         E = ((n = {}).EnableIPRecommender = "enableIPRecommender", n),
-        I = ((r = I || {}).EnableVideoOnboarding = "enableVideoOnboarding", r),
-        S = ((i = S || {}).EnableSignalLookup = "enableSignalLookup", i.AlwaysShow = "alwaysShow", i),
+        S = ((r = S || {}).EnableVideoOnboarding = "enableVideoOnboarding", r),
+        I = ((i = I || {}).EnableSignalLookup = "enableSignalLookup", i.AlwaysShow = "alwaysShow", i),
         O = O || {},
         w = ((o = w || {}).mobileVariant = "mobileVariant", o),
-        R = R || {},
-        x = ((s = {}).ShowEditInStudioButton = "showEditInStudioButton", s.EnableCreationsNavLayout = "enableCreationsIPNavLayout", s),
+        x = x || {},
+        R = ((s = {}).ShowEditInStudioButton = "showEditInStudioButton", s.EnableCreationsNavLayout = "enableCreationsIPNavLayout", s),
         A = ((l = {}).EnableMultiAssetSearch = "enableMultiAssetSearch", l),
         L = ((u = {}).EnableAudienceReachOnOverview = "enableAudienceReachOnOverviewPage", u.EnableAudienceReachGrowthOpportunitiesBanner = "enableAudienceReachGrowthOpportunitiesBanner", u.EnableAudienceControls = "enableAudienceControls", u.EnableNewBadgePattern = "enableNewBadgePattern", u.EnableAtRiskAnnotationOnExperiences = "enableAtRiskAnnotationOnExperiences", u.EnableAudiencesReplacement = "enableAudiencesReplacement", u),
         T = ((d = {}).EnableTalentHubV2 = "enableTalentHubV2", d.EnableTalentHubV2M2 = "enableTalentHubV2M2", d),
         k = ((c = k || {}).EnableExperienceWebhooks = "enableExperienceWebhooks", c),
-        U = ((p = U || {}).GameAppealsEnabled = "gameAppealsEnabled", p),
-        z = ((g = z || {}).EnableExperienceDataTileV2 = "enableExperienceDataTileV2", g),
-        H = ((m = H || {}).EnableChangelogCMS = "enableChangelogCMS", m),
-        N = ((f = {}).CreatorDashboard = "CreatorDashboard", f.CreatorHubHomePage = "CreatorHub.HomePage.UserId", f.CreatorHubHomePageExperienceTile = "CreatorHub.HomePage.ExperienceTile.UserId", f.CreatorHubHomePageOpportunitiesSection = "CreatorHub.HomePage.OpportunitiesSection.UserId", f.CreatorHubLandingPage = "CreatorHub.LandingPage", f.CreatorHubLandingPageUserId = "CreatorHub.LandingPage.UserId", f.CreatorHubNavigation = "CreatorHub.Navigation", f.CreatorHubNavigationUser = "CreatorHub.Navigation.User", f.CreatorHubPublishing = "CreatorHub.Publishing.UserId", f.LicenseManager = "CreatorDashboard.LicenseManager", f.RightsManager = "CreatorDashboard.RightsManager", f.CreatorSuccessOrganizations = "CreatorSuccess.OrganizationsV2", f.CreatorHubDocumentationSearch = "CreatorHub.CreatorDocumentation.Search.UserId", f.CreatorHubCreationsPermission = "CreatorHub.Creations.Permission", f.CreatorHubExperienceWebhooks = "CreatorHub.ExperienceWebhooks.UserId", f.CreatorHubGameAppeals = "CreatorHub.GameAppeals.UserId", f.CreatorHubChangelog = "CreatorHub.Changelog", f.TalentHub = "CreatorHub.TalentHub.UserId", f),
-        M = ((b = M || {}).ShowMemoryStoresDashboard = "showMemoryStoresDashboard", b.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", b.ShowSecrets = "showSecrets", b.ShowQualitySignalCards = "showQualitySignalCards", b);
+        H = ((p = H || {}).GameAppealsEnabled = "gameAppealsEnabled", p),
+        N = ((g = N || {}).EnableExperienceDataTileV2 = "enableExperienceDataTileV2", g),
+        M = ((m = M || {}).EnableChangelogCMS = "enableChangelogCMS", m),
+        U = ((f = {}).CreatorDashboard = "CreatorDashboard", f.CreatorHubHomePage = "CreatorHub.HomePage.UserId", f.CreatorHubHomePageExperienceTile = "CreatorHub.HomePage.ExperienceTile.UserId", f.CreatorHubHomePageOpportunitiesSection = "CreatorHub.HomePage.OpportunitiesSection.UserId", f.CreatorHubLandingPage = "CreatorHub.LandingPage", f.CreatorHubLandingPageUserId = "CreatorHub.LandingPage.UserId", f.CreatorHubNavigation = "CreatorHub.Navigation", f.CreatorHubNavigationUser = "CreatorHub.Navigation.User", f.CreatorHubPublishing = "CreatorHub.Publishing.UserId", f.LicenseManager = "CreatorDashboard.LicenseManager", f.RightsManager = "CreatorDashboard.RightsManager", f.CreatorSuccessOrganizations = "CreatorSuccess.OrganizationsV2", f.CreatorHubDocumentationSearch = "CreatorHub.CreatorDocumentation.Search.UserId", f.CreatorHubCreationsPermission = "CreatorHub.Creations.Permission", f.CreatorHubExperienceWebhooks = "CreatorHub.ExperienceWebhooks.UserId", f.CreatorHubGameAppeals = "CreatorHub.GameAppeals.UserId", f.CreatorHubChangelog = "CreatorHub.Changelog", f.TalentHub = "CreatorHub.TalentHub.UserId", f),
+        z = ((b = z || {}).ShowMemoryStoresDashboard = "showMemoryStoresDashboard", b.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", b.ShowSecrets = "showSecrets", b.ShowQualitySignalCards = "showQualitySignalCards", b);
     let F = {
-        CreatorDashboard: P,
-        "CreatorHub.HomePage.UserId": I,
-        "CreatorHub.HomePage.OpportunitiesSection.UserId": S,
+        CreatorDashboard: C,
+        "CreatorHub.HomePage.UserId": S,
+        "CreatorHub.HomePage.OpportunitiesSection.UserId": I,
         "CreatorHub.LandingPage": O,
         "CreatorHub.LandingPage.UserId": w,
-        "CreatorHub.Navigation": R,
-        "CreatorHub.Navigation.User": x,
+        "CreatorHub.Navigation": x,
+        "CreatorHub.Navigation.User": R,
         "CreatorHub.Publishing.UserId": A,
         "CreatorDashboard.LicenseManager": E,
-        "CreatorDashboard.RightsManager": C,
+        "CreatorDashboard.RightsManager": P,
         "CreatorSuccess.OrganizationsV2": {},
         "CreatorHub.CreatorDocumentation.Search.UserId": ((v = {}).SearchVersion = "searchVersion", v),
         "CreatorHub.Creations.Permission": L,
         "CreatorHub.ExperienceWebhooks.UserId": k,
-        "CreatorHub.GameAppeals.UserId": U,
-        "CreatorHub.HomePage.ExperienceTile.UserId": z,
-        "CreatorHub.Changelog": H,
+        "CreatorHub.GameAppeals.UserId": H,
+        "CreatorHub.HomePage.ExperienceTile.UserId": N,
+        "CreatorHub.Changelog": M,
         "CreatorHub.TalentHub.UserId": T
     };
     async function G(e) {
@@ -306,7 +306,7 @@
         })).json()
     }
     let D = (0, y.default)(G);
-    e.s(["CreatorHubCreationsPermissionParameters", () => L, "IXPLayers", () => N, "LicenseManagerParameters", () => E, "TalentHubParameters", () => T, "fetchIXPParametersForCurrentUser", 0, D])
+    e.s(["CreatorHubCreationsPermissionParameters", () => L, "IXPLayers", () => U, "LicenseManagerParameters", () => E, "TalentHubParameters", () => T, "fetchIXPParametersForCurrentUser", 0, D])
 }, 998683, e => {
     "use strict";
     var t = e.i(721281),
@@ -402,13 +402,6 @@
                 pageToken: t,
                 maxPageSize: a
             }),
-            getUsersWithRole: async (e, t, a, n, r) => s.v1OrganizationsOrganizationIdRolesRoleIdUsersGet({
-                organizationId: e,
-                roleId: t,
-                pageToken: a,
-                maxPageSize: n,
-                isDefault: r
-            }),
             deleteRole: async (e, t) => s.v1OrganizationsOrganizationIdRolesRoleIdDelete({
                 organizationId: e,
                 roleId: t
@@ -421,15 +414,6 @@
             })
         },
         userClient: {
-            getUsersByOrganization: async (e, t, a) => l.v1OrganizationsOrganizationIdUsersGet({
-                organizationId: e,
-                pageToken: t,
-                maxPageSize: a
-            }),
-            removeUserFromOrganization: async (e, t) => l.v1OrganizationsOrganizationIdUsersUserIdDelete({
-                organizationId: e,
-                userId: t
-            }),
             getUserInvitationByOrganization: async (e, t) => l.v1OrganizationsOrganizationIdUsersUserIdInvitationsGet({
                 organizationId: e,
                 userId: t
@@ -443,25 +427,9 @@
                 });
                 return await a.json()
             },
-            getUserRoles: async (e, t, a, n) => l.v1OrganizationsOrganizationIdUsersUserIdRolesGet({
-                organizationId: e,
-                userId: t,
-                pageToken: a,
-                maxPageSize: n
-            }),
             addUserToOrganization: async (e, t) => l.v1OrganizationsOrganizationIdUsersUserIdPost({
                 organizationId: e,
                 userId: t
-            }),
-            addUserToRole: async (e, t, a) => l.v1OrganizationsOrganizationIdUsersUserIdRolesRoleIdPost({
-                organizationId: e,
-                userId: t,
-                roleId: a
-            }),
-            removeUserFromRole: async (e, t, a) => l.v1OrganizationsOrganizationIdUsersUserIdRolesRoleIdDelete({
-                organizationId: e,
-                userId: t,
-                roleId: a
             })
         },
         groupUniversePayoutClient: {
@@ -600,7 +568,7 @@
             } catch (e) {
                 return []
             }
-        }, [d, null == s ? void 0 : s.groups]), P = (0, a.useMemo)(() => {
+        }, [d, null == s ? void 0 : s.groups]), C = (0, a.useMemo)(() => {
             var e;
             return p && null != (e = y.find(e => {
                 let {
@@ -612,16 +580,16 @@
         (0, a.useEffect)(() => {
             (null == o ? void 0 : o.id) && (null == s ? void 0 : s.groups) && !l && c(null == s ? void 0 : s.groups)
         }, [null == s ? void 0 : s.groups, y, l, c, null == o ? void 0 : o.id]);
-        let C = (0, a.useMemo)(() => ({
+        let P = (0, a.useMemo)(() => ({
             groups: y,
-            currentGroup: P,
+            currentGroup: C,
             groupData: b,
             isFetched: !l && !!(null == o ? void 0 : o.id),
             refreshGroups: u,
             setCurrentGroup: h
-        }), [P, b, y, l, u, h, null == o ? void 0 : o.id]);
+        }), [C, b, y, l, u, h, null == o ? void 0 : o.id]);
         return (0, t.jsx)(m.Provider, {
-            value: C,
+            value: P,
             children: i
         })
     }, "useCurrentGroup", 0, () => {
@@ -830,20 +798,20 @@
             defaultProp: null != i && i,
             onChange: d,
             caller: m
-        }), [y, P] = r.useState(null), [C, E] = r.useState(null), I = r.useRef(!1), S = !y || !!s || !!y.closest("form"), O = {
+        }), [y, C] = r.useState(null), [P, E] = r.useState(null), S = r.useRef(!1), I = !y || !!s || !!y.closest("form"), O = {
             checked: b,
             disabled: o,
             setChecked: h,
             control: y,
-            setControl: P,
+            setControl: C,
             name: u,
             form: s,
             value: p,
-            hasConsumerStoppedPropagationRef: I,
+            hasConsumerStoppedPropagationRef: S,
             required: c,
-            defaultChecked: !R(i) && i,
-            isFormControl: S,
-            bubbleInput: C,
+            defaultChecked: !x(i) && i,
+            isFormControl: I,
+            bubbleInput: P,
             setBubbleInput: E
         };
         return (0, g.jsx)(v, {
@@ -852,8 +820,8 @@
             children: "function" == typeof f ? f(O) : n
         })
     }
-    var P = "CheckboxTrigger",
-        C = r.forwardRef((e, t) => {
+    var C = "CheckboxTrigger",
+        P = r.forwardRef((e, t) => {
             let {
                 __scopeCheckbox: a,
                 onKeyDown: n,
@@ -868,35 +836,35 @@
                 setControl: b,
                 setChecked: v,
                 hasConsumerStoppedPropagationRef: y,
-                isFormControl: C,
+                isFormControl: P,
                 bubbleInput: E
-            } = h(P, a), I = (0, i.useComposedRefs)(t, b), S = r.useRef(m);
+            } = h(C, a), S = (0, i.useComposedRefs)(t, b), I = r.useRef(m);
             return r.useEffect(() => {
                 let e = null == u ? void 0 : u.form;
                 if (e) {
-                    let t = () => v(S.current);
+                    let t = () => v(I.current);
                     return e.addEventListener("reset", t), () => e.removeEventListener("reset", t)
                 }
             }, [u, v]), (0, g.jsx)(p.Primitive.button, {
                 type: "button",
                 role: "checkbox",
-                "aria-checked": R(m) ? "mixed" : m,
+                "aria-checked": x(m) ? "mixed" : m,
                 "aria-required": f,
-                "data-state": x(m),
+                "data-state": R(m),
                 "data-disabled": c ? "" : void 0,
                 disabled: c,
                 value: d,
                 ...l,
-                ref: I,
+                ref: S,
                 onKeyDown: (0, s.composeEventHandlers)(n, e => {
                     "Enter" === e.key && e.preventDefault()
                 }),
                 onClick: (0, s.composeEventHandlers)(o, e => {
-                    v(e => !!R(e) || !e), E && C && (y.current = e.isPropagationStopped(), y.current || e.stopPropagation())
+                    v(e => !!x(e) || !e), E && P && (y.current = e.isPropagationStopped(), y.current || e.stopPropagation())
                 })
             })
         });
-    C.displayName = P;
+    P.displayName = C;
     var E = r.forwardRef((e, t) => {
         let {
             __scopeCheckbox: a,
@@ -925,7 +893,7 @@
                     isFormControl: n
                 } = e;
                 return (0, g.jsxs)(g.Fragment, {
-                    children: [(0, g.jsx)(C, {
+                    children: [(0, g.jsx)(P, {
                         ...c,
                         ref: t,
                         __scopeCheckbox: a
@@ -937,17 +905,17 @@
         })
     });
     E.displayName = m;
-    var I = "CheckboxIndicator",
-        S = r.forwardRef((e, t) => {
+    var S = "CheckboxIndicator",
+        I = r.forwardRef((e, t) => {
             let {
                 __scopeCheckbox: a,
                 forceMount: n,
                 ...r
-            } = e, i = h(I, a);
+            } = e, i = h(S, a);
             return (0, g.jsx)(c.Presence, {
-                present: n || R(i.checked) || !0 === i.checked,
+                present: n || x(i.checked) || !0 === i.checked,
                 children: (0, g.jsx)(p.Primitive.span, {
-                    "data-state": x(i.checked),
+                    "data-state": R(i.checked),
                     "data-disabled": i.disabled ? "" : void 0,
                     ...r,
                     ref: t,
@@ -958,7 +926,7 @@
                 })
             })
         });
-    S.displayName = I;
+    I.displayName = S;
     var O = "CheckboxBubbleInput",
         w = r.forwardRef((e, t) => {
             let {
@@ -974,21 +942,21 @@
                 name: b,
                 value: v,
                 form: y,
-                bubbleInput: P,
-                setBubbleInput: C
-            } = h(O, a), E = (0, i.useComposedRefs)(t, C), I = (0, u.usePrevious)(l), S = (0, d.useSize)(o);
+                bubbleInput: C,
+                setBubbleInput: P
+            } = h(O, a), E = (0, i.useComposedRefs)(t, P), S = (0, u.usePrevious)(l), I = (0, d.useSize)(o);
             r.useEffect(() => {
-                if (!P) return;
+                if (!C) return;
                 let e = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "checked").set,
                     t = !s.current;
-                if (I !== l && e) {
+                if (S !== l && e) {
                     let a = new Event("click", {
                         bubbles: t
                     });
-                    P.indeterminate = R(l), e.call(P, !R(l) && l), P.dispatchEvent(a)
+                    C.indeterminate = x(l), e.call(C, !x(l) && l), C.dispatchEvent(a)
                 }
-            }, [P, I, l, s]);
-            let w = r.useRef(!R(l) && l);
+            }, [C, S, l, s]);
+            let w = r.useRef(!x(l) && l);
             return (0, g.jsx)(p.Primitive.input, {
                 type: "checkbox",
                 "aria-hidden": !0,
@@ -1003,7 +971,7 @@
                 ref: E,
                 style: {
                     ...n.style,
-                    ...S,
+                    ...I,
                     position: "absolute",
                     pointerEvents: "none",
                     opacity: 0,
@@ -1013,12 +981,12 @@
             })
         });
 
-    function R(e) {
+    function x(e) {
         return "indeterminate" === e
     }
 
-    function x(e) {
-        return R(e) ? "indeterminate" : e ? "checked" : "unchecked"
+    function R(e) {
+        return x(e) ? "indeterminate" : e ? "checked" : "unchecked"
     }
     w.displayName = O;
     let A = {
@@ -1078,7 +1046,7 @@
             onCheckedChange: p,
             "aria-label": i,
             ...m
-        }, r.default.createElement(t.StateLayer, null), r.default.createElement(S, {
+        }, r.default.createElement(t.StateLayer, null), r.default.createElement(I, {
             "data-slot": "checkbox-indicator",
             className: (0, n.default)(A[u], "content-[var(--inverse-content-emphasis)] icon", "data-[state=indeterminate]:icon-filled-minus", "data-[state=checked]:icon-filled-check")
         }))), "Start" === c && v)
@@ -1111,7 +1079,7 @@
                 isExternal: v,
                 asChild: h,
                 ...y
-            } = e, P = (u = null != (l = y.as) ? l : "a", d = "button" === y.as ? void 0 : y.target, void 0 !== v ? v : "button" !== u && void 0 !== d && !r.has(d)), C = (0, t.default)("foundation-web-link", "button" === y.as && "bg-none stroke-none padding-none appearance-none [text-align:inherit]", ("Standalone" === f || P) && "inline-flex items-center gap-xsmall", void 0 !== g && i[g], o[m], "always" === b ? "underline" : "no-underline", "hover" === b && "hover:underline", "motion-safe:transition-opacity", "hover:cursor-pointer hover:[opacity:0.8]", "radius-xsmall focus-visible:[outline-style:solid] focus-visible:[outline-width:var(--stroke-standard)] focus-visible:[outline-color:var(--color-system-emphasis)]", p), E = P ? a.default.createElement("span", {
+            } = e, C = (u = null != (l = y.as) ? l : "a", d = "button" === y.as ? void 0 : y.target, void 0 !== v ? v : "button" !== u && void 0 !== d && !r.has(d)), P = (0, t.default)("foundation-web-link", "button" === y.as && "bg-none stroke-none padding-none appearance-none [text-align:inherit]", ("Standalone" === f || C) && "inline-flex items-center gap-xsmall", void 0 !== g && i[g], o[m], "always" === b ? "underline" : "no-underline", "hover" === b && "hover:underline", "motion-safe:transition-opacity", "hover:cursor-pointer hover:[opacity:0.8]", "radius-xsmall focus-visible:[outline-style:solid] focus-visible:[outline-width:var(--stroke-standard)] focus-visible:[outline-color:var(--color-system-emphasis)]", p), E = C ? a.default.createElement("span", {
                 "aria-hidden": !0,
                 "data-testid": "foundation-web-icon",
                 className: (0, t.default)("grow-0 shrink-0 basis-auto icon size-[1em]", "icon-regular-arrow-up-right-from-square")
@@ -1124,7 +1092,7 @@
                 return a.default.isValidElement(r) ? a.default.createElement(n.Slot, {
                     ref: s,
                     ...t,
-                    className: C
+                    className: P
                 }, a.default.cloneElement(r, {}, a.default.createElement(a.default.Fragment, null, r.props.children, E))) : null
             }
             if ("button" === y.as) {
@@ -1137,17 +1105,17 @@
                     ref: s,
                     type: null != t ? t : "button",
                     ...n,
-                    className: C
+                    className: P
                 }, c, E)
             }
             let {
-                as: I,
-                ...S
+                as: S,
+                ...I
             } = y;
             return a.default.createElement("a", {
                 ref: s,
-                ...S,
-                className: C
+                ...I,
+                className: P
             }, c, E)
         });
     s.displayName = "Link", e.s(["Link", 0, s])
@@ -1194,7 +1162,7 @@
         (0, a.useEffect)(function() {
             b.length > 0 && m(!0)
         }, [b.length]);
-        var P = (0, a.useMemo)(function() {
+        var C = (0, a.useMemo)(function() {
             return {
                 ref: c,
                 enqueue: h,
@@ -1202,7 +1170,7 @@
             }
         }, [y, h]);
         return a.default.createElement(a.default.Fragment, null, a.default.createElement(r.Provider, {
-            value: P
+            value: C
         }, u), a.default.createElement(n.S, (0, t._)({}, (null == (i = b[0]) ? void 0 : i.props) || {}, d, {
             TransitionProps: (0, t._)((0, t._)({}, (null == (s = null == (o = b[0]) ? void 0 : o.props) ? void 0 : s.TransitionProps) || {}), {
                 onExited: function(e) {
@@ -1438,5 +1406,5 @@
     }, "useUnifiedLoggerProvider", 0, o])
 }]);
 
-//# debugId=f8de3183-63ef-9826-1e4e-6bd307a36ae5
-//# sourceMappingURL=03nox9zweurhv.js.map
+//# debugId=b8ee162c-4431-9a63-3be8-8b248bcffd0e
+//# sourceMappingURL=12vzaff3d8u61.js.map
