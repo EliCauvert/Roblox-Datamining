@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "b69d1157-ba1a-0733-60ef-7db81ba1bd83")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "dcaf0915-ee7e-6023-6d9d-6d34678a15f2")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 118413, e => {
@@ -348,17 +348,17 @@
             pathPattern: /\/analytics\/journeys/,
             title: (0, a.translationKey)("Heading.Journeys", t.TranslationNamespace.Navigation)
         },
-        j = {
+        G = {
             path: "/analytics/journeys/create",
             pathPattern: /\/analytics\/journeys\/create/,
             title: (0, a.translationKey)("Heading.JourneyEventsConfigCreate", t.TranslationNamespace.Navigation)
         },
-        D = {
+        j = {
             path: "/analytics/journeys/edit",
             pathPattern: /\/analytics\/journeys\/edit/,
             title: (0, a.translationKey)("Heading.JourneyEventsConfigCreate", t.TranslationNamespace.Navigation)
         },
-        G = {
+        D = {
             path: "/analytics/journeys/view",
             pathPattern: /\/analytics\/journeys\/view/,
             title: (0, a.translationKey)("Heading.Journeys", t.TranslationNamespace.Navigation)
@@ -476,8 +476,8 @@
             titleOverrideForIAM2: (0, a.translationKey)("Heading.AvatarCreationTokens", t.TranslationNamespace.Navigation),
             group: n
         },
-        er = [M, H, S, w, n, s, l, o, c, d, u, m, p, y, g, b, h, f, en, v, N, T, k, I, C, P, x, L, j, D, G, A, E, R, J, W, Q, F, B, U, z, q, _, $, Z, i, r, X, Y, ee, ea, et, V, O, K, ei];
-    e.s(["analyticsAgentNavigationItem", 0, W, "analyticsAiChatNavigationItem", 0, Q, "analyticsAlertConfifurationNavigationItem", 0, O, "analyticsAlertCreationNavigationItem", 0, V, "analyticsAlertsNavigationItem", 0, K, "analyticsAnalyticsHomeNavigationItem", 0, i, "analyticsAssistantNavigationItem", 0, J, "analyticsAudienceNavigationItem", 0, C, "analyticsAvatarCreationTokensNavigationItem", 0, ei, "analyticsBountyPayoutsNavigationItem", 0, N, "analyticsCommerceNavigationItem", 0, _, "analyticsConfigsHistoryNavigationItem", 0, B, "analyticsConfigsNavigationItem", 0, U, "analyticsCrashesNavigationItem", 0, k, "analyticsCreationOverviewNavigationItem", 0, Z, "analyticsCustomDashboardsManageNavigationItem", 0, E, "analyticsCustomEventsNavigationItem", 0, R, "analyticsDataStoresNavigationItem", 0, p, "analyticsEngagementNavigationItem", 0, S, "analyticsErrorReportNavigationItem", 0, I, "analyticsExperienceCreatorRewardsNavigationItem", 0, v, "analyticsExperienceSubscriptionsNavigationItem", 0, et, "analyticsExperimentsCreateNavigationItem", 0, X, "analyticsExperimentsNavigationItem", 0, r, "analyticsExploreNavigationItem", 0, A, "analyticsFeedbackNavigationItem", 0, F, "analyticsGenerativeAINavigationItem", 0, en, "analyticsHttpServiceNavigationItem", 0, y, "analyticsImmersiveAdsNavigationItem", 0, d, "analyticsItemMonetizationAvatarItemsNavigationItem", 0, o, "analyticsItemMonetizationDeveloperProductsNavigationItem", 0, s, "analyticsItemMonetizationPassesNavigationItem", 0, l, "analyticsMatchmakingNavigationItem", 0, q, "analyticsMemoryStoresNavigationItem", 0, m, "analyticsMessagingServiceNavigationItem", 0, g, "analyticsMonetizationNavigationItem", 0, n, "analyticsNotificationsNavigationItem", 0, ea, "analyticsPerformanceNavigationItem", 0, T, "analyticsRecommendationServiceNavigationItem", 0, Y, "analyticsRecommendedEventsEconomyNavigationItem", 0, P, "analyticsRecommendedEventsFunnelsNavigationItem", 0, x, "analyticsRecommendedEventsJourneyCreateNavigationItem", 0, j, "analyticsRecommendedEventsJourneyEditNavigationItem", 0, D, "analyticsRecommendedEventsJourneyNavigationItem", 0, L, "analyticsRecommendedEventsJourneyViewNavigationItem", 0, G, "analyticsRetentionNavigationItem", 0, w, "analyticsSafetyNavigationItem", 0, $, "analyticsSpeechToTextNavigationItem", 0, b, "analyticsSubscriptionsNavigationItem", 0, u, "analyticsTextToSpeechNavigationItem", 0, h, "analyticsUserAcquisitionNavigationItem", 0, H, "analyticsUserAcquisitionRFYNavigationItem", 0, M, "analyticsVideoServiceNavigationItem", 0, f, "getAnalyticsNavigationItemFromPath", 0, function(e) {
+        er = [M, H, S, w, n, s, l, o, c, d, u, m, p, y, g, b, h, f, en, v, N, T, k, I, C, P, x, L, G, j, D, A, E, R, J, W, Q, F, B, U, z, q, _, $, Z, i, r, X, Y, ee, ea, et, V, O, K, ei];
+    e.s(["analyticsAgentNavigationItem", 0, W, "analyticsAiChatNavigationItem", 0, Q, "analyticsAlertConfifurationNavigationItem", 0, O, "analyticsAlertCreationNavigationItem", 0, V, "analyticsAlertsNavigationItem", 0, K, "analyticsAnalyticsHomeNavigationItem", 0, i, "analyticsAssistantNavigationItem", 0, J, "analyticsAudienceNavigationItem", 0, C, "analyticsAvatarCreationTokensNavigationItem", 0, ei, "analyticsBountyPayoutsNavigationItem", 0, N, "analyticsCommerceNavigationItem", 0, _, "analyticsConfigsHistoryNavigationItem", 0, B, "analyticsConfigsNavigationItem", 0, U, "analyticsCrashesNavigationItem", 0, k, "analyticsCreationOverviewNavigationItem", 0, Z, "analyticsCustomDashboardsManageNavigationItem", 0, E, "analyticsCustomEventsNavigationItem", 0, R, "analyticsDataStoresNavigationItem", 0, p, "analyticsEngagementNavigationItem", 0, S, "analyticsErrorReportNavigationItem", 0, I, "analyticsExperienceCreatorRewardsNavigationItem", 0, v, "analyticsExperienceSubscriptionsNavigationItem", 0, et, "analyticsExperimentsCreateNavigationItem", 0, X, "analyticsExperimentsNavigationItem", 0, r, "analyticsExploreNavigationItem", 0, A, "analyticsFeedbackNavigationItem", 0, F, "analyticsGenerativeAINavigationItem", 0, en, "analyticsHttpServiceNavigationItem", 0, y, "analyticsImmersiveAdsNavigationItem", 0, d, "analyticsItemMonetizationAvatarItemsNavigationItem", 0, o, "analyticsItemMonetizationDeveloperProductsNavigationItem", 0, s, "analyticsItemMonetizationPassesNavigationItem", 0, l, "analyticsMatchmakingNavigationItem", 0, q, "analyticsMemoryStoresNavigationItem", 0, m, "analyticsMessagingServiceNavigationItem", 0, g, "analyticsMonetizationNavigationItem", 0, n, "analyticsNotificationsNavigationItem", 0, ea, "analyticsPerformanceNavigationItem", 0, T, "analyticsRecommendationServiceNavigationItem", 0, Y, "analyticsRecommendedEventsEconomyNavigationItem", 0, P, "analyticsRecommendedEventsFunnelsNavigationItem", 0, x, "analyticsRecommendedEventsJourneyCreateNavigationItem", 0, G, "analyticsRecommendedEventsJourneyEditNavigationItem", 0, j, "analyticsRecommendedEventsJourneyNavigationItem", 0, L, "analyticsRecommendedEventsJourneyViewNavigationItem", 0, D, "analyticsRetentionNavigationItem", 0, w, "analyticsSafetyNavigationItem", 0, $, "analyticsSpeechToTextNavigationItem", 0, b, "analyticsSubscriptionsNavigationItem", 0, u, "analyticsTextToSpeechNavigationItem", 0, h, "analyticsUserAcquisitionNavigationItem", 0, H, "analyticsUserAcquisitionRFYNavigationItem", 0, M, "analyticsVideoServiceNavigationItem", 0, f, "getAnalyticsNavigationItemFromPath", 0, function(e) {
         return er.find(a => a.pathPattern.test(e))
     }])
 }, 533968, e => {
@@ -538,7 +538,7 @@
         d: "M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
     }), "MoreHoriz");
     let L = ["slots", "slotProps"],
-        j = (0, x.s)(E.B, {
+        G = (0, x.s)(E.B, {
             name: "MuiBreadcrumbCollapsed"
         })(e => {
             let {
@@ -570,22 +570,22 @@
                 })
             })
         }),
-        D = (0, x.s)(R)({
+        j = (0, x.s)(R)({
             width: 24,
             height: 16
         });
 
-    function G(e) {
+    function D(e) {
         let {
             slots: t = {},
             slotProps: n = {}
         } = e, i = (0, P._)(e, L);
         return (0, a.jsx)("li", {
-            children: (0, a.jsx)(j, (0, C._)({
+            children: (0, a.jsx)(G, (0, C._)({
                 focusRipple: !0
             }, i, {
                 ownerState: e,
-                children: (0, a.jsx)(D, (0, C._)({
+                children: (0, a.jsx)(j, (0, C._)({
                     as: t.CollapsedIcon,
                     ownerState: e
                 }, n.collapsedIcon))
@@ -688,7 +688,7 @@
                     className: T.ol,
                     ref: I,
                     ownerState: N,
-                    children: (i = f || g && A.length <= g || y + p >= A.length ? A : [...A.slice(0, y), (0, a.jsx)(G, {
+                    children: (i = f || g && A.length <= g || y + p >= A.length ? A : [...A.slice(0, y), (0, a.jsx)(D, {
                         "aria-label": m,
                         slots: {
                             CollapsedIcon: d.CollapsedIcon
@@ -2539,22 +2539,22 @@
                     breadcrumbsContents: i,
                     breadcrumbNames: l
                 }
-            }, [f, r, b, I, T, k, c, A, x, E, s]), L = (0, t.useMemo)(() => R[R.length - 1], [R]), j = (0, t.useMemo)(() => (0, n.buildBreadcrumb)(...R), [R]), D = S && (0, a.jsx)(n.HubMeta, {
+            }, [f, r, b, I, T, k, c, A, x, E, s]), L = (0, t.useMemo)(() => R[R.length - 1], [R]), G = (0, t.useMemo)(() => (0, n.buildBreadcrumb)(...R), [R]), j = S && (0, a.jsx)(n.HubMeta, {
                 title: L,
-                breadcrumb: j,
+                breadcrumb: G,
                 seoTitle: S,
                 ...H
             });
             return b ? (0, a.jsxs)(y.Grid, {
                 className: r ? void 0 : m,
-                children: [D, (0, a.jsx)(_, {
+                children: [j, (0, a.jsx)(_, {
                     id: "navigation-breadcrumbs",
                     maxItems: 3,
                     "aria-label": "breadcrumb",
                     children: (r || M.length > 1) && M
                 })]
             }) : g ? (0, a.jsxs)(y.Grid, {
-                children: [D, (0, a.jsxs)(_, {
+                children: [j, (0, a.jsxs)(_, {
                     maxItems: 3,
                     "aria-label": "breadcrumb",
                     children: [(0, a.jsx)(p.Typography, {
@@ -2565,7 +2565,7 @@
                 })]
             }) : (0, a.jsxs)(y.Grid, {
                 className: "".concat(d, " ").concat(M.length > 1 && !r ? u : ""),
-                children: [D, (0, a.jsx)(_, {
+                children: [j, (0, a.jsx)(_, {
                     id: "navigation-breadcrumbs",
                     maxItems: 8,
                     "aria-label": "breadcrumb",
@@ -3413,8 +3413,8 @@
         M = "Body.GpcDetectedSettingDisabledIneligible",
         R = "Body.GpcDetectedSettingDisabledEligible",
         L = "Body.GpcDetectedSettingEnabledIneligible",
-        j = "Body.GpcMissingSettingIneligible",
-        D = (0, E.makeStyles)()(() => ({
+        G = "Body.GpcMissingSettingIneligible",
+        j = (0, E.makeStyles)()(() => ({
             modalLink: {
                 color: "inherit",
                 textDecoration: "none",
@@ -3436,7 +3436,7 @@
                 verticalAlign: "middle"
             }
         })),
-        G = e => {
+        D = e => {
             var n, i;
             let {
                 gpcState: l,
@@ -3499,9 +3499,9 @@
                                     a = {
                                         lineBreak: T
                                     };
-                                return l.isGpcDetected ? b ? d(L, e, a) : d(M, e, a) : d(j, e, a)
+                                return l.isGpcDetected ? b ? d(L, e, a) : d(M, e, a) : d(G, e, a)
                             }
-                            if (!l.isGpcDetected) return h ? k("Body.GpcMissingSettingEligible", N) : d(j, [{
+                            if (!l.isGpcDetected) return h ? k("Body.GpcMissingSettingEligible", N) : d(G, [{
                                 opening: "aTagStart",
                                 closing: "aTagEnd",
                                 content: v
@@ -3563,7 +3563,7 @@
                 }
             } = S(), {
                 classes: h
-            } = D(), f = (0, t.useCallback)(() => {
+            } = j(), f = (0, t.useCallback)(() => {
                 if ("u" < typeof document) return {};
                 let e = document.cookie.split("; ").find(e => e.startsWith("RBXcb="));
                 if (!e) return {};
@@ -3687,7 +3687,7 @@
                 userSettingsApiBaseUrl: (0, t.useMemo)(() => "".concat("https://apis.roblox.com", "/user-settings-api"), []),
                 apiGatewayBaseUrl: (0, t.useMemo)(() => "https://apis.roblox.com", []),
                 isAuthenticated: () => E
-            }), L = (0, t.useMemo)(() => c.locale ? (0, C.toRobloxLocale)(c.locale) : "en_us", [c.locale]), j = (0, t.useMemo)(() => {
+            }), L = (0, t.useMemo)(() => c.locale ? (0, C.toRobloxLocale)(c.locale) : "en_us", [c.locale]), G = (0, t.useMemo)(() => {
                 let e = "/my/account#!/privacy/AdPreferences?locale=".concat(L);
                 return "https://www.roblox.com".concat(e)
             }, [L]), F = (0, t.useCallback)(e => {
@@ -3711,7 +3711,7 @@
                     color: "secondary",
                     component: "span",
                     children: [U, (0, a.jsx)("img", {
-                        src: "".concat("https://assets.create.roblox.com/e9d56cebb282861e55dde256175bbd2538dbc7be/assets", "/navigation/privacy_icon.png"),
+                        src: "".concat("https://assets.create.roblox.com/01c84778b7f518ecc258bd4a67975acc4b47ef43/assets", "/navigation/privacy_icon.png"),
                         alt: "",
                         style: {
                             marginLeft: "8px",
@@ -3747,13 +3747,13 @@
                                 className: "text-body-medium",
                                 children: s("Description.Loading") || ""
                             })]
-                        }) : (0, a.jsx)(G, {
+                        }) : (0, a.jsx)(D, {
                             gpcState: T,
                             modalData: M,
                             translate: s,
                             translateHTML: o,
                             handleClose: B,
-                            privacyPreferencesUrl: j,
+                            privacyPreferencesUrl: G,
                             modalLinkClass: h.modalLink
                         })
                     })
@@ -3826,36 +3826,37 @@
         let {
             requestedGameId: i,
             children: r
-        } = e, l = (0, n.useRouter)(), [o, c] = (0, t.useState)(!0), [u, m] = (0, t.useState)(null), [p, y] = (0, t.useState)(null), [g, b] = (0, t.useState)(!1), h = (0, t.useRef)(0), f = (0, t.useCallback)(async function(e) {
+        } = e, l = (0, n.useRouter)(), [o, c] = (0, t.useState)(!0), [u, m] = (0, t.useState)(null), [p, y] = (0, t.useState)(null), [g, b] = (0, t.useState)(!1), [h, f] = (0, t.useState)(), v = (0, t.useRef)(0), N = (0, t.useCallback)(async function(e) {
             let a = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
-                t = h.current += 1,
+                t = v.current += 1,
                 n = d.getConfiguration(e),
                 i = d.getGameDetail(e, a),
                 [r, s] = await Promise.allSettled([n, i]);
-            t === h.current && ("fulfilled" === r.status ? m(r.value) : m(null), "fulfilled" === s.status ? (b(!1), y(s.value)) : ("rejected" === s.status ? b(!0) : b(!1), y(null)), c(!1))
-        }, []), v = (0, t.useMemo)(() => {
+            t === v.current && ("fulfilled" === r.status ? m(r.value) : m(null), "fulfilled" === s.status ? (b(!1), y(s.value)) : ("rejected" === s.status ? b(!0) : b(!1), y(null)), f(e), c(!1))
+        }, []), T = (0, t.useMemo)(() => {
             let {
                 id: e
             } = l.query;
             return i || ("string" == typeof e ? parseInt(e, 10) : void 0)
-        }, [i, l.query]), N = (0, t.useCallback)(() => v ? f(v, !0) : Promise.reject(Error("Cannot refresh game details without a game ID")), [v, f]);
+        }, [i, l.query]), k = (0, t.useCallback)(() => T ? N(T, !0) : Promise.reject(Error("Cannot refresh game details without a game ID")), [T, N]);
         (0, t.useEffect)(() => {
             try {
-                if (void 0 !== v && !Number.isNaN(v) && v > 0) return void f(v);
-                h.current += 1, m(null), y(null), b(!1), c(!1)
+                if (void 0 !== T && !Number.isNaN(T) && T > 0) return void N(T);
+                v.current += 1, f(void 0), m(null), y(null), b(!1), c(!1)
             } catch (e) {
-                console.warn("Could not fetch game details for universeId ".concat(v))
+                console.warn("Could not fetch game details for universeId ".concat(T))
             }
-        }, [v, f]);
-        let T = (0, t.useMemo)(() => ({
-            isLoadingGame: o,
-            canConfigure: u,
-            gameDetails: p,
-            isErrorLoadingGame: g,
-            refreshGameDetails: N
-        }), [o, u, p, g, N]);
+        }, [T, N]);
+        let I = o || void 0 !== T && !Number.isNaN(T) && T > 0 && h !== T,
+            C = (0, t.useMemo)(() => ({
+                isLoadingGame: I,
+                canConfigure: u,
+                gameDetails: p,
+                isErrorLoadingGame: g,
+                refreshGameDetails: k
+            }), [I, u, p, g, k]);
         return (0, a.jsx)(s.Provider, {
-            value: T,
+            value: C,
             children: r
         })
     }, "useCurrentGame", 0, function() {
@@ -3885,5 +3886,5 @@
     e.s(["HourglassEmptyIcon", () => a.HourglassEmpty])
 }]);
 
-//# debugId=b69d1157-ba1a-0733-60ef-7db81ba1bd83
-//# sourceMappingURL=36t7zcc_aqj57.js.map
+//# debugId=dcaf0915-ee7e-6023-6d9d-6d34678a15f2
+//# sourceMappingURL=1lysyzxu461tp.js.map

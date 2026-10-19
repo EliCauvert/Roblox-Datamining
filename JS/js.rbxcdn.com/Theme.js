@@ -2,229 +2,279 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "d7258ccb5b7d57624de8381df62568c6d6d655e6"
+            id: "1b2446d27cee0d7f750c78e1b3663e48c662ba47"
         };
-        var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "00d592dc-d93a-451d-888c-0e793d4a04cc", e._sentryDebugIdIdentifier = "sentry-dbid-00d592dc-d93a-451d-888c-0e793d4a04cc")
+        var r = (new e.Error).stack;
+        r && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[r] = "e62a293e-7857-4c7f-ba2e-298f40e7aad2", e._sentryDebugIdIdentifier = "sentry-dbid-e62a293e-7857-4c7f-ba2e-298f40e7aad2")
     } catch (e) {}
 }(),
 function() {
     "use strict";
     var e = {},
-        t = {};
+        r = {};
 
-    function r(n) {
-        var o = t[n];
+    function t(n) {
+        var o = r[n];
         if (void 0 !== o) return o.exports;
-        var a = t[n] = {
+        var l = r[n] = {
             exports: {}
         };
-        return e[n](a, a.exports, r), a.exports
+        return e[n](l, l.exports, t), l.exports
     }
-    r.d = function(e, t) {
-        for (var n in t) r.o(t, n) && !r.o(e, n) && Object.defineProperty(e, n, {
+    t.d = function(e, r) {
+        for (var n in r) t.o(r, n) && !t.o(e, n) && Object.defineProperty(e, n, {
             enumerable: !0,
-            get: t[n]
+            get: r[n]
         })
-    }, r.o = function(e, t) {
-        return Object.prototype.hasOwnProperty.call(e, t)
-    }, r.r = function(e) {
+    }, t.o = function(e, r) {
+        return Object.prototype.hasOwnProperty.call(e, r)
+    }, t.r = function(e) {
         "u" > typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
             value: "Module"
         }), Object.defineProperty(e, "__esModule", {
             value: !0
         })
-    }, r.rv = function() {
+    }, t.rv = function() {
         return "1.7.12"
-    }, r.ruid = "bundler=rspack@1.7.12";
+    }, t.ruid = "bundler=rspack@1.7.12";
     var n = {};
 
-    function o(e, t) {
-        (null == t || t > e.length) && (t = e.length);
-        for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
+    function o(e, r) {
+        (null == r || r > e.length) && (r = e.length);
+        for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
         return n
     }
-    r.r(n), r.d(n, {
+    t.r(n), t.d(n, {
+        colorModes: function() {
+            return v
+        },
+        getColorMode: function() {
+            return p
+        },
         getMode: function() {
-            return O
+            return p
         },
         modes: function() {
-            return c
+            return v
+        },
+        setColorMode: function() {
+            return _
+        },
+        setColorModeOverride: function() {
+            return D
         },
         setMode: function() {
-            return x
+            return _
         }
     });
-    var a = function(e) {
-        var t, r = "".concat(e, "="),
-            n = null == (t = document.cookie.split("; ").find(function(e) {
-                return e.startsWith(r)
-            })) ? void 0 : t.slice(r.length);
-        return null == n ? null : {
-            name: e,
-            value: decodeURIComponent(n)
-        }
-    };
+    var l = function(e, r) {
+            return e.includes(r)
+        },
+        a = function(e) {
+            var r, t = "".concat(e, "="),
+                n = null == (r = document.cookie.split("; ").find(function(e) {
+                    return e.startsWith(t)
+                })) ? void 0 : r.slice(t.length);
+            return null == n ? null : {
+                name: e,
+                value: decodeURIComponent(n)
+            }
+        },
+        u = function(e) {
+            var r = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 10,
+                t = Number.parseInt(e, r);
+            return Number.isNaN(t) ? null : t
+        },
+        i = function(e) {
+            if (!e.trim()) return null;
+            try {
+                return BigInt(e)
+            } catch (e) {
+                return null
+            }
+        },
+        c = function(e) {
+            var r = u(e);
+            if (null == r) throw Error("UserId ".concat(e, " was not parsable as an integer."));
+            return r
+        },
+        d = function(e) {
+            return e > 0 && e <= Number.MAX_SAFE_INTEGER ? e.toString() : null
+        };
 
-    function l(e, t) {
-        (null == t || t > e.length) && (t = e.length);
-        for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
+    function s(e, r) {
+        (null == r || r > e.length) && (r = e.length);
+        for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
         return n
     }
 
-    function i(e, t) {
-        return null != t && "u" > typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t
+    function f(e, r) {
+        return null != r && "u" > typeof Symbol && r[Symbol.hasInstance] ? !!r[Symbol.hasInstance](e) : e instanceof r
     }
 
-    function u(e, t) {
+    function m(e, r) {
         return function(e) {
             if (Array.isArray(e)) return e
-        }(e) || function(e, t) {
-            var r, n, o = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+        }(e) || function(e, r) {
+            var t, n, o = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
             if (null != o) {
-                var a = [],
-                    l = !0,
-                    i = !1;
+                var l = [],
+                    a = !0,
+                    u = !1;
                 try {
-                    for (o = o.call(e); !(l = (r = o.next()).done) && (a.push(r.value), !t || a.length !== t); l = !0);
+                    for (o = o.call(e); !(a = (t = o.next()).done) && (l.push(t.value), !r || l.length !== r); a = !0);
                 } catch (e) {
-                    i = !0, n = e
+                    u = !0, n = e
                 } finally {
                     try {
-                        l || null == o.return || o.return()
+                        a || null == o.return || o.return()
                     } finally {
-                        if (i) throw n
+                        if (u) throw n
                     }
                 }
-                return a
+                return l
             }
-        }(e, t) || function(e, t) {
+        }(e, r) || function(e, r) {
             if (e) {
-                if ("string" == typeof e) return l(e, t);
-                var r = Object.prototype.toString.call(e).slice(8, -1);
-                if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return l(e, t)
+                if ("string" == typeof e) return s(e, r);
+                var t = Object.prototype.toString.call(e).slice(8, -1);
+                if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return s(e, r)
             }
-        }(e, t) || function() {
+        }(e, r) || function() {
             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
         }()
     }
-    var c = ["light", "dark", "system"],
-        d = "light",
-        s = -1,
-        f = d,
-        m = window.matchMedia("(prefers-color-scheme: dark)"),
-        v = function() {
+    var v = ["light", "dark", "system"],
+        y = "light",
+        h = null,
+        g = y,
+        b = null,
+        p = function() {
+            return null != b ? b : g
+        },
+        w = window.matchMedia("(prefers-color-scheme: dark)"),
+        S = function() {
             var e = document.body.classList;
             e.add("light-theme"), e.remove("dark-theme")
         },
-        y = function() {
+        k = function() {
             var e = document.body.classList;
             e.add("dark-theme"), e.remove("light-theme")
         },
-        h = function(e) {
-            e ? y() : v()
+        I = function(e) {
+            e ? k() : S()
         },
-        g = function(e) {
-            h(e.matches)
+        E = function(e) {
+            I(e.matches)
         },
-        b = function(e) {
-            f = e;
-            var t = document.body.classList;
-            switch (t.remove("color-mode-system", "color-mode-light", "color-mode-dark"), e) {
+        A = function(e) {
+            var r = document.body.classList;
+            switch (r.remove("color-mode-system", "color-mode-light", "color-mode-dark"), e) {
                 case "system":
-                    t.add("color-mode-system"), h(m.matches), m.addEventListener("change", g);
+                    r.add("color-mode-system"), I(w.matches), w.addEventListener("change", E);
                     break;
                 case "light":
-                    t.add("color-mode-light"), m.removeEventListener("change", g), v();
+                    r.add("color-mode-light"), w.removeEventListener("change", E), S();
                     break;
                 case "dark":
-                    t.add("color-mode-dark"), m.removeEventListener("change", g), y()
+                    r.add("color-mode-dark"), w.removeEventListener("change", E), k()
             }
         },
-        p = function() {
+        M = function() {
             try {
                 var e = localStorage.getItem("theme");
                 if (null == e) return null;
-                var t = JSON.parse(e),
-                    r = t.version,
-                    n = t.data;
-                return 0 === r ? n : void 0
+                var r = JSON.parse(e),
+                    t = r.version,
+                    n = r.data;
+                return 0 === t ? n : void 0
             } catch (e) {
-                return console.error("Failed to get mode data: ".concat(i(e, Error) ? e : String(e))), null
+                return console.error("Failed to get color mode data: ".concat(f(e, Error) ? e : String(e))), null
             }
         },
-        w = function(e) {
+        O = function(e) {
             return e.find(function(e) {
-                return u(e, 1)[0] === s
+                return m(e, 1)[0] === h
             })
         },
-        S = function(e) {
-            var t, r;
-            return null != (t = null == (r = w(e)) ? void 0 : r[2]) ? t : 0
+        x = function(e) {
+            var r, t;
+            return null != (r = null == (t = O(e)) ? void 0 : t[2]) ? r : 0
         },
-        k = function(e) {
-            var t = w(e),
-                r = null == t ? void 0 : t[1];
-            return null == r ? null : c[r]
+        C = function(e) {
+            var r = O(e),
+                t = null == r ? void 0 : r[1];
+            return null == t ? null : v[t]
         },
-        I = function(e) {
-            var t, r = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0;
-            b(e);
-            var n = p();
-            if (void 0 !== n) {
-                var o = null == n ? 0 : S(n),
-                    a = null != (t = null == n ? void 0 : n.filter(function(e) {
-                        return u(e, 1)[0] !== s
-                    })) ? t : [];
-                a.length >= 100 && a.shift();
-                var l = o | r;
-                a.push(0 === l ? [s, c.indexOf(e)] : [s, c.indexOf(e), l]);
-                try {
-                    localStorage.setItem("theme", JSON.stringify({
-                        version: 0,
-                        data: a
-                    }))
-                } catch (e) {
-                    console.error("Could not set mode. Local storage is likely full: ".concat(i(e, Error) ? e : String(e)))
+        L = function(e) {
+            b = e, A(e)
+        },
+        j = function(e) {
+            g = e, null == b && A(e)
+        },
+        T = function(e) {
+            var r, t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0;
+            if (j(e), null != h) {
+                var n = M();
+                if (void 0 !== n) {
+                    var o = null == n ? 0 : x(n),
+                        l = null != (r = null == n ? void 0 : n.filter(function(e) {
+                            return m(e, 1)[0] !== h
+                        })) ? r : [];
+                    l.length >= 100 && l.shift();
+                    var a = o | t;
+                    l.push(0 === a ? [h, v.indexOf(e)] : [h, v.indexOf(e), a]);
+                    try {
+                        localStorage.setItem("theme", JSON.stringify({
+                            version: 0,
+                            data: l
+                        }))
+                    } catch (e) {
+                        console.error("Could not set color mode. Local storage is likely full: ".concat(f(e, Error) ? e : String(e)))
+                    }
                 }
             }
         },
-        A = function(e) {
-            var t = e.key,
-                r = e.newValue;
-            if ("theme" === t && null != r) {
-                var n = p();
+        N = function(e) {
+            var r = e.key,
+                t = e.newValue;
+            if ("theme" === r && null != t) {
+                var n = M();
                 if (null == n) return;
-                var o = k(n);
+                var o = C(n);
                 if (null == o) return;
-                b(o)
+                j(o)
             }
         },
-        E = function(e) {
+        R = function(e) {
             switch (e) {
                 case "system":
                 case "light":
                 case "dark":
-                    b(e);
+                    j(e);
                     break;
                 case "none":
                 case "":
-                    b("system");
+                    j("system");
                     break;
                 default:
-                    console.warn("Unknown mode: ".concat(e)), b("system")
+                    console.warn("Unknown color mode: ".concat(e)), j("system")
             }
         },
-        O = function() {
-            return f
+        _ = function(e) {
+            l(v, e) ? e !== g && T(e) : console.warn("Unknown color mode: ".concat(e))
         },
-        x = function(e) {
-            c.includes(e) ? e !== f && I(e) : console.warn("Unknown mode: ".concat(e))
+        D = function(e) {
+            if (null != e && !l(v, e)) return void console.warn("Unknown color mode: ".concat(e));
+            var r = p();
+            b = e;
+            var t = p();
+            t !== r && A(t)
         };
-    ! function(e, t) {
-        var r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : window;
-        if ("string" == typeof e) r[e] = t;
+    ! function(e, r) {
+        var t = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : window;
+        if ("string" == typeof e) t[e] = r;
         else {
             var n = function(e) {
                     if (Array.isArray(e)) return o(e)
@@ -233,63 +283,59 @@ function() {
                 }(e) || function(e) {
                     if (e) {
                         if ("string" == typeof e) return o(e, void 0);
-                        var t = Object.prototype.toString.call(e).slice(8, -1);
-                        if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return o(e, void 0)
+                        var r = Object.prototype.toString.call(e).slice(8, -1);
+                        if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return o(e, void 0)
                     }
                 }(e) || function() {
                     throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }(),
-                a = n.pop(),
-                l = r,
-                i = !0,
-                u = !1,
+                l = n.pop(),
+                a = t,
+                u = !0,
+                i = !1,
                 c = void 0;
             try {
-                for (var d, s = n[Symbol.iterator](); !(i = (d = s.next()).done); i = !0) {
+                for (var d, s = n[Symbol.iterator](); !(u = (d = s.next()).done); u = !0) {
                     var f, m = d.value;
-                    null != (f = l)[m] || (f[m] = {}), l = l[m]
+                    null != (f = a)[m] || (f[m] = {}), a = a[m]
                 }
             } catch (e) {
-                u = !0, c = e
+                i = !0, c = e
             } finally {
                 try {
-                    i || null == s.return || s.return()
+                    u || null == s.return || s.return()
                 } finally {
-                    if (u) throw c
+                    if (i) throw c
                 }
             }
-            l[a] = t
+            a[l] = r
         }
     }(["Roblox", "core-scripts", "color-mode"], n);
     try {
-        var L, j, M = (null == (L = document.querySelector('meta[name="age-badge-control"]')) ? void 0 : L.dataset.ageBadgeControl) === "Kids" ? "dark" : void 0;
+        var U, B, P, q, F, J = (null == (P = document.querySelector('meta[name="age-badge-control"]')) ? void 0 : P.dataset.ageBadgeControl) === "Kids" ? "dark" : void 0;
         ! function(e) {
-            var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
-                r = document.body.classList;
-            if (r.contains("color-mode-system") || r.contains("system-theme")) return b("system");
-            if (r.contains("color-mode-light") || r.contains("light-theme")) return b("light");
-            if (r.contains("color-mode-dark") || r.contains("dark-theme")) return b("dark");
+            var r = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+                t = document.body.classList;
+            if (t.contains("color-mode-system") || t.contains("system-theme")) return L("system");
+            if (t.contains("color-mode-light") || t.contains("light-theme")) return L("light");
+            if (t.contains("color-mode-dark") || t.contains("dark-theme")) return L("dark");
             var n = a("RBXThemeOverride");
-            if (null != n) return E(n.value);
-            s = e;
-            var o = p(),
-                l = null == o ? o : k(o);
-            if (null != t.defaultMode && void 0 !== o && ((null == o ? 0 : S(o)) & 1) == 0) {
-                I(t.defaultMode, 1), window.addEventListener("storage", A);
+            if (null != n) return R(n.value);
+            if (null == e) return j(y);
+            h = c(e);
+            var o = M(),
+                l = null == o ? o : C(o);
+            if (null != r.defaultColorMode && void 0 !== o && ((null == o ? 0 : x(o)) & 1) == 0) {
+                T(r.defaultColorMode, 1), window.addEventListener("storage", N);
                 return
             }
-            null === l ? I(d) : void 0 === l ? b(d) : b(l), window.addEventListener("storage", A)
-        }(null != (j = function() {
-            var e, t = null == (e = document.querySelector('meta[name="user-data"]')) ? void 0 : e.dataset.userid;
-            if (null == t) return null;
-            var r = Number.parseInt(t, 10);
-            return Number.isNaN(r) ? null : r
-        }()) ? j : -1, {
-            defaultMode: M
+            null === l ? T(y) : void 0 === l ? j(y) : j(l), window.addEventListener("storage", N)
+        }((F = null == (q = document.querySelector('meta[name="user-data"]')) ? void 0 : q.dataset.userid, null == F ? null : (U = F, B = i(U), null == B ? null : d(B))), {
+            defaultColorMode: J
         })
     } catch (e) {
         console.error(e)
     }
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("Theme");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/theme-26b203d436d70ca9.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/theme-bd3db90c835b3c9e.js.map

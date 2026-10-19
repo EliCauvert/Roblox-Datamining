@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "477a256c-6dd5-f916-f522-5e480e4740a5")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "c0886eef-b0ec-02e6-a7cb-4b87dd6e8cea")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 118413, e => {
@@ -472,36 +472,37 @@
         let {
             requestedGameId: o,
             children: l
-        } = e, r = (0, n.useRouter)(), [s, c] = (0, a.useState)(!0), [u, m] = (0, a.useState)(null), [p, f] = (0, a.useState)(null), [h, g] = (0, a.useState)(!1), b = (0, a.useRef)(0), y = (0, a.useCallback)(async function(e) {
+        } = e, r = (0, n.useRouter)(), [s, c] = (0, a.useState)(!0), [u, m] = (0, a.useState)(null), [p, f] = (0, a.useState)(null), [h, g] = (0, a.useState)(!1), [b, y] = (0, a.useState)(), C = (0, a.useRef)(0), k = (0, a.useCallback)(async function(e) {
             let t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
-                a = b.current += 1,
+                a = C.current += 1,
                 n = d.getConfiguration(e),
                 o = d.getGameDetail(e, t),
                 [l, i] = await Promise.allSettled([n, o]);
-            a === b.current && ("fulfilled" === l.status ? m(l.value) : m(null), "fulfilled" === i.status ? (g(!1), f(i.value)) : ("rejected" === i.status ? g(!0) : g(!1), f(null)), c(!1))
-        }, []), C = (0, a.useMemo)(() => {
+            a === C.current && ("fulfilled" === l.status ? m(l.value) : m(null), "fulfilled" === i.status ? (g(!1), f(i.value)) : ("rejected" === i.status ? g(!0) : g(!1), f(null)), y(e), c(!1))
+        }, []), v = (0, a.useMemo)(() => {
             let {
                 id: e
             } = r.query;
             return o || ("string" == typeof e ? parseInt(e, 10) : void 0)
-        }, [o, r.query]), k = (0, a.useCallback)(() => C ? y(C, !0) : Promise.reject(Error("Cannot refresh game details without a game ID")), [C, y]);
+        }, [o, r.query]), E = (0, a.useCallback)(() => v ? k(v, !0) : Promise.reject(Error("Cannot refresh game details without a game ID")), [v, k]);
         (0, a.useEffect)(() => {
             try {
-                if (void 0 !== C && !Number.isNaN(C) && C > 0) return void y(C);
-                b.current += 1, m(null), f(null), g(!1), c(!1)
+                if (void 0 !== v && !Number.isNaN(v) && v > 0) return void k(v);
+                C.current += 1, y(void 0), m(null), f(null), g(!1), c(!1)
             } catch (e) {
-                console.warn("Could not fetch game details for universeId ".concat(C))
+                console.warn("Could not fetch game details for universeId ".concat(v))
             }
-        }, [C, y]);
-        let v = (0, a.useMemo)(() => ({
-            isLoadingGame: s,
-            canConfigure: u,
-            gameDetails: p,
-            isErrorLoadingGame: h,
-            refreshGameDetails: k
-        }), [s, u, p, h, k]);
+        }, [v, k]);
+        let S = s || void 0 !== v && !Number.isNaN(v) && v > 0 && b !== v,
+            w = (0, a.useMemo)(() => ({
+                isLoadingGame: S,
+                canConfigure: u,
+                gameDetails: p,
+                isErrorLoadingGame: h,
+                refreshGameDetails: E
+            }), [S, u, p, h, E]);
         return (0, t.jsx)(i.Provider, {
-            value: v,
+            value: w,
             children: l
         })
     }, "useCurrentGame", 0, function() {
@@ -1754,5 +1755,5 @@
     }, "useCookieConsentContext", 0, F], 260241)
 }]);
 
-//# debugId=477a256c-6dd5-f916-f522-5e480e4740a5
-//# sourceMappingURL=1wf9mip7qe8sh.js.map
+//# debugId=c0886eef-b0ec-02e6-a7cb-4b87dd6e8cea
+//# sourceMappingURL=0t2ta874i7rwi.js.map
