@@ -400,7 +400,7 @@ Authentication.Login.Response.IncorrectUsernamePassword,Sai tên người dùng 
 Authentication.Login.Response.InvalidEmail,Địa chỉ email không hợp lệ.	
 Authentication.Login.Response.InvalidPasskeyCredential,"Không thể đăng nhập bằng mã xác nhận này. Để lấy lại quyền truy cập, hãy truy cập ""Quên mật khẩu hoặc tên người dùng""."
 Authentication.Login.Response.MoreThanOneUsername,Địa chỉ email của bạn được liên kết với nhiều hơn một tên người dùng. Vui lòng đăng nhập bằng tên người dùng của bạn.
-Authentication.Login.Response.NoLoginMethods,Không có phương thức đăng nhập nào khả dụng cho tài khoản này. Vui lòng thử khôi phục tài khoản hoặc liên hệ với bộ phận hỗ trợ.
+Authentication.Login.Response.NoLoginMethods,Không có phương thức đăng nhập nào khả dụng cho tài khoản này. Tài khoản này có thể đã được liên kết với tài khoản Google hoặc Apple. Hãy thử đăng nhập bằng một trong những phương thức đó hoặc sử dụng tính năng khôi phục tài khoản.
 Authentication.Login.Response.PlatformAlreadyLinked,Tài khoản {platform} này đã được liên kết với một tài khoản Roblox khác. Vui lòng đăng nhập bằng tài khoản Roblox đã liên kết.
 Authentication.Login.Response.RelinkingFreeze,Tài khoản Roblox này đã được liên kết với một tài khoản dùng cho {platform} trong vòng 90 ngày gần đây. Vui lòng thử đăng nhập bằng một tài khoản Roblox khác.
 Authentication.Login.Response.Require2FA,Xác thực 2 bước không được hỗ trợ trên máy chơi game. Vui lòng tuân theo hướng dẫn bên phải để đăng nhập một cách an toàn.
@@ -467,7 +467,7 @@ Authentication.SignUp.Description.BirthdayHelp3,Thông tin này giúp chúng tô
 Authentication.SignUp.Description.BirthdayHint,Nhập ngày
 Authentication.SignUp.Description.BirthdayValuePropC,Thông tin này giúp chúng tôi biết nên hiển thị nội dung nào cho bạn. Người khác sẽ không thấy thông tin này
 Authentication.SignUp.Description.ClickNextAgreeToTerms,"Chọn Tiếp theo đồng nghĩa với việc bạn đồng ý với Điều Khoản Sử Dụng, bao gồm điều khoản trọng tài, và thừa nhận Chính Sách Quyền Riêng Tư."
-Authentication.SignUp.Description.CreateAPassword,Tạo mật khẩu cho tài khoản Roblox của bạn
+Authentication.SignUp.Description.CreateAPassword,Chọn cách bảo mật tài khoản của bạn.
 Authentication.SignUp.Description.CreateAccountPasskeyEmphasisDescription,"Mã xác nhận cho phép bạn đăng nhập nhanh chóng bằng Face ID, dấu vân tay hoặc mã PIN mà bạn sử dụng để mở khóa thiết bị."
 Authentication.SignUp.Description.CreatePasskeyOrOTP,Tạo mã xác nhận cho tài khoản Roblox của bạn hoặc thêm email để đăng nhập bằng mật khẩu dùng một lần.
 Authentication.SignUp.Description.EnsureNeverLoseAccount,Điều này đảm bảo bạn không bao giờ mất quyền truy cập vào tài khoản Roblox của mình.
@@ -744,6 +744,9 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation chứa các
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation chứa nhiều hơn {maxAllowed} MarkerCurve. Đảm bảo không có quá {maxAllowed} mục con MarkerCurve.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation chứa một MarkerCurve có {count} Điểm mốc. Mỗi MarkerCurve chỉ được phép có tối đa {maxAllowed} Điểm mốc. Vui lòng sửa lại hiệu ứng động này.
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation chứa mục con ngoài dự kiến: {childName}
+Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{InstanceFullName}.{FieldName} ghim hoạt ảnh {AssetId} vào phiên bản {Version}, nhưng chưa thể ghim hoạt ảnh vào một phiên bản cụ thể. Hãy xóa ""&version={Version}"" rồi thử lại."
+Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,Tài sản {AssetId} ({InstanceFullName}.{FieldName}) chưa được đăng. Hãy đăng tài sản này rồi thử lại.
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} sử dụng phiên bản {Version} của tài sản {AssetId}, nhưng hiện tại hệ thống chỉ hỗ trợ phiên bản 1. Hãy sử dụng phiên bản 1 rồi thử lại."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Đầu hiệu ứng động trên chợ phải được căn khung bao đúng chuẩn sao cho các đỉnh của mắt và miệng trên khung bao khớp với các đỉnh của lưới bề mặt. Vui lòng căn khung bao chính xác hơn sao cho khớp với lưới bề mặt.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Không phát hiện được biểu cảm mỉm cười cho Đầu hiệu ứng động. Hãy điều chỉnh các điểm mốc của khung bao cho miệng để khớp với vị trí miệng trên đầu và đảm bảo miệng thể hiện được biểu cảm mỉm cười.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Không phát hiện được biểu cảm nhắm mắt trái cho Đầu hiệu ứng động. Vui lòng điều chỉnh các điểm mốc của khung bao cho mắt trái để khớp với vị trí mắt trái trên đầu và đảm bảo mắt có thể nhắm lại.
@@ -756,6 +759,8 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Diện tích phát s
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} có mức Phát sáng quá cao. Diện tích phát sáng × cường độ phát sáng đã vượt quá giới hạn (hiện tại là {emissivePercentage}%, phải ở mức {maxEmissivePercentage}% trở xuống). Hãy thu nhỏ diện tích phát sáng hoặc giảm EmissiveStrength."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Đã vượt quá diện tích phát sáng.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} có mức Phát sáng quá cao. Diện tích phát sáng × cường độ phát sáng đã vượt quá giới hạn (hiện tại là {emissiveArea}, phải ở mức {maxEmissiveArea} trở xuống). Hãy thu nhỏ diện tích phát sáng hoặc giảm EmissiveStrength."
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,Bản đồ phát sáng không được hỗ trợ cho các vật phẩm được tạo trong trải nghiệm. Hãy xóa EmissiveMaskContent khỏi mọi SurfaceAppearance.
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,"Đề can không thể phát sáng. Trên ""{InstancePath}"", hãy xóa EmissiveMaskContent, đặt EmissiveStrength thành 1 và đặt EmissiveTint thành màu trắng."
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Hiệu ứng động đã đăng bị thiếu giá trị dịch chuyển tối đa hợp lệ của bộ phận. Vui lòng đăng lại hiệu ứng động này.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Hiệu ứng động đã đăng bị thiếu điểm đánh dấu biểu cảm UGC hợp lệ. Vui lòng đăng lại hiệu ứng động này.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Không thể tính toán độ dịch chuyển tối đa của bộ phận dựa trên dữ liệu hiệu ứng động đã đăng. Vui lòng đăng lại hiệu ứng động này.
@@ -1058,6 +1063,7 @@ CoreScripts.InGameMenu.GameSettings.UINavToggle,Bật/Tắt Điều Hướng Gia
 CoreScripts.InGameMenu.GameSettings.Volume,Âm Lượng
 CoreScripts.InGameMenu.Leave,Rời Khỏi
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Mời Bạn Bè
+CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,Tham gia hoặc mời bạn bè
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Tham gia trò chơi bạn từng truy cập
 CoreScripts.InGameMenu.Traversal.LeaveBody,Bạn sắp thoát khỏi trò chơi này để quay về {PREVIOUS_EXPERIENCE}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Bạn chắc chắn rời đi chứ?
@@ -1210,6 +1216,37 @@ CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Quảng C
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,Tìm Kiếm
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Quảng Cáo Tìm Kiếm
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Quảng Cáo Được Tài Trợ
+CreatorDashboard.Analytics.Overview.Description.D1Retention,Số lượng người chơi mới quay lại vào ngày hôm sau.
+CreatorDashboard.Analytics.Overview.Description.D7Retention,Số lượng người chơi mới quay lại sau một tuần.
+CreatorDashboard.Analytics.Overview.Description.DailyActiveUsers,Số lượng người chơi trò chơi của bạn mỗi ngày.
+CreatorDashboard.Analytics.Overview.Description.NewUserSessionTime,Thời gian người chơi mới ở lại trong trò chơi của bạn trong lần chơi đầu tiên.
+CreatorDashboard.Analytics.Overview.Description.PayerConversion,Tỷ lệ phần trăm người chơi mua vật phẩm nào đó trong trò chơi của bạn.
+CreatorDashboard.Analytics.Overview.Description.RobuxSpent,Số lượng Robux mà người chơi chi tiêu trong trò chơi của bạn.
+CreatorDashboard.Analytics.Overview.HowToImprove,Cách cải thiện:
+CreatorDashboard.Analytics.Overview.Improve.D1Retention,"• Thiết kế hoạt động chính thật thú vị để người dùng muốn chơi tiếp
+• Tặng thưởng hằng ngày để khuyến khích người chơi quay lại
+• Lưu tiến trình của người chơi"
+CreatorDashboard.Analytics.Overview.Improve.D7Retention,"• Thêm mục tiêu để người chơi phấn đấu
+• Thêm cấp độ, vật phẩm hoặc sự kiện mới
+• Thiết kế thử thách sao cho không quá dễ cũng không quá khó"
+CreatorDashboard.Analytics.Overview.Improve.DailyActiveUsers,"• Tạo quảng cáo để nhiều người chơi tìm thấy trò chơi của bạn hơn
+• Chia sẻ trò chơi của bạn với bạn bè"
+CreatorDashboard.Analytics.Overview.Improve.NewUserSessionTime,"• Giúp người chơi nhanh chóng tham gia cuộc vui
+• Đặt ra mục tiêu để người chơi theo đuổi
+• Giúp người chơi dễ dàng nắm bắt cách chơi ngay từ những phút đầu tiên"
+CreatorDashboard.Analytics.Overview.Improve.PayerConversion,"• Thêm gói khởi đầu (ưu đãi giá rẻ cho người mua lần đầu)
+• Hiển thị cửa hàng và các ưu đãi vào thời điểm thích hợp"
+CreatorDashboard.Analytics.Overview.Improve.RobuxSpent,"• Thêm vé trò chơi hoặc vật phẩm để bán
+• Bật chế độ Giá được quản lý, có thể giúp bạn tăng thu nhập
+• Thêm phần thưởng hằng ngày để người chơi quay lại và chi tiêu"
+CreatorDashboard.Analytics.Overview.Summary.AverageOverSelectedPeriod,Mức trung bình trong khoảng thời gian đã chọn
+CreatorDashboard.Analytics.Overview.Title.D1Retention,Tỷ lệ giữ chân ngày 1
+CreatorDashboard.Analytics.Overview.Title.D7Retention,Tỷ lệ giữ chân ngày 7
+CreatorDashboard.Analytics.Overview.Title.DailyActiveUsers,Người dùng hoạt động hằng ngày
+CreatorDashboard.Analytics.Overview.Title.FirstSessionRetention,Tỷ lệ phần trăm người dùng vẫn chơi sau 5 phút
+CreatorDashboard.Analytics.Overview.Title.NewUserSessionTime,Thời gian phiên của người dùng mới
+CreatorDashboard.Analytics.Overview.Title.PayerConversion,Tỷ lệ chuyển đổi thành người dùng trả phí
+CreatorDashboard.Analytics.Overview.Title.RobuxSpent,Lượng Robux đã chi tiêu
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Cuộn xuống
 Feature.Accessibility.Action.ScrollUp,Cuộn lên
@@ -1221,6 +1258,7 @@ Feature.Accessibility.AppTheme.Classic,Cổ điển
 Feature.Accessibility.AppTheme.CosmicDust,Bụi vũ trụ
 Feature.Accessibility.AppTheme.Default,
 Feature.Accessibility.AppTheme.ElectricLime,Xanh điện quang
+Feature.Accessibility.AppTheme.Halloween2026,Vùng Hư Không
 Feature.Accessibility.AppTheme.HyperPlum,Tím mận siêu cấp
 Feature.Accessibility.AppTheme.InfernoBlast,Hỏa ngục bùng nổ
 Feature.Accessibility.AppTheme.KineticEnergy,Năng lượng sống động
@@ -2252,6 +2290,7 @@ Feature.Build.Action.Edit,Chỉnh sửa
 Feature.Build.Action.HideAutosaved,Ẩn phiên bản lưu tự động
 Feature.Build.Action.KeepBuilding,Tiếp tục tạo dựng
 Feature.Build.Action.ManageLimit,Quản lý hạn mức
+Feature.Build.Action.ManageUsage,Quản lý mức sử dụng
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,Thông báo cho tôi
@@ -2296,6 +2335,7 @@ Feature.Build.Analytics.Description.PayerConversion,Tỷ lệ chuyển đổi th
 Feature.Build.Analytics.Description.PlaythroughRate,Tỷ lệ hoàn thành lượt chơi là tỷ lệ phần trăm số lượt truy cập đã hoàn thành trọn vẹn một phiên chơi. Tỷ lệ này càng cao càng chứng tỏ người chơi cảm thấy trải nghiệm của bạn hấp dẫn và đáng để chơi tới cùng.
 Feature.Build.Analytics.Description.TotalPlaytime,"Tổng thời gian chơi là tổng thời gian mà tất cả các người chơi đã dành cho trải nghiệm của bạn trong một khoảng thời gian. Thông thường, thời gian chơi càng cao chứng tỏ phiên chơi càng hấp dẫn."
 Feature.Build.Analytics.DurationHours,{number} giờ
+Feature.Build.Analytics.DurationMinutes,{number} phút
 Feature.Build.Analytics.Goal.Action.CreateAd,Tạo quảng cáo
 Feature.Build.Analytics.Goal.Action.SellItems,Bán vật phẩm
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,Chia sẻ với bạn bè
@@ -2328,7 +2368,9 @@ Feature.Build.Analytics.Overview,Tổng quan
 Feature.Build.Analytics.Percent,{number}%
 Feature.Build.Analytics.Players,Người chơi
 Feature.Build.Analytics.Sheet.Analyze,Phân tích
+Feature.Build.Analytics.Sheet.AskAboutThis,Hỏi về điều này
 Feature.Build.Analytics.Sheet.ViewInOverview,Xem trong phần Tổng quan
+Feature.Build.Analytics.Sheet.ViewMoreStats,Xem thêm số liệu thống kê
 Feature.Build.Analytics.Summary.Arppu,Số Robux trung bình kiếm được từ mỗi người chơi trả phí.
 Feature.Build.Analytics.Summary.D1Retention,Tỷ lệ người chơi mới tiếp tục chơi vào ngày hôm sau.
 Feature.Build.Analytics.Summary.DailyActiveUsers,Người chơi không trùng lặp đã tham gia trong khoảng thời gian được chọn.
@@ -2339,9 +2381,9 @@ Feature.Build.Analytics.Title.Arppu,ARPPU
 Feature.Build.Analytics.Title.ConcurrentUsers,Tổng số người chơi
 Feature.Build.Analytics.Title.D1Retention,Tỷ lệ giữ chân đến ngày 1
 Feature.Build.Analytics.Title.D7Retention,Tỷ lệ giữ chân đến ngày 7
-Feature.Build.Analytics.Title.DailyActiveUsers,Người dùng hoạt động hằng ngày
-Feature.Build.Analytics.Title.NewUserSessionTime,Thời gian phiên của người dùng mới
-Feature.Build.Analytics.Title.PayerConversion,Tỷ lệ chuyển đổi thành người dùng trả phí
+Feature.Build.Analytics.Title.DailyActiveUsers,
+Feature.Build.Analytics.Title.NewUserSessionTime,
+Feature.Build.Analytics.Title.PayerConversion,
 Feature.Build.Analytics.Title.PlaythroughRate,Tỷ lệ hoàn thành lượt chơi
 Feature.Build.Analytics.Title.RobuxSpent,Lượng Robux đã dùng
 Feature.Build.Analytics.Title.TopAcquisitionSource,Nguồn hàng đầu
@@ -2350,10 +2392,13 @@ Feature.Build.Analytics.Title.TotalPlaytime,Tổng thời gian chơi
 Feature.Build.Analytics.Visits,Lượt truy cập
 Feature.Build.Content.NewGame,Trò chơi mới
 Feature.Build.Description.ActivateDeveloperProduct,Đăng bán sản phẩm {PRODUCT_ID} của nhà phát triển.
+Feature.Build.Description.ActivateGamePass,Đăng bán Vé trò chơi {PRODUCT_ID}.
+Feature.Build.Description.ActivateSubscription,Kích hoạt gói đăng ký {PRODUCT_ID}.
 Feature.Build.Description.AdCampaignModerationReview,Mọi chiến dịch quảng cáo đều được đội ngũ kiểm duyệt của Roblox xem xét. Quá trình này có thể mất đến 24 giờ.
 Feature.Build.Description.AdCampaignSheetRunDates,Chạy từ {startDate} – {endDate}
 Feature.Build.Description.AdComplete,Quảng cáo của bạn đã kết thúc. Hãy kiểm tra kết quả.
 Feature.Build.Description.AdModerationReview,Mọi quảng cáo đều được đội ngũ kiểm duyệt của Roblox xem xét và có thể mất đến 24 giờ.
+Feature.Build.Description.AdvancedModel,Phù hợp nhất để mang đến chất lượng hàng đầu. Hạn mức sử dụng sẽ hết nhanh hơn gấp 3 lần.
 Feature.Build.Description.AdvertisingAgreement,"Khi chọn ""Tạo"", bạn đồng ý với {advertisingTermsStart}Điều khoản quảng cáo{advertisingTermsEnd} và {advertisingStandardsStart}Tiêu chuẩn quảng cáo của Roblox{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"Nếu bạn lưu trữ trò chơi này, trò chơi sẽ bị gỡ khỏi Build. Bạn vẫn có thể truy cập và khôi phục trò chơi từ Trung tâm nhà sáng tạo hoặc Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Dùng Robux của bạn để tự động mua thêm lượt sử dụng Build trong quá trình sáng tạo. Bạn có thể cài đặt hạn mức chi tiêu hằng ngày bất cứ lúc nào.
@@ -2366,9 +2411,17 @@ Feature.Build.Description.CampaignRunDates,Chiến dịch của bạn sẽ diễ
 Feature.Build.Description.ChooseAdCampaignLength,Chọn thời gian bạn muốn chạy quảng cáo.
 Feature.Build.Description.ChoosePlaytesters,Chọn bạn bè để xem trước trò chơi của bạn.
 Feature.Build.Description.CreateDeveloperProduct,"Tạo ""{NAME}"" với giá {PRICE} Robux, không đăng bán."
+Feature.Build.Description.CreateGamePass,"Tạo ""{NAME}"" với giá {PRICE} Robux, chưa đăng bán."
+Feature.Build.Description.CreateSubscription,"Tạo ""{NAME}"" với giá {PRICE} Robux, chưa kích hoạt."
 Feature.Build.Description.DeactivateDeveloperProduct,Ngừng bán sản phẩm {PRODUCT_ID} của nhà phát triển.
+Feature.Build.Description.DeactivateGamePass,Ngừng bán Vé trò chơi {PRODUCT_ID}.
+Feature.Build.Description.DeactivateSubscription,Ngừng bán gói đăng ký {PRODUCT_ID}. Người đăng ký hiện tại vẫn được tái tục.
+Feature.Build.Description.DeactivateSubscriptionCancelRenewals,Ngừng bán gói đăng ký {PRODUCT_ID} và ngừng tái tục đối với người đăng ký hiện tại về sau.
+Feature.Build.Description.DefaultModel,Phù hợp nhất cho việc chỉnh sửa nhanh và cải tiến thường xuyên.
+Feature.Build.Description.DeleteSubscription,Xóa gói đăng ký {PRODUCT_ID}.
 Feature.Build.Description.EarnedRobuxAppliedFirst,"Nếu bạn kiếm được Robux, số Robux này sẽ được ưu tiên trừ vào chi phí của chiến dịch quảng cáo."
 Feature.Build.Description.EnableBuildNotifs,Bật thông báo trong phần cài đặt của thiết bị để nhận thông tin cập nhật từ Build.
+Feature.Build.Description.EnableUsageOrWait,Hãy bật tính năng mua thêm lượt sử dụng để tiếp tục sáng tạo hoặc chờ đến khi giới hạn theo tuần được đặt lại.
 Feature.Build.Description.FriendsLinkOnly,Chỉ bạn bè của bạn mới có thể truy cập đường liên kết này. Hãy thay đổi cài đặt Đối tượng của trò chơi nếu bạn muốn có nhiều người chơi hơn.
 Feature.Build.Description.GameConfiguration,Thay đổi cách bạn bán vật phẩm và quảng bá trò chơi của mình.
 Feature.Build.Description.GameCreationDone,Tôi đã tạo xong và đăng trò chơi của bạn. Bạn đã có thể mở lên để chơi thử.
@@ -2401,6 +2454,8 @@ Feature.Build.Description.ShopButton,Thêm điểm truy cập cửa hàng
 Feature.Build.Description.ShortAdCampaign,Cách nhanh chóng để biết người chơi nghĩ gì về trò chơi của bạn.
 Feature.Build.Description.StopBuild,"Yêu cầu này vẫn đang được xử lý. Nếu dừng lúc này, yêu cầu sẽ không được hoàn tất và bạn cần phải gửi lại."
 Feature.Build.Description.UpdateDeveloperProduct,Cập nhật sản phẩm của nhà phát triển {PRODUCT_ID}.
+Feature.Build.Description.UpdateGamePass,Cập nhật Vé trò chơi {PRODUCT_ID}.
+Feature.Build.Description.UpdateSubscription,Cập nhật gói đăng ký {PRODUCT_ID}.
 Feature.Build.Description.UseAdCreditsInAdsManager,Bạn sẽ cần vào Trình quản lý quảng cáo để sử dụng.
 Feature.Build.Error.AdForbidden,Tài khoản hoặc trò chơi của bạn hiện không thể chạy quảng cáo. Hãy liên hệ với bộ phận hỗ trợ nếu bạn cho rằng đây là sự nhầm lẫn.
 Feature.Build.Error.AdInsufficientFunds,Bạn không có đủ Robux để tạo quảng cáo này. Hãy nạp thêm rồi thử lại.
@@ -2432,6 +2487,7 @@ Feature.Build.Label.AdViews,Lượt xem quảng cáo
 Feature.Build.Label.AdditionalUsage,Lượt sử dụng Build bổ sung
 Feature.Build.Label.AdditionalUsed,Đã dùng {USED}/{LIMIT}
 Feature.Build.Label.AdsManager,Trình quản lý quảng cáo
+Feature.Build.Label.AdvancedModel,Nâng cao
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Tất cả trò chơi
 Feature.Build.Label.AmountAvailable,Còn {AMOUNT}
@@ -2448,6 +2504,7 @@ Feature.Build.Label.CreatorHub,Trung tâm nhà sáng tạo
 Feature.Build.Label.DateRange,{startDate} – {endDate}
 Feature.Build.Label.DefaultDeveloperProduct,Sản phẩm {PRODUCT_ID}
 Feature.Build.Label.DefaultDeveloperProductName,sản phẩm của nhà phát triển
+Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Đã xóa
 Feature.Build.Label.DescribeIdea,Mô tả ý tưởng
 Feature.Build.Label.Description,
@@ -2479,6 +2536,7 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,Giá được quản lý
 Feature.Build.Label.ManagedPricingMixed,Kết hợp trên các sản phẩm hiện tại
 Feature.Build.Label.MaximizeForGamePlays,Tăng tối đa lượt chơi
+Feature.Build.Label.ModelUnavailable,Mô hình không khả dụng
 Feature.Build.Label.Models3D,Mô hình 3D
 Feature.Build.Label.MyGames,Trò chơi của tôi
 Feature.Build.Label.Name,
@@ -2515,6 +2573,10 @@ Feature.Build.Label.SelectOption,Chọn một tùy chọn
 Feature.Build.Label.ShopButton,Nút Cửa hàng
 Feature.Build.Label.ShopUi,UI cửa hàng
 Feature.Build.Label.Sounds,Âm thanh
+Feature.Build.Label.SubscriptionProductType,Loại sản phẩm: {PRODUCT_TYPE}
+Feature.Build.Label.SubscriptionProductTypeConsumable,Vật phẩm tiêu dùng
+Feature.Build.Label.SubscriptionProductTypeCurrency,Tiền tệ
+Feature.Build.Label.SubscriptionProductTypeDurable,Bền vững
 Feature.Build.Label.TargetAllRobloxPlayers,Nhắm đến tất cả người chơi Roblox
 Feature.Build.Label.Thinking,Đang tư duy
 Feature.Build.Label.Title,Tiêu đề
@@ -2715,15 +2777,18 @@ Feature.Build.Title.BuildUnavailable,Build không sử dụng được
 Feature.Build.Title.BuildUsage,Lượt sử dụng Build
 Feature.Build.Title.ChangesNotLive,Nội dung bạn thay đổi chưa được đăng
 Feature.Build.Title.ChatBuildUnavailable,Build không sử dụng được.
+Feature.Build.Title.ChooseModel,Chọn trợ lý Tạo dựng
 Feature.Build.Title.Content,Nội dung
 Feature.Build.Title.CreateYourAd,Tạo quảng cáo của bạn
 Feature.Build.Title.DailyRobuxReached,Đã dùng hết hạn mức Robux hằng ngày
 Feature.Build.Title.DeveloperProduct,Sản phẩm của nhà phát triển
 Feature.Build.Title.EditDeveloperProduct,Chỉnh sửa sản phẩm
 Feature.Build.Title.ExperienceAudience,Đối tượng của trải nghiệm
+Feature.Build.Title.FreeLimitReached,Bạn đã đạt đến giới hạn sử dụng miễn phí
 Feature.Build.Title.FreeUsageReached,Đã hết lượt sử dụng Build miễn phí
 Feature.Build.Title.FriendsOnlyPlay,Chỉ bạn bè mới có thể chơi
 Feature.Build.Title.GameCreationDone,Đã tạo xong trò chơi
+Feature.Build.Title.GamePass,Vé trò chơi
 Feature.Build.Title.GenericError,Đã xảy ra lỗi
 Feature.Build.Title.GetUsers,Thu hút người dùng
 Feature.Build.Title.ManagedPricingAcknowledgement,Mở chế độ Giá được quản lý?
@@ -2741,6 +2806,7 @@ Feature.Build.Title.PromoteGamePaid,Nhiều người chơi khác đang chờ b�
 Feature.Build.Title.PushNotifications,Thông báo đẩy
 Feature.Build.Title.RevertLastChange,Trả về bản thay đổi gần nhất?
 Feature.Build.Title.StopBuild,Dừng tạo dựng?
+Feature.Build.Title.Subscription,Gói đăng ký
 Feature.Build.Title.Tasks,Nhiệm vụ
 Feature.Build.Title.TurnActivity,Hoạt động trong lượt
 Feature.Build.Title.UseYourAdCredits,Dùng tín dụng quảng cáo của bạn
@@ -2967,7 +3033,7 @@ Feature.Catalog.Label.OutOfStock,
 Feature.Catalog.Label.Owned,Đã Sở Hữu
 Feature.Catalog.Label.PBR,Vật liệu
 Feature.Catalog.Label.PBR.false,Cơ bản
-Feature.Catalog.Label.PBR.true,Nâng cao
+Feature.Catalog.Label.PBR.true,
 Feature.Catalog.Label.PBRInfo,"Các bộ phận có vật liệu nâng cao trên avatar sử dụng công nghệ kết xuất dựa trên vật lý (PBR) để trông tự nhiên hơn, với ánh sáng và bóng đổ thay đổi và chiếu sáng như ngoài đời thực."
 Feature.Catalog.Label.PBRInfoTitle,Kết xuất dựa trên vật lý (PBR)
 Feature.Catalog.Label.ParticleEffects,Hiệu ứng hạt
@@ -4003,13 +4069,13 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Còn {time}
-Feature.InExperienceShop.GamePass,Vé trò chơi
+Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.EndTime,Kết thúc sau {timeRemaining}
 Feature.InExperienceShop.Label.Timer.Day.Plural,
 Feature.InExperienceShop.Label.Timer.Day.Singular,1 ngày
 Feature.InExperienceShop.Label.Timer.Hour.Plural,
 Feature.InExperienceShop.Label.Timer.Hour.Singular,1 giờ
-Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} phút
+Feature.InExperienceShop.Label.Timer.Minute.Plural,
 Feature.InExperienceShop.Label.Timer.Minute.Singular,1 phút
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} giây
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 giây
@@ -4042,6 +4108,7 @@ Feature.Moments.Action.AddMusic,Thêm nhạc
 Feature.Moments.Action.AddSticker,Thêm nhãn dán
 Feature.Moments.Action.AddText,Thêm văn bản
 Feature.Moments.Action.AddVoice,Thêm giọng nói
+Feature.Moments.Action.Analytics,Dữ liệu phân tích
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -4058,7 +4125,7 @@ Feature.Moments.Action.GenerateText,Tạo văn bản
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Không hữu ích
 Feature.Moments.Action.GenerateTextFeedbackPolicy,Không phù hợp hoặc vi phạm quy định
 Feature.Moments.Action.Hide,Ẩn chi tiết
-Feature.Moments.Action.HowToCapture,Cách Chụp ảnh/quay màn hình
+Feature.Moments.Action.HowToCapture,Xem cách chụp
 Feature.Moments.Action.Join,
 Feature.Moments.Action.KeepEditing,Tiếp tục chỉnh sửa
 Feature.Moments.Action.Leave,
@@ -4092,6 +4159,8 @@ Feature.Moments.Disclaimer.EveryoneMoments,Ai trong Khoảnh khắc cũng có th
 Feature.Moments.Label.All,
 Feature.Moments.Label.AllowComments,Cho phép bình luận
 Feature.Moments.Label.AttemptingJoinExperience,Đang thử tham gia {placeName}. Vui lòng chờ trong giây lát.
+Feature.Moments.Label.AverageCompletion,Tỷ lệ hoàn tất trung bình
+Feature.Moments.Label.AverageWatchTime,Thời gian xem trung bình
 Feature.Moments.Label.CaptureLibrary,Thư viện Ảnh chụp/video quay màn hình của bạn
 Feature.Moments.Label.ChooseVoice,Chọn giọng nói
 Feature.Moments.Label.CommentAuthorFallback,Người dùng {userId}
@@ -4105,13 +4174,13 @@ Feature.Moments.Label.CommentRejectedByFilter,Bình luận của bạn chưa đ�
 Feature.Moments.Label.CommentSendStatusUnknown,Trạng thái gửi không xác định
 Feature.Moments.Label.CommentSending,Đang gửi...
 Feature.Moments.Label.CommentSignInRequired,Vui lòng đăng nhập lại để bình luận.
-Feature.Moments.Label.CommentTimestampDays,{count}ng
-Feature.Moments.Label.CommentTimestampHours,{count}g
-Feature.Moments.Label.CommentTimestampMinutes,{count}ph
-Feature.Moments.Label.CommentTimestampMonths,{count}th
+Feature.Moments.Label.CommentTimestampDays,{count}ng trước
+Feature.Moments.Label.CommentTimestampHours,{count} giờ trước
+Feature.Moments.Label.CommentTimestampMinutes,{count}p trước
+Feature.Moments.Label.CommentTimestampMonths,{count}th trước
 Feature.Moments.Label.CommentTimestampNow,
-Feature.Moments.Label.CommentTimestampWeeks,{count}t
-Feature.Moments.Label.CommentTimestampYears,{count}n
+Feature.Moments.Label.CommentTimestampWeeks,{count}t trước
+Feature.Moments.Label.CommentTimestampYears,{count}n trước
 Feature.Moments.Label.CommentingUnavailable,Tính năng bình luận hiện không hoạt động. Vui lòng thử lại sau.
 Feature.Moments.Label.CommentsDisabled,Tính năng bình luận đã bị vô hiệu hóa
 Feature.Moments.Label.CommentsReadOnly,Bình luận hiển thị ở chế độ chỉ đọc
@@ -4123,6 +4192,8 @@ Feature.Moments.Label.DeleteMomentBody,Bạn không thể khôi phục một Kho
 Feature.Moments.Label.DeleteMomentTitle,Xóa Khoảnh khắc?
 Feature.Moments.Label.DeleteVoiceoverBody,Thao tác này sẽ xóa văn bản và phần thuyết minh hiện tại. Bạn có thể làm lại từ đầu bất cứ lúc nào.
 Feature.Moments.Label.DeleteVoiceoverTitle,Xóa lời thuyết minh?
+Feature.Moments.Label.DurationSeconds,{seconds} giây
+Feature.Moments.Label.Engagement,Mức độ tương tác
 Feature.Moments.Label.Error,Đã xảy ra sự cố. Vui lòng thử lại.
 Feature.Moments.Label.ExceedsCharacterLimit,Vượt giới hạn ký tự
 Feature.Moments.Label.FeedEndBody,Xem lại sau hoặc tạo Khoảnh khắc của riêng bạn.
@@ -4131,6 +4202,7 @@ Feature.Moments.Label.FeedFailedToLoad,Không tải được bản tin
 Feature.Moments.Label.FeedMyMoments,Khoảnh khắc của tôi
 Feature.Moments.Label.FeedTrending,Thịnh hành
 Feature.Moments.Label.FirstCommentInvite,Chưa có bình luận nào. Hãy là người đầu tiên bình luận!
+Feature.Moments.Label.GameJoinConversion,Tỷ lệ chuyển đổi sang tham gia trò chơi
 Feature.Moments.Label.HowToUseCaptureTitle,Cách dùng Ảnh chụp/video quay màn hình
 Feature.Moments.Label.LinkCopied,Đã sao chép đường liên kết
 Feature.Moments.Label.LinkCopyFailed,Không thể sao chép đường liên kết.
@@ -4150,6 +4222,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,Âm nhạc
 Feature.Moments.Label.NoCommentsYet,Chưa có bình luận nào
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Còn nhiều Khoảnh khắc khác để xem
+Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Ảnh
 Feature.Moments.Label.PostDeleted,Khoảnh khắc đã bị xóa
 Feature.Moments.Label.PostRemovedBody,Khoảnh khắc bạn đăng vi phạm Tiêu chuẩn cộng đồng của chúng tôi.
@@ -4179,6 +4252,8 @@ Feature.Moments.Label.Tone.Cinematic,Điện ảnh
 Feature.Moments.Label.Tone.Funny,Hài hước
 Feature.Moments.Label.Tone.Hype,Sôi động
 Feature.Moments.Label.Tone.Neutral,Trung tính
+Feature.Moments.Label.TotalReactions,Tổng số lượt bày tỏ cảm xúc
+Feature.Moments.Label.TotalViews,Tổng lượt xem
 Feature.Moments.Label.Videos,
 Feature.Moments.Label.VoiceCoachmarkBody,Nhập kịch bản để tường thuật video
 Feature.Moments.Label.VoiceCoachmarkTitle,
@@ -4187,18 +4262,21 @@ Feature.Moments.Label.VoiceGenerationFailedBody,Tạo phần thuyết minh khôn
 Feature.Moments.Label.VoiceHelperDefault,Phần lời đã được cắt khớp với thời lượng video
 Feature.Moments.Label.VoiceLimitReachedBody,Vui lòng đợi một lát rồi thử lại
 Feature.Moments.Label.VoiceModerationError,Kịch bản của bạn phải tuân thủ quy tắc an toàn
-Feature.Moments.Label.VoicePlaceholder,Nhập kịch bản thuyết minh. Tối đa {maxCount} ký tự
+Feature.Moments.Label.VoicePlaceholder,Nhập nội dung bạn muốn thuyết minh.
 Feature.Moments.Label.VoiceTimeoutBody,Đã hết thời gian chờ tạo phần thuyết minh.
 Feature.Moments.Label.VoiceTooManyNumbersError,Tập lệnh chứa quá nhiều chữ số
 Feature.Moments.Label.WriteComment,Viết bình luận
 Feature.Moments.Title.Comments,Bình luận
-Feature.Moments.Title.CommentsWithCappedCount,Bình luận ({count}+)
-Feature.Moments.Title.CommentsWithCount,Bình luận ({count})
+Feature.Moments.Title.CommentsWithCappedCount,{count}+ bình luận
+Feature.Moments.Title.CommentsWithCount,{count} bình luận
 Feature.Moments.Title.GenerateTextFeedbackReason,Đã xảy ra vấn đề gì?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Rời khỏi quá trình tạo Khoảnh khắc?
 Feature.Moments.Title.MomentRemoved,Đã xóa Khoảnh khắc
+Feature.Moments.Title.PostInsights,Tiêu đề ở đầu trang
 Feature.Moments.Title.ReportPost,Báo cáo bài đăng
+Feature.Moments.Tooltip.ShareFirstMomentBody,Tạo Khoảnh khắc từ những gì bạn đã chụp
+Feature.Moments.Tooltip.ShareFirstMomentTitle,Chia sẻ Khoảnh khắc đầu tiên của bạn
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
 Feature.NotApproved.Action.Pending,Chờ xử lý

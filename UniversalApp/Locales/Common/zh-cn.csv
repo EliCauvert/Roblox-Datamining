@@ -383,7 +383,7 @@ Authentication.Login.Response.IncorrectUsernamePassword,用户名或密码不正
 Authentication.Login.Response.InvalidEmail,电子邮件地址无效。
 Authentication.Login.Response.InvalidPasskeyCredential,无法使用此通行密钥登录。若要重新获取权限，请前往“忘记密码或用户名。”
 Authentication.Login.Response.MoreThanOneUsername,你的电子邮件与不止一个用户名关联。请使用你的用户名登录。
-Authentication.Login.Response.NoLoginMethods,此帐户没有可用的登录方式。请尝试进行帐户恢复或联系技术支持。
+Authentication.Login.Response.NoLoginMethods,此帐户没有可用的登录方式。它可能已关联至 Google 或 Apple。请尝试其中一种方式，或尝试恢复帐户。
 Authentication.Login.Response.PlatformAlreadyLinked,此{platform}帐户已关联至另一个 Roblox 帐户。请使用已关联的 Roblox 帐户登录。
 Authentication.Login.Response.RelinkingFreeze,在过去的 90 天内，此 Roblox 帐户已访问{platform}的账号一个帐户。请使用一个不同的 Roblox 帐户尝试登录。
 Authentication.Login.Response.Require2FA,主机版不支援两步验证。请遵循右侧指示以安全登录。
@@ -450,7 +450,7 @@ Authentication.SignUp.Description.BirthdayHelp3,这有助于我们向你推荐�
 Authentication.SignUp.Description.BirthdayHint,输入日期
 Authentication.SignUp.Description.BirthdayValuePropC,
 Authentication.SignUp.Description.ClickNextAgreeToTerms,选择“下一步”，即表示你已同意我们的使用条款（包括其中的仲裁条款），且你已了解隐私政策。
-Authentication.SignUp.Description.CreateAPassword,为你的 Roblox 帐户创建密码
+Authentication.SignUp.Description.CreateAPassword,请选择如何保障你的帐户安全。
 Authentication.SignUp.Description.CreateAccountPasskeyEmphasisDescription,使用通行密钥，你可以通过面容 ID、指纹或用于解锁设备的 PIN 码快速登录。
 Authentication.SignUp.Description.CreatePasskeyOrOTP,为你的 Roblox 帐户创建通行密钥，或添加电子邮件地址，以便使用一次性密码登录。
 Authentication.SignUp.Description.EnsureNeverLoseAccount,这确保你永远不会失去对 Roblox 帐户的访问权限。
@@ -727,6 +727,9 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation 包含关�
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation 包含超过 {maxAllowed} 个 MarkerCurve。请确保 MarkerCurve 的子对象数量不超过 {maxAllowed} 个。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation 包含带 {count} 个标记的 MarkerCurve。每个 MarkerCurve 最多只能有 {maxAllowed} 个标记。请修改该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation 包含不应存在的子级：{childName}
+Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,{InstanceFullName}.{FieldName} 将动画 {AssetId} 固定到版本 {Version}，但动画尚无法固定到版本。请移除“&version={Version}”并重试。
+Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,素材 {AssetId} ({InstanceFullName}.{FieldName}) 未发布。请先发布，然后重试。
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,{InstanceFullName}.{FieldName} 使用了素材 {AssetId} 的版本 {Version}，但目前仅支持版本 1。请使用版本 1 并重试。
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,商城中的动态头部必须正确置入笼架，以便笼架上的眼睛和嘴巴顶点与网格顶点对齐。请调整笼架位置，使其与网格对齐。
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,无法检测到动态头部的微笑表情。请调整嘴巴的笼架标记，使其与头部的嘴巴位置相匹配，并确保它可以显示微笑表情。
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,无法检测到动态头部的左眼闭合表情。请调整左眼的笼架标记，使其与头部的左眼位置相匹配，并确保其可以闭合。
@@ -739,6 +742,8 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,自发光面积超�
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,“{meshName}”的自发光程度过高。自发光区域面积 × 强度超出上限（当前为 {emissivePercentage}%，不得超过 {maxEmissivePercentage}%）。请缩小发光区域或降低其 EmissiveStrength。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,自发光面积超出上限。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,“{assetTypeName}”的自发光程度过高。自发光区域面积 × 强度超出上限（当前为 {emissiveArea}，不得超过 {maxEmissiveArea}）。请缩小发光区域或降低其 EmissiveStrength。
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,在体验中创建的道具不支持自发光贴图。请从每个 SurfaceAppearance 中移除 EmissiveMaskContent。
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,贴花不能发光。在“{InstancePath}”上，移除 EmissiveMaskContent，将 EmissiveStrength 设置为 1，并将 EmissiveTint 设置为白色。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,已发布的动画缺少有效的部件最大位移值。请重新发布该动画。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,已发布的动画缺少有效的用户生成内容动作标记。请重新发布该动画。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,无法根据已发布的动画数据计算部件的最大位移。请重新发布该动画。
@@ -1041,6 +1046,7 @@ CoreScripts.InGameMenu.GameSettings.UINavToggle,界面导航切换
 CoreScripts.InGameMenu.GameSettings.Volume,音量
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,邀请好友
+CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,加入或邀请好友
 CoreScripts.InGameMenu.Traversal.HistoryDescription,加入之前访问过的游戏
 CoreScripts.InGameMenu.Traversal.LeaveBody,你即将离开此游戏并返回“{PREVIOUS_EXPERIENCE}”。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,你要离开吗？
@@ -1191,6 +1197,37 @@ CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,传送门
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,搜索广告
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,赞助广告
+CreatorDashboard.Analytics.Overview.Description.D1Retention,有多少新玩家在第二天返回游玩。
+CreatorDashboard.Analytics.Overview.Description.D7Retention,一周后有多少新玩家返回游玩。
+CreatorDashboard.Analytics.Overview.Description.DailyActiveUsers,每天有多少人游玩你的游戏。
+CreatorDashboard.Analytics.Overview.Description.NewUserSessionTime,首次游玩的新玩家在你游戏中停留的时间。
+CreatorDashboard.Analytics.Overview.Description.PayerConversion,游戏中的消费玩家所占的百分比。
+CreatorDashboard.Analytics.Overview.Description.RobuxSpent,玩家在你的游戏中花费的 Robux 金额。
+CreatorDashboard.Analytics.Overview.HowToImprove,如何改进：
+CreatorDashboard.Analytics.Overview.Improve.D1Retention,"• 确保主要活动能够吸引玩家重复游玩
+• 提供每日奖励，鼓励玩家回归
+• 保存玩家进度"
+CreatorDashboard.Analytics.Overview.Improve.D7Retention,"• 添加玩家可以努力实现的目标
+• 添加新等级、道具或活动
+• 保持挑战难度适中"
+CreatorDashboard.Analytics.Overview.Improve.DailyActiveUsers,"• 创建广告，让更多玩家找到你的游戏
+• 与好友分享你的游戏"
+CreatorDashboard.Analytics.Overview.Improve.NewUserSessionTime,"• 让玩家能迅速沉浸于游戏、享受乐趣
+• 为玩家设定一个需要努力达成的目标
+• 让玩家在前几分钟内轻松上手"
+CreatorDashboard.Analytics.Overview.Improve.PayerConversion,"• 添加新手包（首次购买优惠）
+• 在恰当的时机展示商店和优惠"
+CreatorDashboard.Analytics.Overview.Improve.RobuxSpent,"• 添加游戏通行证或可售卖的道具
+• 开启托管定价，有助于赚取更多收入
+• 添加每日奖励，鼓励玩家返回游玩并消费"
+CreatorDashboard.Analytics.Overview.Summary.AverageOverSelectedPeriod,选定时间段的平均值
+CreatorDashboard.Analytics.Overview.Title.D1Retention,1 天后留存率
+CreatorDashboard.Analytics.Overview.Title.D7Retention,第 7 日留存率
+CreatorDashboard.Analytics.Overview.Title.DailyActiveUsers,日活跃用户
+CreatorDashboard.Analytics.Overview.Title.FirstSessionRetention,5 分钟后仍在游玩的玩家百分比
+CreatorDashboard.Analytics.Overview.Title.NewUserSessionTime,新用户会话时长
+CreatorDashboard.Analytics.Overview.Title.PayerConversion,付费用户转化率
+CreatorDashboard.Analytics.Overview.Title.RobuxSpent,消费的 Robux
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,向下滚动
 Feature.Accessibility.Action.ScrollUp,向上滚动
@@ -1202,6 +1239,7 @@ Feature.Accessibility.AppTheme.Classic,经典
 Feature.Accessibility.AppTheme.CosmicDust,星尘
 Feature.Accessibility.AppTheme.Default,
 Feature.Accessibility.AppTheme.ElectricLime,电光青柠
+Feature.Accessibility.AppTheme.Halloween2026,空洞
 Feature.Accessibility.AppTheme.HyperPlum,超能李紫
 Feature.Accessibility.AppTheme.InfernoBlast,炼狱烈焰
 Feature.Accessibility.AppTheme.KineticEnergy,动能
@@ -2233,6 +2271,7 @@ Feature.Build.Action.Edit,编辑
 Feature.Build.Action.HideAutosaved,隐藏自动保存版本
 Feature.Build.Action.KeepBuilding,继续构建
 Feature.Build.Action.ManageLimit,管理限额
+Feature.Build.Action.ManageUsage,管理使用额度
 Feature.Build.Action.Next,下一个
 Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,通知我
@@ -2265,8 +2304,8 @@ Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,查看使用额度
 Feature.Build.Analytics.AnalyzeChatPrompt,分析过去 {days} 天我的“{analyzeName}”指标。为什么这个指标很重要？我该如何改进？
 Feature.Build.Analytics.AnalyzeName.Arppu,每位付费用户平均收入
-Feature.Build.Analytics.AnalyzeName.D1Retention,1 天后留存率
-Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,日活跃用户
+Feature.Build.Analytics.AnalyzeName.D1Retention,
+Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,
 Feature.Build.Analytics.AnalyzeName.PayerConversion,付费用户转换率
 Feature.Build.Analytics.AnalyzeName.PlaythroughRate,通关率
 Feature.Build.Analytics.AnalyzeName.TotalPlaytime,总游戏时间
@@ -2277,6 +2316,7 @@ Feature.Build.Analytics.Description.PayerConversion,付费用户转化率是指�
 Feature.Build.Analytics.Description.PlaythroughRate,通关率是完成完整游戏会话的访问次数占比。通关率越高，表明玩家越容易上手游戏体验，并且更愿意游玩至结束。
 Feature.Build.Analytics.Description.TotalPlaytime,总游戏时间是该时间段内所有玩家在你的游戏体验中花费的时间总和。游戏时间增加通常表明游戏过程更具吸引力。
 Feature.Build.Analytics.DurationHours,{number} 小时
+Feature.Build.Analytics.DurationMinutes,{number} 分钟
 Feature.Build.Analytics.Goal.Action.CreateAd,创建广告
 Feature.Build.Analytics.Goal.Action.SellItems,出售道具
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,与好友分享
@@ -2309,7 +2349,9 @@ Feature.Build.Analytics.Overview,概览
 Feature.Build.Analytics.Percent,{number}%
 Feature.Build.Analytics.Players,玩家数
 Feature.Build.Analytics.Sheet.Analyze,分析
+Feature.Build.Analytics.Sheet.AskAboutThis,询问此事
 Feature.Build.Analytics.Sheet.ViewInOverview,在概览中查看
+Feature.Build.Analytics.Sheet.ViewMoreStats,查看更多统计数据
 Feature.Build.Analytics.Summary.Arppu,每位付费玩家平均获得的 Robux。
 Feature.Build.Analytics.Summary.D1Retention,第二天回来游玩的新玩家占比。
 Feature.Build.Analytics.Summary.DailyActiveUsers,在所选时间段内加入的去重玩家数量。
@@ -2321,8 +2363,8 @@ Feature.Build.Analytics.Title.ConcurrentUsers,玩家总数
 Feature.Build.Analytics.Title.D1Retention,首日留存率
 Feature.Build.Analytics.Title.D7Retention,7 日留存率
 Feature.Build.Analytics.Title.DailyActiveUsers,
-Feature.Build.Analytics.Title.NewUserSessionTime,新用户会话时长
-Feature.Build.Analytics.Title.PayerConversion,付费用户转化率
+Feature.Build.Analytics.Title.NewUserSessionTime,
+Feature.Build.Analytics.Title.PayerConversion,
 Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.RobuxSpent,已扣取 Robux
 Feature.Build.Analytics.Title.TopAcquisitionSource,热门来源
@@ -2331,10 +2373,13 @@ Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,访问次数
 Feature.Build.Content.NewGame,新游戏
 Feature.Build.Description.ActivateDeveloperProduct,将开发者产品 {PRODUCT_ID} 上架销售。
+Feature.Build.Description.ActivateGamePass,将游戏通行证 {PRODUCT_ID} 上架销售。
+Feature.Build.Description.ActivateSubscription,激活订阅 {PRODUCT_ID}。
 Feature.Build.Description.AdCampaignModerationReview,所有广告活动均由 Roblox 审核团队进行审核。此过程最多可能需要 24 小时。
 Feature.Build.Description.AdCampaignSheetRunDates,投放时间 {startDate} – {endDate}
 Feature.Build.Description.AdComplete,你的广告已投放完毕。请查看结果。
 Feature.Build.Description.AdModerationReview,所有广告均由 Roblox 审核团队审核，最长可能需要 24 小时。
+Feature.Build.Description.AdvancedModel,最适合追求顶级质量。使用额度消耗速度将快 3 倍。
 Feature.Build.Description.AdvertisingAgreement,选择“创建”，即表示你同意 {advertisingTermsStart}Roblox 广告条款{advertisingTermsEnd}和{advertisingStandardsStart}广告准则{advertisingStandardsEnd}。
 Feature.Build.Description.ArchiveRemoval,如果你将此游戏存档，它将从 Build 中移除。你仍可在创作者中心或 Roblox Studio 中访问和恢复此游戏。
 Feature.Build.Description.AutoBuyUsage,在创建过程中使用你的 Robux 自动购买额外的 Build 使用额度。你可以随时设置每日消费限额。
@@ -2347,9 +2392,17 @@ Feature.Build.Description.CampaignRunDates,你的广告活动将在 {startDate} 
 Feature.Build.Description.ChooseAdCampaignLength,选择你希望广告投放的时长。
 Feature.Build.Description.ChoosePlaytesters,选择好友来抢先体验你的游戏。
 Feature.Build.Description.CreateDeveloperProduct,创建“{NAME}”，售价 {PRICE} Robux，已下架。
+Feature.Build.Description.CreateGamePass,
+Feature.Build.Description.CreateSubscription,创建“{NAME}”，售价 {PRICE} Robux，未激活。
 Feature.Build.Description.DeactivateDeveloperProduct,将开发者产品 {PRODUCT_ID} 下架。
+Feature.Build.Description.DeactivateGamePass,将游戏通行证 {PRODUCT_ID} 下架。
+Feature.Build.Description.DeactivateSubscription,将订阅 {PRODUCT_ID} 下架。现有订阅者将继续续订。
+Feature.Build.Description.DeactivateSubscriptionCancelRenewals,将订阅 {PRODUCT_ID} 下架，并停止现有订阅者今后的续订。
+Feature.Build.Description.DefaultModel,最适合快速编辑和常规改进。
+Feature.Build.Description.DeleteSubscription,删除订阅 {PRODUCT_ID}。
 Feature.Build.Description.EarnedRobuxAppliedFirst,如果你已赚取 Robux，这些 Robux 将首先用于支付广告活动费用。
 Feature.Build.Description.EnableBuildNotifs,在设备设置中启用通知，获取来自 Build 的最新动态。
+Feature.Build.Description.EnableUsageOrWait,开启额外使用额度以继续创作，或等待你的每周限额重置。
 Feature.Build.Description.FriendsLinkOnly,只有你的好友才能访问此链接。如果你希望更多人游玩，请更改游戏的受众设置。
 Feature.Build.Description.GameConfiguration,更改你销售道具和推广游戏的方式。
 Feature.Build.Description.GameCreationDone,我已完成游戏的创建和发布。你可以打开它进行游戏测试。
@@ -2382,6 +2435,8 @@ Feature.Build.Description.ShopButton,添加购物入口
 Feature.Build.Description.ShortAdCampaign,快速了解玩家对你游戏的看法。
 Feature.Build.Description.StopBuild,此请求仍在进行中。如果现在停止，请求将无法完成，你需要再次发送。
 Feature.Build.Description.UpdateDeveloperProduct,更新开发者产品 {PRODUCT_ID}。
+Feature.Build.Description.UpdateGamePass,更新游戏通行证 {PRODUCT_ID}。
+Feature.Build.Description.UpdateSubscription,更新订阅 {PRODUCT_ID}。
 Feature.Build.Description.UseAdCreditsInAdsManager,你需要前往广告管理器才能使用。
 Feature.Build.Error.AdForbidden,你的帐户或游戏当前无法投放广告。如果你认为这是个错误，请联系技术支持。
 Feature.Build.Error.AdInsufficientFunds,你的 Robux 不足，无法创建此广告。请充值并重试。
@@ -2413,6 +2468,7 @@ Feature.Build.Label.AdViews,广告观看次数
 Feature.Build.Label.AdditionalUsage,额外的 Build 使用额度
 Feature.Build.Label.AdditionalUsed,已使用 {USED}，共 {LIMIT}
 Feature.Build.Label.AdsManager,广告管理器
+Feature.Build.Label.AdvancedModel,高级
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,所有游戏
 Feature.Build.Label.AmountAvailable,{AMOUNT} 可用
@@ -2429,6 +2485,7 @@ Feature.Build.Label.CreatorHub,创作者中心
 Feature.Build.Label.DateRange,{startDate} – {endDate}
 Feature.Build.Label.DefaultDeveloperProduct,产品 {PRODUCT_ID}
 Feature.Build.Label.DefaultDeveloperProductName,开发者产品
+Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,已删除
 Feature.Build.Label.DescribeIdea,描述一个创意
 Feature.Build.Label.Description,
@@ -2460,6 +2517,7 @@ Feature.Build.Label.Loading,正在加载…
 Feature.Build.Label.ManagedPricing,托管定价
 Feature.Build.Label.ManagedPricingMixed,对当前商品使用混合定价
 Feature.Build.Label.MaximizeForGamePlays,最大化游戏游玩次数
+Feature.Build.Label.ModelUnavailable,模型不可用
 Feature.Build.Label.Models3D,3D 模型
 Feature.Build.Label.MyGames,我的游戏
 Feature.Build.Label.Name,
@@ -2496,6 +2554,10 @@ Feature.Build.Label.SelectOption,选择一个选项
 Feature.Build.Label.ShopButton,商店按钮
 Feature.Build.Label.ShopUi,商店用户界面
 Feature.Build.Label.Sounds,声音
+Feature.Build.Label.SubscriptionProductType,产品类型：{PRODUCT_TYPE}
+Feature.Build.Label.SubscriptionProductTypeConsumable,消耗品
+Feature.Build.Label.SubscriptionProductTypeCurrency,货币
+Feature.Build.Label.SubscriptionProductTypeDurable,耐用品
 Feature.Build.Label.TargetAllRobloxPlayers,定位所有 Roblox 玩家
 Feature.Build.Label.Thinking,正在思考
 Feature.Build.Label.Title,标题
@@ -2696,15 +2758,18 @@ Feature.Build.Title.BuildUnavailable,Build 不可用
 Feature.Build.Title.BuildUsage,Build 使用额度
 Feature.Build.Title.ChangesNotLive,你的更改尚未上线
 Feature.Build.Title.ChatBuildUnavailable,Build 不可用。
+Feature.Build.Title.ChooseModel,选择你的 Build 智能体
 Feature.Build.Title.Content,内容
 Feature.Build.Title.CreateYourAd,创建你的广告
 Feature.Build.Title.DailyRobuxReached,已达到每日 Robux 限额
 Feature.Build.Title.DeveloperProduct,
 Feature.Build.Title.EditDeveloperProduct,编辑产品
 Feature.Build.Title.ExperienceAudience,体验受众
+Feature.Build.Title.FreeLimitReached,你已达到免费使用上限
 Feature.Build.Title.FreeUsageReached,已达到免费 Build 使用额度上限
 Feature.Build.Title.FriendsOnlyPlay,只有好友可以游玩
 Feature.Build.Title.GameCreationDone,游戏创建已完成
+Feature.Build.Title.GamePass,游戏通行证
 Feature.Build.Title.GenericError,出错了
 Feature.Build.Title.GetUsers,获取用户
 Feature.Build.Title.ManagedPricingAcknowledgement,是否开启托管定价？
@@ -2722,6 +2787,7 @@ Feature.Build.Title.PromoteGamePaid,更多玩家正在等待
 Feature.Build.Title.PushNotifications,推送通知
 Feature.Build.Title.RevertLastChange,是否还原上次更改？
 Feature.Build.Title.StopBuild,停止构建？
+Feature.Build.Title.Subscription,
 Feature.Build.Title.Tasks,任务
 Feature.Build.Title.TurnActivity,轮次活动
 Feature.Build.Title.UseYourAdCredits,使用你的广告点数
@@ -2948,7 +3014,7 @@ Feature.Catalog.Label.OutOfStock,
 Feature.Catalog.Label.Owned,已拥有
 Feature.Catalog.Label.PBR,材质
 Feature.Catalog.Label.PBR.false,基础
-Feature.Catalog.Label.PBR.true,高级
+Feature.Catalog.Label.PBR.true,
 Feature.Catalog.Label.PBRInfo,带有 PBR（基于物理渲染）的虚拟形象物品看起来更加逼真，光影效果会像现实中一样变化和闪耀。
 Feature.Catalog.Label.PBRInfoTitle,基于物理的渲染 (PBR)
 Feature.Catalog.Label.ParticleEffects,粒子效果
@@ -3380,7 +3446,7 @@ Feature.Durables.PartiallyExpiredItems.TitleText,道具已过期
 Feature.Durables.PurchaseModal.SuccessMessage,“{itemName}”已延期 {number} 天。
 Feature.Durables.TimeRemaining.Days,{number} 天
 Feature.Durables.TimeRemaining.Hours,
-Feature.Durables.TimeRemaining.Minutes,{number} 分钟
+Feature.Durables.TimeRemaining.Minutes,
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} 天（购买后开始计时）
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,若要举报《欧盟数字服务法》定义的非法内容，请访问 https://www.roblox.com/illegal-content-reporting
 Feature.EmptyStatePage.Message.NoInternet,无网络连接
@@ -3981,7 +4047,7 @@ Feature.InExperienceIntervention.Label.Player,{username}：{evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,剩余 {time}
-Feature.InExperienceShop.GamePass,游戏通行证
+Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.EndTime,{timeRemaining}后结束
 Feature.InExperienceShop.Label.Timer.Day.Plural,
 Feature.InExperienceShop.Label.Timer.Day.Singular,
@@ -4020,6 +4086,7 @@ Feature.Moments.Action.AddMusic,添加音乐
 Feature.Moments.Action.AddSticker,添加贴纸
 Feature.Moments.Action.AddText,添加文本
 Feature.Moments.Action.AddVoice,添加语音
+Feature.Moments.Action.Analytics,
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -4036,7 +4103,7 @@ Feature.Moments.Action.GenerateText,生成文本
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,没有帮助
 Feature.Moments.Action.GenerateTextFeedbackPolicy,不适当或违规
 Feature.Moments.Action.Hide,隐藏详情
-Feature.Moments.Action.HowToCapture,如何截取
+Feature.Moments.Action.HowToCapture,查看如何截取
 Feature.Moments.Action.Join,
 Feature.Moments.Action.KeepEditing,继续编辑
 Feature.Moments.Action.Leave,
@@ -4070,6 +4137,8 @@ Feature.Moments.Disclaimer.EveryoneMoments,“精彩瞬间”中的每个人都�
 Feature.Moments.Label.All,
 Feature.Moments.Label.AllowComments,允许评论
 Feature.Moments.Label.AttemptingJoinExperience,正在尝试加入“{placeName}”。可能需要几秒钟时间。
+Feature.Moments.Label.AverageCompletion,平均完成度
+Feature.Moments.Label.AverageWatchTime,平均观看时长
 Feature.Moments.Label.CaptureLibrary,你的截图库
 Feature.Moments.Label.ChooseVoice,选择语音
 Feature.Moments.Label.CommentAuthorFallback,用户 {userId}
@@ -4083,13 +4152,13 @@ Feature.Moments.Label.CommentRejectedByFilter,你的评论未发布。请修改�
 Feature.Moments.Label.CommentSendStatusUnknown,发送状态未知
 Feature.Moments.Label.CommentSending,正在发送…
 Feature.Moments.Label.CommentSignInRequired,请重新登录以发布评论。
-Feature.Moments.Label.CommentTimestampDays,{count} 天
-Feature.Moments.Label.CommentTimestampHours,{count} 小时
-Feature.Moments.Label.CommentTimestampMinutes,{count} 分
-Feature.Moments.Label.CommentTimestampMonths,{count} 个月
+Feature.Moments.Label.CommentTimestampDays,{count} 天前
+Feature.Moments.Label.CommentTimestampHours,{count} 小时前
+Feature.Moments.Label.CommentTimestampMinutes,{count} 分钟前
+Feature.Moments.Label.CommentTimestampMonths,{count} 个月前
 Feature.Moments.Label.CommentTimestampNow,
-Feature.Moments.Label.CommentTimestampWeeks,{count} 周
-Feature.Moments.Label.CommentTimestampYears,{count} 年
+Feature.Moments.Label.CommentTimestampWeeks,{count} 周前
+Feature.Moments.Label.CommentTimestampYears,{count} 年前
 Feature.Moments.Label.CommentingUnavailable,目前无法使用评论功能。请稍后再试。
 Feature.Moments.Label.CommentsDisabled,评论功能已停用
 Feature.Moments.Label.CommentsReadOnly,评论为只读
@@ -4101,6 +4170,8 @@ Feature.Moments.Label.DeleteMomentBody,精彩瞬间一旦删除，便无法恢�
 Feature.Moments.Label.DeleteMomentTitle,是否删除精彩瞬间？
 Feature.Moments.Label.DeleteVoiceoverBody,此操作将清除你的文本和旁白。你可以随时重新开始。
 Feature.Moments.Label.DeleteVoiceoverTitle,要删除旁白吗？
+Feature.Moments.Label.DurationSeconds,{seconds} 秒
+Feature.Moments.Label.Engagement,参与度
 Feature.Moments.Label.Error,
 Feature.Moments.Label.ExceedsCharacterLimit,超出字符数限制
 Feature.Moments.Label.FeedEndBody,稍后返回查看，或创作自己的精彩瞬间。
@@ -4109,6 +4180,7 @@ Feature.Moments.Label.FeedFailedToLoad,无法加载推送
 Feature.Moments.Label.FeedMyMoments,我的精彩瞬间
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,暂无评论。快来发表第一条评论吧！
+Feature.Moments.Label.GameJoinConversion,游戏加入转化率
 Feature.Moments.Label.HowToUseCaptureTitle,如何使用截图
 Feature.Moments.Label.LinkCopied,链接已复制
 Feature.Moments.Label.LinkCopyFailed,无法复制链接。
@@ -4128,6 +4200,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,暂无评论
 Feature.Moments.Label.NonInfiniteScrollEndTitle,还有更多精彩瞬间可供观看
+Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,照片
 Feature.Moments.Label.PostDeleted,精彩瞬间已删除
 Feature.Moments.Label.PostRemovedBody,你发布的精彩瞬间违反了社区准则。
@@ -4157,6 +4230,8 @@ Feature.Moments.Label.Tone.Cinematic,电影感
 Feature.Moments.Label.Tone.Funny,
 Feature.Moments.Label.Tone.Hype,活力
 Feature.Moments.Label.Tone.Neutral,中性
+Feature.Moments.Label.TotalReactions,总回应量
+Feature.Moments.Label.TotalViews,总观看次数
 Feature.Moments.Label.Videos,
 Feature.Moments.Label.VoiceCoachmarkBody,输入视频旁白脚本
 Feature.Moments.Label.VoiceCoachmarkTitle,
@@ -4165,18 +4240,21 @@ Feature.Moments.Label.VoiceGenerationFailedBody,旁白生成失败。
 Feature.Moments.Label.VoiceHelperDefault,语音已剪辑‌为视频长度
 Feature.Moments.Label.VoiceLimitReachedBody,请等待一分钟，然后重试
 Feature.Moments.Label.VoiceModerationError,你的脚本必须遵守安全规则
-Feature.Moments.Label.VoicePlaceholder,请输入你的旁白脚本。字符数限制为 {maxCount} 个
+Feature.Moments.Label.VoicePlaceholder,请输入你希望旁白说的话。
 Feature.Moments.Label.VoiceTimeoutBody,旁白生成超时。
 Feature.Moments.Label.VoiceTooManyNumbersError,脚本包含的数字过多
 Feature.Moments.Label.WriteComment,留下评论
 Feature.Moments.Title.Comments,评论
-Feature.Moments.Title.CommentsWithCappedCount,评论（{count} 条以上）
-Feature.Moments.Title.CommentsWithCount,评论（{count} 条）
+Feature.Moments.Title.CommentsWithCappedCount,超过 {count} 条评论
+Feature.Moments.Title.CommentsWithCount,{count} 条评论
 Feature.Moments.Title.GenerateTextFeedbackReason,内容有什么问题？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页面吗？
 Feature.Moments.Title.MomentRemoved,精彩瞬间已移除
+Feature.Moments.Title.PostInsights,页面标题
 Feature.Moments.Title.ReportPost,举报帖子
+Feature.Moments.Tooltip.ShareFirstMomentBody,从截图创建精彩瞬间
+Feature.Moments.Tooltip.ShareFirstMomentTitle,分享你的第一个精彩瞬间
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,注销
 Feature.NotApproved.Action.Pending,
