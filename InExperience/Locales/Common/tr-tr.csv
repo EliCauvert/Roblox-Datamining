@@ -269,7 +269,9 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,"CurveAnimation, çok fazl
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,"CurveAnimation, {maxAllowed} taneden fazla MarkerCurve içeriyor. Lütfen en fazla {maxAllowed} MarkerCurve alt öğesi bulunmasına dikkat et."
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,"CurveAnimation, {count} İşaretçili bir MarkerCurve içeriyor. MarkerCurve başına maksimum {maxAllowed} işaretçi olabilir. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation beklenmedik bir alt öğe içeriyor: {childName}
+Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{InstanceFullName}.{FieldName} {AssetId} animasyonunu {Version} versiyonuna sabitliyor ancak animasyonlar henüz bir versiyona sabitlenemez. ""&version={Version}"" ifadesini kaldırıp tekrar dene."
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,{AssetId} kimlikli varlık ({InstanceFullName}.{FieldName}) yayınlanmadı. Yayınla ve tekrar dene.
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,{InstanceFullName}.{FieldName} {AssetId} varlığının {Version} versiyonunu kullanıyor ancak şu anda yalnızca versiyon 1 destekleniyor. Versiyon 1'i kullanıp tekrar dene.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Pazar yerindeki Dinamik Kafalar, kafes üzerindeki gözler ve ağız köşeleri mesh köşeleriyle hizalanacak şekilde düzgünce kafeslenmelidir. Lütfen kafeslemeni ve mesh ile hizalamasını iyileştir."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Dinamik Kafa için gülümseme ifadesi algılanamıyor. Kafada ağzın bulunduğu yerle eşleşmesi için lütfen ağzın kafes işaretlerini ayarla ve gülümseme ifadesini gösterebildiğinden emin ol.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Dinamik Kafa için sol göz kapalı ifadesi algılanamıyor. Kafada sol gözün bulunduğu yerle eşleşmesi için lütfen sol gözün kafes işaretlerini ayarla ve gözün kapatılabildiğinden emin ol.
@@ -282,6 +284,8 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Yayıcı Alan Eşiğ
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} çok Yayıcı. Yayıcı alan × yoğunluk sınırı aşıyor (şu anda yüzde {emissivePercentage}, yüzde {maxEmissivePercentage} veya daha az olmalıdır). Parlayan alanı küçült veya Yayıcı Gücünü düşür."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Yayıcı Alan Aşıldı.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} çok Yayıcı. Yayıcı alan × yoğunluk sınırı aşıyor (şu anda {emissiveArea}, {maxEmissiveArea} veya daha az olmalıdır). Parlayan alanı küçült veya Yayıcı Gücünü düşür."
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,Deneyimlerde oluşturulan öğeler için yayıcı haritalar desteklenmiyor. Her SurfaceAppearance'tan EmissiveMaskContent'i kaldır.
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,"Çıkartmalar yayıcı olamaz. ""{InstancePath}"" üzerinde EmissiveMaskContent'i kaldır, EmissiveStrength'i 1 ve EmissiveTint'i beyaz olarak ayarla."
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Yayınlanan animasyonda geçerli bir maksimum parça öteleme değeri eksik. Lütfen animasyonu yeniden yayınla.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Yayınlanan animasyonda geçerli bir kullanıcı tarafından oluşturulmuş içerik (KTOİ) ifade işaretleyicisi eksik. Lütfen animasyonu yeniden yayınla.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Yayınlanan animasyon verilerinden maksimum parça ötelemesi hesaplanamadı. Lütfen animasyonu yeniden yayınla.
@@ -942,6 +946,7 @@ CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,Kontroller...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Arkadaşları Davet Et
+CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,Arkadaşlara Katıl veya Arkadaşları Davet Et
 CoreScripts.InGameMenu.PageTitle.Players,Kişiler
 CoreScripts.InGameMenu.PageTitle.Report,Bildir
 CoreScripts.InGameMenu.PageTitle.VRComfortSettings,Konfor Ayarları
@@ -1957,6 +1962,7 @@ Feature.Build.Action.Edit,Düzenle
 Feature.Build.Action.HideAutosaved,Otomatik kaydedilenleri gizle
 Feature.Build.Action.KeepBuilding,İnşa etmeye devam et
 Feature.Build.Action.ManageLimit,Sınırı yönet
+Feature.Build.Action.ManageUsage,Kullanımı yönet
 Feature.Build.Action.Next,Sonraki
 Feature.Build.Action.NotNow,Şimdi değil
 Feature.Build.Action.NotifyMe,Bana haber ver
@@ -2034,7 +2040,9 @@ Feature.Build.Analytics.Overview,Genel Bakış
 Feature.Build.Analytics.Percent,Yüzde {number}
 Feature.Build.Analytics.Players,Oyuncular
 Feature.Build.Analytics.Sheet.Analyze,Analiz et
+Feature.Build.Analytics.Sheet.AskAboutThis,Bununla ilgili soru sor
 Feature.Build.Analytics.Sheet.ViewInOverview,Genel Bakışta Görüntüle
+Feature.Build.Analytics.Sheet.ViewMoreStats,Daha fazla istatistik görüntüle
 Feature.Build.Analytics.Summary.Arppu,Ödeme yapan oyuncu başına kazanılan ortalama Robux.
 Feature.Build.Analytics.Summary.D1Retention,Ertesi gün geri dönen yeni oyuncuların oranı.
 Feature.Build.Analytics.Summary.DailyActiveUsers,Seçilen dönemde katılan benzersiz oyuncular.
@@ -2056,10 +2064,13 @@ Feature.Build.Analytics.Title.TotalPlaytime,Toplam oynama süresi
 Feature.Build.Analytics.Visits,Ziyaretler
 Feature.Build.Content.NewGame,Yeni oyun
 Feature.Build.Description.ActivateDeveloperProduct,Geliştirici ürününü ({PRODUCT_ID}) satışa çıkar.
+Feature.Build.Description.ActivateGamePass,{PRODUCT_ID} kimlikli Oyun Biletini satışa çıkar.
+Feature.Build.Description.ActivateSubscription,{PRODUCT_ID} kimlikli aboneliği etkinleştir.
 Feature.Build.Description.AdCampaignModerationReview,Tüm reklam kampanyaları Roblox moderasyonu tarafından incelenir. Bu işlem 24 saate kadar sürebilir.
 Feature.Build.Description.AdCampaignSheetRunDates,{startDate}-{endDate} arasında yayınlanır
 Feature.Build.Description.AdComplete,Reklamın sona erdi. Sonuçlarını kontrol et.
 Feature.Build.Description.AdModerationReview,Tüm reklamlar Roblox moderasyonu tarafından incelenir ve bu işlem 24 saate kadar sürebilir.
+Feature.Build.Description.AdvancedModel,Üstün kalite için birebir. Kullanım hakkı 3 kat daha hızlı tükenir.
 Feature.Build.Description.AdvertisingAgreement,Oluştur'u seçerek {advertisingTermsStart}Roblox Reklam Şartları{advertisingTermsEnd} ve {advertisingStandardsStart}Reklam Standartları{advertisingStandardsEnd}'nı kabul etmiş olursun.
 Feature.Build.Description.ArchiveRemoval,Bu oyunu arşivlersen oyun İnşa Et'ten kaldırılır. Yaratıcı Merkezi'nde veya Roblox Studio'da oyuna erişmeye ve oyunu geri yüklemeye devam edebilirsin.
 Feature.Build.Description.AutoBuyUsage,Bir şeyler oluştururken otomatik olarak ek İnşa Et kullanım hakkı satın almak için Robux'unu kullan. İstediğin zaman günlük harcama limiti belirleyebilirsin.
@@ -2072,9 +2083,17 @@ Feature.Build.Description.CampaignRunDates,Kampanyanız {startDate}-{endDate} ar
 Feature.Build.Description.ChooseAdCampaignLength,Reklamının ne kadar süreyle yayınlanmasını istediğini seç.
 Feature.Build.Description.ChoosePlaytesters,Oyununun ön izlemesini yapacak arkadaşları seç.
 Feature.Build.Description.CreateDeveloperProduct,"{PRICE} Robux karşılığında satışa kapalı olarak ""{NAME}"" oluştur."
+Feature.Build.Description.CreateGamePass,
+Feature.Build.Description.CreateSubscription,"{PRICE} Robux karşılığında aktif olmayan ""{NAME}"" oluştur."
 Feature.Build.Description.DeactivateDeveloperProduct,{PRODUCT_ID} geliştirici ürününü satıştan kaldır.
+Feature.Build.Description.DeactivateGamePass,{PRODUCT_ID} kimlikli Oyun Biletini satıştan kaldır.
+Feature.Build.Description.DeactivateSubscription,{PRODUCT_ID} kimlikli aboneliği satıştan kaldır. Mevcut aboneler yenilemeye devam eder.
+Feature.Build.Description.DeactivateSubscriptionCancelRenewals,{PRODUCT_ID} kimlikli aboneliği satıştan kaldır ve mevcut aboneler için gelecekteki yenilemeleri durdur.
+Feature.Build.Description.DefaultModel,Hızlı düzenlemeler ve düzenli iyileştirmeler yapmak için birebir.
+Feature.Build.Description.DeleteSubscription,{PRODUCT_ID} kimlikli aboneliği sil.
 Feature.Build.Description.EarnedRobuxAppliedFirst,Robux kazandıysan bunlar öncelikle reklam kampanyasının maliyetine uygulanacak.
 Feature.Build.Description.EnableBuildNotifs,İnşa Et'ten güncellemeler almak için cihaz ayarlarında bildirimleri aç.
+Feature.Build.Description.EnableUsageOrWait,Bir şeyler oluşturmaya devam etmek için ek kullanım hakkını etkinleştir veya haftalık kullanımının sıfırlanmasını bekle.
 Feature.Build.Description.FriendsLinkOnly,Bu bağlantıya yalnızca arkadaşların erişebilir. Daha fazla insanın oynamasını istiyorsan oyununun Kitle ayarını değiştir.
 Feature.Build.Description.GameConfiguration,Öğeleri satma ve oyununu tanıtma şeklini değiştir.
 Feature.Build.Description.GameCreationDone,Oyununun oluşturulmasını ve yayınlanmasını tamamladım. Oynanış testini yapmak için açabilirsin.
@@ -2107,6 +2126,8 @@ Feature.Build.Description.ShopButton,Bir alışveriş giriş noktası ekle
 Feature.Build.Description.ShortAdCampaign,"Oyuncuların, oyunun hakkında ne düşündüğünü görmenin hızlı bir yolu."
 Feature.Build.Description.StopBuild,Bu talep hâlâ devam ediyor. Şimdi son verirsen tamamlanmayacak ve talebi tekrar göndermen gerekecek.
 Feature.Build.Description.UpdateDeveloperProduct,Geliştirici ürününü ({PRODUCT_ID}) güncelle.
+Feature.Build.Description.UpdateGamePass,{PRODUCT_ID} kimlikli Oyun Biletini güncelle.
+Feature.Build.Description.UpdateSubscription,{PRODUCT_ID} kimlikli aboneliği güncelle.
 Feature.Build.Description.UseAdCreditsInAdsManager,Bunları kullanmak için Reklam Yöneticisi'ne gitmen gerekecek.
 Feature.Build.Error.AdForbidden,Hesabın veya oyunun şu anda reklam yayınlayamıyor. Bunun bir hata olduğunu düşünüyorsan destek ile iletişime geç.
 Feature.Build.Error.AdInsufficientFunds,Bu reklamı oluşturmak için yeterli Robux'un yok. Daha fazla Robux ekle ve tekrar dene.
@@ -2138,6 +2159,7 @@ Feature.Build.Label.AdViews,Reklam görüntülemeleri
 Feature.Build.Label.AdditionalUsage,Ek İnşa Et kullanım hakkı
 Feature.Build.Label.AdditionalUsed,{USED}/{LIMIT} kullanıldı
 Feature.Build.Label.AdsManager,Reklam Yöneticisi
+Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Tüm oyunlar
 Feature.Build.Label.AmountAvailable,{AMOUNT} mevcut
@@ -2154,6 +2176,7 @@ Feature.Build.Label.CreatorHub,Yaratıcı Merkezi
 Feature.Build.Label.DateRange,{startDate}-{endDate}
 Feature.Build.Label.DefaultDeveloperProduct,Ürün ({PRODUCT_ID})
 Feature.Build.Label.DefaultDeveloperProductName,geliştirici ürünü
+Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Silindi
 Feature.Build.Label.DescribeIdea,Fikrini tarif et
 Feature.Build.Label.Description,
@@ -2185,6 +2208,7 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,Yönetilen fiyatlandırma
 Feature.Build.Label.ManagedPricingMixed,Mevcut ürünler arasında karışık
 Feature.Build.Label.MaximizeForGamePlays,Oyun oynama sayısını en üst düzeye çıkar
+Feature.Build.Label.ModelUnavailable,Model kullanılamıyor
 Feature.Build.Label.Models3D,3 Boyutlu Modeller
 Feature.Build.Label.MyGames,Oyunlarım
 Feature.Build.Label.Name,
@@ -2221,6 +2245,10 @@ Feature.Build.Label.SelectOption,Bir seçenek belirle
 Feature.Build.Label.ShopButton,Alışveriş yap düğmesi
 Feature.Build.Label.ShopUi,Alışveriş yap kullanıcı arayüzü
 Feature.Build.Label.Sounds,Sesler
+Feature.Build.Label.SubscriptionProductType,Ürün tipi: {PRODUCT_TYPE}
+Feature.Build.Label.SubscriptionProductTypeConsumable,Tüketilebilir
+Feature.Build.Label.SubscriptionProductTypeCurrency,Para birimi
+Feature.Build.Label.SubscriptionProductTypeDurable,Dayanıklı
 Feature.Build.Label.TargetAllRobloxPlayers,Tüm Roblox oyuncularını hedefle
 Feature.Build.Label.Thinking,Düşünüyor
 Feature.Build.Label.Title,Başlık
@@ -2421,15 +2449,18 @@ Feature.Build.Title.BuildUnavailable,İnşa Et kullanılamıyor
 Feature.Build.Title.BuildUsage,İnşa Et kullanımı
 Feature.Build.Title.ChangesNotLive,Değişikliklerin henüz aktif değil
 Feature.Build.Title.ChatBuildUnavailable,İnşa Et kullanılamıyor.
+Feature.Build.Title.ChooseModel,İnşa Et ajanını seç
 Feature.Build.Title.Content,İçerik
 Feature.Build.Title.CreateYourAd,Reklamını oluştur
 Feature.Build.Title.DailyRobuxReached,Günlük Robux sınırına ulaşıldı
 Feature.Build.Title.DeveloperProduct,Geliştirici ürünü
 Feature.Build.Title.EditDeveloperProduct,Ürünü düzenle
 Feature.Build.Title.ExperienceAudience,Deneyim kitlesi
+Feature.Build.Title.FreeLimitReached,Ücretsiz kullanım sınırına ulaştın
 Feature.Build.Title.FreeUsageReached,Ücretsiz İnşa Et kullanım sınırına ulaşıldı
 Feature.Build.Title.FriendsOnlyPlay,Yalnızca arkadaşlar oynayabilir
 Feature.Build.Title.GameCreationDone,Oyun oluşturma tamamlandı
+Feature.Build.Title.GamePass,Oyun Bileti
 Feature.Build.Title.GenericError,Bir şeyler ters gitti
 Feature.Build.Title.GetUsers,Kullanıcıları al
 Feature.Build.Title.ManagedPricingAcknowledgement,Yönetilen Fiyatlandırma açılsın mı?
@@ -2447,6 +2478,7 @@ Feature.Build.Title.PromoteGamePaid,Daha fazla oyuncu seni bekliyor
 Feature.Build.Title.PushNotifications,Anlık bildirimler
 Feature.Build.Title.RevertLastChange,Son değişiklik geri döndürülsün mü?
 Feature.Build.Title.StopBuild,İnşa etme işlemi durdurulsun mu?
+Feature.Build.Title.Subscription,Abonelik
 Feature.Build.Title.Tasks,Görevler
 Feature.Build.Title.TurnActivity,Etkinliği aç
 Feature.Build.Title.UseYourAdCredits,Reklam kredilerini kullan
@@ -3586,6 +3618,7 @@ Feature.Moments.Action.AddMusic,Müzik Ekle
 Feature.Moments.Action.AddSticker,Çıkartma Ekle
 Feature.Moments.Action.AddText,Metin Ekle
 Feature.Moments.Action.AddVoice,Ses Ekle
+Feature.Moments.Action.Analytics,Analiz
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -3602,7 +3635,7 @@ Feature.Moments.Action.GenerateText,Metin Oluştur
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Yararlı değil
 Feature.Moments.Action.GenerateTextFeedbackPolicy,Uygunsuz veya Kural Dışı
 Feature.Moments.Action.Hide,Ayrıntıları gizle
-Feature.Moments.Action.HowToCapture,Nasıl Yakalama Yapılır?
+Feature.Moments.Action.HowToCapture,Nasıl yakalama yapılacağını görüntüle
 Feature.Moments.Action.Join,
 Feature.Moments.Action.KeepEditing,Düzenlemeye devam et
 Feature.Moments.Action.Leave,
@@ -3637,6 +3670,8 @@ Feature.Moments.Disclaimer.EveryoneMoments,Anlardaki herkes yayınlananları gö
 Feature.Moments.Label.All,
 Feature.Moments.Label.AllowComments,Yorumlara izin ver
 Feature.Moments.Label.AttemptingJoinExperience,{placeName} dünyasına katılmaya çalışılıyor. Bu işlem birkaç saniye sürebilir.
+Feature.Moments.Label.AverageCompletion,Ortalama tamamlama
+Feature.Moments.Label.AverageWatchTime,Ortalama izleme süresi
 Feature.Moments.Label.CaptureLibrary,Yakalama kütüphanen
 Feature.Moments.Label.ChooseVoice,Ses seç
 Feature.Moments.Label.CommentAuthorFallback,Kullanıcı {userId}
@@ -3650,13 +3685,13 @@ Feature.Moments.Label.CommentRejectedByFilter,Yorumun paylaşılmadı. Lütfen g
 Feature.Moments.Label.CommentSendStatusUnknown,Gönderme durumu bilinmiyor
 Feature.Moments.Label.CommentSending,
 Feature.Moments.Label.CommentSignInRequired,Yorum yapmak için lütfen tekrar giriş yap.
-Feature.Moments.Label.CommentTimestampDays,{count} gün
-Feature.Moments.Label.CommentTimestampHours,{count} sa.
-Feature.Moments.Label.CommentTimestampMinutes,{count} dk.
-Feature.Moments.Label.CommentTimestampMonths,{count} ay
+Feature.Moments.Label.CommentTimestampDays,{count} gün önce
+Feature.Moments.Label.CommentTimestampHours,{count} saat önce
+Feature.Moments.Label.CommentTimestampMinutes,{count} dk. önce
+Feature.Moments.Label.CommentTimestampMonths,{count} ay önce
 Feature.Moments.Label.CommentTimestampNow,şimdi
-Feature.Moments.Label.CommentTimestampWeeks,{count} hafta
-Feature.Moments.Label.CommentTimestampYears,{count} yıl
+Feature.Moments.Label.CommentTimestampWeeks,{count} hft. önce
+Feature.Moments.Label.CommentTimestampYears,{count} yıl önce
 Feature.Moments.Label.CommentingUnavailable,Yorum yapma özelliği şu anda kullanılamıyor. Lütfen daha sonra tekrar dene.
 Feature.Moments.Label.CommentsDisabled,Yorumlar devre dışı
 Feature.Moments.Label.CommentsReadOnly,Yorumlar salt okunur
@@ -3668,6 +3703,8 @@ Feature.Moments.Label.DeleteMomentBody,Bir An silindikten sonra onu kurtarmak m�
 Feature.Moments.Label.DeleteMomentTitle,An silinsin mi?
 Feature.Moments.Label.DeleteVoiceoverBody,"Bu, işlem metnini ve seslendirmeni siler. İstediğin zaman baştan başlayabilirsin."
 Feature.Moments.Label.DeleteVoiceoverTitle,Seslendirme silinsin mi?
+Feature.Moments.Label.DurationSeconds,{seconds} sn.
+Feature.Moments.Label.Engagement,Etkileşim
 Feature.Moments.Label.Error,
 Feature.Moments.Label.ExceedsCharacterLimit,Karakter sınırını aşıyor
 Feature.Moments.Label.FeedEndBody,Daha sonra tekrar kontrol et veya kendi Anını oluştur.
@@ -3676,6 +3713,7 @@ Feature.Moments.Label.FeedFailedToLoad,Sayfa yüklenemedi
 Feature.Moments.Label.FeedMyMoments,Anlarım
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,Henüz yorum yok. İlk yorumu yapan sen ol!
+Feature.Moments.Label.GameJoinConversion,Oyuna katılma dönüşümü
 Feature.Moments.Label.HowToUseCaptureTitle,Yakalama nasıl kullanılır?
 Feature.Moments.Label.LinkCopied,Bağlantı kopyalandı
 Feature.Moments.Label.LinkCopyFailed,Bağlantı kopyalanamadı.
@@ -3695,6 +3733,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,Henüz yorum yok
 Feature.Moments.Label.NonInfiniteScrollEndTitle,İzlenecek daha fazla An var
+Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Fotoğraflar
 Feature.Moments.Label.PostDeleted,An silindi
 Feature.Moments.Label.PostRemovedBody,"Paylaştığın An, Topluluk Standartlarımıza aykırı."
@@ -3724,6 +3763,8 @@ Feature.Moments.Label.Tone.Cinematic,Sinematik
 Feature.Moments.Label.Tone.Funny,Komik
 Feature.Moments.Label.Tone.Hype,Heyecan verici
 Feature.Moments.Label.Tone.Neutral,Nötr
+Feature.Moments.Label.TotalReactions,Toplam tepki
+Feature.Moments.Label.TotalViews,Toplam görüntüleme sayısı
 Feature.Moments.Label.Videos,Videolar
 Feature.Moments.Label.VoiceCoachmarkBody,Video anlatımı için bir metin yaz
 Feature.Moments.Label.VoiceCoachmarkTitle,Bir seslendirme oluştur
@@ -3732,17 +3773,18 @@ Feature.Moments.Label.VoiceGenerationFailedBody,Seslendirme oluşturulamadı.
 Feature.Moments.Label.VoiceHelperDefault,"Ses, video uzunluğuna göre kırpıldı"
 Feature.Moments.Label.VoiceLimitReachedBody,"Bir dakika bekle, ardından tekrar dene"
 Feature.Moments.Label.VoiceModerationError,Metnin güvenlik kurallarına uymalıdır
-Feature.Moments.Label.VoicePlaceholder,Seslendirme metnini yaz. {maxCount} karakter sınırı
+Feature.Moments.Label.VoicePlaceholder,Seslendirmenin ne söylemesini istediğini yaz.
 Feature.Moments.Label.VoiceTimeoutBody,Seslendirme oluşturma işlemi zaman aşımına uğradı.
 Feature.Moments.Label.VoiceTooManyNumbersError,Komut dosyası çok fazla sayıda rakam içeriyor
 Feature.Moments.Label.WriteComment,Yorum yaz
 Feature.Moments.Title.Comments,Yorumlar
-Feature.Moments.Title.CommentsWithCappedCount,Yorumlar ({count}+)
-Feature.Moments.Title.CommentsWithCount,Yorumlar ({count})
+Feature.Moments.Title.CommentsWithCappedCount,En az {count} yorum
+Feature.Moments.Title.CommentsWithCount,{count} yorum
 Feature.Moments.Title.GenerateTextFeedbackReason,Ne yanlış gitti?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,An yaratmadan çıkılsın mı?
 Feature.Moments.Title.MomentRemoved,An kaldırıldı
+Feature.Moments.Title.PostInsights,Sayfa başlığı
 Feature.Moments.Title.ReportPost,Paylaşımı raporla
 Feature.Moments.Tooltip.Creation,"Deneyimdeki herkes, Anlarını görüntüleyebilir."
 Feature.Moments.Tooltip.ShareFirstMomentBody,Yakaladığın görüntülerden bir An oluştur

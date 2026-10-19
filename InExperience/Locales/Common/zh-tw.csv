@@ -268,6 +268,9 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation 包含的 C
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation 包含 {maxAllowed} 個以上的 MarkerCurve。請確保 MarkerCurve 後代的數量不超過 {maxAllowed} 個。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation 包含一個含有 {count} 個 Marker 的 MarkerCurve（每個 MarkerCurve 的上限為 {maxAllowed} 個）。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation 包含未預期的子資料夾類型：{childName}
+Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,{InstanceFullName}.{FieldName} 將動畫 {AssetId} 置頂至版本 {Version}，但動畫目前尚無法置頂至特定版本。請移除「&version={Version}」，然後再試一次。
+Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,素材 {AssetId}（{InstanceFullName}.{FieldName}）未發佈。請發佈後再試一次。
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,{InstanceFullName}.{FieldName} 使用的是素材 {AssetId} 的第 {Version} 版，但目前只支援第 1 版。請使用第 1 版，然後再試一次。
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,市集上的動態頭部必須妥善置於圍籠中，以便圍籠上的眼睛和嘴巴頂點與網格頂點對齊。請改善置於圍籠及其與網格的對齊情況。
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,無法偵測到動態頭部微笑的表情。請根據嘴巴在頭部上的位置，調整嘴巴的圍籠地標，並確保嘴巴是微笑的狀態。
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,無法偵測到動態頭部閉上左眼的表情。請根據左眼在頭部上的位置，調整左眼的圍籠地標，並確保眼睛是閉上的狀態。
@@ -280,6 +283,8 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,發光區域超過�
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,{meshName} 的發光度太高。發光區域 × 強度超過限制（目前為 {emissivePercentage}%，必須小於或等於 {maxEmissivePercentage}%）。請縮小發光區域或降低其 EmissiveStrength。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,超出發光區域。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,{assetTypeName} 的發光度太高。發光區域 × 強度超過限制（目前為 {emissiveArea}，必須小於或等於 {maxEmissiveArea}）。請縮小發光區域或降低其 EmissiveStrength。
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,在體驗中建立的道具不支援發光貼圖。請從每個 SurfaceAppearance 中移除 EmissiveMaskContent。
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,貼花不具有發光效果。在「{InstancePath}」上，移除 EmissiveMaskContent，將 EmissiveStrength 設為 1，並將 EmissiveTint 設為白色。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,已發佈的動畫缺少有效的部位最大平移距離值。請重新發佈此動畫。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,已發佈的動畫缺少有效的 UGC 動作標記。請重新發佈此動畫。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,無法從已發佈的動畫資料中，計算部位的最大平移距離。請重新發佈此動畫。
@@ -921,6 +926,9 @@ CoreScripts.InGameMenu.GameSettings.VRThirdPersonFixedCamEnabled,第三人稱固
 CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader,檢視與控制
 CoreScripts.InGameMenu.GameSettings.VignetteEnabled,已啟用 VR 暈影
 CoreScripts.InGameMenu.GameSettings.VoiceChatVolume,語音聊天音量
+CoreScripts.InGameMenu.GameSettings.VoiceTypingMode,語音輸入模式
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeContinuous,自動傳送
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeStandard,手動傳送
 CoreScripts.InGameMenu.GameSettings.Volume,音量
 CoreScripts.InGameMenu.GameSettings.VrControlsTitle,VR 控制選項
 CoreScripts.InGameMenu.InviteFriends.ErrorOccured,發生錯誤，請重新嘗試。
@@ -937,6 +945,7 @@ CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,操作……
 CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,邀請好友
+CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,加入或邀請好友
 CoreScripts.InGameMenu.PageTitle.Players,帳號
 CoreScripts.InGameMenu.PageTitle.Report,檢舉
 CoreScripts.InGameMenu.PageTitle.VRComfortSettings,舒適度設定
@@ -1265,6 +1274,37 @@ CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,平台廣
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,搜尋廣告
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,贊助廣告
+CreatorDashboard.Analytics.Overview.Description.D1Retention,隔天有多少新玩家再次遊玩。
+CreatorDashboard.Analytics.Overview.Description.D7Retention,一週後有多少新玩家再次遊玩。
+CreatorDashboard.Analytics.Overview.Description.DailyActiveUsers,每天有多少人玩你的遊戲。
+CreatorDashboard.Analytics.Overview.Description.NewUserSessionTime,新玩家首次遊玩時在遊戲中停留的時間長度。
+CreatorDashboard.Analytics.Overview.Description.PayerConversion,遊戲中消費玩家所占的百分比。
+CreatorDashboard.Analytics.Overview.Description.RobuxSpent,玩家在遊戲中花費的 Robux 金額。
+CreatorDashboard.Analytics.Overview.HowToImprove,如何改善：
+CreatorDashboard.Analytics.Overview.Improve.D1Retention,"• 使主要活動玩起來很有趣，讓人想一玩再玩
+• 為回流玩家提供每日獎勵
+• 儲存玩家進度"
+CreatorDashboard.Analytics.Overview.Improve.D7Retention,"• 新增玩家可以努力達成的目標
+• 新增等級、道具或活動
+• 讓挑戰難易度適中"
+CreatorDashboard.Analytics.Overview.Improve.DailyActiveUsers,"• 建立廣告，讓更多玩家找到你的遊戲
+• 與好友分享你的遊戲"
+CreatorDashboard.Analytics.Overview.Improve.NewUserSessionTime,"• 讓玩家快速享受遊戲樂趣
+• 為玩家設定一個目標
+• 讓遊戲的前幾分鐘更容易上手"
+CreatorDashboard.Analytics.Overview.Improve.PayerConversion,"• 新增新手組合包（首次購買的超值優惠）
+• 在適當時機顯示商店和優惠"
+CreatorDashboard.Analytics.Overview.Improve.RobuxSpent,"• 新增遊戲通行證或要販售的物品
+• 開啟管理定價功能，以賺取更多收入
+• 新增每日獎勵，吸引玩家再次遊玩並消費"
+CreatorDashboard.Analytics.Overview.Summary.AverageOverSelectedPeriod,所選時段的平均值
+CreatorDashboard.Analytics.Overview.Title.D1Retention,第 1 天保留率
+CreatorDashboard.Analytics.Overview.Title.D7Retention,第 7 天保留率
+CreatorDashboard.Analytics.Overview.Title.DailyActiveUsers,每日活躍使用者
+CreatorDashboard.Analytics.Overview.Title.FirstSessionRetention,5 分鐘後仍繼續遊玩的百分比
+CreatorDashboard.Analytics.Overview.Title.NewUserSessionTime,新使用者作業時間
+CreatorDashboard.Analytics.Overview.Title.PayerConversion,付費使用者轉換率
+CreatorDashboard.Analytics.Overview.Title.RobuxSpent,
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,往下捲動
 Feature.Accessibility.Action.ScrollUp,往上捲動
@@ -1965,6 +2005,7 @@ Feature.Build.Action.Edit,編輯
 Feature.Build.Action.HideAutosaved,隱藏自動儲存
 Feature.Build.Action.KeepBuilding,繼續建立
 Feature.Build.Action.ManageLimit,管理上限
+Feature.Build.Action.ManageUsage,管理使用量
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,通知我
@@ -1997,9 +2038,9 @@ Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,查看使用量
 Feature.Build.Analytics.AnalyzeChatPrompt,分析我過去 {days} 天的{analyzeName}。為何這項指標很重要，以及我該如何改善？
 Feature.Build.Analytics.AnalyzeName.Arppu,每位付費使用者平均收益
-Feature.Build.Analytics.AnalyzeName.D1Retention,第 1 天保留率
-Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,每日活躍使用者
-Feature.Build.Analytics.AnalyzeName.PayerConversion,付費使用者轉換率
+Feature.Build.Analytics.AnalyzeName.D1Retention,
+Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,
+Feature.Build.Analytics.AnalyzeName.PayerConversion,
 Feature.Build.Analytics.AnalyzeName.PlaythroughRate,遊戲完成率
 Feature.Build.Analytics.AnalyzeName.TotalPlaytime,總遊玩時間
 Feature.Build.Analytics.Description.Arppu,每位付費使用者平均收益是指賺取的 Robux 總金額除以付費玩家人數。此指標顯示每位買家平均消費金額。
@@ -2009,6 +2050,7 @@ Feature.Build.Analytics.Description.PayerConversion,付費使用者轉換率是�
 Feature.Build.Analytics.Description.PlaythroughRate,遊玩完成率是指完成整個遊玩作業的造訪百分比。比例越高代表玩家認為你的體驗越容易上手，而且更有意願通關。
 Feature.Build.Analytics.Description.TotalPlaytime,總遊玩時間計算某段時間內，所有玩家在體驗中花費的總時數。遊玩時間增加通常表示作業更具吸引力。
 Feature.Build.Analytics.DurationHours,{number} 小時
+Feature.Build.Analytics.DurationMinutes,{number} 分鐘
 Feature.Build.Analytics.Goal.Action.CreateAd,建立廣告
 Feature.Build.Analytics.Goal.Action.SellItems,販賣物品
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,與好友分享
@@ -2041,7 +2083,9 @@ Feature.Build.Analytics.Overview,概覽
 Feature.Build.Analytics.Percent,{number}%
 Feature.Build.Analytics.Players,玩家
 Feature.Build.Analytics.Sheet.Analyze,分析
+Feature.Build.Analytics.Sheet.AskAboutThis,詢問有關此內容的問題
 Feature.Build.Analytics.Sheet.ViewInOverview,在概覽中檢視
+Feature.Build.Analytics.Sheet.ViewMoreStats,檢視更多統計資料
 Feature.Build.Analytics.Summary.Arppu,每位付費玩家的平均 Robux 收入。
 Feature.Build.Analytics.Summary.D1Retention,隔天再次遊玩的新玩家比例。
 Feature.Build.Analytics.Summary.DailyActiveUsers,在所選期間內加入的不重複玩家。
@@ -2051,9 +2095,9 @@ Feature.Build.Analytics.Summary.TotalPlaytime,玩家在體驗中花費的總時�
 Feature.Build.Analytics.Title.Arppu,每位使用者平均每日支出
 Feature.Build.Analytics.Title.ConcurrentUsers,玩家總數
 Feature.Build.Analytics.Title.D1Retention,
-Feature.Build.Analytics.Title.D7Retention,第 7 天保留率
+Feature.Build.Analytics.Title.D7Retention,
 Feature.Build.Analytics.Title.DailyActiveUsers,
-Feature.Build.Analytics.Title.NewUserSessionTime,新使用者作業時間
+Feature.Build.Analytics.Title.NewUserSessionTime,
 Feature.Build.Analytics.Title.PayerConversion,
 Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.RobuxSpent,
@@ -2063,10 +2107,13 @@ Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,造訪次數
 Feature.Build.Content.NewGame,新遊戲
 Feature.Build.Description.ActivateDeveloperProduct,販售開發者產品 {PRODUCT_ID}。
+Feature.Build.Description.ActivateGamePass,販售遊戲通行證 {PRODUCT_ID}。
+Feature.Build.Description.ActivateSubscription,啟用訂閱 {PRODUCT_ID}。
 Feature.Build.Description.AdCampaignModerationReview,所有廣告活動都會由 Roblox 審核。此流程最多可能需要 24 小時。
 Feature.Build.Description.AdCampaignSheetRunDates,投放時間 {startDate} – {endDate}
 Feature.Build.Description.AdComplete,廣告已結束。請查看結果。
 Feature.Build.Description.AdModerationReview,所有廣告都會經由 Roblox 審核，最多可能需要 24 小時。
+Feature.Build.Description.AdvancedModel,最適合追求最高品質。使用量會以 3 倍的速度用完。
 Feature.Build.Description.AdvertisingAgreement,選擇「建立」，即表示您同意 {advertisingTermsStart}Roblox 廣告條款{advertisingTermsEnd}和{advertisingStandardsStart}廣告標準{advertisingStandardsEnd}。
 Feature.Build.Description.ArchiveRemoval,若封存此遊戲，遊戲會從「組建」中移除。你仍可在創作者中心或 Roblox Studio 中，存取並還原遊戲。
 Feature.Build.Description.AutoBuyUsage,使用你的 Robux，在你建立時自動購買額外的組建使用量。你可以隨時設定每日消費上限。
@@ -2079,9 +2126,17 @@ Feature.Build.Description.CampaignRunDates,你的活動將在 {startDate} – {e
 Feature.Build.Description.ChooseAdCampaignLength,選擇廣告投放的時間長度。
 Feature.Build.Description.ChoosePlaytesters,選擇好友預覽你的遊戲。
 Feature.Build.Description.CreateDeveloperProduct,以 {PRICE} Robux 建立「{NAME}」，已下架。
+Feature.Build.Description.CreateGamePass,
+Feature.Build.Description.CreateSubscription,以 {PRICE} Robux 建立「{NAME}」，未啟用。
 Feature.Build.Description.DeactivateDeveloperProduct,將開發者產品 {PRODUCT_ID} 下架。
+Feature.Build.Description.DeactivateGamePass,將遊戲通行證 {PRODUCT_ID} 下架。
+Feature.Build.Description.DeactivateSubscription,將訂閱 {PRODUCT_ID} 下架。現有訂閱者會繼續續訂。
+Feature.Build.Description.DeactivateSubscriptionCancelRenewals,將訂閱 {PRODUCT_ID} 下架，並停止現有訂閱者的未來續訂。
+Feature.Build.Description.DefaultModel,最適合快速編輯和一般改善。
+Feature.Build.Description.DeleteSubscription,刪除訂閱 {PRODUCT_ID}。
 Feature.Build.Description.EarnedRobuxAppliedFirst,若已賺取 Robux，這些 Robux 將會優先用於支付廣告活動費用。
 Feature.Build.Description.EnableBuildNotifs,在裝置設定中啟用通知，以接收來自組建的最新消息。
+Feature.Build.Description.EnableUsageOrWait,開啟額外使用量以繼續創作，或等待每週上限重置。
 Feature.Build.Description.FriendsLinkOnly,只有你的好友能存取此連結。若希望有更多人玩，請變更遊戲的受眾設定。
 Feature.Build.Description.GameConfiguration,變更販售物品的方式，並宣傳你的遊戲。
 Feature.Build.Description.GameCreationDone,我已建立完成並發佈你的遊戲。你可以打開遊戲試玩。
@@ -2114,6 +2169,8 @@ Feature.Build.Description.ShopButton,新增購物入口
 Feature.Build.Description.ShortAdCampaign,快速瞭解玩家對你遊戲的看法。
 Feature.Build.Description.StopBuild,這項請求仍在處理中。若現在停止，將無法完成請求，你必須再次傳送。
 Feature.Build.Description.UpdateDeveloperProduct,更新開發者產品 {PRODUCT_ID}。
+Feature.Build.Description.UpdateGamePass,更新遊戲通行證 {PRODUCT_ID}。
+Feature.Build.Description.UpdateSubscription,更新訂閱 {PRODUCT_ID}。
 Feature.Build.Description.UseAdCreditsInAdsManager,你必須前往廣告管理工具才能使用。
 Feature.Build.Error.AdForbidden,你的帳號或遊戲目前無法投放廣告。若認為其中有誤，請聯絡客服團隊。
 Feature.Build.Error.AdInsufficientFunds,你的 Robux 不足，無法建立此廣告。請增加 Robux，然後再試一次。
@@ -2145,6 +2202,7 @@ Feature.Build.Label.AdViews,廣告觀看次數
 Feature.Build.Label.AdditionalUsage,額外組建使用量
 Feature.Build.Label.AdditionalUsed,已使用 {USED}，上限 {LIMIT}
 Feature.Build.Label.AdsManager,廣告管理工具
+Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,所有遊戲
 Feature.Build.Label.AmountAvailable,尚有 {AMOUNT} 次可使用
@@ -2161,6 +2219,7 @@ Feature.Build.Label.CreatorHub,創作者中心
 Feature.Build.Label.DateRange,{startDate} – {endDate}
 Feature.Build.Label.DefaultDeveloperProduct,產品 {PRODUCT_ID}
 Feature.Build.Label.DefaultDeveloperProductName,開發者產品
+Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,已刪除
 Feature.Build.Label.DescribeIdea,描述想法
 Feature.Build.Label.Description,
@@ -2192,6 +2251,7 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,管理定價
 Feature.Build.Label.ManagedPricingMixed,混合套用於現有產品
 Feature.Build.Label.MaximizeForGamePlays,最大化遊戲遊玩次數
+Feature.Build.Label.ModelUnavailable,模型無法使用
 Feature.Build.Label.Models3D,3D 模型
 Feature.Build.Label.MyGames,我的遊戲
 Feature.Build.Label.Name,
@@ -2228,6 +2288,10 @@ Feature.Build.Label.SelectOption,選擇一個選項
 Feature.Build.Label.ShopButton,商店按鈕
 Feature.Build.Label.ShopUi,商店使用者介面
 Feature.Build.Label.Sounds,音效
+Feature.Build.Label.SubscriptionProductType,產品類型：{PRODUCT_TYPE}
+Feature.Build.Label.SubscriptionProductTypeConsumable,消耗品
+Feature.Build.Label.SubscriptionProductTypeCurrency,貨幣
+Feature.Build.Label.SubscriptionProductTypeDurable,耐用品
 Feature.Build.Label.TargetAllRobloxPlayers,鎖定所有 Roblox 玩家
 Feature.Build.Label.Thinking,思考中
 Feature.Build.Label.Title,標題
@@ -2428,15 +2492,18 @@ Feature.Build.Title.BuildUnavailable,無法使用組建
 Feature.Build.Title.BuildUsage,組建使用量
 Feature.Build.Title.ChangesNotLive,變更的內容尚未發佈
 Feature.Build.Title.ChatBuildUnavailable,無法使用組建。
+Feature.Build.Title.ChooseModel,選擇你的組建代理程式
 Feature.Build.Title.Content,內容
 Feature.Build.Title.CreateYourAd,
 Feature.Build.Title.DailyRobuxReached,已達每日 Robux 上限
 Feature.Build.Title.DeveloperProduct,
 Feature.Build.Title.EditDeveloperProduct,編輯產品
 Feature.Build.Title.ExperienceAudience,體驗受眾
+Feature.Build.Title.FreeLimitReached,你已達到免費使用上限
 Feature.Build.Title.FreeUsageReached,已達到免費組建使用量上限
 Feature.Build.Title.FriendsOnlyPlay,只有好友可以遊玩
 Feature.Build.Title.GameCreationDone,已完成遊戲創作
+Feature.Build.Title.GamePass,遊戲通行證
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,取得使用者
 Feature.Build.Title.ManagedPricingAcknowledgement,是否開啟管理定價功能？
@@ -2454,6 +2521,7 @@ Feature.Build.Title.PromoteGamePaid,更多玩家正在等著你
 Feature.Build.Title.PushNotifications,推播通知
 Feature.Build.Title.RevertLastChange,是否要還原上次的變更？
 Feature.Build.Title.StopBuild,要停止建立嗎？
+Feature.Build.Title.Subscription,訂閱
 Feature.Build.Title.Tasks,任務
 Feature.Build.Title.TurnActivity,回合活動
 Feature.Build.Title.UseYourAdCredits,使用廣告點數
@@ -3536,6 +3604,7 @@ Feature.InExperienceIntervention.Description.ChatSuspension.Minute.Expired,{numb
 Feature.InExperienceIntervention.Description.ChatSuspension.Minutes,你有一或多則訊息違反規定，因此無法在接下來的 {number} 分鐘內使用聊天功能。若再次違規，可能會遭到停權。
 Feature.InExperienceIntervention.Description.Disclaimer,我們誤會了嗎？{startLink}若是如此，請告訴我們{endLink}
 Feature.InExperienceIntervention.Description.FeedbackHelps,您的回饋有助我們改善系統。
+Feature.InExperienceIntervention.Description.KeepWordsKindCommunitySafe,請使用友善的言詞，並維護社群安全。
 Feature.InExperienceIntervention.Description.LoseAccess,如果此情形再次發生，您可能會失去存取帳號的權限。
 Feature.InExperienceIntervention.Description.MayLoseAccess,如果您再次違規，可能會失去存取帳號的權限。
 Feature.InExperienceIntervention.Description.Mistake,我們誤會了嗎？
@@ -3555,6 +3624,7 @@ Feature.InExperienceIntervention.Heading.DontSharePersonalInformation,請勿分�
 Feature.InExperienceIntervention.Heading.PartyChatSuspended,暫停聊天功能權限 {remainingTime}
 Feature.InExperienceIntervention.Heading.TakeALook,我們會著手調查
 Feature.InExperienceIntervention.Heading.TextChatSuspension,文字聊天停權
+Feature.InExperienceIntervention.Heading.VoiceTypingMayBeTurnedOff,若違規，系統可能會關閉語音輸入功能
 Feature.InExperienceIntervention.Label.Complete,
 Feature.InExperienceIntervention.Label.EndsOn,結束時間：
 Feature.InExperienceIntervention.Label.Player,{username}：{evidence}
@@ -3562,7 +3632,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,剩下 {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,購買 Robux 即表示您同意我們的{termsLinkStart}使用條款{termsLinkEnd}，包括仲裁條款和撤銷政策。
-Feature.InExperienceShop.GamePass,遊戲通行證
+Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.BonusItem,額外獎勵物品
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining}後結束
@@ -3574,7 +3644,7 @@ Feature.InExperienceShop.Label.Timer.Day.Plural,{number} 天
 Feature.InExperienceShop.Label.Timer.Day.Singular,
 Feature.InExperienceShop.Label.Timer.Hour.Plural,
 Feature.InExperienceShop.Label.Timer.Hour.Singular,
-Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} 分鐘
+Feature.InExperienceShop.Label.Timer.Minute.Plural,
 Feature.InExperienceShop.Label.Timer.Minute.Singular,1 分鐘
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} 秒
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 秒
@@ -3591,6 +3661,7 @@ Feature.Moments.Action.AddMusic,新增音樂
 Feature.Moments.Action.AddSticker,新增貼紙
 Feature.Moments.Action.AddText,新增文字
 Feature.Moments.Action.AddVoice,新增語音
+Feature.Moments.Action.Analytics,
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -3607,7 +3678,7 @@ Feature.Moments.Action.GenerateText,生成文字
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,沒有幫助
 Feature.Moments.Action.GenerateTextFeedbackPolicy,不當或違規
 Feature.Moments.Action.Hide,隱藏詳細資訊
-Feature.Moments.Action.HowToCapture,如何截圖
+Feature.Moments.Action.HowToCapture,檢視擷取方式
 Feature.Moments.Action.Join,
 Feature.Moments.Action.KeepEditing,繼續編輯
 Feature.Moments.Action.Leave,
@@ -3642,6 +3713,8 @@ Feature.Moments.Disclaimer.EveryoneMoments,參與「美好時光」的所有人�
 Feature.Moments.Label.All,
 Feature.Moments.Label.AllowComments,允許留言
 Feature.Moments.Label.AttemptingJoinExperience,正在嘗試加入 {placeName}。這可能需要幾秒鐘。
+Feature.Moments.Label.AverageCompletion,平均完成度
+Feature.Moments.Label.AverageWatchTime,平均觀看時間
 Feature.Moments.Label.CaptureLibrary,你的截圖資料庫
 Feature.Moments.Label.ChooseVoice,選擇語音
 Feature.Moments.Label.CommentAuthorFallback,使用者 {userId}
@@ -3655,13 +3728,13 @@ Feature.Moments.Label.CommentRejectedByFilter,留言未張貼，請修改後再�
 Feature.Moments.Label.CommentSendStatusUnknown,傳送狀態未知
 Feature.Moments.Label.CommentSending,正在傳送...
 Feature.Moments.Label.CommentSignInRequired,如要留言，請重新登入。
-Feature.Moments.Label.CommentTimestampDays,{count} 天
-Feature.Moments.Label.CommentTimestampHours,{count} 小時
-Feature.Moments.Label.CommentTimestampMinutes,{count} 分鐘
-Feature.Moments.Label.CommentTimestampMonths,{count} 個月
+Feature.Moments.Label.CommentTimestampDays,{count} 天前
+Feature.Moments.Label.CommentTimestampHours,{count} 小時前
+Feature.Moments.Label.CommentTimestampMinutes,{count} 分鐘前
+Feature.Moments.Label.CommentTimestampMonths,{count} 個月前
 Feature.Moments.Label.CommentTimestampNow,剛剛
-Feature.Moments.Label.CommentTimestampWeeks,{count} 週
-Feature.Moments.Label.CommentTimestampYears,{count} 年
+Feature.Moments.Label.CommentTimestampWeeks,{count} 週前
+Feature.Moments.Label.CommentTimestampYears,{count} 年前
 Feature.Moments.Label.CommentingUnavailable,目前無法留言，請稍後再試。
 Feature.Moments.Label.CommentsDisabled,留言功能已停用
 Feature.Moments.Label.CommentsReadOnly,留言為唯讀
@@ -3673,6 +3746,8 @@ Feature.Moments.Label.DeleteMomentBody,美好時光一經刪除即無法復原�
 Feature.Moments.Label.DeleteMomentTitle,要刪除美好時光嗎？
 Feature.Moments.Label.DeleteVoiceoverBody,此操作會清除你的文字和旁白。你可以隨時重新開始。
 Feature.Moments.Label.DeleteVoiceoverTitle,要刪除旁白嗎？
+Feature.Moments.Label.DurationSeconds,{seconds} 秒
+Feature.Moments.Label.Engagement,互動
 Feature.Moments.Label.Error,
 Feature.Moments.Label.ExceedsCharacterLimit,超過字元上限
 Feature.Moments.Label.FeedEndBody,請稍後返回查看，或建立自己的美好時光。
@@ -3681,6 +3756,7 @@ Feature.Moments.Label.FeedFailedToLoad,無法載入饋送
 Feature.Moments.Label.FeedMyMoments,我的美好時光
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,尚無留言。成為第一個留言的人！
+Feature.Moments.Label.GameJoinConversion,遊戲加入轉換率
 Feature.Moments.Label.HowToUseCaptureTitle,如何使用截圖功能
 Feature.Moments.Label.LinkCopied,連結已複製
 Feature.Moments.Label.LinkCopyFailed,無法複製連結。
@@ -3700,6 +3776,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,尚無留言
 Feature.Moments.Label.NonInfiniteScrollEndTitle,還有更多美好時光可供觀看
+Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,相片
 Feature.Moments.Label.PostDeleted,美好時光已刪除
 Feature.Moments.Label.PostRemovedBody,你張貼的「美好時光」違反了我們的《社群標準》。
@@ -3729,6 +3806,8 @@ Feature.Moments.Label.Tone.Cinematic,電影感
 Feature.Moments.Label.Tone.Funny,搞笑
 Feature.Moments.Label.Tone.Hype,充滿活力
 Feature.Moments.Label.Tone.Neutral,中性
+Feature.Moments.Label.TotalReactions,總反應次數
+Feature.Moments.Label.TotalViews,總觀看次數
 Feature.Moments.Label.Videos,
 Feature.Moments.Label.VoiceCoachmarkBody,輸入影片旁白的指令碼
 Feature.Moments.Label.VoiceCoachmarkTitle,
@@ -3737,19 +3816,22 @@ Feature.Moments.Label.VoiceGenerationFailedBody,旁白生成失敗。
 Feature.Moments.Label.VoiceHelperDefault,語音已裁剪至影片長度
 Feature.Moments.Label.VoiceLimitReachedBody,請稍候片刻，然後再試一次
 Feature.Moments.Label.VoiceModerationError,指令碼必須遵守安全規定
-Feature.Moments.Label.VoicePlaceholder,輸入你的旁白指令碼。{maxCount} 個字元上限
+Feature.Moments.Label.VoicePlaceholder,輸入你希望旁白說的內容。
 Feature.Moments.Label.VoiceTimeoutBody,旁白生成逾時。
 Feature.Moments.Label.VoiceTooManyNumbersError,指令碼包含過多數字
 Feature.Moments.Label.WriteComment,撰寫留言
 Feature.Moments.Title.Comments,留言
-Feature.Moments.Title.CommentsWithCappedCount,留言（{count} 則以上）
-Feature.Moments.Title.CommentsWithCount,留言（{count} 則）
+Feature.Moments.Title.CommentsWithCappedCount,超過 {count} 則留言
+Feature.Moments.Title.CommentsWithCount,{count} 則留言
 Feature.Moments.Title.GenerateTextFeedbackReason,發生什麼問題了嗎？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,要離開「美好時光」建立程序嗎？
 Feature.Moments.Title.MomentRemoved,「美好時光」已移除
+Feature.Moments.Title.PostInsights,頁面標題
 Feature.Moments.Title.ReportPost,檢舉貼文
 Feature.Moments.Tooltip.Creation,參與體驗的所有人皆可檢視你的「美好時光」。
+Feature.Moments.Tooltip.ShareFirstMomentBody,從截圖建立美好時光
+Feature.Moments.Tooltip.ShareFirstMomentTitle,分享第一個美好時光
 Feature.NativeAds.Label.Ad,
 Feature.NotApproved.Action.ReportMistake,回報錯誤
 Feature.NotApproved.Label.AbuseType.Advertising,
@@ -4092,7 +4174,7 @@ Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,完成報告
 Feature.ReportAbuse.Title.SelectInSceneIpReport,感謝你提出智慧財產權侵權檢舉
 Feature.ReportAbuse.Title.SelectInSceneThankYou,
 Feature.RobloxSubscription.Action.JoinIn,加入時間：{time}
-Feature.RobloxSubscription.Action.Subscribe,訂閱
+Feature.RobloxSubscription.Action.Subscribe,
 Feature.RobloxSubscription.Action.TryItForFree,
 Feature.RobloxSubscription.Body.AlreadySubscribed,您的 Plus 訂閱已提供遊戲內的福利。
 Feature.RobloxSubscription.Body.GenericError,目前無法完成此操作，請再試一次。

@@ -269,6 +269,9 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation contiene Cu
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation contiene más de {maxAllowed} MarkerCurve(s). Asegúrate de que no haya más de {maxAllowed} MarkerCurve(s) secundario(s).
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation contiene una MarkerCurve con {count} marcadores. {maxAllowed} es el máximo por MarkerCurve. Corrige la animación.
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation contiene un elemento secundario inesperado: {childName}
+Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{InstanceFullName}.{FieldName} ancla la animación {AssetId} a la versión {Version}, pero las animaciones aún no se pueden anclar a una versión. Elimina '&version={Version}' e inténtalo de nuevo."
+Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,El elemento {AssetId} ({InstanceFullName}.{FieldName}) no está publicado. Publícalo e inténtalo de nuevo.
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} usa la versión {Version} del recurso {AssetId}, pero en este momento solo se admite la versión 1. Usa la versión 1 e inténtalo de nuevo."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Las cabezas dinámicas en el mercado deben estar correctamente enjauladas para que los vértices de los ojos y la boca en la jaula se alineen con los vértices de la malla. Mejora tu enjaulamiento y su alineación con la malla.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,No se puede detectar la expresión de sonrisa en la cabeza dinámica. Ajusta los puntos de referencia de la jaula de la boca para que coincidan con la ubicación de la boca en la cabeza y asegúrate de que pueda mostrar la expresión de sonrisa.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,No se puede detectar la expresión de cierre del ojo izquierdo en la cabeza dinámica. Ajusta los puntos de referencia de la jaula del ojo izquierdo para que coincidan con la ubicación del ojo en la cabeza y asegúrate de que pueda cerrarse.
@@ -281,6 +284,8 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Área emisiva por en
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} es demasiado emisivo. El área emisiva × la intensidad supera el límite (actualmente {emissivePercentage}%, debe ser {maxEmissivePercentage}% o menos). Reduce el área brillante o disminuye su EmissiveStrength."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Área emisiva excedida.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} es demasiado emisivo. El área emisiva × la intensidad supera el límite (actualmente {emissiveArea}, debe ser {maxEmissiveArea} o menos). Reduce el área brillante o disminuye su EmissiveStrength."
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,Los mapas emisivos no son compatibles con los elementos creados en las experiencias. Elimina EmissiveMaskContent de cada SurfaceAppearance.
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,"Las calcomanías no pueden ser emisivas. En '{InstancePath}', elimina EmissiveMaskContent, establece EmissiveStrength en 1 y establece EmissiveTint en blanco."
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,A la animación publicada le falta un valor válido de traslación máxima de la parte. Vuelve a publicar la animación.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,A la animación publicada le falta un marcador de emote UGC válido. Vuelve a publicar la animación.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,No se pudo calcular la traslación máxima de la parte a partir de los datos de la animación publicada. Vuelve a publicar la animación.
@@ -923,6 +928,9 @@ CoreScripts.InGameMenu.GameSettings.VRThirdPersonFixedCamEnabled,Cámara fija de
 CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader,Vista y controles
 CoreScripts.InGameMenu.GameSettings.VignetteEnabled,Viñeta RV activada
 CoreScripts.InGameMenu.GameSettings.VoiceChatVolume,Volumen del chat de voz
+CoreScripts.InGameMenu.GameSettings.VoiceTypingMode,Modo de escritura por voz
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeContinuous,Envío automático
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeStandard,Envío manual
 CoreScripts.InGameMenu.GameSettings.Volume,Volumen
 CoreScripts.InGameMenu.GameSettings.VrControlsTitle,CONTROLES DE RV
 CoreScripts.InGameMenu.InviteFriends.ErrorOccured,Se produjo un error. Inténtalo de nuevo.
@@ -939,6 +947,7 @@ CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,Controles...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Invitar amistades
+CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,Únete o invita a tus amistades
 CoreScripts.InGameMenu.PageTitle.Players,Personas
 CoreScripts.InGameMenu.PageTitle.Report,Denunciar
 CoreScripts.InGameMenu.PageTitle.VRComfortSettings,Ajustes de comodidad
@@ -1267,6 +1276,15 @@ CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Anuncios 
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Buscar anuncios
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Anuncios patrocinados
+CreatorDashboard.Analytics.Overview.HowToImprove,Cómo mejorar:
+CreatorDashboard.Analytics.Overview.Improve.D1Retention,"• Haz que tu actividad principal sea divertida para que los jugadores quieran repetirla.
+• Ofrece una recompensa diaria por regresar al juego.
+• Guarda el progreso de los jugadores."
+CreatorDashboard.Analytics.Overview.Improve.D7Retention,"• Añade objetivos que los jugadores puedan alcanzar.
+• Añade nuevos niveles, objetos o eventos.
+• Procura que el desafío no sea demasiado fácil ni demasiado difícil."
+CreatorDashboard.Analytics.Overview.Improve.DailyActiveUsers,"• Crea un anuncio para que más jugadores descubran tu juego.
+• Comparte tu juego con amistades."
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Ir hacia abajo
 Feature.Accessibility.Action.ScrollUp,Ir hacia arriba
@@ -2011,6 +2029,7 @@ Feature.Build.Analytics.Description.PayerConversion,La conversión de usuario de
 Feature.Build.Analytics.Description.PlaythroughRate,La tasa de juego completo es el porcentaje de visitas que completaron una sesión de juego completa. Las tasas más altas sugieren que los jugadores encuentran que tu experiencia es fácil de iniciar y que vale la pena terminarla.
 Feature.Build.Analytics.Description.TotalPlaytime,El tiempo de juego total suma el tiempo que todos los jugadores pasaron en tu experiencia durante el periodo. El aumento del tiempo de juego suele indicar sesiones más atractivas.
 Feature.Build.Analytics.DurationHours,{number} horas
+Feature.Build.Analytics.DurationMinutes,{number} minutos
 Feature.Build.Analytics.Goal.Action.CreateAd,Crea un anuncio
 Feature.Build.Analytics.Goal.Action.SellItems,Vender objetos
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,Comparte con amistades
@@ -2043,7 +2062,9 @@ Feature.Build.Analytics.Overview,
 Feature.Build.Analytics.Percent,{number}%
 Feature.Build.Analytics.Players,Jugadores
 Feature.Build.Analytics.Sheet.Analyze,Analiza
+Feature.Build.Analytics.Sheet.AskAboutThis,Preguntar sobre esto
 Feature.Build.Analytics.Sheet.ViewInOverview,Ver en el resumen
+Feature.Build.Analytics.Sheet.ViewMoreStats,Ver más estadísticas
 Feature.Build.Analytics.Summary.Arppu,Promedio de Robux obtenidos por jugador de pago.
 Feature.Build.Analytics.Summary.D1Retention,Porcentaje de nuevos jugadores que regresan al día siguiente.
 Feature.Build.Analytics.Summary.DailyActiveUsers,Jugadores únicos que se unieron durante el periodo seleccionado.
@@ -2065,6 +2086,8 @@ Feature.Build.Analytics.Title.TotalPlaytime,Tiempo de reproducción total
 Feature.Build.Analytics.Visits,Visitas
 Feature.Build.Content.NewGame,Juego nuevo
 Feature.Build.Description.ActivateDeveloperProduct,Poner el producto {PRODUCT_ID} del desarrollador a la venta.
+Feature.Build.Description.ActivateGamePass,Poner a la venta el pase de juego {PRODUCT_ID}.
+Feature.Build.Description.ActivateSubscription,Activar la suscripción {PRODUCT_ID}.
 Feature.Build.Description.AdCampaignModerationReview,Todas las campañas publicitarias son revisadas por la moderación de Roblox. Este proceso puede tardar hasta 24 horas.
 Feature.Build.Description.AdCampaignSheetRunDates,Se publica del {startDate} al {endDate}
 Feature.Build.Description.AdComplete,Tu anuncio finalizó. Consulta tus resultados.
@@ -2081,7 +2104,13 @@ Feature.Build.Description.CampaignRunDates,Tu campaña se ejecutará del {startD
 Feature.Build.Description.ChooseAdCampaignLength,Elige por cuánto tiempo quieres publicar tu anuncio.
 Feature.Build.Description.ChoosePlaytesters,Elige amistades para que previsualicen tu juego.
 Feature.Build.Description.CreateDeveloperProduct,"Crea ""{NAME}"" por {PRICE} Robux, fuera de venta."
+Feature.Build.Description.CreateGamePass,
+Feature.Build.Description.CreateSubscription,"Crea ""{NAME}"" por {PRICE} Robux, inactivo."
 Feature.Build.Description.DeactivateDeveloperProduct,Retira el producto {PRODUCT_ID} del desarrollador de la venta.
+Feature.Build.Description.DeactivateGamePass,Retirar de la venta el pase de juego {PRODUCT_ID}.
+Feature.Build.Description.DeactivateSubscription,Retirar de la venta la suscripción {PRODUCT_ID}. Los suscriptores existentes siguen renovando.
+Feature.Build.Description.DeactivateSubscriptionCancelRenewals,Retirar de la venta la suscripción {PRODUCT_ID} y detener las renovaciones futuras para los suscriptores existentes.
+Feature.Build.Description.DeleteSubscription,Eliminar la suscripción {PRODUCT_ID}.
 Feature.Build.Description.EarnedRobuxAppliedFirst,"Si has ganado Robux, estos se aplicarán primero al costo de la campaña publicitaria."
 Feature.Build.Description.EnableBuildNotifs,Activa las notificaciones en la configuración de tu dispositivo para recibir actualizaciones de la compilación.
 Feature.Build.Description.FriendsLinkOnly,Solo tus amistades pueden acceder a este enlace. Cambia la configuración de público de tu juego si quieres que más gente juegue.
@@ -2116,6 +2145,8 @@ Feature.Build.Description.ShopButton,Agregar un punto de entrada de compras
 Feature.Build.Description.ShortAdCampaign,Una forma rápida de ver qué opinan los jugadores de tu juego.
 Feature.Build.Description.StopBuild,"Esta solicitud aún está en curso. Si la detienes ahora, no se completará y tendrás que volver a enviarla."
 Feature.Build.Description.UpdateDeveloperProduct,Actualizar producto del desarrollador {PRODUCT_ID}.
+Feature.Build.Description.UpdateGamePass,Actualizar el pase de juego {PRODUCT_ID}.
+Feature.Build.Description.UpdateSubscription,Actualizar la suscripción {PRODUCT_ID}.
 Feature.Build.Description.UseAdCreditsInAdsManager,Deberás ir al Gestor de anuncios para usarlos.
 Feature.Build.Error.AdForbidden,Tu cuenta o juego no puede publicar un anuncio en este momento. Ponte en contacto con el equipo de asistencia si crees que se trata de un error.
 Feature.Build.Error.AdInsufficientFunds,No tienes suficientes Robux para crear este anuncio. Agrega más e inténtalo de nuevo.
@@ -2230,6 +2261,10 @@ Feature.Build.Label.SelectOption,Elige una opción
 Feature.Build.Label.ShopButton,Botón de la Tienda
 Feature.Build.Label.ShopUi,Interfaz de usuario de la Tienda
 Feature.Build.Label.Sounds,Sonidos
+Feature.Build.Label.SubscriptionProductType,Tipo de producto: {PRODUCT_TYPE}
+Feature.Build.Label.SubscriptionProductTypeConsumable,Consumible
+Feature.Build.Label.SubscriptionProductTypeCurrency,Moneda
+Feature.Build.Label.SubscriptionProductTypeDurable,Duradero
 Feature.Build.Label.TargetAllRobloxPlayers,Dirígete a todos los jugadores de Roblox
 Feature.Build.Label.Thinking,Pensando
 Feature.Build.Label.Title,Título
@@ -2439,6 +2474,7 @@ Feature.Build.Title.ExperienceAudience,Público de la experiencia
 Feature.Build.Title.FreeUsageReached,Se alcanzó el límite de uso gratuito de la compilación
 Feature.Build.Title.FriendsOnlyPlay,Solo las amistades pueden jugar
 Feature.Build.Title.GameCreationDone,Se completó la creación del juego
+Feature.Build.Title.GamePass,Pase del juego
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Obtener usuarios
 Feature.Build.Title.ManagedPricingAcknowledgement,¿Quieres activar Precios gestionados?
@@ -2456,6 +2492,7 @@ Feature.Build.Title.PromoteGamePaid,Hay más jugadores esperando
 Feature.Build.Title.PushNotifications,Notificaciones push
 Feature.Build.Title.RevertLastChange,¿Revertir el último cambio?
 Feature.Build.Title.StopBuild,¿Deseas detener la construcción?
+Feature.Build.Title.Subscription,Suscripción
 Feature.Build.Title.Tasks,Tareas
 Feature.Build.Title.TurnActivity,Actividad de giro
 Feature.Build.Title.UseYourAdCredits,Usa tus créditos publicitarios
@@ -3538,6 +3575,7 @@ Feature.InExperienceIntervention.Description.ChatSuspension.Minute.Expired,"Term
 Feature.InExperienceIntervention.Description.ChatSuspension.Minutes,"No podrás utilizar el chat durante otros {number} minutos porque uno o varios de tus mensajes infligen las normas. Si vuelves a infringir las normas, puedes perder el acceso a la cuenta."
 Feature.InExperienceIntervention.Description.Disclaimer,¿Cometimos un error? {startLink}Déjanos saber{endLink}
 Feature.InExperienceIntervention.Description.FeedbackHelps,Tus comentarios ayudan a mejorar nuestros sistemas.
+Feature.InExperienceIntervention.Description.KeepWordsKindCommunitySafe,Usa palabras amables y mantén segura a tu comunidad.
 Feature.InExperienceIntervention.Description.LoseAccess,"Si esto vuelve a ocurrir, puedes perder el acceso a tu cuenta."
 Feature.InExperienceIntervention.Description.MayLoseAccess,"Si vuelves a incumplir las reglas, puedes perder el acceso a tu cuenta."
 Feature.InExperienceIntervention.Description.Mistake,¿Cometimos un error?
@@ -3557,6 +3595,7 @@ Feature.InExperienceIntervention.Heading.DontSharePersonalInformation,No compart
 Feature.InExperienceIntervention.Heading.PartyChatSuspended,Chat suspendido por {remainingTime}
 Feature.InExperienceIntervention.Heading.TakeALook,Echaremos un vistazo
 Feature.InExperienceIntervention.Heading.TextChatSuspension,Suspensión de chat de texto
+Feature.InExperienceIntervention.Heading.VoiceTypingMayBeTurnedOff,La escritura por voz puede desactivarse si rompes las reglas
 Feature.InExperienceIntervention.Label.Complete,Completar
 Feature.InExperienceIntervention.Label.EndsOn,Termina el:
 Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
@@ -3564,7 +3603,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Quedan {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Al comprar Robux, aceptas nuestros {termsLinkStart}Términos de uso{termsLinkEnd}, incluida la cláusula de arbitraje y la política de revocación."
-Feature.InExperienceShop.GamePass,Pase del juego
+Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.BonusItem,Artículo extra
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Termina en {timeRemaining}
@@ -3609,7 +3648,7 @@ Feature.Moments.Action.GenerateText,Generar texto
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,No es útil
 Feature.Moments.Action.GenerateTextFeedbackPolicy,Inadecuado o infractor
 Feature.Moments.Action.Hide,Ocultar detalles
-Feature.Moments.Action.HowToCapture,Cómo capturar
+Feature.Moments.Action.HowToCapture,Ver cómo capturar
 Feature.Moments.Action.Join,
 Feature.Moments.Action.KeepEditing,Continuar editando
 Feature.Moments.Action.Leave,
@@ -3739,7 +3778,7 @@ Feature.Moments.Label.VoiceGenerationFailedBody,Error en la generación de la vo
 Feature.Moments.Label.VoiceHelperDefault,La voz se ajustó a la duración del video
 Feature.Moments.Label.VoiceLimitReachedBody,Espera un minuto y vuelve a intentarlo
 Feature.Moments.Label.VoiceModerationError,Tu script debe seguir las normas de seguridad
-Feature.Moments.Label.VoicePlaceholder,Escribe el guion de tu voz en off. Límite de caracteres: {maxCount}
+Feature.Moments.Label.VoicePlaceholder,Escribe lo que quieres que diga tu voz en off.
 Feature.Moments.Label.VoiceTimeoutBody,Se agotó el tiempo de espera para la generación de la voz en off.
 Feature.Moments.Label.VoiceTooManyNumbersError,El script contiene demasiados números
 Feature.Moments.Label.WriteComment,Escribe un comentario
@@ -3752,6 +3791,8 @@ Feature.Moments.Title.LeaveMomentCreation,¿Salir de la creación de Momento?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Reportar publicación
 Feature.Moments.Tooltip.Creation,Todas las personas que participan en la experiencia pueden ver tus Momentos.
+Feature.Moments.Tooltip.ShareFirstMomentBody,Crea un Momento a partir de tus capturas
+Feature.Moments.Tooltip.ShareFirstMomentTitle,Comparte tu primer Momento
 Feature.NativeAds.Label.Ad,
 Feature.NotApproved.Action.ReportMistake,Reportar un error
 Feature.NotApproved.Label.AbuseType.Advertising,Publicidad

@@ -6,15 +6,16 @@ local IconButton = FoundationModule.IconButton
 local IconName = FoundationModule.Enums.IconName
 local ButtonSize = FoundationModule.Enums.ButtonSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local ShouldUseDeviceSafeInsets = require(Parent.SharedFlags).FFlagFixOverlayTopInsetForDeviceSafeInsets and require(Parent.Display).shouldUseDeviceSafeInsets
 
-return function(p1) --[[ Line: 29 | Named "ExperienceDetailsBottomSheetTopBar" ]]
-	-- upvalues: ReactModule (copy), RoactNavigationModule (copy), FoundationModule (copy), IconButton (copy), IconName (copy), ButtonVariant (copy), ButtonSize (copy)
+return function(p1) --[[ Line: 32 | Named "ExperienceDetailsBottomSheetTopBar" ]]
+	-- upvalues: ReactModule (copy), RoactNavigationModule (copy), ShouldUseDeviceSafeInsets (copy), FoundationModule (copy), IconButton (copy), IconName (copy), ButtonVariant (copy), ButtonSize (copy)
 	local Tokens = p1.tokens
 	local Navigation = p1.navigation
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(false)
 	local NewSmall = Tokens.Padding.Small + Tokens.Size.Size_100
-	ReactModule.useEffect(function() --[[ Line: 39 ]]
+	ReactModule.useEffect(function() --[[ Line: 42 ]]
 		-- upvalues: p1 (copy), UseBindingResult2 (copy), NewSmall (copy)
 		local Current = p1.sheetContentRef.current
 		
@@ -23,7 +24,7 @@ return function(p1) --[[ Line: 29 | Named "ExperienceDetailsBottomSheetTopBar" ]
 			
 			return
 		end
-		local function updateTopBarState() --[[ Line: 46 ]]
+		local function updateTopBarState() --[[ Line: 49 ]]
 			-- upvalues: Current (copy), p1 (upval), NewSmall (upval), UseBindingResult2 (upval)
 			UseBindingResult2(1 - math.clamp((math.ceil(Current.AbsolutePosition.Y) + p1.deviceInsets.top - p1.topBarHeight - NewSmall) / math.max(p1.fullH - p1.briefH, 1), 0, 1))
 		end
@@ -31,7 +32,7 @@ return function(p1) --[[ Line: 29 | Named "ExperienceDetailsBottomSheetTopBar" ]
 		UseBindingResult2(1 - math.clamp((math.ceil(Current.AbsolutePosition.Y) + p1.deviceInsets.top - p1.topBarHeight - NewSmall) / math.max(p1.fullH - p1.briefH, 1), 0, 1))
 		local Connection = Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateTopBarState)
 		
-		return function() --[[ Line: 60 ]]
+		return function() --[[ Line: 63 ]]
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
@@ -39,19 +40,19 @@ return function(p1) --[[ Line: 29 | Named "ExperienceDetailsBottomSheetTopBar" ]
 		p1.overlayFrame, p1.deviceInsets.top, p1.topBarHeight, NewSmall, p1.fullH,
 		p1.briefH
 	})
-	ReactModule.useEffect(function() --[[ Line: 67 ]]
+	ReactModule.useEffect(function() --[[ Line: 70 ]]
 		-- upvalues: UseBindingResult2_1 (copy), Navigation (copy), RoactNavigationModule (upval)
 		UseBindingResult2_1(Navigation.isFocused())
-		local AddListenerResult = Navigation.addListener(RoactNavigationModule.Events.WillFocus, function() --[[ Line: 70 ]]
+		local AddListenerResult = Navigation.addListener(RoactNavigationModule.Events.WillFocus, function() --[[ Line: 73 ]]
 			-- upvalues: UseBindingResult2_1 (upval)
 			UseBindingResult2_1(true)
 		end)
-		local AddListenerResult1 = Navigation.addListener(RoactNavigationModule.Events.WillBlur, function() --[[ Line: 74 ]]
+		local AddListenerResult1 = Navigation.addListener(RoactNavigationModule.Events.WillBlur, function() --[[ Line: 77 ]]
 			-- upvalues: UseBindingResult2_1 (upval)
 			UseBindingResult2_1(false)
 		end)
 		
-		return function() --[[ Line: 78 ]]
+		return function() --[[ Line: 81 ]]
 			-- upvalues: AddListenerResult (copy), AddListenerResult1 (copy)
 			AddListenerResult.remove()
 			AddListenerResult1.remove()
@@ -63,7 +64,7 @@ return function(p1) --[[ Line: 29 | Named "ExperienceDetailsBottomSheetTopBar" ]
 		IgnoreGuiInset = true,
 		ClipToDeviceSafeArea = false,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-		ScreenInsets = Enum.ScreenInsets.None,
+		ScreenInsets = if ShouldUseDeviceSafeInsets then Enum.ScreenInsets.DeviceSafeInsets else Enum.ScreenInsets.None,
 		Enabled = UseBindingResult1
 	}, {
 		TopBarCanvasGroup = ReactModule.createElement("CanvasGroup", {
@@ -71,10 +72,10 @@ return function(p1) --[[ Line: 29 | Named "ExperienceDetailsBottomSheetTopBar" ]
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
 			ZIndex = 2,
-			Position = UDim2.new(0, 0, 0, 0),
+			Position = UDim2.new(0, 0, 0, if ShouldUseDeviceSafeInsets then -p1.deviceInsets.top else 0),
 			Size = UDim2.new(1, 0, 0, p1.topBarHeight),
 			BackgroundColor3 = Tokens.Color.Surface.Surface_0.Color3,
-			GroupTransparency = if p1.shouldMountAsFullView then 0 else UseBindingResult:map(function(p2: number): number --[[ Line: 100 ]]
+			GroupTransparency = if p1.shouldMountAsFullView then 0 else UseBindingResult:map(function(p2: number): number --[[ Line: 103 ]]
 				return 1 - p2
 			end),
 			BorderColor3 = Tokens.Color.Common.Shimmer.Color3

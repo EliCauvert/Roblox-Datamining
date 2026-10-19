@@ -269,6 +269,9 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation의 Curve에
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation에 {maxAllowed}개 이상의 MarkerCurve가 포함되어 있습니다. MarkerCurve 하위 항목은 {maxAllowed}개 이하여야 합니다.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation에 마커 {count}개가 포함된 MarkerCurve가 있습니다. MarkerCurve당 최대 개수는 {maxAllowed}개입니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation에 예상치 못한 자식 항목({childName})이 포함되어 있습니다.
+Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{InstanceFullName}.{FieldName}이(가) 애니메이션 {AssetId}을(를) {Version}버전에 고정하지만, 아직 애니메이션을 버전에 고정할 수 없습니다. '&version={Version}'을(를) 제거하고 다시 시도하세요."
+Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,애셋 {AssetId}({InstanceFullName}.{FieldName})이 게시되지 않았습니다. 애셋을 게시하고 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName}은(는) 애셋 {AssetId}의 {Version}버전을 사용하지만, 현재는 버전 1만 지원됩니다. 버전 1을 사용하고 다시 시도하세요."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,마켓플레이스의 다이내믹 헤드는 케이징을 적절히 처리하여 케이지의 눈과 입 정점이 메시 정점과 일치해야 합니다. 케이징과 메시의 정렬을 개선하세요.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,다이내믹 헤드의 미소 표정을 감지할 수 없습니다. 입의 케이지 랜드마크를 조정하여 머리에서 입이 있는 위치와 일치시키고 미소 표정을 지을 수 있는지 확인하세요.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,다이내믹 헤드의 왼쪽 눈 감기 표정을 감지할 수 없습니다. 왼쪽 눈의 케이지 랜드마크를 조정하여 머리의 왼쪽 눈과 일치시키고 감을 수 있는지 확인하세요.
@@ -281,6 +284,8 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,이미시브 영역�
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} 의 발광도가 너무 높습니다. 발광 영역 × 강도가 한도를 초과합니다(현재 {emissivePercentage}%, {maxEmissivePercentage}% 이하여야 함). 발광 영역을 줄이거나 발광 강도를 낮추세요."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,이미시브 영역이 초과되었습니다.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} 의 발광도가 너무 높습니다. 발광 영역 × 강도가 한도를 초과합니다(현재 {emissiveArea}, {maxEmissiveArea} 이하여야 함). 발광 영역을 줄이거나 발광 강도를 낮추세요."
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,체험에서 생성된 아이템은 빛 발산 맵을 지원하지 않습니다. 모든 SurfaceAppearance에서 EmissiveMaskContent를 제거하세요.
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,"데칼은 빛을 발산할 수 없습니다. '{InstancePath}'에서 EmissiveMaskContent를 제거하고, EmissiveStrength를 1로 설정하고, EmissiveTint를 흰색으로 설정하세요."
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,게시된 애니메이션에 유효한 최대 부위 이동 거리 값이 없습니다. 애니메이션을 다시 게시하세요.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,게시된 애니메이션에 유효한 UGC 감정 표현 마커가 없습니다. 애니메이션을 다시 게시하세요.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,게시된 애니메이션 데이터에서 최대 부위 이동 거리를 계산할 수 없습니다. 애니메이션을 다시 게시하세요.
@@ -921,6 +926,9 @@ CoreScripts.InGameMenu.GameSettings.VRThirdPersonFixedCamEnabled,3인칭 고정 
 CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader,보기 및 컨트롤
 CoreScripts.InGameMenu.GameSettings.VignetteEnabled,VR 비네트 활성화됨
 CoreScripts.InGameMenu.GameSettings.VoiceChatVolume,음성 채팅 볼륨
+CoreScripts.InGameMenu.GameSettings.VoiceTypingMode,음성 입력 모드
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeContinuous,자동 전송
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeStandard,수동 전송
 CoreScripts.InGameMenu.GameSettings.Volume,볼륨
 CoreScripts.InGameMenu.GameSettings.VrControlsTitle,VR 제어
 CoreScripts.InGameMenu.InviteFriends.ErrorOccured,오류가 발생했어요. 다시 시도하세요.
@@ -937,6 +945,7 @@ CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,컨트롤...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,친구 초대
+CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,친구들에게 합류하거나 친구 초대
 CoreScripts.InGameMenu.PageTitle.Players,회원
 CoreScripts.InGameMenu.PageTitle.Report,신고
 CoreScripts.InGameMenu.PageTitle.VRComfortSettings,컴포트 설정
@@ -1265,6 +1274,37 @@ CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,포털 �
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,검색 광고
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,스폰서 광고
+CreatorDashboard.Analytics.Overview.Description.D1Retention,다음 날 다시 플레이하는 신규 플레이어 수.
+CreatorDashboard.Analytics.Overview.Description.D7Retention,1주일 뒤에 다시 플레이하는 신규 플레이어 수.
+CreatorDashboard.Analytics.Overview.Description.DailyActiveUsers,매일 내 게임을 플레이하는 사람 수.
+CreatorDashboard.Analytics.Overview.Description.NewUserSessionTime,신규 플레이어가 게임을 처음 플레이할 때 게임에 머무는 시간.
+CreatorDashboard.Analytics.Overview.Description.PayerConversion,게임 내에서 무언가를 구매하는 플레이어의 비율.
+CreatorDashboard.Analytics.Overview.Description.RobuxSpent,플레이어가 게임 내에서 지출하는 Robux 금액.
+CreatorDashboard.Analytics.Overview.HowToImprove,개선 방법:
+CreatorDashboard.Analytics.Overview.Improve.D1Retention,"• 계속 플레이하고 싶을 만큼 메인 활동을 재미있게 만드세요.
+• 재방문하는 플레이어에게 매일 리워드를 제공하세요.
+• 플레이어의 진행 상황을 저장하세요."
+CreatorDashboard.Analytics.Overview.Improve.D7Retention,"• 플레이어가 달성할 수 있는 목표를 추가하세요.
+• 새로운 레벨, 아이템, 이벤트를 추가하세요.
+• 챌린지의 난이도가 한쪽으로 치우치지 않도록 조절하세요."
+CreatorDashboard.Analytics.Overview.Improve.DailyActiveUsers,"• 광고를 만들어 더 많은 플레이어에게 게임을 노출하세요.
+• 친구들에게 게임을 공유하세요."
+CreatorDashboard.Analytics.Overview.Improve.NewUserSessionTime,"• 플레이어가 게임의 재미를 바로 느낄 수 있도록 해보세요.
+• 플레이어에게 달성할 목표를 제시하세요.
+• 처음 몇 분은 플레이어가 쉽게 따라 할 수 있도록 구성하세요."
+CreatorDashboard.Analytics.Overview.Improve.PayerConversion,"• 스타터 팩(저렴한 첫 구매 특가)을 추가하세요.
+• 적절한 시점에 상점과 혜택을 표시하세요."
+CreatorDashboard.Analytics.Overview.Improve.RobuxSpent,"• 게임 패스 또는 판매할 아이템을 추가하세요.
+• 수익을 증가시키는 데 도움이 될 수 있는 관리형 가격 책정을 켜세요.
+• 플레이어가 다시 방문하여 지출하도록 일일 보상을 추가하세요."
+CreatorDashboard.Analytics.Overview.Summary.AverageOverSelectedPeriod,선택한 기간의 평균
+CreatorDashboard.Analytics.Overview.Title.D1Retention,1일 차 유지율
+CreatorDashboard.Analytics.Overview.Title.D7Retention,7일 차 유지율
+CreatorDashboard.Analytics.Overview.Title.DailyActiveUsers,일일 활성 사용자 수
+CreatorDashboard.Analytics.Overview.Title.FirstSessionRetention,5분 후에도 계속 플레이 중인 비율
+CreatorDashboard.Analytics.Overview.Title.NewUserSessionTime,신규 사용자 세션 시간
+CreatorDashboard.Analytics.Overview.Title.PayerConversion,유료 사용자 전환
+CreatorDashboard.Analytics.Overview.Title.RobuxSpent,
 Feature.AbuseReportDialog.Label.GeneralError,오류가 발생했습니다. 나중에 다시 시도하세요.
 Feature.Accessibility.Action.ScrollDown,아래로 스크롤
 Feature.Accessibility.Action.ScrollUp,위로 스크롤
@@ -1965,6 +2005,7 @@ Feature.Build.Action.Edit,편집
 Feature.Build.Action.HideAutosaved,자동 저장된 버전 숨기기
 Feature.Build.Action.KeepBuilding,계속 제작
 Feature.Build.Action.ManageLimit,한도 관리
+Feature.Build.Action.ManageUsage,사용량 관리
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,나중에
 Feature.Build.Action.NotifyMe,알림 받기
@@ -1997,8 +2038,8 @@ Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,사용량 보기
 Feature.Build.Analytics.AnalyzeChatPrompt,"지난 {days}일 동안의 내 {analyzeName}을(를) 분석해 주세요. 이 지표가 중요한 이유는 무엇이며, 어떻게 개선할 수 있나요?"
 Feature.Build.Analytics.AnalyzeName.Arppu,유료 사용자당 평균 수익
-Feature.Build.Analytics.AnalyzeName.D1Retention,1일 차 유지율
-Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,일일 활성 사용자 수
+Feature.Build.Analytics.AnalyzeName.D1Retention,
+Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,
 Feature.Build.Analytics.AnalyzeName.PayerConversion,유료 사용자 전환율
 Feature.Build.Analytics.AnalyzeName.PlaythroughRate,플레이스루 비율
 Feature.Build.Analytics.AnalyzeName.TotalPlaytime,총 플레이타임
@@ -2009,6 +2050,7 @@ Feature.Build.Analytics.Description.PayerConversion,유료 사용자 전환은 �
 Feature.Build.Analytics.Description.PlaythroughRate,플레이스루 비율은 전체 플레이 세션을 완료한 방문자의 비율입니다. 비율이 높다는 것은 플레이어가 체험을 쉽게 시작하고 끝까지 플레이할 가치가 있다고 생각하는 것을 의미합니다.
 Feature.Build.Analytics.Description.TotalPlaytime,총 플레이타임은 해당 기간 동안 모든 플레이어가 체험에 소요한 시간을 합산한 것입니다. 플레이타임이 증가하면 일반적으로 더 많은 참여 세션이 있다는 신호입니다.
 Feature.Build.Analytics.DurationHours,{number}시간
+Feature.Build.Analytics.DurationMinutes,{number}분
 Feature.Build.Analytics.Goal.Action.CreateAd,광고 만들기
 Feature.Build.Analytics.Goal.Action.SellItems,아이템 판매
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,친구와 공유
@@ -2041,7 +2083,9 @@ Feature.Build.Analytics.Overview,
 Feature.Build.Analytics.Percent,{number}%
 Feature.Build.Analytics.Players,플레이어
 Feature.Build.Analytics.Sheet.Analyze,분석
+Feature.Build.Analytics.Sheet.AskAboutThis,이 내용에 대해 질문하기
 Feature.Build.Analytics.Sheet.ViewInOverview,개요에서 보기
+Feature.Build.Analytics.Sheet.ViewMoreStats,통계 더 보기
 Feature.Build.Analytics.Summary.Arppu,유료 플레이어 1인당 평균 Robux 수입.
 Feature.Build.Analytics.Summary.D1Retention,다음 날 다시 플레이하는 신규 플레이어 비율.
 Feature.Build.Analytics.Summary.DailyActiveUsers,선택한 기간 동안 참가한 고유 플레이어 수.
@@ -2051,10 +2095,10 @@ Feature.Build.Analytics.Summary.TotalPlaytime,플레이어가 내 체험에서 �
 Feature.Build.Analytics.Title.Arppu,ARPPU
 Feature.Build.Analytics.Title.ConcurrentUsers,총 플레이어
 Feature.Build.Analytics.Title.D1Retention,
-Feature.Build.Analytics.Title.D7Retention,7일 차 유지율
+Feature.Build.Analytics.Title.D7Retention,
 Feature.Build.Analytics.Title.DailyActiveUsers,
-Feature.Build.Analytics.Title.NewUserSessionTime,신규 사용자 세션 시간
-Feature.Build.Analytics.Title.PayerConversion,유료 사용자 전환
+Feature.Build.Analytics.Title.NewUserSessionTime,
+Feature.Build.Analytics.Title.PayerConversion,
 Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.RobuxSpent,
 Feature.Build.Analytics.Title.TopAcquisitionSource,상위 소스
@@ -2063,10 +2107,13 @@ Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,방문 수
 Feature.Build.Content.NewGame,새 게임
 Feature.Build.Description.ActivateDeveloperProduct,개발자 상품 {PRODUCT_ID}을(를) 판매하세요.
+Feature.Build.Description.ActivateGamePass,게임 패스 {PRODUCT_ID}을(를) 판매하세요.
+Feature.Build.Description.ActivateSubscription,구독({PRODUCT_ID})을 활성화하세요.
 Feature.Build.Description.AdCampaignModerationReview,모든 광고 캠페인은 Roblox 규정 준수 팀에서 검토합니다. 이 절차에는 최대 24시간이 소요될 수 있습니다.
 Feature.Build.Description.AdCampaignSheetRunDates,{startDate}~{endDate} 실행
 Feature.Build.Description.AdComplete,광고가 종료되었습니다. 결과를 확인하세요.
 Feature.Build.Description.AdModerationReview,"모든 광고는 Roblox 규정 준수 팀에서 검토하며, 최대 24시간이 소요될 수 있습니다."
+Feature.Build.Description.AdvancedModel,최고 품질에 가장 적합합니다. 사용량이 3배 더 빨리 소진됩니다.
 Feature.Build.Description.AdvertisingAgreement,'만들기'를 선택하면 {advertisingTermsStart}Roblox 광고 약관{advertisingTermsEnd}과 {advertisingStandardsStart}광고 규정{advertisingStandardsEnd}에 동의하는 것으로 간주됩니다.
 Feature.Build.Description.ArchiveRemoval,이 게임을 보관하면 해당 게임이 Build에서 삭제됩니다. 크리에이터 허브 또는 Roblox Studio에서 계속 액세스하고 복원할 수 있습니다.
 Feature.Build.Description.AutoBuyUsage,Robux를 사용하여 제작할 때 추가 Build 사용량을 자동으로 구매하세요. 언제든지 일일 지출 한도를 설정할 수 있습니다.
@@ -2079,9 +2126,17 @@ Feature.Build.Description.CampaignRunDates,캠페인은 {startDate}~{endDate} �
 Feature.Build.Description.ChooseAdCampaignLength,광고 게재 기간을 선택하세요.
 Feature.Build.Description.ChoosePlaytesters,게임을 미리 볼 친구를 선택하세요.
 Feature.Build.Description.CreateDeveloperProduct,"{PRICE} Robux로 ""{NAME}""을(를) 만듭니다(판매 중단)."
+Feature.Build.Description.CreateGamePass,"{PRICE} Robux로 '{NAME}'을(를) 만들되, 판매하지는 않습니다."
+Feature.Build.Description.CreateSubscription,{PRICE} Robux로 '{NAME}'을(를) 비활성 상태로 만듭니다.
 Feature.Build.Description.DeactivateDeveloperProduct,개발자 상품 {PRODUCT_ID}을(를) 판매 중단합니다.
+Feature.Build.Description.DeactivateGamePass,게임 패스 {PRODUCT_ID}의 판매를 중단하세요.
+Feature.Build.Description.DeactivateSubscription,구독({PRODUCT_ID})의 판매를 중단하세요. 기존 구독자는 계속 갱신됩니다.
+Feature.Build.Description.DeactivateSubscriptionCancelRenewals,구독({PRODUCT_ID})의 판매를 중단하고 기존 구독자의 향후 갱신을 중지하세요.
+Feature.Build.Description.DefaultModel,빠른 편집 및 일반적인 개선에 적합합니다.
+Feature.Build.Description.DeleteSubscription,구독({PRODUCT_ID})을 삭제하세요.
 Feature.Build.Description.EarnedRobuxAppliedFirst,"Robux를 획득한 경우, 해당 Robux가 광고 캠페인 비용에 우선 적용됩니다."
 Feature.Build.Description.EnableBuildNotifs,Build에서 보내는 최신 소식을 받으려면 기기 설정에서 알림을 켜세요.
+Feature.Build.Description.EnableUsageOrWait,"계속 제작하려면 추가 사용량을 활성화하거나, 주간 한도가 재설정될 때까지 기다리세요."
 Feature.Build.Description.FriendsLinkOnly,친구만 이 링크에 액세스할 수 있습니다. 더 많은 사람이 플레이하기를 원하시면 게임의 대상 설정을 변경하세요.
 Feature.Build.Description.GameConfiguration,아이템 판매 방식과 게임 홍보 방식을 변경하세요.
 Feature.Build.Description.GameCreationDone,게임 생성 및 게시가 완료되었습니다. 게임을 열어 플레이테스트할 수 있습니다.
@@ -2114,6 +2169,8 @@ Feature.Build.Description.ShopButton,쇼핑 진입점 추가
 Feature.Build.Description.ShortAdCampaign,플레이어들이 내 게임에 대해 어떻게 생각하는지 빠르게 확인할 수 있는 방법입니다.
 Feature.Build.Description.StopBuild,"이 요청은 아직 진행 중입니다. 지금 중지하면 요청이 완료되지 않으며, 다시 요청하셔야 합니다."
 Feature.Build.Description.UpdateDeveloperProduct,개발자 상품 {PRODUCT_ID}을(를) 업데이트하세요.
+Feature.Build.Description.UpdateGamePass,게임 패스 {PRODUCT_ID}을(를) 업데이트하세요.
+Feature.Build.Description.UpdateSubscription,구독({PRODUCT_ID})을 업데이트하세요.
 Feature.Build.Description.UseAdCreditsInAdsManager,광고 크레딧을 사용하려면 광고 관리자로 이동해야 합니다.
 Feature.Build.Error.AdForbidden,지금은 계정이나 게임에서 광고를 게재할 수 없습니다. 오류라고 생각되면 지원 센터로 문의하세요.
 Feature.Build.Error.AdInsufficientFunds,Robux가 부족해 이 광고를 만들 수 없습니다. Robux를 추가하고 다시 시도하세요.
@@ -2145,6 +2202,7 @@ Feature.Build.Label.AdViews,광고 조회수
 Feature.Build.Label.AdditionalUsage,추가 Build 사용량
 Feature.Build.Label.AdditionalUsed,{LIMIT} 중 {USED} 사용됨
 Feature.Build.Label.AdsManager,광고 관리자
+Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,모든 게임
 Feature.Build.Label.AmountAvailable,{AMOUNT} 이용 가능
@@ -2161,6 +2219,7 @@ Feature.Build.Label.CreatorHub,크리에이터 허브
 Feature.Build.Label.DateRange,{startDate}~{endDate}
 Feature.Build.Label.DefaultDeveloperProduct,상품 {PRODUCT_ID}
 Feature.Build.Label.DefaultDeveloperProductName,개발자 상품
+Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,삭제됨
 Feature.Build.Label.DescribeIdea,아이디어 설명
 Feature.Build.Label.Description,
@@ -2192,6 +2251,7 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,관리형 가격 책정
 Feature.Build.Label.ManagedPricingMixed,현재 상품 전체에 혼합
 Feature.Build.Label.MaximizeForGamePlays,게임 플레이 횟수 극대화
+Feature.Build.Label.ModelUnavailable,모델 이용 불가
 Feature.Build.Label.Models3D,3D 모델
 Feature.Build.Label.MyGames,내 게임
 Feature.Build.Label.Name,
@@ -2228,6 +2288,10 @@ Feature.Build.Label.SelectOption,옵션 선택
 Feature.Build.Label.ShopButton,상점 버튼
 Feature.Build.Label.ShopUi,상점 UI
 Feature.Build.Label.Sounds,사운드
+Feature.Build.Label.SubscriptionProductType,상품 유형: {PRODUCT_TYPE}
+Feature.Build.Label.SubscriptionProductTypeConsumable,소모품
+Feature.Build.Label.SubscriptionProductTypeCurrency,통화
+Feature.Build.Label.SubscriptionProductTypeDurable,영속성
 Feature.Build.Label.TargetAllRobloxPlayers,모든 Roblox 플레이어를 대상으로 하세요
 Feature.Build.Label.Thinking,생각 중
 Feature.Build.Label.Title,제목
@@ -2428,15 +2492,18 @@ Feature.Build.Title.BuildUnavailable,Build를 이용할 수 없음
 Feature.Build.Title.BuildUsage,Build 사용량
 Feature.Build.Title.ChangesNotLive,변경 사항이 아직 라이브 상태가 아닙니다
 Feature.Build.Title.ChatBuildUnavailable,Build를 이용할 수 없습니다.
+Feature.Build.Title.ChooseModel,빌드 에이전트 선택
 Feature.Build.Title.Content,콘텐츠
 Feature.Build.Title.CreateYourAd,
 Feature.Build.Title.DailyRobuxReached,일일 Robux 한도에 도달함
 Feature.Build.Title.DeveloperProduct,
 Feature.Build.Title.EditDeveloperProduct,상품 편집
 Feature.Build.Title.ExperienceAudience,체험 오디언스
+Feature.Build.Title.FreeLimitReached,무료 한도에 도달했습니다.
 Feature.Build.Title.FreeUsageReached,무료 Build 사용량 한도에 도달함
 Feature.Build.Title.FriendsOnlyPlay,친구만 플레이할 수 있습니다
 Feature.Build.Title.GameCreationDone,게임 제작 완료
+Feature.Build.Title.GamePass,게임패스
 Feature.Build.Title.GenericError,오류 발생
 Feature.Build.Title.GetUsers,사용자 가져오기
 Feature.Build.Title.ManagedPricingAcknowledgement,관리형 가격 책정을 켜시겠습니까?
@@ -2454,6 +2521,7 @@ Feature.Build.Title.PromoteGamePaid,더 많은 플레이어가 기다리고 있�
 Feature.Build.Title.PushNotifications,푸시 알림
 Feature.Build.Title.RevertLastChange,마지막 변경 사항을 되돌리시겠어요?
 Feature.Build.Title.StopBuild,빌드를 중지하시겠습니까?
+Feature.Build.Title.Subscription,구독
 Feature.Build.Title.Tasks,작업
 Feature.Build.Title.TurnActivity,턴 활동
 Feature.Build.Title.UseYourAdCredits,광고 크레딧 사용
@@ -3538,6 +3606,7 @@ Feature.InExperienceIntervention.Description.ChatSuspension.Minute.Expired,채�
 Feature.InExperienceIntervention.Description.ChatSuspension.Minutes,회원님이 보낸 한 개 이상의 메시지가 규정을 위반했기 때문에 {number}분간 채팅을 사용할 수 없습니다. 규정을 또 위반하면 일시 정지당할 수 있습니다.
 Feature.InExperienceIntervention.Description.Disclaimer,오류가 있나요? {startLink}의견을 전해 주세요{endLink}
 Feature.InExperienceIntervention.Description.FeedbackHelps,피드백은 시스템 개선에 도움이 됩니다.
+Feature.InExperienceIntervention.Description.KeepWordsKindCommunitySafe,친절한 언어를 사용하고 커뮤니티를 안전하게 유지하세요.
 Feature.InExperienceIntervention.Description.LoseAccess,이러한 일이 다시 발생하면 계정에 액세스하지 못하게 될 수도 있습니다.
 Feature.InExperienceIntervention.Description.MayLoseAccess,규칙을 다시 위반하면 계정에 액세스하지 못하게 될 수도 있습니다.
 Feature.InExperienceIntervention.Description.Mistake,오류가 있나요?
@@ -3557,6 +3626,7 @@ Feature.InExperienceIntervention.Heading.DontSharePersonalInformation,개인정�
 Feature.InExperienceIntervention.Heading.PartyChatSuspended,채팅 정지 해제까지 {remainingTime}
 Feature.InExperienceIntervention.Heading.TakeALook,확인해 보겠습니다
 Feature.InExperienceIntervention.Heading.TextChatSuspension,텍스트 채팅 일시 정지
+Feature.InExperienceIntervention.Heading.VoiceTypingMayBeTurnedOff,규칙을 위반하면 음성 입력이 꺼질 수 있습니다.
 Feature.InExperienceIntervention.Label.Complete,
 Feature.InExperienceIntervention.Label.EndsOn,종료일시:
 Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
@@ -3564,7 +3634,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} 남음
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,Robux를 구매하면 중재 조항 및 취소 정책을 비롯한 {termsLinkStart}이용 약관{termsLinkEnd}에 동의하는 것으로 간주됩니다.
-Feature.InExperienceShop.GamePass,게임패스
+Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.BonusItem,보너스 아이템
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} 후 종료
@@ -3576,7 +3646,7 @@ Feature.InExperienceShop.Label.Timer.Day.Plural,{number}일
 Feature.InExperienceShop.Label.Timer.Day.Singular,
 Feature.InExperienceShop.Label.Timer.Hour.Plural,
 Feature.InExperienceShop.Label.Timer.Hour.Singular,
-Feature.InExperienceShop.Label.Timer.Minute.Plural,{number}분
+Feature.InExperienceShop.Label.Timer.Minute.Plural,
 Feature.InExperienceShop.Label.Timer.Minute.Singular,
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number}초
 Feature.InExperienceShop.Label.Timer.Second.Singular,1초
@@ -3593,6 +3663,7 @@ Feature.Moments.Action.AddMusic,음악 추가
 Feature.Moments.Action.AddSticker,스티커 추가
 Feature.Moments.Action.AddText,텍스트 추가
 Feature.Moments.Action.AddVoice,음성 추가
+Feature.Moments.Action.Analytics,애널리틱스
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -3609,7 +3680,7 @@ Feature.Moments.Action.GenerateText,텍스트 생성
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,도움이 되지 않음
 Feature.Moments.Action.GenerateTextFeedbackPolicy,부적절하거나 규정을 위반함
 Feature.Moments.Action.Hide,세부 정보 숨기기
-Feature.Moments.Action.HowToCapture,캡처 방법
+Feature.Moments.Action.HowToCapture,캡처 방법 보기
 Feature.Moments.Action.Join,
 Feature.Moments.Action.KeepEditing,계속 편집
 Feature.Moments.Action.Leave,
@@ -3644,6 +3715,8 @@ Feature.Moments.Disclaimer.EveryoneMoments,모멘트에 참여하는 모든 사�
 Feature.Moments.Label.All,
 Feature.Moments.Label.AllowComments,코멘트 허용
 Feature.Moments.Label.AttemptingJoinExperience,{placeName}에 참가하려고 시도 중입니다. 몇 초 정도 걸릴 수 있습니다.
+Feature.Moments.Label.AverageCompletion,평균 완료율
+Feature.Moments.Label.AverageWatchTime,평균 시청 시간
 Feature.Moments.Label.CaptureLibrary,
 Feature.Moments.Label.ChooseVoice,음성 선택
 Feature.Moments.Label.CommentAuthorFallback,사용자 {userId}
@@ -3657,13 +3730,13 @@ Feature.Moments.Label.CommentRejectedByFilter,코멘트가 게시되지 않았�
 Feature.Moments.Label.CommentSendStatusUnknown,전송 상태를 알 수 없음
 Feature.Moments.Label.CommentSending,전송 중...
 Feature.Moments.Label.CommentSignInRequired,코멘트를 남기려면 다시 로그인하세요.
-Feature.Moments.Label.CommentTimestampDays,{count}일
-Feature.Moments.Label.CommentTimestampHours,{count}시간
-Feature.Moments.Label.CommentTimestampMinutes,{count}분
-Feature.Moments.Label.CommentTimestampMonths,{count}개월
+Feature.Moments.Label.CommentTimestampDays,{count}일 전
+Feature.Moments.Label.CommentTimestampHours,{count}시간 전
+Feature.Moments.Label.CommentTimestampMinutes,{count}분 전
+Feature.Moments.Label.CommentTimestampMonths,{count}개월 전
 Feature.Moments.Label.CommentTimestampNow,
-Feature.Moments.Label.CommentTimestampWeeks,{count}주
-Feature.Moments.Label.CommentTimestampYears,{count}년
+Feature.Moments.Label.CommentTimestampWeeks,{count}주 전
+Feature.Moments.Label.CommentTimestampYears,{count}년 전
 Feature.Moments.Label.CommentingUnavailable,현재 코멘트를 남길 수 없습니다. 나중에 다시 시도해 보세요.
 Feature.Moments.Label.CommentsDisabled,코멘트를 사용하지 않음
 Feature.Moments.Label.CommentsReadOnly,코멘트는 읽기 전용입니다.
@@ -3675,6 +3748,8 @@ Feature.Moments.Label.DeleteMomentBody,모멘트가 삭제되면 복구할 수 �
 Feature.Moments.Label.DeleteMomentTitle,모멘트를 삭제할까요?
 Feature.Moments.Label.DeleteVoiceoverBody,계속하면 텍스트와 보이스오버가 지워집니다. 언제든지 다시 시작할 수 있습니다.
 Feature.Moments.Label.DeleteVoiceoverTitle,보이스오버를 삭제하시겠습니까?
+Feature.Moments.Label.DurationSeconds,{seconds}초
+Feature.Moments.Label.Engagement,참여도
 Feature.Moments.Label.Error,
 Feature.Moments.Label.ExceedsCharacterLimit,글자 수 한도 초과
 Feature.Moments.Label.FeedEndBody,나중에 다시 확인하거나 나만의 모멘트를 만들어 보세요.
@@ -3683,6 +3758,7 @@ Feature.Moments.Label.FeedFailedToLoad,피드를 불러오지 못했습니다.
 Feature.Moments.Label.FeedMyMoments,내 모멘트
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,아직 코멘트가 없습니다. 가장 먼저 코멘트를 남겨 보세요!
+Feature.Moments.Label.GameJoinConversion,게임 참가 전환
 Feature.Moments.Label.HowToUseCaptureTitle,캡처 사용 방법
 Feature.Moments.Label.LinkCopied,링크 복사됨
 Feature.Moments.Label.LinkCopyFailed,링크를 복사하지 못했습니다.
@@ -3702,6 +3778,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,코멘트 아직 없음
 Feature.Moments.Label.NonInfiniteScrollEndTitle,시청할 모멘트가 더 있습니다
+Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,사진
 Feature.Moments.Label.PostDeleted,모멘트 삭제됨
 Feature.Moments.Label.PostRemovedBody,게시하신 모멘트는 당사 커뮤니티 규정에 위배됩니다.
@@ -3731,6 +3808,8 @@ Feature.Moments.Label.Tone.Cinematic,시네마틱함
 Feature.Moments.Label.Tone.Funny,유쾌함
 Feature.Moments.Label.Tone.Hype,활기참
 Feature.Moments.Label.Tone.Neutral,무난함
+Feature.Moments.Label.TotalReactions,총 반응 수
+Feature.Moments.Label.TotalViews,총 조회 수
 Feature.Moments.Label.Videos,
 Feature.Moments.Label.VoiceCoachmarkBody,동영상 내레이션용 스크립트 입력
 Feature.Moments.Label.VoiceCoachmarkTitle,
@@ -3739,19 +3818,22 @@ Feature.Moments.Label.VoiceGenerationFailedBody,보이스오버를 생성하지 
 Feature.Moments.Label.VoiceHelperDefault,동영상 길이로 음성 트리밍됨
 Feature.Moments.Label.VoiceLimitReachedBody,잠시 기다린 후 다시 시도하세요
 Feature.Moments.Label.VoiceModerationError,스크립트는 안전 규칙을 준수해야 합니다
-Feature.Moments.Label.VoicePlaceholder,보이스오버 스크립트를 입력하세요. 글자 수 한도 {maxCount}자
+Feature.Moments.Label.VoicePlaceholder,보이스오버에서 말하고자 하는 내용을 입력하세요.
 Feature.Moments.Label.VoiceTimeoutBody,보이스오버 생성 시간이 초과되었습니다.
 Feature.Moments.Label.VoiceTooManyNumbersError,스크립트에 숫자가 너무 많습니다
 Feature.Moments.Label.WriteComment,코멘트를 남기세요
 Feature.Moments.Title.Comments,코멘트
-Feature.Moments.Title.CommentsWithCappedCount,코멘트({count}개 이상)
-Feature.Moments.Title.CommentsWithCount,코멘트({count}개)
+Feature.Moments.Title.CommentsWithCappedCount,코멘트 {count}개 이상
+Feature.Moments.Title.CommentsWithCount,코멘트 {count}개
 Feature.Moments.Title.GenerateTextFeedbackReason,어떤 문제가 생겼나요?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요?
 Feature.Moments.Title.MomentRemoved,
+Feature.Moments.Title.PostInsights,페이지 헤더 제목
 Feature.Moments.Title.ReportPost,게시물 신고
 Feature.Moments.Tooltip.Creation,체험에 참여하는 모든 사람이 내 모멘트를 볼 수 있습니다.
+Feature.Moments.Tooltip.ShareFirstMomentBody,캡처에서 모멘트를 만드세요
+Feature.Moments.Tooltip.ShareFirstMomentTitle,첫 모멘트를 공유하세요
 Feature.NativeAds.Label.Ad,
 Feature.NotApproved.Action.ReportMistake,오류 신고
 Feature.NotApproved.Label.AbuseType.Advertising,
@@ -4094,7 +4176,7 @@ Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,신고를 완료하세�
 Feature.ReportAbuse.Title.SelectInSceneIpReport,지적 재산권 침해에 대한 신고 절차를 시작해 주셔서 감사합니다
 Feature.ReportAbuse.Title.SelectInSceneThankYou,
 Feature.RobloxSubscription.Action.JoinIn,{time}에 참가하기
-Feature.RobloxSubscription.Action.Subscribe,구독
+Feature.RobloxSubscription.Action.Subscribe,
 Feature.RobloxSubscription.Action.TryItForFree,무료로 이용해 보기
 Feature.RobloxSubscription.Body.AlreadySubscribed,이미 Plus 구독을 통해 게임 내 혜택을 적용받고 계시네요.
 Feature.RobloxSubscription.Body.GenericError,현재 이 작업을 완료하지 못했습니다. 다시 시도해 보세요.

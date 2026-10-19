@@ -13,6 +13,7 @@ local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
 local ConstantsModule = require(script.Parent.Parent.Constants)
 local UseFlyoutNavigationItemsModule = require(script.Parent.Parent.Hooks.useFlyoutNavigationItems)
 local DrawerContainer = require(Parent.Drawer).DrawerContainer
+local UseDeviceInsetsFunction = require(Parent.Responsive).useDeviceInsets
 local RobuxPillModule = require(script.Parent.RobuxPill)
 local FlyoutNavigationListModule = require(script.Parent.FlyoutNavigationList)
 local FlyoutQuickSigninButtonModule = require(script.Parent.FlyoutQuickSigninButton)
@@ -39,6 +40,8 @@ local FFlagEnableBlackbirdCheck = SharedFlagsModule.FFlagEnableBlackbirdCheck
 local FFlagEnablePlusReferralFlyoutEntry = SharedFlagsModule.FFlagEnablePlusReferralFlyoutEntry
 local FFlagEnablePlusReferralRecipientFlyoutEntry = SharedFlagsModule.FFlagEnablePlusReferralRecipientFlyoutEntry
 local FFlagEnableFlyoutOnNavRail = SharedFlagsModule.FFlagEnableFlyoutOnNavRail
+local FFlagFixOverlayTopInsetForDeviceSafeInsets = SharedFlagsModule.FFlagFixOverlayTopInsetForDeviceSafeInsets
+local ShouldUseDeviceSafeInsets = require(Parent.Display).shouldUseDeviceSafeInsets
 local FFlagFlyoutSidePanelUseProfileFrameThumbnail = SharedFlagsModule.FFlagFlyoutSidePanelUseProfileFrameThumbnail
 local FlyoutScaleMenuWidth = game:DefineFastFlag("FlyoutScaleMenuWidth", false)
 local FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled = SharedFlagsModule.FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled
@@ -49,27 +52,33 @@ local PlusReferralBannerModule = if FFlagEnablePlusReferralFlyoutEntry then requ
 local PlusReferralRecipientBannerModule = if FFlagEnablePlusReferralRecipientFlyoutEntry then require(script.Parent.PlusReferralRecipientBanner) else nil
 local BlackbirdUpsellBannerModule = if FFlagEnableBlackbird and FFlagEnableBlackbirdOnFlyoutMenu and EnableBlackbirdUpsellOnFlyoutMenu then require(script.Parent.BlackbirdUpsellBanner) else nil
 
-local function selectStatusBarHeight(p1) --[[ Line: 117 ]]
+local function selectStatusBarHeight(p1) --[[ Line: 120 ]]
 	return p1.TopBar.statusBarHeight or 0
 end
 
-local function selectGlobalGuiInset(p1) --[[ Line: 121 ]]
+local function selectGlobalGuiInset(p1) --[[ Line: 124 ]]
 	return p1.GlobalGuiInset or { left = 0, top = 0, right = 0, bottom = 0 }
 end
 
-local function _(p1, p2): number --[[ Line: 125 | Named "getFlyoutMenuWidth" ]]
+local function _(p1, p2): number --[[ Line: 128 | Named "getFlyoutMenuWidth" ]]
 	-- upvalues: ConstantsModule (copy)
 	return (math.min(ConstantsModule.FLYOUT_SIDE_PANEL_WIDTH * p2, p1 - ConstantsModule.FLYOUT_SIDE_PADDING * p2))
 end
 
-return ReactModule.memo(function(p1, _) --[[ Line: 130 ]]
-	-- upvalues: UseTokensFunction (copy), UseLocalRobuxBalanceFunction (copy), UseSelectorFunction (copy), selectStatusBarHeight (copy), selectGlobalGuiInset (copy), FFlagEnableFlyoutOnNavRail (copy), UseScreenSizeFunction (copy), FlyoutScaleMenuWidth (copy), ConstantsModule (copy), UseAppPolicyFunction (copy), FFlagEnableBlackbirdCheck (copy), UseHasRobloxSubscriptionModule (copy), FFlagEnablePlusReferralRecipientFlyoutEntry (copy), UsePlusReferralFlyoutBannerBlindnessModule (copy), PlusReferralRecipientFlyoutBannerMaxImpressions (copy), FFlagEnableBlackbird (copy), BlackbirdUpsellBannerModule (copy), FFlagEnablePlusReferralFlyoutEntry (copy), UseFlyoutNavigationItemsModule (copy), CreateNextOrderFunction (copy), UseSetDrawerVisibleFunction (copy), FFlagFlyoutSidePanelUseSharedProfileCardModule (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), FFlagFlyoutTradesEntryExposureLoggingModule (copy), UseFlyoutTradesEntryExposureLoggingModule (copy), FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled (copy), UseCTAChangeMorePageFlyoutButtonTextExposureLoggingModule (copy), FFlagFlyoutTradesEntryImpressionLoggingModule (copy), UseFlyoutTradesEntryImpressionLoggingModule (copy), ReactModule (copy), FlyoutAnalyticsModule (copy), ProfileCard (copy), FFlagFlyoutSidePanelUseProfileFrameThumbnail (copy), FlyoutProfileCardModule (copy), FFlagEnableFlyoutMenuRobuxCardRefactor (copy), RobuxPillModule (copy), FoundationModule (copy), Divider (copy), PlusReferralBannerModule (copy), PlusReferralRecipientBannerModule (copy), FlyoutNavigationListModule (copy), FlyoutSwitchAccountButtonModule (copy), FlyoutQuickSigninButtonModule (copy), FlyoutReportLogsModule (copy), TermsPrivacyFooterModule (copy), UseDismissFlyoutOnPartyTopBannerModule (copy), DrawerContainer (copy)
+return ReactModule.memo(function(p1, _) --[[ Line: 133 ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalRobuxBalanceFunction (copy), UseSelectorFunction (copy), selectStatusBarHeight (copy), selectGlobalGuiInset (copy), FFlagFixOverlayTopInsetForDeviceSafeInsets (copy), UseDeviceInsetsFunction (copy), ShouldUseDeviceSafeInsets (copy), FFlagEnableFlyoutOnNavRail (copy), UseScreenSizeFunction (copy), FlyoutScaleMenuWidth (copy), ConstantsModule (copy), UseAppPolicyFunction (copy), FFlagEnableBlackbirdCheck (copy), UseHasRobloxSubscriptionModule (copy), FFlagEnablePlusReferralRecipientFlyoutEntry (copy), UsePlusReferralFlyoutBannerBlindnessModule (copy), PlusReferralRecipientFlyoutBannerMaxImpressions (copy), FFlagEnableBlackbird (copy), BlackbirdUpsellBannerModule (copy), FFlagEnablePlusReferralFlyoutEntry (copy), UseFlyoutNavigationItemsModule (copy), CreateNextOrderFunction (copy), UseSetDrawerVisibleFunction (copy), FFlagFlyoutSidePanelUseSharedProfileCardModule (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), FFlagFlyoutTradesEntryExposureLoggingModule (copy), UseFlyoutTradesEntryExposureLoggingModule (copy), FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled (copy), UseCTAChangeMorePageFlyoutButtonTextExposureLoggingModule (copy), FFlagFlyoutTradesEntryImpressionLoggingModule (copy), UseFlyoutTradesEntryImpressionLoggingModule (copy), ReactModule (copy), FlyoutAnalyticsModule (copy), ProfileCard (copy), FFlagFlyoutSidePanelUseProfileFrameThumbnail (copy), FlyoutProfileCardModule (copy), FFlagEnableFlyoutMenuRobuxCardRefactor (copy), RobuxPillModule (copy), FoundationModule (copy), Divider (copy), PlusReferralBannerModule (copy), PlusReferralRecipientBannerModule (copy), FlyoutNavigationListModule (copy), FlyoutSwitchAccountButtonModule (copy), FlyoutQuickSigninButtonModule (copy), FlyoutReportLogsModule (copy), TermsPrivacyFooterModule (copy), UseDismissFlyoutOnPartyTopBannerModule (copy), DrawerContainer (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalRobuxBalanceResult: number = UseLocalRobuxBalanceFunction()
 	local UseSelectorResult = UseSelectorFunction(selectStatusBarHeight)
 	local UseSelectorResult1 = UseSelectorFunction(selectGlobalGuiInset)
+	local DeviceSafeInsets = nil
+	
+	if FFlagFixOverlayTopInsetForDeviceSafeInsets then
+		local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+		DeviceSafeInsets = if ShouldUseDeviceSafeInsets then UseDeviceInsetsResult else nil
+	end
 	local NewTop = UseSelectorResult1.top + UseSelectorResult
-	local Bottom = UseSelectorResult1.bottom
+	local Bottom = if DeviceSafeInsets then 0 else UseSelectorResult1.bottom
 	local Left = if FFlagEnableFlyoutOnNavRail then nil else UseSelectorResult1.left
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local Smallest = nil
@@ -80,7 +89,7 @@ return ReactModule.memo(function(p1, _) --[[ Line: 130 ]]
 	else
 		Smallest = if UseScreenSizeResult.X - ConstantsModule.FLYOUT_SIDE_PADDING < ConstantsModule.FLYOUT_SIDE_PANEL_WIDTH then UseScreenSizeResult.X - ConstantsModule.FLYOUT_SIDE_PADDING else ConstantsModule.FLYOUT_SIDE_PANEL_WIDTH
 	end
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 149 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 157 ]]
 		return p2.getDisableBlackbirdEntrypoints() or false
 	end)
 	local UseHasRobloxSubscriptionModuleResult = if FFlagEnableBlackbirdCheck then UseHasRobloxSubscriptionModule() else false
@@ -124,15 +133,15 @@ return ReactModule.memo(function(p1, _) --[[ Line: 130 ]]
 	if FFlagFlyoutTradesEntryImpressionLoggingModule then
 		UseFlyoutTradesEntryImpressionLoggingModule(UseFlyoutNavigationItemsModuleResult.myLibraryItems)
 	end
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 216 ]]
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 224 ]]
 		-- upvalues: UseSetDrawerVisibleResult (copy)
 		UseSetDrawerVisibleResult(false)
 	end, { UseSetDrawerVisibleResult })
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 219 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 227 ]]
 		-- upvalues: FlyoutAnalyticsModule (upval)
 		FlyoutAnalyticsModule.onFlyoutSidePanelClosed(p2)
 	end, {})
-	local UseResult2 = if FFlagFlyoutSidePanelUseSharedProfileCardModule then ReactModule.useCallback(function() --[[ Line: 224 ]]
+	local UseResult2 = if FFlagFlyoutSidePanelUseSharedProfileCardModule then ReactModule.useCallback(function() --[[ Line: 232 ]]
 		-- upvalues: UseResult (copy), p1 (copy), FlyoutAnalyticsModule (upval), UseRoactServiceResult (ref)
 		UseResult()
 		
@@ -242,6 +251,7 @@ return ReactModule.memo(function(p1, _) --[[ Line: 130 ]]
 		leftOffset = Left,
 		topOffset = NewTop,
 		bottomOffset = Bottom,
+		deviceSafeInsets = DeviceSafeInsets,
 		backgroundStyle = UseTokensResult.Color.Surface.Surface_0,
 		onDrawerClosedAnalytics = UseResult1
 	})

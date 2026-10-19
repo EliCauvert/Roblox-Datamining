@@ -8,6 +8,7 @@ local CommentActionsMenuModule = require(script.Parent.CommentActionsMenu)
 local CommentDeleteConfirmationDialogModule = require(script.Parent.CommentDeleteConfirmationDialog)
 local CommentReactionButtonModule = require(script.Parent.CommentReactionButton)
 local CommentRowHighlightModule = require(script.Parent.CommentRowHighlight)
+local GetLineHeightsModule = require(script.Parent.Parent.getLineHeights)
 local Radius = FoundationModule.Enums.Radius
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local ThumbnailSize = FoundationModule.Enums.ThumbnailSize
@@ -16,19 +17,21 @@ local GetRbxThumbFunction = FoundationModule.Utility.getRbxThumb
 local UseComposedRefFunction = require(Parent.ReactUtils).useComposedRef
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function noop() --[[ Line: 65 ]] end
+local function noop() --[[ Line: 66 ]] end
 
-return function(Frame) --[[ Line: 67 | Named "CommentRowView" ]]
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseComposedRefFunction (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), FoundationModule (copy), CommentRowHighlightModule (copy), FFlagMomentsCommentRowRedesignModule (copy), noop (copy), StateLayerAffordance (copy), ImageWithSkeletonModule (copy), Radius (copy), CommentReactionButtonModule (copy), CommentActionsMenuModule (copy), CommentDeleteConfirmationDialogModule (copy)
+return function(Frame) --[[ Line: 68 | Named "CommentRowView" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseComposedRefFunction (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), GetLineHeightsModule (copy), FFlagMomentsCommentRowRedesignModule (copy), FoundationModule (copy), CommentRowHighlightModule (copy), noop (copy), StateLayerAffordance (copy), ImageWithSkeletonModule (copy), Radius (copy), CommentReactionButtonModule (copy), CommentActionsMenuModule (copy), CommentDeleteConfirmationDialogModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ActionsMenu = Frame.actionsMenu
 	local DeleteConfirmation = Frame.deleteConfirmation
 	local HasAnchorRef: boolean = ActionsMenu ~= nil and ActionsMenu.anchorRef ~= nil
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 75 ]]
+	local UseComposedRefResult = UseComposedRefFunction(Frame.gestureRef, UseStateResult2)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 76 ]]
 		-- upvalues: UseStateResult (copy)
 		return { current = UseStateResult }
 	end, { UseStateResult })
+	local LineHeightsModule = GetLineHeightsModule(if FFlagMomentsCommentRowRedesignModule then UseTokensResult.Typography.TitleMedium else UseTokensResult.Typography.TitleSmall)
 	
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full-0 auto-y",
@@ -45,7 +48,7 @@ return function(Frame) --[[ Line: 67 | Named "CommentRowView" ]]
 				["row gap-medium size-full-0 auto-y padding-x-small padding-top-small"] = true,
 				["padding-bottom-small"] = FFlagMomentsCommentRowRedesignModule or not Frame.showReactionControl
 			},
-			ref = UseComposedRefFunction(Frame.gestureRef, UseStateResult2),
+			ref = UseComposedRefResult,
 			onActivated = if Frame.isGestureSurfaceActive then noop else nil,
 			onStateChanged = if Frame.isGestureSurfaceActive then Frame.onContentStateChanged else nil,
 			stateLayer = if Frame.isGestureSurfaceActive then { affordance = StateLayerAffordance.None } else nil,
@@ -90,11 +93,16 @@ return function(Frame) --[[ Line: 67 | Named "CommentRowView" ]]
 						LayoutOrder = 1,
 						testId = `moments-comment-metadata-{Frame.commentId}`
 					}, {
-						Author = if Frame.isAuthorLoading then ReactModule.createElement(FoundationModule.Skeleton, {
-							tag = "size-2000-400",
+						Author = if Frame.isAuthorLoading then ReactModule.createElement(FoundationModule.View, {
+							tag = "row align-y-center",
 							LayoutOrder = 1,
-							radius = Radius.Medium,
-							testId = `moments-comment-author-loading-{Frame.commentId}`
+							Size = UDim2.fromOffset(UseTokensResult.Size.Size_2000, LineHeightsModule)
+						}, {
+							Bar = ReactModule.createElement(FoundationModule.Skeleton, {
+								Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_300),
+								radius = Radius.Medium,
+								testId = `moments-comment-author-loading-{Frame.commentId}`
+							})
 						}) else ReactModule.createElement(FoundationModule.Text, {
 							LayoutOrder = 1,
 							tag = {
@@ -146,7 +154,7 @@ return function(Frame) --[[ Line: 67 | Named "CommentRowView" ]]
 					isReactionCountHidden = Frame.isReactionCountHidden,
 					onReactionActivated = Frame.onReactionActivated or noop
 				}),
-				Footer = if FFlagMomentsCommentRowRedesignModule and (Frame.metadataLabel ~= nil or (Frame.headerAction ~= nil or Frame.showReactionControl)) then ReactModule.createElement(FoundationModule.View, {
+				Footer = if FFlagMomentsCommentRowRedesignModule and (Frame.metadataLabel ~= nil or Frame.headerAction ~= nil or Frame.showReactionControl) then ReactModule.createElement(FoundationModule.View, {
 					tag = "row align-y-center gap-small size-full-0 auto-y",
 					LayoutOrder = 2,
 					testId = `moments-comment-footer-{Frame.commentId}`
@@ -184,7 +192,7 @@ return function(Frame) --[[ Line: 67 | Named "CommentRowView" ]]
 				onClose = ActionsMenu.onClose
 			})
 		}),
-		RowActionsMenu = if ActionsMenu == nil or (not HasAnchorRef or UseStateResult == nil) then nil else ReactModule.createElement(CommentActionsMenuModule, {
+		RowActionsMenu = if ActionsMenu == nil or not HasAnchorRef or UseStateResult == nil then nil else ReactModule.createElement(CommentActionsMenuModule, {
 			commentId = Frame.commentId,
 			items = ActionsMenu.items,
 			isOpen = ActionsMenu.isOpen,

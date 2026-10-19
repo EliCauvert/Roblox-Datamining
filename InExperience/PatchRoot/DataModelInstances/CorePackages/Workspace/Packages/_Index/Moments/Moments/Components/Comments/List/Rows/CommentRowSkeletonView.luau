@@ -3,37 +3,26 @@ local Parent = Moments.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local FFlagMomentsCommentRowRedesignModule = require(Moments.Flags.FFlagMomentsCommentRowRedesign)
+local GetLineHeightsModule = require(script.Parent.getLineHeights)
 local Skeleton = FoundationModule.Skeleton
 local View = FoundationModule.View
 local Radius = FoundationModule.Enums.Radius
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function _(p1) --[[ Line: 26 | Named "getLineHeights" ]]
-	local ScaledFontSize = p1.FontSize * p1.LineHeight
-	
-	return p1.FontSize + 2 * UDim.new(0, (ScaledFontSize - p1.FontSize) / 2).Offset, (math.round(ScaledFontSize))
-end
-
-return function(Frame) --[[ Line: 34 | Named "CommentRowSkeletonView" ]]
-	-- upvalues: UseTokensFunction (copy), FFlagMomentsCommentRowRedesignModule (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
+return function(Frame) --[[ Line: 27 | Named "CommentRowSkeletonView" ]]
+	-- upvalues: UseTokensFunction (copy), GetLineHeightsModule (copy), FFlagMomentsCommentRowRedesignModule (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Size300 = UseTokensResult.Size.Size_300
-	local TitleMedium = if FFlagMomentsCommentRowRedesignModule then UseTokensResult.Typography.TitleMedium else UseTokensResult.Typography.TitleSmall
-	local ScaledFontSize = TitleMedium.FontSize * TitleMedium.LineHeight
-	local NewFontSize = TitleMedium.FontSize + 2 * UDim.new(0, (ScaledFontSize - TitleMedium.FontSize) / 2).Offset
-	local _ = math.round(ScaledFontSize)
+	local LineHeightsModule = GetLineHeightsModule(if FFlagMomentsCommentRowRedesignModule then UseTokensResult.Typography.TitleMedium else UseTokensResult.Typography.TitleSmall)
 	local Size800 = if FFlagMomentsCommentRowRedesignModule then UseTokensResult.Size.Size_800 else UseTokensResult.Size.Size_700
-	local BodyMedium = UseTokensResult.Typography.BodyMedium
-	local ScaledFontSize1 = BodyMedium.FontSize * BodyMedium.LineHeight
-	local NewFontSize1 = BodyMedium.FontSize + 2 * UDim.new(0, (ScaledFontSize1 - BodyMedium.FontSize) / 2).Offset
-	local Rounded = math.round(ScaledFontSize1)
+	local LineHeightsModule1, LineHeightsModule2 = GetLineHeightsModule(UseTokensResult.Typography.BodyMedium)
 	local Elements = {}
 	
 	for LayoutOrder, bodyLineWidth in Frame.bodyLineWidths do
 		Elements[`Line{LayoutOrder}`] = ReactModule.createElement(View, {
 			tag = "row align-y-center",
 			LayoutOrder = LayoutOrder,
-			Size = UDim2.new(1, 0, 0, if LayoutOrder == 1 then NewFontSize1 else Rounded)
+			Size = UDim2.new(1, 0, 0, if LayoutOrder == 1 then LineHeightsModule1 else LineHeightsModule2)
 		}, {
 			Bar = ReactModule.createElement(Skeleton, {
 				Size = UDim2.new(bodyLineWidth, 0, 0, Size300),
@@ -75,7 +64,7 @@ return function(Frame) --[[ Line: 34 | Named "CommentRowSkeletonView" ]]
 				Header = ReactModule.createElement(View, {
 					LayoutOrder = 1,
 					tag = "row align-y-center gap-medium",
-					Size = UDim2.new(1, 0, 0, NewFontSize)
+					Size = UDim2.new(1, 0, 0, LineHeightsModule)
 				}, {
 					Author = ReactModule.createElement(Skeleton, {
 						LayoutOrder = 1,

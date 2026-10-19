@@ -269,6 +269,9 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation berisi Curv
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation berisi lebih dari {maxAllowed} MarkerCurve. Pastikan descendant MarkerCurve tidak lebih dari {maxAllowed}.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation berisi MarkerCurve dengan {count} Marker. Jumlah maksimum yang diizinkan per MarkerCurve adalah {maxAllowed}. Perbaiki animasi.
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation berisi child yang tidak diharapkan: {childName}
+Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{InstanceFullName}.{FieldName} mengepin animasi {AssetId} ke versi {Version}, tetapi animasi belum dapat di-pin ke suatu versi. Hapus '&version={Version}', lalu coba lagi."
+Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,"Aset {AssetId} ({InstanceFullName}.{FieldName}) tidak dipublikasikan. Publikasikan, lalu coba lagi."
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} menggunakan versi {Version} dari aset {AssetId}, tetapi saat ini hanya versi 1 yang didukung. Gunakan versi 1 lalu coba lagi."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Kepala Dinamis di marketplace harus dikurung dengan benar sehingga titik lengkung mata dan mulut pada cage sejajar dengan titik lengkung mesh. Tingkatkan kurungan (caging) dan keselarasan dengan mesh.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Tidak dapat mendeteksi ekspresi senyum untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mulut agar sesuai dengan posisi mulut di kepala dan pastikan mulut dapat menunjukkan ekspresi senyum.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Tidak dapat mendeteksi ekspresi mata kiri tertutup untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mata kiri agar sesuai dengan posisi mata kiri di kepala dan pastikan mata tersebut dapat ditutup.
@@ -281,6 +284,8 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Area Emisif di Atas 
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} terlalu Emisif. Luas area Emisif × intensitas melebihi batas (saat ini {emissivePercentage}%, maksimal {maxEmissivePercentage}%). Perkecil area bercahaya atau turunkan EmissiveStrength-nya."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Area Emisif Terlampaui.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} terlalu Emisif. Luas area Emisif × intensitas melebihi batas (saat ini {emissiveArea}, maksimal {maxEmissiveArea}). Perkecil area bercahaya atau turunkan EmissiveStrength-nya."
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,Peta emisif tidak didukung untuk item yang dibuat di pengalaman virtual. Hapus EmissiveMaskContent dari setiap SurfaceAppearance.
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,"Stiker tidak boleh bersifat emisif. Pada '{InstancePath}', hapus EmissiveMaskContent, atur EmissiveStrength menjadi 1, dan atur EmissiveTint menjadi putih."
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Animasi yang dipublikasikan tidak memiliki nilai translasi maksimum bagian yang valid. Publikasikan ulang animasi.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Animasi yang dipublikasikan tidak memiliki penanda emote UGC yang valid. Publikasikan ulang animasi.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Translasi maksimum bagian tidak dapat dihitung dari data animasi yang dipublikasikan. Publikasikan ulang animasi.
@@ -922,6 +927,9 @@ CoreScripts.InGameMenu.GameSettings.VRThirdPersonFixedCamEnabled,Kamera Tetap Or
 CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader,Tampilan & Kendali
 CoreScripts.InGameMenu.GameSettings.VignetteEnabled,VR Vignette Diaktifkan
 CoreScripts.InGameMenu.GameSettings.VoiceChatVolume,Volume Chat Suara
+CoreScripts.InGameMenu.GameSettings.VoiceTypingMode,Mode pengetikan suara
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeContinuous,Kirim Otomatis
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeStandard,Kirim Manual
 CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.GameSettings.VrControlsTitle,KONTROL VR
 CoreScripts.InGameMenu.InviteFriends.ErrorOccured,
@@ -938,6 +946,7 @@ CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,Kontrol...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Undang Teman
+CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,Bergabung atau Undang Teman
 CoreScripts.InGameMenu.PageTitle.Players,Pengguna
 CoreScripts.InGameMenu.PageTitle.Report,Laporkan
 CoreScripts.InGameMenu.PageTitle.VRComfortSettings,Pengaturan Kenyamanan
@@ -1266,6 +1275,37 @@ CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Portal Ik
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Iklan Pencarian
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Iklan Bersponsor
+CreatorDashboard.Analytics.Overview.Description.D1Retention,Berapa banyak pemain baru yang kembali pada hari berikutnya.
+CreatorDashboard.Analytics.Overview.Description.D7Retention,Berapa banyak pemain baru yang kembali seminggu kemudian.
+CreatorDashboard.Analytics.Overview.Description.DailyActiveUsers,Berapa banyak orang yang bermain game-mu setiap hari.
+CreatorDashboard.Analytics.Overview.Description.NewUserSessionTime,Berapa lama pemain baru berada di game-mu saat pertama kali bermain.
+CreatorDashboard.Analytics.Overview.Description.PayerConversion,Berapa persen pemainmu yang membeli sesuatu di game-mu.
+CreatorDashboard.Analytics.Overview.Description.RobuxSpent,Berapa banyak Robux yang dihabiskan pemain di game-mu.
+CreatorDashboard.Analytics.Overview.HowToImprove,Cara meningkatkan:
+CreatorDashboard.Analytics.Overview.Improve.D1Retention,"• Buat aktivitas utamamu seru untuk diulang
+• Berikan hadiah harian untuk pemain yang kembali bermain
+• Simpan progres pemain"
+CreatorDashboard.Analytics.Overview.Improve.D7Retention,"• Tambahkan target yang bisa dicapai pemain
+• Tambahkan level, item, atau acara baru
+• Buat tantangan yang tidak terlalu mudah atau terlalu sulit"
+CreatorDashboard.Analytics.Overview.Improve.DailyActiveUsers,"• Buat iklan agar lebih banyak pemain menemukan game-mu
+• Bagikan game-mu kepada teman-teman"
+CreatorDashboard.Analytics.Overview.Improve.NewUserSessionTime,"• Buat pemain langsung seru-seruan
+• Beri pemain target untuk dikejar
+• Pastikan beberapa menit pertama mudah diikuti"
+CreatorDashboard.Analytics.Overview.Improve.PayerConversion,"• Tambahkan paket pemula (promo murah khusus pengguna baru)
+• Tampilkan toko dan penawaran pada saat yang tepat"
+CreatorDashboard.Analytics.Overview.Improve.RobuxSpent,"• Tambahkan pas game atau item untuk dijual
+• Aktifkan Harga Terkelola, yang dapat membantumu memperoleh pendapatan lebih banyak
+• Tambahkan hadiah harian agar pemain kembali dan berbelanja"
+CreatorDashboard.Analytics.Overview.Summary.AverageOverSelectedPeriod,Rata-rata selama periode yang dipilih
+CreatorDashboard.Analytics.Overview.Title.D1Retention,Retensi hari pertama
+CreatorDashboard.Analytics.Overview.Title.D7Retention,Retensi hari ke-7
+CreatorDashboard.Analytics.Overview.Title.DailyActiveUsers,Pengguna aktif harian
+CreatorDashboard.Analytics.Overview.Title.FirstSessionRetention,Persentase yang masih bermain setelah 5 menit
+CreatorDashboard.Analytics.Overview.Title.NewUserSessionTime,Waktu sesi pengguna baru
+CreatorDashboard.Analytics.Overview.Title.PayerConversion,Konversi pengguna nongratis
+CreatorDashboard.Analytics.Overview.Title.RobuxSpent,Robux yang dibelanjakan
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Scroll ke Bawah
 Feature.Accessibility.Action.ScrollUp,Scroll ke Atas
@@ -1966,6 +2006,7 @@ Feature.Build.Action.Edit,Edit
 Feature.Build.Action.HideAutosaved,Sembunyikan yang disimpan otomatis
 Feature.Build.Action.KeepBuilding,Lanjutkan proses
 Feature.Build.Action.ManageLimit,Kelola batas
+Feature.Build.Action.ManageUsage,Kelola kuota penggunaan
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,Beri saya notifikasi
@@ -2010,6 +2051,7 @@ Feature.Build.Analytics.Description.PayerConversion,Konversi pengguna nongratis 
 Feature.Build.Analytics.Description.PlaythroughRate,Tingkat penyelesaian adalah persentase kunjungan yang menyelesaikan seluruh sesi bermain. Tingkat yang lebih tinggi menunjukkan bahwa pemain merasa pengalaman virtualmu mudah dimainkan dan layak diselesaikan.
 Feature.Build.Analytics.Description.TotalPlaytime,Total waktu main adalah jumlah waktu yang dihabiskan semua pemain di pengalaman virtualmu selama periode tersebut. Peningkatan waktu main biasanya menandakan sesi yang lebih menarik.
 Feature.Build.Analytics.DurationHours,{number} j
+Feature.Build.Analytics.DurationMinutes,{number} mnt
 Feature.Build.Analytics.Goal.Action.CreateAd,Buat iklan
 Feature.Build.Analytics.Goal.Action.SellItems,Jual item
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,Bagikan kepada teman
@@ -2042,7 +2084,9 @@ Feature.Build.Analytics.Overview,
 Feature.Build.Analytics.Percent,{number}%
 Feature.Build.Analytics.Players,Pemain
 Feature.Build.Analytics.Sheet.Analyze,Analisis
+Feature.Build.Analytics.Sheet.AskAboutThis,Tanyakan tentang ini
 Feature.Build.Analytics.Sheet.ViewInOverview,Lihat di Ringkasan
+Feature.Build.Analytics.Sheet.ViewMoreStats,Lihat statistik lainnya
 Feature.Build.Analytics.Summary.Arppu,Rata-rata Robux yang diperoleh per pemain berbayar.
 Feature.Build.Analytics.Summary.D1Retention,Persentase pemain baru yang kembali pada hari berikutnya.
 Feature.Build.Analytics.Summary.DailyActiveUsers,Pemain unik yang bergabung selama periode yang dipilih.
@@ -2053,9 +2097,9 @@ Feature.Build.Analytics.Title.Arppu,Pendapatan Rata-rata per Pengguna Berbayar
 Feature.Build.Analytics.Title.ConcurrentUsers,Total pemain
 Feature.Build.Analytics.Title.D1Retention,Retensi hari ke-1
 Feature.Build.Analytics.Title.D7Retention,Retensi H7
-Feature.Build.Analytics.Title.DailyActiveUsers,Pengguna aktif harian
-Feature.Build.Analytics.Title.NewUserSessionTime,Waktu sesi pengguna baru
-Feature.Build.Analytics.Title.PayerConversion,Konversi pengguna nongratis
+Feature.Build.Analytics.Title.DailyActiveUsers,
+Feature.Build.Analytics.Title.NewUserSessionTime,
+Feature.Build.Analytics.Title.PayerConversion,
 Feature.Build.Analytics.Title.PlaythroughRate,Tingkat penyelesaian
 Feature.Build.Analytics.Title.RobuxSpent,
 Feature.Build.Analytics.Title.TopAcquisitionSource,Sumber teratas
@@ -2064,10 +2108,13 @@ Feature.Build.Analytics.Title.TotalPlaytime,Total waktu main
 Feature.Build.Analytics.Visits,Kunjungan
 Feature.Build.Content.NewGame,Game baru
 Feature.Build.Description.ActivateDeveloperProduct,Jual produk developer {PRODUCT_ID}.
+Feature.Build.Description.ActivateGamePass,Jual Pas Game {PRODUCT_ID}.
+Feature.Build.Description.ActivateSubscription,Aktifkan subscription {PRODUCT_ID}.
 Feature.Build.Description.AdCampaignModerationReview,Semua kampanye iklan di-review oleh moderasi Roblox. Proses ini bisa membutuhkan waktu hingga 24 jam.
 Feature.Build.Description.AdCampaignSheetRunDates,Berlangsung {startDate}—{endDate}
 Feature.Build.Description.AdComplete,Iklanmu sudah berakhir. Lihat hasilnya.
 Feature.Build.Description.AdModerationReview,Semua iklan di-review oleh moderasi Roblox dan bisa membutuhkan waktu hingga 24 jam.
+Feature.Build.Description.AdvancedModel,Paling cocok untuk kualitas tertinggi. Kuota penggunaan habis 3 kali lebih cepat.
 Feature.Build.Description.AdvertisingAgreement,"Dengan memilih Buat, kamu menyetujui {advertisingTermsStart}Ketentuan Periklanan Roblox{advertisingTermsEnd} dan {advertisingStandardsStart}Standar Periklanan{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"Jika kamu mengarsipkan game ini, game ini akan dihapus dari Build. Kamu masih dapat mengakses dan memulihkannya dari Pusat Kreator atau Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Gunakan Robux-mu untuk membeli kuota penggunaan Build tambahan secara otomatis saat kamu berkreasi. Kamu dapat menetapkan batas pemakaian uang harian kapan saja.
@@ -2080,9 +2127,17 @@ Feature.Build.Description.CampaignRunDates,Kampanyemu akan berlangsung {startDat
 Feature.Build.Description.ChooseAdCampaignLength,Pilih durasi yang kamu inginkan untuk menayangkan iklanmu.
 Feature.Build.Description.ChoosePlaytesters,Pilih teman untuk melihat preview game-mu.
 Feature.Build.Description.CreateDeveloperProduct,"Buat ""{NAME}"" dengan membayar {PRICE} Robux, tidak dijual."
+Feature.Build.Description.CreateGamePass,"Buat ""{NAME}"" seharga {PRICE} Robux, tidak dijual."
+Feature.Build.Description.CreateSubscription,"Buat ""{NAME}"" seharga {PRICE} Robux, tidak aktif."
 Feature.Build.Description.DeactivateDeveloperProduct,Hentikan penjualan produk delevoper {PRODUCT_ID}.
+Feature.Build.Description.DeactivateGamePass,Hentikan penjualan Pas Game {PRODUCT_ID}.
+Feature.Build.Description.DeactivateSubscription,Hentikan penjualan subscription {PRODUCT_ID}. Subscriber yang sudah ada akan terus diperpanjang.
+Feature.Build.Description.DeactivateSubscriptionCancelRenewals,Hentikan penjualan subscription {PRODUCT_ID} dan hentikan perpanjangan berikutnya untuk subscriber saat ini.
+Feature.Build.Description.DefaultModel,Paling cocok untuk editan cepat dan peningkatan rutin.
+Feature.Build.Description.DeleteSubscription,Hapus subscription {PRODUCT_ID}.
 Feature.Build.Description.EarnedRobuxAppliedFirst,"Jika kamu punya perolehan Robux, Robux tersebut akan digunakan terlebih dahulu untuk membayar biaya kampanye iklan."
 Feature.Build.Description.EnableBuildNotifs,Aktifkan notifikasi di pengaturan perangkatmu untuk mendapatkan update dari Build.
+Feature.Build.Description.EnableUsageOrWait,"Aktifkan kuota penggunaan tambahan untuk terus berkreasi, atau tunggu hingga batas mingguanmu direset."
 Feature.Build.Description.FriendsLinkOnly,Hanya temanmu yang dapat mengakses link ini. Ubah pengaturan Audiens game-mu jika kamu ingin lebih banyak pengguna memainkannya.
 Feature.Build.Description.GameConfiguration,Ubah caramu menjual item dan mempromosikan game-mu.
 Feature.Build.Description.GameCreationDone,Saya telah selesai membuat dan memublikasikan game-mu. Kamu dapat membukanya untuk melakukan playtest.
@@ -2115,6 +2170,8 @@ Feature.Build.Description.ShopButton,Tambahkan entry point belanja
 Feature.Build.Description.ShortAdCampaign,Cara cepat untuk melihat pendapat pemain tentang game-mu.
 Feature.Build.Description.StopBuild,"Permintaan ini masih dalam proses. Jika kamu berhenti sekarang, permintaan ini tidak akan selesai dan kamu harus mengirimkannya lagi."
 Feature.Build.Description.UpdateDeveloperProduct,Perbarui produk developer {PRODUCT_ID}.
+Feature.Build.Description.UpdateGamePass,Ubah Pas Game {PRODUCT_ID}.
+Feature.Build.Description.UpdateSubscription,Ubah subscription {PRODUCT_ID}.
 Feature.Build.Description.UseAdCreditsInAdsManager,Kamu harus membuka Manajer Iklan untuk menggunakannya.
 Feature.Build.Error.AdForbidden,Akun atau game-mu tidak dapat menayangkan iklan saat ini. Hubungi dukungan pelanggan jika menurutmu ini kesalahan.
 Feature.Build.Error.AdInsufficientFunds,Kamu tidak memiliki cukup Robux untuk membuat iklan ini. Tambahkan lebih banyak lalu coba lagi.
@@ -2146,6 +2203,7 @@ Feature.Build.Label.AdViews,Tayangan iklan
 Feature.Build.Label.AdditionalUsage,Kuota penggunaan Build tambahan
 Feature.Build.Label.AdditionalUsed,{USED} dari {LIMIT} digunakan
 Feature.Build.Label.AdsManager,Manajer Iklan
+Feature.Build.Label.AdvancedModel,Tingkat Lanjut
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Semua game
 Feature.Build.Label.AmountAvailable,{AMOUNT} tersedia
@@ -2162,6 +2220,7 @@ Feature.Build.Label.CreatorHub,Pusat Kreator
 Feature.Build.Label.DateRange,{startDate}—{endDate}
 Feature.Build.Label.DefaultDeveloperProduct,Produk {PRODUCT_ID}
 Feature.Build.Label.DefaultDeveloperProductName,produk developer
+Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Dihapus
 Feature.Build.Label.DescribeIdea,Deskripsikan ide
 Feature.Build.Label.Description,
@@ -2193,6 +2252,7 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,Harga terkelola
 Feature.Build.Label.ManagedPricingMixed,Harga terkelola campuran di seluruh produk saat ini
 Feature.Build.Label.MaximizeForGamePlays,Maksimalkan agar game lebih banyak dimainkan
+Feature.Build.Label.ModelUnavailable,Model tidak tersedia
 Feature.Build.Label.Models3D,Model 3D
 Feature.Build.Label.MyGames,Game saya
 Feature.Build.Label.Name,
@@ -2229,6 +2289,10 @@ Feature.Build.Label.SelectOption,Pilih opsi
 Feature.Build.Label.ShopButton,Tombol Belanja
 Feature.Build.Label.ShopUi,UI Belanja
 Feature.Build.Label.Sounds,Suara
+Feature.Build.Label.SubscriptionProductType,Tipe produk: {PRODUCT_TYPE}
+Feature.Build.Label.SubscriptionProductTypeConsumable,Habis pakai
+Feature.Build.Label.SubscriptionProductTypeCurrency,Mata uang
+Feature.Build.Label.SubscriptionProductTypeDurable,Tahan lama
 Feature.Build.Label.TargetAllRobloxPlayers,Targetkan semua pemain Roblox
 Feature.Build.Label.Thinking,Sedang memproses
 Feature.Build.Label.Title,Judul
@@ -2429,15 +2493,18 @@ Feature.Build.Title.BuildUnavailable,Build tidak tersedia
 Feature.Build.Title.BuildUsage,Penggunaan Build
 Feature.Build.Title.ChangesNotLive,Perubahanmu belum tayang
 Feature.Build.Title.ChatBuildUnavailable,Build tidak tersedia.
+Feature.Build.Title.ChooseModel,Pilih agen Build-mu
 Feature.Build.Title.Content,Konten
 Feature.Build.Title.CreateYourAd,Buat iklanmu
 Feature.Build.Title.DailyRobuxReached,Batas Robux harian tercapai
 Feature.Build.Title.DeveloperProduct,Produk developer
 Feature.Build.Title.EditDeveloperProduct,Edit produk
 Feature.Build.Title.ExperienceAudience,Audiens pengalaman virtual
+Feature.Build.Title.FreeLimitReached,Kamu sudah mencapai batas gratis
 Feature.Build.Title.FreeUsageReached,Batas penggunaan Build gratis tercapai
 Feature.Build.Title.FriendsOnlyPlay,Hanya teman yang bisa memainkannya
 Feature.Build.Title.GameCreationDone,Pembuatan game selesai
+Feature.Build.Title.GamePass,Pas Game
 Feature.Build.Title.GenericError,Terjadi kesalahan
 Feature.Build.Title.GetUsers,Dapatkan pengguna
 Feature.Build.Title.ManagedPricingAcknowledgement,Aktifkan Harga Terkelola?
@@ -2455,6 +2522,7 @@ Feature.Build.Title.PromoteGamePaid,Lebih banyak pemain menanti
 Feature.Build.Title.PushNotifications,Notifikasi Push
 Feature.Build.Title.RevertLastChange,Batalkan perubahan terakhir?
 Feature.Build.Title.StopBuild,Hentikan proses?
+Feature.Build.Title.Subscription,Subscription
 Feature.Build.Title.Tasks,Tugas
 Feature.Build.Title.TurnActivity,Aktivitas chat saat ini
 Feature.Build.Title.UseYourAdCredits,Gunakan kredit iklanmu
@@ -2746,7 +2814,7 @@ Feature.Catalog.Label.OutOfStock,
 Feature.Catalog.Label.Owned,Dimiliki
 Feature.Catalog.Label.PBR,Material
 Feature.Catalog.Label.PBR.false,Dasar
-Feature.Catalog.Label.PBR.true,Tingkat Lanjut
+Feature.Catalog.Label.PBR.true,
 Feature.Catalog.Label.PBRInfo,"Item avatar dengan material tingkat lanjut menggunakan perenderan berbasis fisik (PBR) agar terlihat lebih alami, dengan pencahayaan dan bayangan yang berubah dan berkilau seperti di kehidupan nyata."
 Feature.Catalog.Label.PBRInfoTitle,Merender Berbasis Fisik (PBR)
 Feature.Catalog.Label.ParticleEffects,Efek Partikel
@@ -3535,6 +3603,7 @@ Feature.InExperienceIntervention.Description.ChatSuspension.Minute.Expired,"Pena
 Feature.InExperienceIntervention.Description.ChatSuspension.Minutes,"Kamu tidak dapat menggunakan chat selama {number} menit ke depan karena satu atau beberapa pesanmu melanggar peraturan. Jika melanggar peraturan lagi, kamu mungkin akan diblokir."
 Feature.InExperienceIntervention.Description.Disclaimer,Apakah kami melakukan kesalahan?{startLink}Beri tahukan kami{endLink}
 Feature.InExperienceIntervention.Description.FeedbackHelps,Masukanmu membantu kami meningkatkan kualitas sistem.
+Feature.InExperienceIntervention.Description.KeepWordsKindCommunitySafe,Gunakan kata-kata yang sopan dan jaga keamanan komunitasmu.
 Feature.InExperienceIntervention.Description.LoseAccess,"Jika pelanggaran terjadi lagi, kamu dapat kehilangan akses ke akunmu."
 Feature.InExperienceIntervention.Description.MayLoseAccess,"Jika melanggar aturan lagi, kamu mungkin akan kehilangan akses ke akunmu."
 Feature.InExperienceIntervention.Description.Mistake,Apakah kami melakukan kesalahan?
@@ -3554,6 +3623,7 @@ Feature.InExperienceIntervention.Heading.DontSharePersonalInformation,Jangan bag
 Feature.InExperienceIntervention.Heading.PartyChatSuspended,Chat ditangguhkan selama {remainingTime}
 Feature.InExperienceIntervention.Heading.TakeALook,Kami akan memeriksanya
 Feature.InExperienceIntervention.Heading.TextChatSuspension,Penangguhan chat teks
+Feature.InExperienceIntervention.Heading.VoiceTypingMayBeTurnedOff,Pengetikan suara mungkin dinonaktifkan jika kamu melanggar aturan
 Feature.InExperienceIntervention.Label.Complete,
 Feature.InExperienceIntervention.Label.EndsOn,Berakhir pada:
 Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
@@ -3590,6 +3660,7 @@ Feature.Moments.Action.AddMusic,Tambahkan Musik
 Feature.Moments.Action.AddSticker,Tambahkan Stiker
 Feature.Moments.Action.AddText,Tambahkan Teks
 Feature.Moments.Action.AddVoice,Tambahkan Suara
+Feature.Moments.Action.Analytics,Analitik
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -3606,7 +3677,7 @@ Feature.Moments.Action.GenerateText,Buat Teks
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Tidak membantu
 Feature.Moments.Action.GenerateTextFeedbackPolicy,Tidak Pantas atau Melanggar Aturan
 Feature.Moments.Action.Hide,Sembunyikan detail
-Feature.Moments.Action.HowToCapture,Cara mengambil Media
+Feature.Moments.Action.HowToCapture,Cara mengambil media
 Feature.Moments.Action.Join,Gabung
 Feature.Moments.Action.KeepEditing,Lanjutkan mengedit
 Feature.Moments.Action.Leave,
@@ -3641,6 +3712,8 @@ Feature.Moments.Disclaimer.EveryoneMoments,Semua orang di Moment dapat melihat a
 Feature.Moments.Label.All,
 Feature.Moments.Label.AllowComments,Izinkan komentar
 Feature.Moments.Label.AttemptingJoinExperience,Mencoba bergabung ke {placeName}. Ini mungkin membutuhkan waktu beberapa detik.
+Feature.Moments.Label.AverageCompletion,Rata-rata penyelesaian
+Feature.Moments.Label.AverageWatchTime,Rata-rata waktu tonton
 Feature.Moments.Label.CaptureLibrary,Perpustakaan Mediamu
 Feature.Moments.Label.ChooseVoice,Pilih suara
 Feature.Moments.Label.CommentAuthorFallback,Pengguna {userId}
@@ -3654,13 +3727,13 @@ Feature.Moments.Label.CommentRejectedByFilter,"Komentarmu tidak diposting. Revis
 Feature.Moments.Label.CommentSendStatusUnknown,Status pengiriman tidak diketahui
 Feature.Moments.Label.CommentSending,Mengirim...
 Feature.Moments.Label.CommentSignInRequired,Log in lagi untuk komen.
-Feature.Moments.Label.CommentTimestampDays,{count} hr
-Feature.Moments.Label.CommentTimestampHours,{count} jm
-Feature.Moments.Label.CommentTimestampMinutes,{count} mnt
-Feature.Moments.Label.CommentTimestampMonths,{count} bln
+Feature.Moments.Label.CommentTimestampDays,{count} hr lalu
+Feature.Moments.Label.CommentTimestampHours,{count} jm lalu
+Feature.Moments.Label.CommentTimestampMinutes,{count} mnt lalu
+Feature.Moments.Label.CommentTimestampMonths,{count} bln lalu
 Feature.Moments.Label.CommentTimestampNow,sekarang
-Feature.Moments.Label.CommentTimestampWeeks,{count} mg
-Feature.Moments.Label.CommentTimestampYears,{count} thn
+Feature.Moments.Label.CommentTimestampWeeks,{count} mg lalu
+Feature.Moments.Label.CommentTimestampYears,{count} thn lalu
 Feature.Moments.Label.CommentingUnavailable,Fitur komentar saat ini tidak tersedia. Coba lagi nanti.
 Feature.Moments.Label.CommentsDisabled,Komentar dinonaktifkan
 Feature.Moments.Label.CommentsReadOnly,Komentar berstatus hanya baca
@@ -3672,6 +3745,8 @@ Feature.Moments.Label.DeleteMomentBody,Kamu tidak bisa memulihkan Moment setelah
 Feature.Moments.Label.DeleteMomentTitle,Hapus Moment?
 Feature.Moments.Label.DeleteVoiceoverBody,Ini akan menghapus teks dan voiceover-mu. Kamu dapat memulai dari awal kapan saja.
 Feature.Moments.Label.DeleteVoiceoverTitle,Hapus voiceover?
+Feature.Moments.Label.DurationSeconds,{seconds} dtk
+Feature.Moments.Label.Engagement,Interaksi
 Feature.Moments.Label.Error,
 Feature.Moments.Label.ExceedsCharacterLimit,Melebihi batas karakter
 Feature.Moments.Label.FeedEndBody,Kembali lagi nanti atau buat Moment-mu sendiri.
@@ -3680,6 +3755,7 @@ Feature.Moments.Label.FeedFailedToLoad,Feed gagal di-load
 Feature.Moments.Label.FeedMyMoments,Moment Saya
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,Belum ada komentar. Jadilah yang pertama berkomentar.
+Feature.Moments.Label.GameJoinConversion,Konversi gabung ke game
 Feature.Moments.Label.HowToUseCaptureTitle,Cara menggunakan Media
 Feature.Moments.Label.LinkCopied,Link disalin
 Feature.Moments.Label.LinkCopyFailed,Gagal menyalin link.
@@ -3699,6 +3775,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,Belum ada komentar
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Ada lebih banyak Moment untuk ditonton
+Feature.Moments.Label.Overview,Ikhtisar
 Feature.Moments.Label.Photos,Foto
 Feature.Moments.Label.PostDeleted,Moment dihapus
 Feature.Moments.Label.PostRemovedBody,Moment yang kamu posting bertentangan dengan Standar Komunitas kami.
@@ -3728,6 +3805,8 @@ Feature.Moments.Label.Tone.Cinematic,Sinematik
 Feature.Moments.Label.Tone.Funny,Lucu
 Feature.Moments.Label.Tone.Hype,Seru
 Feature.Moments.Label.Tone.Neutral,Netral
+Feature.Moments.Label.TotalReactions,Total reaksi
+Feature.Moments.Label.TotalViews,Total tayangan
 Feature.Moments.Label.Videos,
 Feature.Moments.Label.VoiceCoachmarkBody,Ketik skrip untuk narasi video
 Feature.Moments.Label.VoiceCoachmarkTitle,
@@ -3736,19 +3815,22 @@ Feature.Moments.Label.VoiceGenerationFailedBody,Pembuatan voiceover gagal.
 Feature.Moments.Label.VoiceHelperDefault,Suara dipotong agar sesuai dengan durasi video
 Feature.Moments.Label.VoiceLimitReachedBody,"Tunggu sebentar, lalu coba lagi"
 Feature.Moments.Label.VoiceModerationError,Skripmu harus mematuhi peraturan keamanan
-Feature.Moments.Label.VoicePlaceholder,Ketik skrip voiceover-mu. Batas {maxCount} karakter
+Feature.Moments.Label.VoicePlaceholder,Ketik apa yang ingin dikatakan oleh voiceover-mu.
 Feature.Moments.Label.VoiceTimeoutBody,Waktu pembuatan voiceover habis.
 Feature.Moments.Label.VoiceTooManyNumbersError,Skrip berisi terlalu banyak angka
 Feature.Moments.Label.WriteComment,Tulis komentar
 Feature.Moments.Title.Comments,Komentar
-Feature.Moments.Title.CommentsWithCappedCount,Komentar ({count}+)
-Feature.Moments.Title.CommentsWithCount,Komentar ({count})
+Feature.Moments.Title.CommentsWithCappedCount,{count}+ komentar
+Feature.Moments.Title.CommentsWithCount,{count} komentar
 Feature.Moments.Title.GenerateTextFeedbackReason,Apa masalahnya?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?
 Feature.Moments.Title.MomentRemoved,
+Feature.Moments.Title.PostInsights,Judul header halaman
 Feature.Moments.Title.ReportPost,Laporkan postingan
 Feature.Moments.Tooltip.Creation,Semua orang di pengalaman virtual dapat melihat Moment-mu.
+Feature.Moments.Tooltip.ShareFirstMomentBody,Buat Moment dari mediamu
+Feature.Moments.Tooltip.ShareFirstMomentTitle,Bagikan Moment pertamamu
 Feature.NativeAds.Label.Ad,
 Feature.NotApproved.Action.ReportMistake,Laporkan kekeliruan
 Feature.NotApproved.Label.AbuseType.Advertising,Mengiklankan

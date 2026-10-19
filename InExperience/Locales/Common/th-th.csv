@@ -252,6 +252,9 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation มี Curv
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation มี MarkerCurve มากกว่า {maxAllowed} รายการ โปรดเช็คให้แน่ใจว่ามี descendant MarkerCurve ไม่เกิน {maxAllowed} รายการ
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation มี MarkerCurve ที่มี Marker {count} ตัว ทว่าจำนวนสูงสุดที่อนุญาตคือ {maxAllowed} ตัว โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation มีส่วนรองที่ไม่คาดคิด: {childName}
+Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,{InstanceFullName}.{FieldName} กำหนดให้แอนิเมชัน {AssetId} ใช้เวอร์ชัน {Version} แต่ยังไม่รองรับการกำหนดเวอร์ชันสำหรับแอนิเมชัน โปรดลบ '&version={Version}' แล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,ยังไม่ได้เผยแพร่ทรัพยากร {AssetId} ({InstanceFullName}.{FieldName}) โปรดเผยแพร่แล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,{InstanceFullName}.{FieldName} ใช้ทรัพยากร {AssetId} เวอร์ชัน {Version} แต่ขณะนี้รองรับเฉพาะเวอร์ชัน 1 เท่านั้น โปรดใช้เวอร์ชัน 1 แล้วลองอีกครั้ง
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,ต้องสร้าง Cage ศีรษะแบบเคลื่อนไหวที่ลงในมาร์เก็ตเพลสอย่างเหมาะสม เพื่อให้จุดสูงสุดของดวงตาและปากใน Cage นั้นอยู่ในแนวเดียวกับจุดสูงสุดของเมช โปรดปรับปรุงโครงสร้าง Cage และการจัดตำแหน่งให้ตรงกับเมช
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,ตรวจไม่พบท่ายิ้มสำหรับศีรษะแบบเคลื่อนไหว โปรดปรับจุดสังเกต Cage สำหรับปากให้ตรงกับตำแหน่งของปากบนศีรษะ และตรวจสอบให้แน่ใจว่ายิ้มได้
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,ตรวจไม่พบท่าปิดตาข้างซ้ายสำหรับศีรษะแบบเคลื่อนไหว โปรดปรับจุดสังเกต Cage สำหรับตาซ้ายให้ตรงกับตำแหน่งของตาซ้ายบนศีรษะ และตรวจสอบให้แน่ใจว่าปิดตาข้างซ้ายได้
@@ -264,6 +267,8 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,พื้นที�
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,{meshName} เปล่งแสงมากเกินไป พื้นที่เปล่งแสง × ความเข้มเกินขีดจำกัด (ปัจจุบันอยู่ที่ {emissivePercentage}% และต้องไม่เกิน {maxEmissivePercentage}%) โปรดลดขนาดพื้นที่เปล่งแสงหรือลดค่า EmissiveStrength ลง
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,พื้นที่การเปล่งแสงเกินขีดจำกัด
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,{assetTypeName} เปล่งแสงมากเกินไป พื้นที่เปล่งแสง × ความเข้มเกินขีดจำกัด (ปัจจุบันอยู่ที่ {emissiveArea} ต้องไม่เกิน {maxEmissiveArea}) โปรดลดขนาดพื้นที่เปล่งแสงหรือลดค่า EmissiveStrength ลง
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,ไม่รองรับแผนที่การเปล่งแสงสำหรับไอเท็มที่สร้างในประสบการณ์ โปรดลบ EmissiveMaskContent ออกจาก SurfaceAppearance ทุกรายการ
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,สติกเกอร์ไม่สามารถเปล่งแสงได้ สำหรับ '{InstancePath}' ให้ลบ EmissiveMaskContent ตั้งค่า EmissiveStrength เป็น 1 และตั้งค่า EmissiveTint เป็นสีขาว
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,แอนิเมชันที่เผยแพร่ไม่มีค่าระยะการขยับชิ้นส่วนสูงสุดที่ถูกต้อง โปรดเผยแพร่แอนิเมชันอีกครั้ง
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,แอนิเมชันที่เผยแพร่ไม่มีมาร์กเกอร์ท่าทาง UGC ที่ถูกต้อง โปรดเผยแพร่แอนิเมชันอีกครั้ง
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,ไม่สามารถคำนวณระยะการขยับชิ้นส่วนสูงสุดจากข้อมูลแอนิเมชันที่เผยแพร่ได้ โปรดเผยแพร่แอนิเมชันอีกครั้ง
@@ -905,6 +910,9 @@ CoreScripts.InGameMenu.GameSettings.VRThirdPersonFixedCamEnabled,กล้อง
 CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader,มุมมองและการควบคุม
 CoreScripts.InGameMenu.GameSettings.VignetteEnabled,เปิดใช้งานวิกเน็ตต์ใน VR แล้ว
 CoreScripts.InGameMenu.GameSettings.VoiceChatVolume,ระดับเสียงในการแชทด้วยเสียง
+CoreScripts.InGameMenu.GameSettings.VoiceTypingMode,โหมดพิมพ์ด้วยเสียง
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeContinuous,ส่งอัตโนมัติ
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeStandard,ส่งด้วยตนเอง
 CoreScripts.InGameMenu.GameSettings.Volume,ระดับเสียง
 CoreScripts.InGameMenu.GameSettings.VrControlsTitle,การควบคุมสำหรับ VR
 CoreScripts.InGameMenu.InviteFriends.ErrorOccured,เกิดข้อผิดพลาด โปรดลองอีกครั้ง
@@ -921,6 +929,7 @@ CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,การควบคุม...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,เชิญเพื่อน
+CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,เข้าร่วมหรือเชิญเพื่อน
 CoreScripts.InGameMenu.PageTitle.Players,ผู้ใช้
 CoreScripts.InGameMenu.PageTitle.Report,รายงาน
 CoreScripts.InGameMenu.PageTitle.VRComfortSettings,การตั้งค่าความสบาย
@@ -1249,6 +1258,37 @@ CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,พอร
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,โฆษณาผ่านผลการค้นหา
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,โฆษณาที่ได้รับการสนับสนุน
+CreatorDashboard.Analytics.Overview.Description.D1Retention,จำนวนผู้เล่นใหม่ที่กลับมาในวันถัดไป
+CreatorDashboard.Analytics.Overview.Description.D7Retention,จำนวนผู้เล่นใหม่ที่กลับมาหลังจากผ่านไป 1 สัปดาห์
+CreatorDashboard.Analytics.Overview.Description.DailyActiveUsers,จำนวนผู้ใช้ที่เล่นเกมของคุณในแต่ละวัน
+CreatorDashboard.Analytics.Overview.Description.NewUserSessionTime,ระยะเวลาที่ผู้เล่นใหม่อยู่ในเกมของคุณเมื่อเล่นครั้งแรก
+CreatorDashboard.Analytics.Overview.Description.PayerConversion,เปอร์เซ็นต์ของผู้เล่นที่ซื้อของในเกมของคุณ
+CreatorDashboard.Analytics.Overview.Description.RobuxSpent,จำนวน Robux ที่ผู้เล่นใช้ในเกมของคุณ
+CreatorDashboard.Analytics.Overview.HowToImprove,วิธีปรับปรุง:
+CreatorDashboard.Analytics.Overview.Improve.D1Retention,"• ทำให้กิจกรรมหลักของคุณสนุกจนอยากเล่นซ้ำ
+• มอบรางวัลรายวันเมื่อกลับมาเล่นอีกครั้ง
+• บันทึกความคืบหน้าของผู้เล่น"
+CreatorDashboard.Analytics.Overview.Improve.D7Retention,"• เพิ่มเป้าหมายให้ผู้เล่นมุ่งไปให้ถึง
+• เพิ่มด่าน ไอเท็ม หรืออีเวนต์ใหม่ๆ
+• ปรับความท้าทายให้ไม่ง่ายหรือยากเกินไป"
+CreatorDashboard.Analytics.Overview.Improve.DailyActiveUsers,"• สร้างโฆษณาเพื่อให้ผู้เล่นพบเกมของคุณมากขึ้น
+• แชร์เกมของคุณกับเพื่อนๆ"
+CreatorDashboard.Analytics.Overview.Improve.NewUserSessionTime,"• ทำให้ผู้เล่นสนุกอย่างรวดเร็ว
+• ให้ผู้เล่นมีเป้าหมายให้มุ่งไปให้ถึง
+• ทำให้ช่วง 2-3 นาทีแรกเข้าใจได้ง่ายขึ้น"
+CreatorDashboard.Analytics.Overview.Improve.PayerConversion,"• เพิ่มชุดเริ่มต้น (ดีลราคาถูกสำหรับผู้เล่นเป็นครั้งแรก)
+• แสดงร้านค้าและข้อเสนอในเวลาที่เหมาะสม"
+CreatorDashboard.Analytics.Overview.Improve.RobuxSpent,"• เพิ่มบัตรผ่านเกมหรือไอเท็มที่จะขาย
+• เปิดการตั้งราคาแบบมีการจัดการ ซึ่งอาจช่วยให้คุณมีรายได้เพิ่ม
+• เพิ่มรางวัลรายวันเพื่อให้ผู้เล่นกลับมาและใช้จ่ายอีกครั้ง"
+CreatorDashboard.Analytics.Overview.Summary.AverageOverSelectedPeriod,ค่าเฉลี่ยในช่วงเวลาที่เลือก
+CreatorDashboard.Analytics.Overview.Title.D1Retention,จำนวนผู้ที่กลับมาใช้งานในวันที่ 1
+CreatorDashboard.Analytics.Overview.Title.D7Retention,จำนวนผู้ที่กลับมาใช้งานในวันที่ 7
+CreatorDashboard.Analytics.Overview.Title.DailyActiveUsers,จำนวนผู้ใช้งานต่อวัน
+CreatorDashboard.Analytics.Overview.Title.FirstSessionRetention,เปอร์เซ็นต์ที่ยังคงเล่นอยู่หลังจาก 5 นาที
+CreatorDashboard.Analytics.Overview.Title.NewUserSessionTime,ระยะเวลาเซสชันของผู้ใช้ใหม่
+CreatorDashboard.Analytics.Overview.Title.PayerConversion,อัตราคอนเวอร์ชันของผู้ที่ชำระเงิน
+CreatorDashboard.Analytics.Overview.Title.RobuxSpent,Robux ที่ใช้จ่าย
 Feature.AbuseReportDialog.Label.GeneralError,มีบางอย่างผิดปกติ กรุณาลองใหม่อีกครั้ง
 Feature.Accessibility.Action.ScrollDown,เลื่อนลง
 Feature.Accessibility.Action.ScrollUp,เลื่อนขึ้น
@@ -1949,6 +1989,7 @@ Feature.Build.Action.Edit,แก้ไข
 Feature.Build.Action.HideAutosaved,ซ่อนรายการที่บันทึกอัตโนมัติ
 Feature.Build.Action.KeepBuilding,สร้างต่อ
 Feature.Build.Action.ManageLimit,จัดการวงเงิน
+Feature.Build.Action.ManageUsage,จัดการการใช้งาน
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,แจ้งเตือนฉัน
@@ -1981,9 +2022,9 @@ Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,ดูการใช้งาน
 Feature.Build.Analytics.AnalyzeChatPrompt,วิเคราะห์{analyzeName}ของฉันในช่วง {days} วันที่ผ่านมาให้หน่อย ทำไมตัวชี้วัดนี้จึงสำคัญ และฉันจะนำไปปรับปรุงอย่างไรดี?
 Feature.Build.Analytics.AnalyzeName.Arppu,รายรับเฉลี่ยต่อผู้ใช้ที่ชำระเงิน
-Feature.Build.Analytics.AnalyzeName.D1Retention,จำนวนผู้ที่กลับมาใช้งานในวันที่ 1
-Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,จำนวนผู้ใช้งานต่อวัน
-Feature.Build.Analytics.AnalyzeName.PayerConversion,อัตราคอนเวอร์ชันของผู้ที่ชำระเงิน
+Feature.Build.Analytics.AnalyzeName.D1Retention,
+Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,
+Feature.Build.Analytics.AnalyzeName.PayerConversion,
 Feature.Build.Analytics.AnalyzeName.PlaythroughRate,อัตราการเล่นจนจบ
 Feature.Build.Analytics.AnalyzeName.TotalPlaytime,เวลาเล่นรวม
 Feature.Build.Analytics.Description.Arppu,รายรับเฉลี่ยต่อผู้ใช้ที่ชำระเงินคือ Robux ที่ได้รับทั้งหมดหารด้วยจำนวนผู้เล่นที่ชำระเงิน ซึ่งแสดงให้เห็นว่าโดยเฉลี่ยแล้วผู้ซื้อแต่ละรายใช้จ่ายไปมากน้อยแค่ไหน
@@ -1993,6 +2034,7 @@ Feature.Build.Analytics.Description.PayerConversion,อัตราคอนเ�
 Feature.Build.Analytics.Description.PlaythroughRate,อัตราการเล่นจนจบคือ เปอร์เซ็นต์การเยี่ยมชมเซสชันเต็มรูปแบบที่มีการเล่นจนจบ อัตราที่สูงบ่งชี้ว่าผู้เล่นพบว่าประสบการณ์ของคุณเข้าถึงได้ง่ายและคุ้มค่าที่จะเล่นจนจบ
 Feature.Build.Analytics.Description.TotalPlaytime,เวลาเล่นรวมคือผลรวมเวลาที่ผู้เล่นทุกคนใช้ไปในประสบการณ์ของคุณตลอดช่วงเวลาดังกล่าว เวลาเล่นที่เพิ่มขึ้นมักบ่งบอกถึงเซสชันที่มีส่วนร่วมมากขึ้น
 Feature.Build.Analytics.DurationHours,{number} ชม.
+Feature.Build.Analytics.DurationMinutes,{number} นาที
 Feature.Build.Analytics.Goal.Action.CreateAd,สร้างโฆษณา
 Feature.Build.Analytics.Goal.Action.SellItems,ขายไอเท็ม
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,แชร์กับเพื่อน
@@ -2025,7 +2067,9 @@ Feature.Build.Analytics.Overview,ภาพรวม
 Feature.Build.Analytics.Percent,{number}%
 Feature.Build.Analytics.Players,ผู้เล่น
 Feature.Build.Analytics.Sheet.Analyze,วิเคราะห์
+Feature.Build.Analytics.Sheet.AskAboutThis,ถามเกี่ยวกับเรื่องนี้
 Feature.Build.Analytics.Sheet.ViewInOverview,ดูในภาพรวม
+Feature.Build.Analytics.Sheet.ViewMoreStats,ดูสถิติเพิ่มเติม
 Feature.Build.Analytics.Summary.Arppu,Robux ที่ได้รับโดยเฉลี่ยต่อผู้เล่นที่ชำระเงิน
 Feature.Build.Analytics.Summary.D1Retention,สัดส่วนผู้เล่นใหม่ที่กลับมาในวันถัดไป
 Feature.Build.Analytics.Summary.DailyActiveUsers,ผู้เล่นที่ไม่ซ้ำกันที่เข้าร่วมในช่วงเวลาที่เลือก
@@ -2035,22 +2079,25 @@ Feature.Build.Analytics.Summary.TotalPlaytime,จำนวนชั่วโม�
 Feature.Build.Analytics.Title.Arppu,ARPPU
 Feature.Build.Analytics.Title.ConcurrentUsers,ผู้เล่นทั้งหมด
 Feature.Build.Analytics.Title.D1Retention,ผู้ที่กลับมาใช้งานในวันที่ 1
-Feature.Build.Analytics.Title.D7Retention,จำนวนผู้ที่กลับมาใช้งานในวันที่ 7
+Feature.Build.Analytics.Title.D7Retention,
 Feature.Build.Analytics.Title.DailyActiveUsers,
-Feature.Build.Analytics.Title.NewUserSessionTime,ระยะเวลาเซสชันของผู้ใช้ใหม่
+Feature.Build.Analytics.Title.NewUserSessionTime,
 Feature.Build.Analytics.Title.PayerConversion,
 Feature.Build.Analytics.Title.PlaythroughRate,
-Feature.Build.Analytics.Title.RobuxSpent,Robux ที่ใช้จ่าย
+Feature.Build.Analytics.Title.RobuxSpent,
 Feature.Build.Analytics.Title.TopAcquisitionSource,แหล่งที่มายอดนิยม
 Feature.Build.Analytics.Title.TopDropOffStep,ลดลงมากที่สุด
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,การเยี่ยมชม
 Feature.Build.Content.NewGame,เกมใหม่
 Feature.Build.Description.ActivateDeveloperProduct,ลงขายผลิตภัณฑ์นักพัฒนา {PRODUCT_ID}
+Feature.Build.Description.ActivateGamePass,ลงขายบัตรผ่านเกม {PRODUCT_ID}
+Feature.Build.Description.ActivateSubscription,เปิดใช้งานการสมัครสมาชิก {PRODUCT_ID}
 Feature.Build.Description.AdCampaignModerationReview,ทีมกลั่นกรองของ Roblox จะตรวจสอบแคมเปญโฆษณาทั้งหมด โดยกระบวนการนี้อาจใช้เวลาถึง 24 ชั่วโมง
 Feature.Build.Description.AdCampaignSheetRunDates,ใช้ {startDate} – {endDate}
 Feature.Build.Description.AdComplete,โฆษณาของคุณสิ้นสุดลงแล้ว ตรวจสอบผลลัพธ์เลย
 Feature.Build.Description.AdModerationReview,ทีมกลั่นกรองของ Roblox จะตรวจสอบโฆษณาทั้งหมด ซึ่งอาจใช้เวลาถึง 24 ชั่วโมง
+Feature.Build.Description.AdvancedModel,เหมาะที่สุดสำหรับคุณภาพสูงสุด โควต้าการใช้งานจะหมดเร็วขึ้น 3 เท่า
 Feature.Build.Description.AdvertisingAgreement,"การเลือก ""สร้าง"" ถือว่าคุณยอมรับ{advertisingTermsStart}ข้อกำหนดการโฆษณา{advertisingTermsEnd}และ{advertisingStandardsStart}มาตรฐานการโฆษณา{advertisingStandardsEnd}ของ Roblox"
 Feature.Build.Description.ArchiveRemoval,หากเก็บเกมนี้ถาวร เกมจะถูกลบออกจาก Build แต่คุณยังสามารถเข้าถึงและกู้คืนเกมได้จากศูนย์กลางครีเอเตอร์หรือ Roblox Studio
 Feature.Build.Description.AutoBuyUsage,ใช้ Robux ของคุณเพื่อซื้อโควต้าการใช้งาน Build เพิ่มเติมโดยอัตโนมัติในขณะที่คุณสร้าง คุณสามารถกำหนดวงเงินใช้จ่ายต่อวันได้ตลอดเวลา
@@ -2063,9 +2110,17 @@ Feature.Build.Description.CampaignRunDates,แคมเปญของคุณ�
 Feature.Build.Description.ChooseAdCampaignLength,เลือกว่าต้องการให้แสดงโฆษณานานแค่ไหน
 Feature.Build.Description.ChoosePlaytesters,เลือกเพื่อนที่จะช่วยดูตัวอย่างเกมของคุณ
 Feature.Build.Description.CreateDeveloperProduct,"สร้าง ""{NAME}"" ในราคา {PRICE} Robux, ไม่ได้วางขาย"
+Feature.Build.Description.CreateGamePass,
+Feature.Build.Description.CreateSubscription,"สร้าง ""{NAME}"" ในราคา {PRICE} Robux, ไม่ได้ใช้งานอยู่"
 Feature.Build.Description.DeactivateDeveloperProduct,เลิกขายผลิตภัณฑ์นักพัฒนา {PRODUCT_ID}
+Feature.Build.Description.DeactivateGamePass,หยุดขายบัตรผ่านเกม {PRODUCT_ID}
+Feature.Build.Description.DeactivateSubscription,หยุดขายการสมัครสมาชิก {PRODUCT_ID} โดยสมาชิกเดิมจะยังต่ออายุได้ตามปกติ
+Feature.Build.Description.DeactivateSubscriptionCancelRenewals,หยุดขายการสมัครสมาชิก {PRODUCT_ID} และหยุดไม่ให้สมาชิกเดิมต่ออายุในอนาคต
+Feature.Build.Description.DefaultModel,เหมาะที่สุดสำหรับการแก้ไขด่วนและการปรับปรุงทั่วไป
+Feature.Build.Description.DeleteSubscription,ลบการสมัครสมาชิก {PRODUCT_ID}
 Feature.Build.Description.EarnedRobuxAppliedFirst,หากคุณได้รับ Robux จะมีการนำ Robux เหล่านั้นไปชำระค่าแคมเปญโฆษณาก่อน
 Feature.Build.Description.EnableBuildNotifs,เปิดการแจ้งเตือนในการตั้งค่าอุปกรณ์ของคุณเพื่อรับอัปเดตจาก Build
+Feature.Build.Description.EnableUsageOrWait,เปิดโควต้าการใช้งานเพิ่มเพื่อสร้างต่อ หรือรอให้โควต้ารายสัปดาห์ของคุณรีเซ็ต
 Feature.Build.Description.FriendsLinkOnly,มีเพียงเพื่อนของคุณเท่านั้นที่สามารถเข้าถึงลิงก์นี้ได้ หากต้องการให้มีคนเล่นมากขึ้น ให้เปลี่ยนการตั้งค่ากลุ่มเป้าหมายของเกม
 Feature.Build.Description.GameConfiguration,เปลี่ยนวิธีขายไอเท็มและโปรโมตเกมของคุณ
 Feature.Build.Description.GameCreationDone,ฉันสร้างและเผยแพร่เกมของคุณเรียบร้อยแล้ว คุณสามารถเปิดเพื่อทดลองเล่นได้
@@ -2098,6 +2153,8 @@ Feature.Build.Description.ShopButton,เพิ่มจุดเริ่มต�
 Feature.Build.Description.ShortAdCampaign,วิธีดูแบบเร็วๆ ว่าผู้เล่นคิดอย่างไรเกี่ยวกับเกมของคุณ
 Feature.Build.Description.StopBuild,คำขอนี้ยังอยู่ระหว่างดำเนินการ หากคุณหยุดตอนนี้ การดำเนินการจะไม่เสร็จสิ้น และคุณจะต้องส่งคำขออีกครั้ง
 Feature.Build.Description.UpdateDeveloperProduct,อัปเดตผลิตภัณฑ์นักพัฒนา {PRODUCT_ID}
+Feature.Build.Description.UpdateGamePass,อัปเดตบัตรผ่านเกม {PRODUCT_ID}
+Feature.Build.Description.UpdateSubscription,อัปเดตการสมัครสมาชิก {PRODUCT_ID}
 Feature.Build.Description.UseAdCreditsInAdsManager,คุณจะต้องไปที่เครื่องมือจัดการโฆษณาเพื่อใช้เครดิต
 Feature.Build.Error.AdForbidden,บัญชีหรือเกมของคุณไม่สามารถเผยแพร่โฆษณาได้ในตอนนี้ โปรดติดต่อฝ่ายบริการช่วยเหลือหากคุณคิดว่านี่เป็นข้อผิดพลาด
 Feature.Build.Error.AdInsufficientFunds,คุณมี Robux ไม่เพียงพอที่จะสร้างโฆษณานี้ โปรดเพิ่ม Robux แล้วลองอีกครั้ง
@@ -2129,6 +2186,7 @@ Feature.Build.Label.AdViews,จำนวนการดูโฆษณา
 Feature.Build.Label.AdditionalUsage,โควต้าการใช้งาน Build เพิ่มเติม
 Feature.Build.Label.AdditionalUsed,ใช้ไปแล้ว {USED} จาก {LIMIT}
 Feature.Build.Label.AdsManager,เครื่องมือจัดการโฆษณา
+Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,เกมทั้งหมด
 Feature.Build.Label.AmountAvailable,พร้อมใช้งาน {AMOUNT} ครั้ง
@@ -2145,6 +2203,7 @@ Feature.Build.Label.CreatorHub,ศูนย์กลางครีเอเต�
 Feature.Build.Label.DateRange,{startDate} – {endDate}
 Feature.Build.Label.DefaultDeveloperProduct,ผลิตภัณฑ์ {PRODUCT_ID}
 Feature.Build.Label.DefaultDeveloperProductName,ผลิตภัณฑ์นักพัฒนา
+Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,ลบแล้ว
 Feature.Build.Label.DescribeIdea,อธิบายไอเดีย
 Feature.Build.Label.Description,
@@ -2176,6 +2235,7 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,การตั้งราคาแบบมีการจัดการ
 Feature.Build.Label.ManagedPricingMixed,ราคาคละกันในผลิตภัณฑ์ปัจจุบันทั้งหมด
 Feature.Build.Label.MaximizeForGamePlays,เพิ่มจำนวนการเล่นเกมให้สูงสุด
+Feature.Build.Label.ModelUnavailable,โมเดลไม่พร้อมใช้งาน
 Feature.Build.Label.Models3D,โมเดล 3D
 Feature.Build.Label.MyGames,เกมของฉัน
 Feature.Build.Label.Name,
@@ -2212,6 +2272,10 @@ Feature.Build.Label.SelectOption,เลือก 1 ข้อ
 Feature.Build.Label.ShopButton,ปุ่มร้านค้า
 Feature.Build.Label.ShopUi,UI ของร้านค้า
 Feature.Build.Label.Sounds,
+Feature.Build.Label.SubscriptionProductType,ประเภทผลิตภัณฑ์: {PRODUCT_TYPE}
+Feature.Build.Label.SubscriptionProductTypeConsumable,สิ้นเปลือง
+Feature.Build.Label.SubscriptionProductTypeCurrency,สกุลเงิน
+Feature.Build.Label.SubscriptionProductTypeDurable,ใช้งานได้นาน
 Feature.Build.Label.TargetAllRobloxPlayers,กำหนดเป้าหมายเป็นผู้เล่น Roblox ทั้งหมด
 Feature.Build.Label.Thinking,กำลังคิด
 Feature.Build.Label.Title,
@@ -2412,15 +2476,18 @@ Feature.Build.Title.BuildUnavailable,Build ไม่พร้อมใช้ง�
 Feature.Build.Title.BuildUsage,โควต้าการใช้งาน Build
 Feature.Build.Title.ChangesNotLive,การเปลี่ยนแปลงของคุณยังไม่มีผล
 Feature.Build.Title.ChatBuildUnavailable,
+Feature.Build.Title.ChooseModel,เลือกเอเจนต์ Build ของคุณ
 Feature.Build.Title.Content,เนื้อหา
 Feature.Build.Title.CreateYourAd,สร้างโฆษณาของคุณ
 Feature.Build.Title.DailyRobuxReached,ใช้ Robux ครบตามวงเงินสูงสุดต่อวันแล้ว
 Feature.Build.Title.DeveloperProduct,
 Feature.Build.Title.EditDeveloperProduct,แก้ไขผลิตภัณฑ์
 Feature.Build.Title.ExperienceAudience,กลุ่มเป้าหมายของประสบการณ์
+Feature.Build.Title.FreeLimitReached,คุณใช้งานฟรีครบตามจำนวนสูงสุดแล้ว
 Feature.Build.Title.FreeUsageReached,ใช้โควต้าการใช้งาน Build ฟรีหมดแล้ว
 Feature.Build.Title.FriendsOnlyPlay,เฉพาะเพื่อนเท่านั้นที่เล่นได้
 Feature.Build.Title.GameCreationDone,สร้างเกมเรียบร้อยแล้ว
+Feature.Build.Title.GamePass,บัตรผ่านเกม
 Feature.Build.Title.GenericError,มีบางอย่างผิดปกติ
 Feature.Build.Title.GetUsers,ดึงดูดผู้ใช้
 Feature.Build.Title.ManagedPricingAcknowledgement,เปิดการตั้งราคาแบบมีการจัดการใช่ไหม?
@@ -2438,6 +2505,7 @@ Feature.Build.Title.PromoteGamePaid,มีผู้เล่นอีกมา�
 Feature.Build.Title.PushNotifications,การแจ้งเตือนแบบพุช
 Feature.Build.Title.RevertLastChange,แปลงกลับการเปลี่ยนแปลงล่าสุดไหม?
 Feature.Build.Title.StopBuild,หยุดสร้างใช่ไหม?
+Feature.Build.Title.Subscription,การสมัครสมาชิก
 Feature.Build.Title.Tasks,งาน
 Feature.Build.Title.TurnActivity,เปลี่ยนกิจกรรม
 Feature.Build.Title.UseYourAdCredits,ใช้เครดิตโฆษณาของคุณ
@@ -3520,6 +3588,7 @@ Feature.InExperienceIntervention.Description.ChatSuspension.Minute.Expired,ส�
 Feature.InExperienceIntervention.Description.ChatSuspension.Minutes,คุณไม่สามารถแชทได้อีก {number} นาที เนื่องจากมีการฝ่าฝืนกฎในข้อความของคุณอย่างน้อย 1 ข้อความ หากฝ่าฝืนอีกครั้ง คุณอาจถูกแบน
 Feature.InExperienceIntervention.Description.Disclaimer,หากมีอะไรผิดพลาด โปรด{startLink}แจ้งให้เราทราบ{endLink}
 Feature.InExperienceIntervention.Description.FeedbackHelps,ข้อเสนอแนะของคุณช่วยปรับปรุงระบบของเราให้ดีขึ้น
+Feature.InExperienceIntervention.Description.KeepWordsKindCommunitySafe,ใช้คำพูดที่สุภาพและรักษาชุมชนของคุณให้ปลอดภัย
 Feature.InExperienceIntervention.Description.LoseAccess,หากเกิดเหตุการณ์นี้ขึ้นอีก คุณอาจเสียสิทธิ์ในการเข้าถึงบัญชีของคุณ
 Feature.InExperienceIntervention.Description.MayLoseAccess,หากฝ่าฝืนกฎอีกครั้ง คุณอาจเสียสิทธิ์ในการเข้าถึงบัญชีของคุณ
 Feature.InExperienceIntervention.Description.Mistake,หากมีอะไรผิดพลาด
@@ -3539,6 +3608,7 @@ Feature.InExperienceIntervention.Heading.DontSharePersonalInformation,อย่�
 Feature.InExperienceIntervention.Heading.PartyChatSuspended,แชทถูกระงับเป็นเวลา {remainingTime}
 Feature.InExperienceIntervention.Heading.TakeALook,เราจะดำเนินการตรวจสอบให้
 Feature.InExperienceIntervention.Heading.TextChatSuspension,การระงับการแชทข้อความ
+Feature.InExperienceIntervention.Heading.VoiceTypingMayBeTurnedOff,เราอาจปิดการพิมพ์ด้วยเสียงหากคุณฝ่าฝืนกฎ
 Feature.InExperienceIntervention.Label.Complete,เสร็จสมบูรณ์
 Feature.InExperienceIntervention.Label.EndsOn,สิ้นสุดในวันที่:
 Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
@@ -3546,7 +3616,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,เหลืออีก {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,เมื่อคุณซื้อ Robux จะถือว่าคุณยอมรับ{termsLinkStart}ข้อกำหนดการใช้งาน{termsLinkEnd} รวมถึงข้อกำหนดการใช้อนุญาโตตุลาการและนโยบายเกี่ยวกับการเพิกถอน
-Feature.InExperienceShop.GamePass,บัตรผ่านเกม
+Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.BonusItem,ไอเท็มโบนัส
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,สิ้นสุดใน {timeRemaining}
@@ -3558,7 +3628,7 @@ Feature.InExperienceShop.Label.Timer.Day.Plural,{number} วัน
 Feature.InExperienceShop.Label.Timer.Day.Singular,
 Feature.InExperienceShop.Label.Timer.Hour.Plural,{number} ชั่วโมง
 Feature.InExperienceShop.Label.Timer.Hour.Singular,1 ชั่วโมง
-Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} นาที
+Feature.InExperienceShop.Label.Timer.Minute.Plural,
 Feature.InExperienceShop.Label.Timer.Minute.Singular,
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} วินาที
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 วินาที
@@ -3575,6 +3645,7 @@ Feature.Moments.Action.AddMusic,เพิ่มดนตรี
 Feature.Moments.Action.AddSticker,เพิ่มสติกเกอร์
 Feature.Moments.Action.AddText,เพิ่มข้อความ
 Feature.Moments.Action.AddVoice,เพิ่มเสียง
+Feature.Moments.Action.Analytics,การวิเคราะห์
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -3591,7 +3662,7 @@ Feature.Moments.Action.GenerateText,สร้างข้อความ
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,ไม่มีประโยชน์
 Feature.Moments.Action.GenerateTextFeedbackPolicy,ไม่เหมาะสมหรือละเมิดกฎเกณฑ์
 Feature.Moments.Action.Hide,ซ่อนรายละเอียด
-Feature.Moments.Action.HowToCapture,วิธีจับภาพ
+Feature.Moments.Action.HowToCapture,ดูวิธีจับภาพ
 Feature.Moments.Action.Join,
 Feature.Moments.Action.KeepEditing,แก้ไขต่อ
 Feature.Moments.Action.Leave,
@@ -3626,6 +3697,8 @@ Feature.Moments.Disclaimer.EveryoneMoments,ทุกคนในโมเมน�
 Feature.Moments.Label.All,
 Feature.Moments.Label.AllowComments,อนุญาตให้แสดงความคิดเห็น
 Feature.Moments.Label.AttemptingJoinExperience,กำลังพยายามเข้าร่วม {placeName} อาจใช้เวลาสักครู่
+Feature.Moments.Label.AverageCompletion,อัตราการดูจนจบโดยเฉลี่ย
+Feature.Moments.Label.AverageWatchTime,เวลาติดตามเฉลี่ย
 Feature.Moments.Label.CaptureLibrary,คลังภาพที่จับไว้ของคุณ
 Feature.Moments.Label.ChooseVoice,เลือกเสียง
 Feature.Moments.Label.CommentAuthorFallback,ผู้ใช้ {userId}
@@ -3639,13 +3712,13 @@ Feature.Moments.Label.CommentRejectedByFilter,ไม่มีการโพส�
 Feature.Moments.Label.CommentSendStatusUnknown,ไม่ทราบสถานะการส่ง
 Feature.Moments.Label.CommentSending,กำลังส่ง…
 Feature.Moments.Label.CommentSignInRequired,โปรดลงชื่อเข้าใช้อีกครั้งเพื่อแสดงความคิดเห็น
-Feature.Moments.Label.CommentTimestampDays,{count} วัน
-Feature.Moments.Label.CommentTimestampHours,{count} ชม.
-Feature.Moments.Label.CommentTimestampMinutes,{count} นาที
-Feature.Moments.Label.CommentTimestampMonths,{count} เดือน
+Feature.Moments.Label.CommentTimestampDays,{count} วันที่แล้ว
+Feature.Moments.Label.CommentTimestampHours,{count} ชั่วโมงที่แล้ว
+Feature.Moments.Label.CommentTimestampMinutes,{count} นาทีที่แล้ว
+Feature.Moments.Label.CommentTimestampMonths,{count} เดือนที่แล้ว
 Feature.Moments.Label.CommentTimestampNow,
-Feature.Moments.Label.CommentTimestampWeeks,{count} สัปดาห์
-Feature.Moments.Label.CommentTimestampYears,{count} ปี
+Feature.Moments.Label.CommentTimestampWeeks,{count} สัปดาห์ที่แล้ว
+Feature.Moments.Label.CommentTimestampYears,{count} ปีที่แล้ว
 Feature.Moments.Label.CommentingUnavailable,การแสดงความคิดเห็นไม่พร้อมใช้งานในขณะนี้ โปรดลองอีกครั้งในภายหลัง
 Feature.Moments.Label.CommentsDisabled,ปิดใช้งานความคิดเห็นอยู่
 Feature.Moments.Label.CommentsReadOnly,ความคิดเห็นเป็นแบบอ่านอย่างเดียว
@@ -3657,6 +3730,8 @@ Feature.Moments.Label.DeleteMomentBody,คุณไม่สามารถก�
 Feature.Moments.Label.DeleteMomentTitle,ลบโมเมนต์ใช่ไหม?
 Feature.Moments.Label.DeleteVoiceoverBody,การดำเนินการนี้จะล้างข้อความและเสียงบรรยายของคุณ คุณสามารถเริ่มต้นใหม่ได้ทุกเมื่อ
 Feature.Moments.Label.DeleteVoiceoverTitle,ลบเสียงบรรยายใช่ไหม?
+Feature.Moments.Label.DurationSeconds,{seconds} วินาที
+Feature.Moments.Label.Engagement,การมีส่วนร่วม
 Feature.Moments.Label.Error,
 Feature.Moments.Label.ExceedsCharacterLimit,เกินจำนวนอักขระที่กำหนด
 Feature.Moments.Label.FeedEndBody,กลับมาอีกครั้งในภายหลังหรือสร้างโมเมนต์ของคุณเอง
@@ -3665,6 +3740,7 @@ Feature.Moments.Label.FeedFailedToLoad,โหลดฟีดไม่สำเ�
 Feature.Moments.Label.FeedMyMoments,โมเมนต์ของฉัน
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,ยังไม่มีความคิดเห็น มาเป็นคนที่แสดงความคิดเห็นกัน!
+Feature.Moments.Label.GameJoinConversion,อัตราคอนเวอร์ชันการเข้าร่วมเกม
 Feature.Moments.Label.HowToUseCaptureTitle,วิธีใช้การจับภาพ
 Feature.Moments.Label.LinkCopied,คัดลอกลิงก์แล้ว
 Feature.Moments.Label.LinkCopyFailed,คัดลอกลิงก์ไม่สำเร็จ
@@ -3684,6 +3760,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,ยังไม่มีความคิดเห็น
 Feature.Moments.Label.NonInfiniteScrollEndTitle,ยังมีโมเมนต์ให้ดูอีกเพียบ
+Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,รูปภาพ
 Feature.Moments.Label.PostDeleted,ลบโมเมนต์แล้ว
 Feature.Moments.Label.PostRemovedBody,โมเมนต์ที่คุณโพสต์ขัดต่อมาตรฐานชุมชนของเรา
@@ -3713,6 +3790,8 @@ Feature.Moments.Label.Tone.Cinematic,ภาพยนตร์
 Feature.Moments.Label.Tone.Funny,ตลก
 Feature.Moments.Label.Tone.Hype,ตื่นเต้น
 Feature.Moments.Label.Tone.Neutral,ปกติ
+Feature.Moments.Label.TotalReactions,การแสดงความรู้สึกทั้งหมด
+Feature.Moments.Label.TotalViews,ยอดวิวทั้งหมด
 Feature.Moments.Label.Videos,
 Feature.Moments.Label.VoiceCoachmarkBody,พิมพ์สคริปต์สำหรับคำบรรยายวิดีโอ
 Feature.Moments.Label.VoiceCoachmarkTitle,
@@ -3721,19 +3800,22 @@ Feature.Moments.Label.VoiceGenerationFailedBody,สร้างเสียง�
 Feature.Moments.Label.VoiceHelperDefault,ตัดเสียงให้มีความยาวเท่าวิดีโอ
 Feature.Moments.Label.VoiceLimitReachedBody,โปรดรอสักครู่แล้วลองอีกครั้ง
 Feature.Moments.Label.VoiceModerationError,สคริปต์ของคุณต้องเป็นไปตามกฎความปลอดภัย
-Feature.Moments.Label.VoicePlaceholder,พิมพ์สคริปต์เสียงบรรยายของคุณ สูงสุด {maxCount} อักขระ
+Feature.Moments.Label.VoicePlaceholder,พิมพ์ข้อความที่คุณต้องการให้เสียงบรรยายพูด
 Feature.Moments.Label.VoiceTimeoutBody,การสร้างเสียงบรรยายหมดเวลา
 Feature.Moments.Label.VoiceTooManyNumbersError,สคริปต์มีตัวเลขมากเกินไป
 Feature.Moments.Label.WriteComment,เขียนความคิดเห็น
 Feature.Moments.Title.Comments,ความคิดเห็น
-Feature.Moments.Title.CommentsWithCappedCount,ความคิดเห็น ({count}+)
-Feature.Moments.Title.CommentsWithCount,ความคิดเห็น ({count})
+Feature.Moments.Title.CommentsWithCappedCount,{count}+ ความคิดเห็น
+Feature.Moments.Title.CommentsWithCount,{count} ความคิดเห็น
 Feature.Moments.Title.GenerateTextFeedbackReason,มีอะไรผิดพลาด?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,ต้องการออกจากการสร้างสรรค์โมเมนต์ใช่ไหม?
 Feature.Moments.Title.MomentRemoved,
+Feature.Moments.Title.PostInsights,ชื่อส่วนหัวของหน้า
 Feature.Moments.Title.ReportPost,รายงานโพสต์
 Feature.Moments.Tooltip.Creation,ทุกคนในประสบการณ์สามารถดูโมเมนต์ของคุณได้
+Feature.Moments.Tooltip.ShareFirstMomentBody,สร้างโมเมนต์จากภาพที่คุณจับ
+Feature.Moments.Tooltip.ShareFirstMomentTitle,แชร์โมเมนต์แรกของคุณ
 Feature.NativeAds.Label.Ad,
 Feature.NotApproved.Action.ReportMistake,รายงานข้อผิดพลาด
 Feature.NotApproved.Label.AbuseType.Advertising,การโฆษณา

@@ -1483,6 +1483,7 @@ return {
 	FFlagAppIaStatusBar = require(script.FFlagAppIaStatusBar),
 	FFlagLuaAppUseDeviceSafeInsetsForAppContainer = game:DefineFastFlag("LuaAppUseDeviceSafeInsetsForAppContainer3", false),
 	FFlagFixNavigationInsetsOnHiddenTabBar = game:DefineFastFlag("FixNavigationInsetsOnHiddenTabBar", false),
+	FFlagFixOverlayTopInsetForDeviceSafeInsets = game:DefineFastFlag("FixOverlayTopInsetForDeviceSafeInsets", false),
 	FFlagEnableHomeRobloxLogo = game:DefineFastFlag("EnableHomeRobloxLogo", false),
 	FFlagEnableConsoleRobloxLogo = game:DefineFastFlag("EnableConsoleRobloxLogo", false),
 	GetFFlagGateEducationalPopupVisibilityViaGUAC = require(script.GetFFlagGateEducationalPopupVisibilityViaGUAC),

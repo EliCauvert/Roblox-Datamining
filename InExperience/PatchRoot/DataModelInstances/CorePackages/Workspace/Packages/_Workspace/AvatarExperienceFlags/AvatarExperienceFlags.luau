@@ -55,7 +55,6 @@
 	FFlagAXRevertEquippedAssetsAfterLayeringTryOnMakeup = require(script.FFlagAXRevertEquippedAssetsAfterLayeringTryOnMakeup),
 	FFlagAXLeaveCatalogToAvatarPromptHandleSubcategoryFilters = require(script.FFlagAXLeaveCatalogToAvatarPromptHandleSubcategoryFilters),
 	FFlagAXBringingItBack = require(script.FFlagAXBringingItBack),
-	FFlagAXBackgroundSceneManagerRevamp = require(script.FFlagAXBackgroundSceneManagerRevamp),
 	FFlagAXAvatarsTabIXP = require(script.FFlagAXAvatarsTabIXP),
 	FFlagAXAvatarsTabIXPEnabledForAll = require(script.FFlagAXAvatarsTabIXPEnabledForAll),
 	FFlagAXUseSignalsForAvatarsTabSearchInfo = require(script.FFlagAXUseSignalsForAvatarsTabSearchInfo),

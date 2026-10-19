@@ -269,7 +269,9 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimationに、キー
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimationに、{maxAllowed}件を超えるMarkerCurveが含まれています。MarkerCurveの子孫は{maxAllowed}件以下にしてください。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimationに、マーカーが{count}件あるMarkerCurveが含まれています。MarkerCurveあたりのマーカーの最大数は{maxAllowed}件です。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimationに、予期しない子が含まれています：{childName}
+Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,{InstanceFullName}.{FieldName}はアニメーション{AssetId}をバージョン{Version}にピン留めしますが、このバージョンにピン留めすることはまだできません。「&version={Version}」を削除して、もう一度お試しください。
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,アセット{AssetId}（{InstanceFullName}.{FieldName}）は公開されていません。公開してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,{InstanceFullName}.{FieldName}はアセット{AssetId}のバージョン{Version}を使用していますが、現在対応しているのはバージョン1のみです。バージョン1を使用して、もう一度お試しください。
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,マーケットプレイスの「動く頭」は、ケージの目と口の頂点がメッシュの頂点と一致するように、適切に合わせる必要があります。ケージとメッシュとの位置合わせを改善してください。
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,動く頭の笑顔の表情を検出できません。口のケージのランドマークを調整して、頭の口の位置に合わせ、笑顔の表情ができるようにしてください。
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,動く頭の左目を閉じた表情を検出できません。左目のケージのランドマークを調整して、頭の左目の位置に合わせ、閉じられるようにしてください。
@@ -282,6 +284,8 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,エミッシブエ�
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,{meshName}の発光が強すぎます。エミッシブエリア×強度が上限を超えています（現在{emissivePercentage}%ですが、{maxEmissivePercentage}%以下でなければなりません）。光るエリアを縮小するか、EmissiveStrengthを下げてください。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,エミッシブエリアの面積が上限を超えています。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,{emissiveArea}の発光が強すぎます。エミッシブエリア×強度が上限を超えています（現在{assetTypeName}ですが、{maxEmissiveArea}以下でなければなりません）。光るエリアを縮小するか、EmissiveStrengthを下げてください。
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,エミッシブマップは、バーチャル空間内で作成されたアイテムには対応していません。すべてのSurfaceAppearanceからEmissiveMaskContentを削除してください。
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,デカールを発光させることはできません。「{InstancePath}」でEmissiveMaskContentを削除し、EmissiveStrengthを1に、EmissiveTintを白に設定してください。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,公開されたアニメーションには有効なパーツの最大移動量がありません。アニメーションを再公開してください。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,公開されたアニメーションには有効なUGCリアクションマーカーがありません。アニメーションを再公開してください。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,公開されたアニメーションデータからパーツの最大移動量を計算できませんでした。アニメーションを再公開してください。
@@ -942,6 +946,7 @@ CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,コントロール...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,友達を招待
+CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,参加または友達を招待する
 CoreScripts.InGameMenu.PageTitle.Players,人
 CoreScripts.InGameMenu.PageTitle.Report,報告する
 CoreScripts.InGameMenu.PageTitle.VRComfortSettings,VR酔い防止設定
@@ -1270,6 +1275,37 @@ CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,ポータ
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,広告をサーチ
 CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,スポンサー広告
+CreatorDashboard.Analytics.Overview.Description.D1Retention,翌日に戻ってくる新規プレイヤーの数。
+CreatorDashboard.Analytics.Overview.Description.D7Retention,1週間後に戻ってくる新規プレイヤーの数。
+CreatorDashboard.Analytics.Overview.Description.DailyActiveUsers,1日あたりのゲームをプレイしに来る人数。
+CreatorDashboard.Analytics.Overview.Description.NewUserSessionTime,新規プレイヤーが初めてゲームをプレイしたときに、ゲーム内に滞在した時間。
+CreatorDashboard.Analytics.Overview.Description.PayerConversion,ゲーム内で何かを購入するプレイヤーの割合。
+CreatorDashboard.Analytics.Overview.Description.RobuxSpent,プレイヤーがゲーム内で消費したRobux支出額。
+CreatorDashboard.Analytics.Overview.HowToImprove,改善方法：
+CreatorDashboard.Analytics.Overview.Improve.D1Retention,"• メインのアクティビティを何度でも楽しめるようにする
+• 再びプレイしに来たプレイヤーに毎日報酬を付与する
+• プレイヤーの進捗状況を保存する"
+CreatorDashboard.Analytics.Overview.Improve.D7Retention,"• プレイヤーが達成を目指せる目標を追加する
+• 新しいレベル、アイテム、イベントを追加する
+• チャレンジの難易度を簡単すぎず、難しすぎないレベルに設定する"
+CreatorDashboard.Analytics.Overview.Improve.DailyActiveUsers,"• 広告を作成して、より多くのプレイヤーにゲームを見つけてもらう
+• ゲームを友達とシェアする"
+CreatorDashboard.Analytics.Overview.Improve.NewUserSessionTime,"• プレイヤーがすぐにゲームの楽しさを味わえるようにする
+• プレイヤーが目指せる目標を用意する
+• ゲーム開始後の数分間をスムーズに進められるようにする"
+CreatorDashboard.Analytics.Overview.Improve.PayerConversion,"• スターターパック（お得な初回限定オファー）を追加する
+• 適切なタイミングでショップやオファーを表示する"
+CreatorDashboard.Analytics.Overview.Improve.RobuxSpent,"• 販売用のゲームパスまたはアイテムを追加する
+• 収益アップにつながる可能性のある管理価格設定をオンにする
+• プレイヤーが戻ってきて課金するようにデイリーリワードを追加する"
+CreatorDashboard.Analytics.Overview.Summary.AverageOverSelectedPeriod,選択した期間の平均
+CreatorDashboard.Analytics.Overview.Title.D1Retention,1日目のリテンション
+CreatorDashboard.Analytics.Overview.Title.D7Retention,7日目のリテンション
+CreatorDashboard.Analytics.Overview.Title.DailyActiveUsers,1日あたりのアクティブユーザー数
+CreatorDashboard.Analytics.Overview.Title.FirstSessionRetention,5分後もプレイを続けている割合
+CreatorDashboard.Analytics.Overview.Title.NewUserSessionTime,新規ユーザーのセッション時間
+CreatorDashboard.Analytics.Overview.Title.PayerConversion,有料ユーザーコンバージョン
+CreatorDashboard.Analytics.Overview.Title.RobuxSpent,Robux支出額
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,下スクロール
 Feature.Accessibility.Action.ScrollUp,上スクロール
@@ -1970,6 +2006,7 @@ Feature.Build.Action.Edit,編集
 Feature.Build.Action.HideAutosaved,自動保存済みバージョンを非表示
 Feature.Build.Action.KeepBuilding,作成を続行
 Feature.Build.Action.ManageLimit,限度額を管理
+Feature.Build.Action.ManageUsage,使用量を管理
 Feature.Build.Action.Next,
 Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,通知する
@@ -2002,8 +2039,8 @@ Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,使用量を表示
 Feature.Build.Analytics.AnalyzeChatPrompt,過去{days}日間の{analyzeName}に関する解析を行ってください。また、この指標が重要な理由と改善方法を教えてください。
 Feature.Build.Analytics.AnalyzeName.Arppu,有料ユーザーあたりの平均収益
-Feature.Build.Analytics.AnalyzeName.D1Retention,1日目のリテンション
-Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,1日あたりのアクティブユーザー数
+Feature.Build.Analytics.AnalyzeName.D1Retention,
+Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,
 Feature.Build.Analytics.AnalyzeName.PayerConversion,有料ユーザーのコンバージョン率
 Feature.Build.Analytics.AnalyzeName.PlaythroughRate,プレイスルー率
 Feature.Build.Analytics.AnalyzeName.TotalPlaytime,合計プレイ時間
@@ -2047,7 +2084,9 @@ Feature.Build.Analytics.Overview,
 Feature.Build.Analytics.Percent,{number}%
 Feature.Build.Analytics.Players,プレイヤー
 Feature.Build.Analytics.Sheet.Analyze,分析
+Feature.Build.Analytics.Sheet.AskAboutThis,これについて質問
 Feature.Build.Analytics.Sheet.ViewInOverview,概要で表示
+Feature.Build.Analytics.Sheet.ViewMoreStats,さらに統計を表示
 Feature.Build.Analytics.Summary.Arppu,有料プレイヤー1人あたりの平均Robux収益。
 Feature.Build.Analytics.Summary.D1Retention,翌日再度プレイした新規プレイヤーの割合。
 Feature.Build.Analytics.Summary.DailyActiveUsers,選択した期間内に参加したユニークプレイヤー数。
@@ -2059,8 +2098,8 @@ Feature.Build.Analytics.Title.ConcurrentUsers,合計プレイヤー数
 Feature.Build.Analytics.Title.D1Retention,D1リテンション
 Feature.Build.Analytics.Title.D7Retention,D7のリテンション
 Feature.Build.Analytics.Title.DailyActiveUsers,
-Feature.Build.Analytics.Title.NewUserSessionTime,新規ユーザーのセッション時間
-Feature.Build.Analytics.Title.PayerConversion,有料ユーザーコンバージョン
+Feature.Build.Analytics.Title.NewUserSessionTime,
+Feature.Build.Analytics.Title.PayerConversion,
 Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.RobuxSpent,
 Feature.Build.Analytics.Title.TopAcquisitionSource,上位のソース
@@ -2069,10 +2108,13 @@ Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,訪問数
 Feature.Build.Content.NewGame,新規のゲーム
 Feature.Build.Description.ActivateDeveloperProduct,開発者製品{PRODUCT_ID}の販売を開始してください。
+Feature.Build.Description.ActivateGamePass,{PRODUCT_ID}のゲームパスの販売を開始します。
+Feature.Build.Description.ActivateSubscription,{PRODUCT_ID}の定期購入を有効化します。
 Feature.Build.Description.AdCampaignModerationReview,すべての広告キャンペーンはRobloxによる審査の対象となります。審査には最大24時間かかる場合があります。
 Feature.Build.Description.AdCampaignSheetRunDates,実施期間：{startDate}～{endDate}
 Feature.Build.Description.AdComplete,広告が終了しました。結果をご覧ください。
 Feature.Build.Description.AdModerationReview,すべての広告はRobloxによる審査の対象となり、審査には最大24時間かかる場合があります。
+Feature.Build.Description.AdvancedModel,最高品質に最適です。使用量が3倍の速さでなくなります。
 Feature.Build.Description.AdvertisingAgreement,[作成]を選択すると、{advertisingTermsStart}Roblox広告基準{advertisingTermsEnd}および{advertisingStandardsStart}広告基準{advertisingStandardsEnd}に同意したものとみなされます。
 Feature.Build.Description.ArchiveRemoval,このゲームをアーカイブすると、[ビルド]から削除されます。これは、クリエーターハブまたはRoblox Studioから引き続きアクセスして復元できます。
 Feature.Build.Description.AutoBuyUsage,Robuxを使って、作成中に追加のビルド使用量を自動的に購入しましょう。1日あたりの課金限度額はいつでも設定できます。
@@ -2085,9 +2127,17 @@ Feature.Build.Description.CampaignRunDates,キャンペーンは、{startDate}�
 Feature.Build.Description.ChooseAdCampaignLength,広告の掲載期間を選択してください。
 Feature.Build.Description.ChoosePlaytesters,ゲームをテストプレイしてもらう友達を選択してください。
 Feature.Build.Description.CreateDeveloperProduct,{PRICE} Robuxの「{NAME}」を作成し、非売品にします。
+Feature.Build.Description.CreateGamePass,
+Feature.Build.Description.CreateSubscription,{PRICE} Robuxの「{NAME}」を作成し、非アクティブにします。
 Feature.Build.Description.DeactivateDeveloperProduct,開発者製品（{PRODUCT_ID}）を非売品にします。
+Feature.Build.Description.DeactivateGamePass,{PRODUCT_ID}のゲームパスを非売品にします。
+Feature.Build.Description.DeactivateSubscription,{PRODUCT_ID}の定期購入を非売品にします。既存の会員については引き続き更新されます。
+Feature.Build.Description.DeactivateSubscriptionCancelRenewals,{PRODUCT_ID}の定期購入を非売品にし、既存の会員について今後の更新を停止します。
+Feature.Build.Description.DefaultModel,すばやい編集や通常の改善に最適です。
+Feature.Build.Description.DeleteSubscription,{PRODUCT_ID}の定期購入を削除します。
 Feature.Build.Description.EarnedRobuxAppliedFirst,獲得済みRobuxをお持ちの場合、広告キャンペーンの費用にはそちらが先に充当されます。
 Feature.Build.Description.EnableBuildNotifs,ビルドからの最新情報を受け取るには、デバイス設定で通知を有効化してください。
+Feature.Build.Description.EnableUsageOrWait,作成を続けるには、追加の使用量を有効にするか、毎週の上限がリセットされるまでお待ちください。
 Feature.Build.Description.FriendsLinkOnly,このリンクにアクセスできるのはあなたの友達のみです。より多くの人にプレイしてもらいたい場合は、ゲームのオーディエンス設定を変更してください。
 Feature.Build.Description.GameConfiguration,アイテムの販売方法やゲームの宣伝方法を変更しましょう。
 Feature.Build.Description.GameCreationDone,ゲームの作成と公開が完了しました。ゲームを開いてプレイテストできます。
@@ -2120,6 +2170,8 @@ Feature.Build.Description.ShopButton,ショップボタンを追加
 Feature.Build.Description.ShortAdCampaign,ゲームに対するプレイヤーの反応を簡単に確認する方法です。
 Feature.Build.Description.StopBuild,このリクエストはまだ進行中です。今停止すると作業が完了せず、再度送信する必要があります。
 Feature.Build.Description.UpdateDeveloperProduct,開発者製品{PRODUCT_ID}を更新してください。
+Feature.Build.Description.UpdateGamePass,{PRODUCT_ID}のゲームパスを更新します。
+Feature.Build.Description.UpdateSubscription,{PRODUCT_ID}の定期購入を更新します。
 Feature.Build.Description.UseAdCreditsInAdsManager,広告クレジットを使用するには、[広告管理]にアクセスする必要があります。
 Feature.Build.Error.AdForbidden,現在、ご利用のアカウントまたはゲームで広告を掲載できません。これが誤りであると思われる場合は、サポートまでご連絡ください。
 Feature.Build.Error.AdInsufficientFunds,この広告を作成するのに必要なRobuxが足りません。Robuxを追加してもう一度お試しください。
@@ -2151,6 +2203,7 @@ Feature.Build.Label.AdViews,広告表示回数
 Feature.Build.Label.AdditionalUsage,追加のビルド使用量
 Feature.Build.Label.AdditionalUsed,{USED}/{LIMIT}使用済み
 Feature.Build.Label.AdsManager,広告管理
+Feature.Build.Label.AdvancedModel,詳細選択
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,すべてのゲーム
 Feature.Build.Label.AmountAvailable,残り{AMOUNT}
@@ -2167,6 +2220,7 @@ Feature.Build.Label.CreatorHub,クリエーターハブ
 Feature.Build.Label.DateRange,{startDate}〜{endDate}
 Feature.Build.Label.DefaultDeveloperProduct,製品{PRODUCT_ID}
 Feature.Build.Label.DefaultDeveloperProductName,開発者製品
+Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,削除済み
 Feature.Build.Label.DescribeIdea,アイデアを説明してください
 Feature.Build.Label.Description,
@@ -2198,6 +2252,7 @@ Feature.Build.Label.Loading,読み込み中...
 Feature.Build.Label.ManagedPricing,管理価格設定
 Feature.Build.Label.ManagedPricingMixed,既存の製品で設定が混在
 Feature.Build.Label.MaximizeForGamePlays,プレイ数を最大化
+Feature.Build.Label.ModelUnavailable,モデルは利用できません
 Feature.Build.Label.Models3D,3Dモデル
 Feature.Build.Label.MyGames,マイゲーム
 Feature.Build.Label.Name,
@@ -2234,6 +2289,10 @@ Feature.Build.Label.SelectOption,オプションを選択
 Feature.Build.Label.ShopButton,ショップボタン
 Feature.Build.Label.ShopUi,ショップUI
 Feature.Build.Label.Sounds,サウンド
+Feature.Build.Label.SubscriptionProductType,製品タイプ：{PRODUCT_TYPE}
+Feature.Build.Label.SubscriptionProductTypeConsumable,消耗品
+Feature.Build.Label.SubscriptionProductTypeCurrency,通貨
+Feature.Build.Label.SubscriptionProductTypeDurable,耐久品
 Feature.Build.Label.TargetAllRobloxPlayers,すべてのRobloxプレイヤーを対象にする
 Feature.Build.Label.Thinking,考え中
 Feature.Build.Label.Title,タイトル
@@ -2434,15 +2493,18 @@ Feature.Build.Title.BuildUnavailable,ビルドは利用できません
 Feature.Build.Title.BuildUsage,ビルド使用量
 Feature.Build.Title.ChangesNotLive,変更はまだ公開されていません
 Feature.Build.Title.ChatBuildUnavailable,ビルドは利用できません。
+Feature.Build.Title.ChooseModel,ビルドエージェントを選択
 Feature.Build.Title.Content,コンテンツ
 Feature.Build.Title.CreateYourAd,
 Feature.Build.Title.DailyRobuxReached,Robuxが1日の限度額に達しました
 Feature.Build.Title.DeveloperProduct,
 Feature.Build.Title.EditDeveloperProduct,製品を編集
 Feature.Build.Title.ExperienceAudience,バーチャル空間のオーディエンス
+Feature.Build.Title.FreeLimitReached,無料の上限に達しました
 Feature.Build.Title.FreeUsageReached,無料のビルド使用量の限度額に達しました
 Feature.Build.Title.FriendsOnlyPlay,友達だけがプレイできます
 Feature.Build.Title.GameCreationDone,ゲームの作成が完了しました
+Feature.Build.Title.GamePass,ゲームパス
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,ユーザーを獲得
 Feature.Build.Title.ManagedPricingAcknowledgement,管理価格設定をオンにしますか？
@@ -2460,6 +2522,7 @@ Feature.Build.Title.PromoteGamePaid,さらに多くのプレイヤーが待っ�
 Feature.Build.Title.PushNotifications,プッシュ通知
 Feature.Build.Title.RevertLastChange,最後の変更を元に戻しますか？
 Feature.Build.Title.StopBuild,作成を停止しますか？
+Feature.Build.Title.Subscription,定期購入
 Feature.Build.Title.Tasks,タスク
 Feature.Build.Title.TurnActivity,ターン内のアクティビティ
 Feature.Build.Title.UseYourAdCredits,広告クレジットを使用
@@ -3570,7 +3633,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,残り{time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,Robuxを購入すると、仲裁条項と撤回ポリシーを含むRobloxの{termsLinkStart}利用規約{termsLinkEnd}に同意したものとみなされます。
-Feature.InExperienceShop.GamePass,ゲームパス
+Feature.InExperienceShop.GamePass,
 Feature.InExperienceShop.Label.BonusItem,ボーナスアイテム
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,あと{timeRemaining}で終了
@@ -3599,6 +3662,7 @@ Feature.Moments.Action.AddMusic,音楽を追加
 Feature.Moments.Action.AddSticker,ステッカーを追加
 Feature.Moments.Action.AddText,テキストを追加
 Feature.Moments.Action.AddVoice,ボイスを追加
+Feature.Moments.Action.Analytics,解析
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -3615,7 +3679,7 @@ Feature.Moments.Action.GenerateText,テキストを生成
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,役に立たなかった
 Feature.Moments.Action.GenerateTextFeedbackPolicy,不適切またはコミュニティガイドライン違反
 Feature.Moments.Action.Hide,詳細を非表示
-Feature.Moments.Action.HowToCapture,切り抜き方法
+Feature.Moments.Action.HowToCapture,切り抜き方法を表示
 Feature.Moments.Action.Join,
 Feature.Moments.Action.KeepEditing,編集を続ける
 Feature.Moments.Action.Leave,
@@ -3650,6 +3714,8 @@ Feature.Moments.Disclaimer.EveryoneMoments,モーメント内の全員が、公�
 Feature.Moments.Label.All,
 Feature.Moments.Label.AllowComments,コメントを許可
 Feature.Moments.Label.AttemptingJoinExperience,{placeName}に参加しようとしています。これには数秒かかる場合があります。
+Feature.Moments.Label.AverageCompletion,平均完了率
+Feature.Moments.Label.AverageWatchTime,平均視聴時間
 Feature.Moments.Label.CaptureLibrary,
 Feature.Moments.Label.ChooseVoice,ボイスを選択
 Feature.Moments.Label.CommentAuthorFallback,ユーザー（{userId}）
@@ -3663,13 +3729,13 @@ Feature.Moments.Label.CommentRejectedByFilter,コメントが投稿されませ�
 Feature.Moments.Label.CommentSendStatusUnknown,送信状況が不明です
 Feature.Moments.Label.CommentSending,
 Feature.Moments.Label.CommentSignInRequired,コメントするにはもう一度ログインしてください。
-Feature.Moments.Label.CommentTimestampDays,{count}日
-Feature.Moments.Label.CommentTimestampHours,{count}時間
-Feature.Moments.Label.CommentTimestampMinutes,{count}分
-Feature.Moments.Label.CommentTimestampMonths,{count}か月
+Feature.Moments.Label.CommentTimestampDays,{count}日前
+Feature.Moments.Label.CommentTimestampHours,{count}時間前
+Feature.Moments.Label.CommentTimestampMinutes,{count}分前
+Feature.Moments.Label.CommentTimestampMonths,{count}か月前
 Feature.Moments.Label.CommentTimestampNow,現在
-Feature.Moments.Label.CommentTimestampWeeks,{count}週間
-Feature.Moments.Label.CommentTimestampYears,{count}年
+Feature.Moments.Label.CommentTimestampWeeks,{count}週間前
+Feature.Moments.Label.CommentTimestampYears,{count}年前
 Feature.Moments.Label.CommentingUnavailable,コメントは現在ご利用いただけません。後でもう一度お試しください。
 Feature.Moments.Label.CommentsDisabled,コメントが無効化されています
 Feature.Moments.Label.CommentsReadOnly,コメントは読み取り専用です
@@ -3681,6 +3747,8 @@ Feature.Moments.Label.DeleteMomentBody,削除したモーメントは復元で�
 Feature.Moments.Label.DeleteMomentTitle,モーメントを削除しますか？
 Feature.Moments.Label.DeleteVoiceoverBody,これにより、テキストとボイスオーバーが消去されます。この操作はいつでもやり直せます。
 Feature.Moments.Label.DeleteVoiceoverTitle,ボイスオーバーを削除しますか？
+Feature.Moments.Label.DurationSeconds,{seconds}秒
+Feature.Moments.Label.Engagement,エンゲージメント
 Feature.Moments.Label.Error,
 Feature.Moments.Label.ExceedsCharacterLimit,文字数制限を超過しています
 Feature.Moments.Label.FeedEndBody,後でもう一度確認するか、独自のモーメントを作成してください。
@@ -3689,6 +3757,7 @@ Feature.Moments.Label.FeedFailedToLoad,ロードできませんでした
 Feature.Moments.Label.FeedMyMoments,マイモーメント
 Feature.Moments.Label.FeedTrending,トレンド
 Feature.Moments.Label.FirstCommentInvite,まだコメントはありません。最初にコメントしましょう！
+Feature.Moments.Label.GameJoinConversion,ゲーム参加コンバージョン
 Feature.Moments.Label.HowToUseCaptureTitle,切り抜きの使い方
 Feature.Moments.Label.LinkCopied,リンクをコピーしました
 Feature.Moments.Label.LinkCopyFailed,リンクをコピーできませんでした。
@@ -3708,6 +3777,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,コメントはまだありません
 Feature.Moments.Label.NonInfiniteScrollEndTitle,他にも視聴可能なモーメントがあります
+Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,写真
 Feature.Moments.Label.PostDeleted,モーメントが削除されました
 Feature.Moments.Label.PostRemovedBody,投稿したモーメントは、コミュニティ基準に違反しています。
@@ -3737,6 +3807,8 @@ Feature.Moments.Label.Tone.Cinematic,シネマモード
 Feature.Moments.Label.Tone.Funny,面白い
 Feature.Moments.Label.Tone.Hype,エネルギッシュ
 Feature.Moments.Label.Tone.Neutral,客観的
+Feature.Moments.Label.TotalReactions,リアクション総数
+Feature.Moments.Label.TotalViews,総表示数
 Feature.Moments.Label.Videos,
 Feature.Moments.Label.VoiceCoachmarkBody,ビデオナレーションのスクリプトを入力してください
 Feature.Moments.Label.VoiceCoachmarkTitle,
@@ -3745,17 +3817,18 @@ Feature.Moments.Label.VoiceGenerationFailedBody,ボイスオーバーを生成�
 Feature.Moments.Label.VoiceHelperDefault,音声はビデオの長さに合わせてカットされました
 Feature.Moments.Label.VoiceLimitReachedBody,しばらくしてから、もう一度お試しください
 Feature.Moments.Label.VoiceModerationError,スクリプトは安全に関するルールに従う必要があります
-Feature.Moments.Label.VoicePlaceholder,ボイスオーバーのスクリプトを入力してください。文字数制限は{maxCount}文字です
+Feature.Moments.Label.VoicePlaceholder,ボイスオーバーで読み上げたい内容を入力してください。
 Feature.Moments.Label.VoiceTimeoutBody,ボイスオーバーの生成がタイムアウトしました。
 Feature.Moments.Label.VoiceTooManyNumbersError,スクリプトに含まれる桁数が多すぎます
 Feature.Moments.Label.WriteComment,コメントを書く
 Feature.Moments.Title.Comments,コメント
-Feature.Moments.Title.CommentsWithCappedCount,コメント（{count}件以上）
-Feature.Moments.Title.CommentsWithCount,コメント（{count}件）
+Feature.Moments.Title.CommentsWithCappedCount,{count}件以上のコメント
+Feature.Moments.Title.CommentsWithCount,{count}件のコメント
 Feature.Moments.Title.GenerateTextFeedbackReason,何が問題でしたか？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しますか？
 Feature.Moments.Title.MomentRemoved,
+Feature.Moments.Title.PostInsights,ページヘッダーのタイトル
 Feature.Moments.Title.ReportPost,投稿の規約違反を報告
 Feature.Moments.Tooltip.Creation,バーチャル空間内の全員があなたのモーメントを見ることができます。
 Feature.Moments.Tooltip.ShareFirstMomentBody,切り抜きからモーメントを作成します
@@ -4101,7 +4174,7 @@ Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,規約違反の報告を
 Feature.ReportAbuse.Title.SelectInSceneIpReport,知的財産侵害の報告を開始していただきありがとうございます
 Feature.ReportAbuse.Title.SelectInSceneThankYou,規約違反を報告してくださりありがとうございました。
 Feature.RobloxSubscription.Action.JoinIn,{time}後に参加
-Feature.RobloxSubscription.Action.Subscribe,定期購入
+Feature.RobloxSubscription.Action.Subscribe,
 Feature.RobloxSubscription.Action.TryItForFree,無料で試す
 Feature.RobloxSubscription.Body.AlreadySubscribed,お持ちのPlus定期購入で、すでにゲーム内特典が提供されています。
 Feature.RobloxSubscription.Body.GenericError,現在、この操作を完了できません。もう一度お試しください。

@@ -1,0 +1,3 @@
+﻿local SharedFlagsModule = require(script.Parent.Parent.SharedFlags)
+
+return SharedFlagsModule.FFlagLuaAppUseDeviceSafeInsetsForAppContainer and SharedFlagsModule.FFlagLuaAppSupportDeviceSafeInsets
