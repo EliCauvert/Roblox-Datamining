@@ -37,7 +37,7 @@ local MyCreationsFilterContainerModule = require(BuildExperience.Components.MyCr
 local UseMyCreationsResultsModule = require(script.Parent.useMyCreationsResults)
 
 return function(Frame: Frame)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMyCreationsCreateGameButtonModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (copy), FFlagBuildWithGroupsModule (copy), GetMyCreationsFilterStoreModule (copy), UseMyCreationsResultsModule (copy), ChatConstantsModule (copy), Players (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), FFlagBuildExperienceStableMyCreationsListItemsModule (copy), ListItemInputType (copy), ExperienceResultsLoadingSkeletonModule (copy), List (copy), IconName (copy), MyCreationsTabNewGameRow (copy), SearchEmptyStateModule (copy), View (copy), InputSize (copy), BuildEmptyStateModule (copy), ExperienceResultsListModule (copy), RefreshScrollingFrame (copy), MyCreationsFilterContainerModule (copy), Button (copy), ButtonVariant (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMyCreationsCreateGameButtonModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildWithGroupsModule (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (copy), GetMyCreationsFilterStoreModule (copy), UseMyCreationsResultsModule (copy), ChatConstantsModule (copy), Players (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), FFlagBuildExperienceStableMyCreationsListItemsModule (copy), ListItemInputType (copy), ExperienceResultsLoadingSkeletonModule (copy), List (copy), IconName (copy), MyCreationsTabNewGameRow (copy), SearchEmptyStateModule (copy), View (copy), InputSize (copy), BuildEmptyStateModule (copy), ExperienceResultsListModule (copy), RefreshScrollingFrame (copy), MyCreationsFilterContainerModule (copy), Button (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		building = LocalizationStringsModule.MY_CREATIONS_BUILDING,
 		buildWithAI = LocalizationStringsModule.MY_CREATIONS_BUILD_WITH_AI,
@@ -61,8 +61,10 @@ return function(Frame: Frame)
 	local UseRefResult1 = ReactModule.useRef(false)
 	UseScrollPerformanceTrackerModule("LuaApp_Build_Home_Scroll", UseRefResult)
 	local UseShowEmptyStateResult = SearchQueryStore.useShowEmptyState()
+	local UseIsSearchActiveResult = if FFlagBuildWithGroupsModule or FFlagBuildExperienceMyCreationsCreateGameButtonModule then SearchQueryStore.useIsSearchActive() else false
 	local UseDraftQueryResult = if FFlagBuildExperienceMyCreationsUseUniverseListModule then SearchQueryStore.useDraftQuery() else nil
 	local FilterStore = if FFlagBuildWithGroupsModule then Frame.filterStore or GetMyCreationsFilterStoreModule() else nil
+	local UseFilterResult = if FFlagBuildWithGroupsModule then FilterStore.useFilter() else nil
 	local UseMyCreationsResultsModuleResult = UseMyCreationsResultsModule({
 		creatorAgentChatStore = Frame.creatorAgentChatStore,
 		creatorGroupsStore = Frame.creatorGroupsStore,
@@ -73,7 +75,7 @@ return function(Frame: Frame)
 		isFocused = IsIsFocused,
 		pollingIntervalSeconds = Frame.pollingIntervalSeconds,
 		userId = Frame.userId,
-		filter = if FFlagBuildWithGroupsModule then FilterStore.useFilter() else nil
+		filter = if UseIsSearchActiveResult then nil else UseFilterResult
 	})
 	local DisplayedItems = UseMyCreationsResultsModuleResult.displayedItems
 	local Items = UseMyCreationsResultsModuleResult.items
@@ -210,35 +212,42 @@ return function(Frame: Frame)
 		creatorGroupsStore = Frame.creatorGroupsStore
 	}) else nil
 	
-	return if FFlagBuildExperienceMyCreationsCreateGameButtonModule then ReactModule.createElement(View, {
-		tag = "col fill size-full",
-		LayoutOrder = Frame.LayoutOrder
-	}, {
-		Filter = Element1,
-		Results = Element,
-		CreateGameFooter = ReactModule.createElement(View, {
-			LayoutOrder = 2,
-			testId = "MyCreationsTab.CreateGameLayout",
-			tag = {
-				["composition-layout-detail"] = true,
-				["size-full-0 auto-y"] = true
-			}
+	if FFlagBuildExperienceMyCreationsCreateGameButtonModule then
+		local Element2 = ReactModule.createElement(View, {
+			tag = "composition-content-body col size-full-0 auto-y padding-y-medium"
 		}, {
-			CreateGameBody = ReactModule.createElement(View, {
-				tag = "composition-content-body col size-full-0 auto-y padding-y-medium"
-			}, {
-				CreateGameButton = ReactModule.createElement(Button, {
-					testId = "MyCreationsTab.CreateGameButton",
-					text = CreateNewGame,
-					onActivated = UseResult,
-					variant = ButtonVariant.Emphasis,
-					size = InputSize.Medium,
-					width = UDim.new(1, 0)
-				})
+			CreateGameButton = ReactModule.createElement(Button, {
+				testId = "MyCreationsTab.CreateGameButton",
+				text = CreateNewGame,
+				onActivated = UseResult,
+				variant = ButtonVariant.Emphasis,
+				size = InputSize.Medium,
+				width = UDim.new(1, 0)
 			})
 		})
-	}) elseif Element1 == nil then Element else ReactModule.createElement(View, {
-		tag = "col fill size-full",
-		LayoutOrder = Frame.LayoutOrder
-	}, { Filter = Element1, Results = Element })
+		
+		return ReactModule.createElement(View, {
+			tag = "col fill size-full",
+			LayoutOrder = Frame.LayoutOrder
+		}, {
+			Filter = if UseIsSearchActiveResult then nil else Element1,
+			Results = Element,
+			CreateGameFooter = if UseIsSearchActiveResult then nil else ReactModule.createElement(View, {
+				LayoutOrder = 2,
+				testId = "MyCreationsTab.CreateGameLayout",
+				tag = {
+					["composition-layout-detail"] = true,
+					["size-full-0 auto-y"] = true
+				}
+			}, { CreateGameBody = Element2 })
+		})
+	else
+		return if Element1 == nil then Element else ReactModule.createElement(View, {
+			tag = "col fill size-full",
+			LayoutOrder = Frame.LayoutOrder
+		}, {
+			Filter = if UseIsSearchActiveResult then nil else Element1,
+			Results = Element
+		})
+	end
 end

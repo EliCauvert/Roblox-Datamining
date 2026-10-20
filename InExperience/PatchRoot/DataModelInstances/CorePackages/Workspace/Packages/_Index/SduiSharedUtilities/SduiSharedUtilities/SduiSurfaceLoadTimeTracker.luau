@@ -53,6 +53,24 @@ return {
 			end
 		end
 		
+		local function logRenderStarted()
+			-- upvalues: Flag (ref), TimeToInteractiveTracker (upval), EventName (copy), p2 (copy), Milestone (upval), t (copy)
+			if not Flag then
+				Flag = true
+				TimeToInteractiveTracker.trackStart(EventName, true)
+				
+				if p2.metadata then
+					TimeToInteractiveTracker.updateMetadata(EventName, p2.metadata)
+				end
+			end
+			local RenderStarted = Milestone.RenderStarted
+			
+			if not t[RenderStarted] then
+				t[RenderStarted] = true
+				TimeToInteractiveTracker.trackMilestone(EventName, RenderStarted)
+			end
+		end
+		
 		local LogUiRequestSentFunction = LoadTimer.logUiRequestSent
 		
 		function LoadTimer.logUiRequestSent()
@@ -155,6 +173,7 @@ return {
 			end
 		end
 		
+		LoadTimer.logRenderStarted = logRenderStarted
 		LoadTimer.trackOnce = trackOnce
 		LoadTimer.trackSurfaceReady = trackSurfaceReady
 		LoadTimer.surfaceLoadTimeEventName = EventName

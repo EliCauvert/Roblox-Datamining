@@ -14,8 +14,6 @@ return {
 		FFlagMomentsVideoPermissionContextFix = require(script.Flags.FFlagMomentsVideoPermissionContextFix),
 		FFlagMomentsEngagementMetricsFeature = require(script.Flags.FFlagMomentsEngagementMetricsFeature),
 		FFlagMomentsMediaSmoothnessTelemetry = require(script.Flags.FFlagMomentsMediaSmoothnessTelemetry),
-		FFlagMomentsRealtimeSessionTelemetry = require(script.Flags.FFlagMomentsRealtimeSessionTelemetry),
-		FFlagMomentsSessionHeartbeat = require(script.Flags.FFlagMomentsSessionHeartbeat),
 		FFlagMomentsUploadOutcomeTelemetry = require(script.Flags.FFlagMomentsUploadOutcomeTelemetry),
 		FFlagMomentsContentStatsTelemetry = require(script.Flags.FFlagMomentsContentStatsTelemetry),
 		FFlagMomentTextGenerationFilteredSignal = require(script.Flags.FFlagMomentTextGenerationFilteredSignal),

@@ -17,5 +17,9 @@ return function()
 	for i, value in UseAbilitiesModuleResult do
 		Copy[i] = value
 	end
-	return { groups = UseContextResult.groups, controls = Copy }
+	return {
+		abilitiesAvailable = true,
+		groups = UseContextResult.groups,
+		controls = Copy
+	}
 end

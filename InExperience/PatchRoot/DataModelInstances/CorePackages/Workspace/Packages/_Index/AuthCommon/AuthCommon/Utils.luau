@@ -30,5 +30,6 @@
 	shouldSkipLegacyPasswordSaveEvent = require(script.shouldSkipLegacyPasswordSaveEvent),
 	coarseLoginErrorBucket = require(script.coarseLoginErrorBucket),
 	isNonTerminalLoginError = require(script.isNonTerminalLoginError),
+	fillGenericLoginErrorKey = require(script.fillGenericLoginErrorKey),
 	isLoggedOutUserId = require(script.isLoggedOutUserId)
 }

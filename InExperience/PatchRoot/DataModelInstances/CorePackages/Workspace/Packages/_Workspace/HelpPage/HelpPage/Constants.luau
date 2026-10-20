@@ -194,6 +194,7 @@ return {
 			[TouchControlsEnumModule.BottomMid] = nil,
 			[TouchControlsEnumModule.BottomRight] = config.TAP
 		},
+		TOUCH_ICONS = config,
 		TOUCH_OFFSETS = {
 			SMALL_SCREEN_CUTOFF_X = 700,
 			SMALL_SCREEN_CUTOFF_Y = 500,

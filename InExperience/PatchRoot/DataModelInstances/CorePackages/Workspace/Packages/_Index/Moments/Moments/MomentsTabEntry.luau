@@ -31,8 +31,6 @@ local FireFunnelAnalyticsEventFunction = Analytics.fireFunnelAnalyticsEvent
 local MomentsSurfaceLoadManager = MomentsCommonModule.Performance.MomentsSurfaceLoadManager
 local UseMomentsGatingFunction = MomentsCommonModule.Hooks.useMomentsGating
 local CanRenderNativeMomentsFunction = MomentsCommonModule.canRenderNativeMoments
-local FFlagMomentsRealtimeSessionTelemetry = MomentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
-local FFlagMomentsSessionHeartbeat = MomentsCommonModule.Flags.FFlagMomentsSessionHeartbeat
 local MomentsSessionHeartbeats = {}
 local FFlagMomentsPassFeedItemIdToBackendApis = SharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 local FFlagMomentsAvatarLookTryOn = SharedFlagsModule.FFlagMomentsAvatarLookTryOn
@@ -219,7 +217,7 @@ local _ = function(p2, p3, p4)
 end
 
 local function MomentsTabEntry(Current)
-	-- upvalues: ReactModule (copy), CreateMomentsStoreModule (copy), UseResetTeleportingOnGameLeaveModule (copy), GetFFlagMomentsFixDeeplinkRefocusModule (copy), getDeepLinkRequest (copy), GetDeepLinkStoreModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), RobloxAppEventsModule (copy), AppPage (copy), ConsumeEntrySourceModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsExperienceJoinActionTextIxpLayerModule (copy), Moments (copy), FFlagMomentsEmojiSetsApiModule (copy), MomentsGetMomentsReactionsStoreModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), FFlagMomentsRealtimeSessionTelemetry (copy), Analytics (copy), FFlagMomentsSessionHeartbeat (copy), MomentsSessionHeartbeats (copy), SessionManager (copy), FunnelEventNames (copy), FireFunnelAnalyticsEventFunction (copy), MomentsSurfaceLoadManager (copy), GetExperienceDetailsSheetStoreModule (copy), GetImmersiveChromeStoreModule (copy), RoactNavigationModule (copy), UseMomentsTabIsVisibleModule (copy), FFlagMomentsAvatarLookTryOn (copy), UseMomentsGatingFunction (copy), CanRenderNativeMomentsFunction (copy), MomentsHostShellModule (copy), InnerNavigatorModule (copy)
+	-- upvalues: ReactModule (copy), CreateMomentsStoreModule (copy), UseResetTeleportingOnGameLeaveModule (copy), GetFFlagMomentsFixDeeplinkRefocusModule (copy), getDeepLinkRequest (copy), GetDeepLinkStoreModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), RobloxAppEventsModule (copy), AppPage (copy), ConsumeEntrySourceModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsExperienceJoinActionTextIxpLayerModule (copy), Moments (copy), FFlagMomentsEmojiSetsApiModule (copy), MomentsGetMomentsReactionsStoreModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Analytics (copy), MomentsSessionHeartbeats (copy), SessionManager (copy), FunnelEventNames (copy), FireFunnelAnalyticsEventFunction (copy), MomentsSurfaceLoadManager (copy), GetExperienceDetailsSheetStoreModule (copy), GetImmersiveChromeStoreModule (copy), RoactNavigationModule (copy), UseMomentsTabIsVisibleModule (copy), FFlagMomentsAvatarLookTryOn (copy), UseMomentsGatingFunction (copy), CanRenderNativeMomentsFunction (copy), MomentsHostShellModule (copy), InnerNavigatorModule (copy)
 	local UseRefResult = ReactModule.useRef(Current)
 	UseRefResult.current = Current
 	local UseRefResult1 = ReactModule.useRef(false)
@@ -256,7 +254,7 @@ local function MomentsTabEntry(Current)
 		UseRefResult2.current = true
 	end, { Key, MomentId, Current.navigation })
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: UseRefResult1 (copy), UseRefResult3 (copy), FFlagMomentsFixDeeplinkRefocusModule (copy), UseRefResult5 (copy), ConsumeEntrySourceModule (upval), UseRefResult (copy), LogMomentsLayerExposureFunction (upval), FStringMomentsExperienceJoinActionTextIxpLayerModule (upval), Moments (upval), FFlagMomentsEmojiSetsApiModule (upval), MomentsGetMomentsReactionsStoreModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval), FFlagMomentsRealtimeSessionTelemetry (upval), Analytics (upval), FFlagMomentsSessionHeartbeat (upval), MomentsSessionHeartbeats (upval), SessionManager (upval), FunnelEventNames (upval), FireFunnelAnalyticsEventFunction (upval)
+		-- upvalues: UseRefResult1 (copy), UseRefResult3 (copy), FFlagMomentsFixDeeplinkRefocusModule (copy), UseRefResult5 (copy), ConsumeEntrySourceModule (upval), UseRefResult (copy), LogMomentsLayerExposureFunction (upval), FStringMomentsExperienceJoinActionTextIxpLayerModule (upval), Moments (upval), FFlagMomentsEmojiSetsApiModule (upval), MomentsGetMomentsReactionsStoreModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval), Analytics (upval), MomentsSessionHeartbeats (upval), SessionManager (upval), FunnelEventNames (upval), FireFunnelAnalyticsEventFunction (upval)
 		if UseRefResult1.current then return end
 		UseRefResult1.current = true
 		local Current = UseRefResult3.current
@@ -290,19 +288,14 @@ local function MomentsTabEntry(Current)
 			moments_session_id = Current.getMomentsSessionId(false),
 			source = ConsumeEntrySourceModuleResult
 		})
-		
-		if FFlagMomentsRealtimeSessionTelemetry then
-			Analytics.reportMomentsSessionStarted(ConsumeEntrySourceModuleResult)
-		end
-		if FFlagMomentsSessionHeartbeat then
-			local MomentsSessionHeartbeat = Analytics.createMomentsSessionHeartbeat()
-			MomentsSessionHeartbeats[Current.getMomentsSessionId(false)] = MomentsSessionHeartbeat
-			MomentsSessionHeartbeat.start(ConsumeEntrySourceModuleResult)
-		end
+		Analytics.reportMomentsSessionStarted(ConsumeEntrySourceModuleResult)
+		local MomentsSessionHeartbeat = Analytics.createMomentsSessionHeartbeat()
+		MomentsSessionHeartbeats[Current.getMomentsSessionId(false)] = MomentsSessionHeartbeat
+		MomentsSessionHeartbeat.start(ConsumeEntrySourceModuleResult)
 		FireFunnelAnalyticsEventFunction(FunnelEventNames.FunnelTypes.AppNavigation, FunnelEventNames.AppNavigationSteps.AppLaunched, (SessionManager.startSession(FunnelEventNames.FunnelTypes.AppNavigation)))
 	end, { FFlagMomentsFixDeeplinkRefocusModule })
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: UseRefResult1 (copy), MomentsSurfaceLoadManager (upval), GetExperienceDetailsSheetStoreModule (upval), UseRefResult3 (copy), FireAnalyticsEventFunction (upval), EventNames (upval), FFlagMomentsSessionHeartbeat (upval), MomentsSessionHeartbeats (upval), FFlagMomentsRealtimeSessionTelemetry (upval), Analytics (upval), SessionManager (upval), FunnelEventNames (upval)
+		-- upvalues: UseRefResult1 (copy), MomentsSurfaceLoadManager (upval), GetExperienceDetailsSheetStoreModule (upval), UseRefResult3 (copy), FireAnalyticsEventFunction (upval), EventNames (upval), MomentsSessionHeartbeats (upval), Analytics (upval), SessionManager (upval), FunnelEventNames (upval)
 		if not UseRefResult1.current then return end
 		UseRefResult1.current = false
 		MomentsSurfaceLoadManager.abort("blur")
@@ -313,19 +306,14 @@ local function MomentsTabEntry(Current)
 			source = Current.getSessionSource(false),
 			duration_seconds = tostring((math.floor(os.clock() - Current.getSessionStartTime(false))))
 		})
+		local MomentsSessionId = Current.getMomentsSessionId(false)
+		local MomentsSessionHeartbeat = MomentsSessionHeartbeats[MomentsSessionId]
 		
-		if FFlagMomentsSessionHeartbeat then
-			local MomentsSessionId = Current.getMomentsSessionId(false)
-			local MomentsSessionHeartbeat = MomentsSessionHeartbeats[MomentsSessionId]
-			
-			if MomentsSessionHeartbeat then
-				MomentsSessionHeartbeat.stop()
-				MomentsSessionHeartbeats[MomentsSessionId] = nil
-			end
+		if MomentsSessionHeartbeat then
+			MomentsSessionHeartbeat.stop()
+			MomentsSessionHeartbeats[MomentsSessionId] = nil
 		end
-		if FFlagMomentsRealtimeSessionTelemetry then
-			Analytics.reportMomentsSessionEnded(Current.getSessionSource(false))
-		end
+		Analytics.reportMomentsSessionEnded(Current.getSessionSource(false))
 		SessionManager.endSession(FunnelEventNames.FunnelTypes.AppNavigation)
 	end, {})
 	local UseResult2 = ReactModule.useCallback(function()

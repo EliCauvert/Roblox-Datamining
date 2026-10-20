@@ -1,6 +1,7 @@
 ﻿local GameDetail = script:FindFirstAncestor("GameDetail")
 local Parent = GameDetail.Parent
 local IsTenFootInterfaceFunction = require(Parent.AppCommonLib).isTenFootInterface
+local FFlagSduiEdpRenderStartedModule = require(GameDetail.Flags.FFlagSduiEdpRenderStarted)
 local ExperienceDetailsPageUtilsModule = require(script.Parent.ExperienceDetailsPageUtils)
 local ExperienceDetailsPageConstantsModule = require(script.Parent.ExperienceDetailsPageConstants)
 local ExperienceDetailsPageScopeFieldsModule = require(script.Parent.ExperienceDetailsPageScopeFields)
@@ -59,7 +60,7 @@ local SelectionGroup = {
 }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: GameDetail (copy), ExperienceDetailsPageUtilsModule (copy), GetExperienceDetailsPageKeyModule (copy), ReactModule (copy), UsePageScopeRefFunction (copy), FFlagEDPTTIParityDefinitions (copy), CreateExperienceDetailsPageTimerModule (copy), EDPTTIConstants (copy), SduiSurfaceLoadTimeTracker (copy), GetSduiClientPageScopeFunction (copy), UseEdpFunctionallyReadyLoggerModule (copy), UseNavigationFunction (copy), UseRoactServiceFunction (copy), AppSessionService (copy), UseTokensFunction (copy), UseGetCurrentLegacyRouteFunction (copy), FilterPlayWithReward (copy), SduiEdpPageScopeIsTenFoot (copy), IsTenFoot (copy), IsTenFootInterfaceFunction (copy), RemoveGameDetailSessionIfDepartedModule (copy), FetchExperienceDetailsPageModule (copy), UseUiStatusFunction (copy), UiStatus (copy), DataHydrationModule (copy), FFlagSduiContainerQueries (copy), UsePublishContainerWidthModule (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), ResponsiveModule (copy), FFlagEnableSplitPaneEDPFix (copy), ExperienceDetailsPageScopeFieldsModule (copy), DetailsPageLayout (copy), SelectionGroup (copy), EdpBannerAspectRatioTenths (copy), EdpDirectionalFullBleedOverlapOffset (copy), EdpFullBleedOverlapOffset (copy), EdpGradientTopBleedOffset (copy), FFlagLuaAppEdpDirectionalGradientMidTransparency (copy), EdpDirectionalGradientMidTransparencyHundredths (copy), EdpDirectionalBannerBottomVisiblePercent (copy), EdpBannerBottomVisiblePercent (copy), SduiFeatureEntryPoint (copy), AppPage (copy), ExperienceDetailsPageConstantsModule (copy), ExperienceDetailsFallbackBannerImageModule (copy), FoundationModule (copy), SduiPageEntryPoint (copy), FFlagSduiPageEntryUseSharedHooks (copy), CompositionTags (copy), ExperienceDetailsFallbackFeedModule (copy), ExperienceDetailsPersistentActionBarModule (copy)
+	-- upvalues: GameDetail (copy), ExperienceDetailsPageUtilsModule (copy), GetExperienceDetailsPageKeyModule (copy), ReactModule (copy), UsePageScopeRefFunction (copy), FFlagEDPTTIParityDefinitions (copy), CreateExperienceDetailsPageTimerModule (copy), EDPTTIConstants (copy), SduiSurfaceLoadTimeTracker (copy), GetSduiClientPageScopeFunction (copy), FFlagSduiEdpRenderStartedModule (copy), UseEdpFunctionallyReadyLoggerModule (copy), UseNavigationFunction (copy), UseRoactServiceFunction (copy), AppSessionService (copy), UseTokensFunction (copy), UseGetCurrentLegacyRouteFunction (copy), FilterPlayWithReward (copy), SduiEdpPageScopeIsTenFoot (copy), IsTenFoot (copy), IsTenFootInterfaceFunction (copy), RemoveGameDetailSessionIfDepartedModule (copy), FetchExperienceDetailsPageModule (copy), UseUiStatusFunction (copy), UiStatus (copy), DataHydrationModule (copy), FFlagSduiContainerQueries (copy), UsePublishContainerWidthModule (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), ResponsiveModule (copy), FFlagEnableSplitPaneEDPFix (copy), ExperienceDetailsPageScopeFieldsModule (copy), DetailsPageLayout (copy), SelectionGroup (copy), EdpBannerAspectRatioTenths (copy), EdpDirectionalFullBleedOverlapOffset (copy), EdpFullBleedOverlapOffset (copy), EdpGradientTopBleedOffset (copy), FFlagLuaAppEdpDirectionalGradientMidTransparency (copy), EdpDirectionalGradientMidTransparencyHundredths (copy), EdpDirectionalBannerBottomVisiblePercent (copy), EdpBannerBottomVisiblePercent (copy), SduiFeatureEntryPoint (copy), AppPage (copy), ExperienceDetailsPageConstantsModule (copy), ExperienceDetailsFallbackBannerImageModule (copy), FoundationModule (copy), SduiPageEntryPoint (copy), FFlagSduiPageEntryUseSharedHooks (copy), CompositionTags (copy), ExperienceDetailsFallbackFeedModule (copy), ExperienceDetailsPersistentActionBarModule (copy)
 	local UseExperienceDetailsFocusNavigationModule = require(GameDetail.FocusNavigation.useExperienceDetailsFocusNavigation)
 	local UniverseId = ExperienceDetailsPageUtilsModule.getUniverseId(p1)
 	local ExperienceDetailsPageKeyModule = GetExperienceDetailsPageKeyModule(UniverseId)
@@ -83,6 +84,10 @@ return ReactModule.memo(function(p1)
 		
 		return PageTimerFromPropsOrNavigationParams1
 	end, {})
+	
+	if FFlagSduiEdpRenderStartedModule then
+		UseMemoResult.logRenderStarted()
+	end
 	UseEdpFunctionallyReadyLoggerModule(UseMemoResult, UniverseId)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(AppSessionService)

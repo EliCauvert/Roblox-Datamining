@@ -18,9 +18,13 @@ end)()
 
 local function _(Text: string)
 	-- upvalues: v1 (copy)
-	local Number: number? = tonumber((string.sub(Text, 14)))
-	
-	return if Number == nil then nil else v1 + Number
+	if string.match(Text, "^AbilityAction%d+$") == nil then
+		return nil
+	else
+		local Number: number? = tonumber((string.sub(Text, 14)))
+		
+		return if Number == nil then nil else v1 + Number
+	end
 end
 
 local _ = function(Object)
@@ -58,10 +62,16 @@ end
 
 local function readAction(InputAction)
 	-- upvalues: v1 (copy), ConstantsModule (copy), getKeyboardCombo (copy), BindingConfigsModule (copy)
-	local Number: number? = tonumber((string.sub(InputAction.Name, 14)))
-	local NewNumber = if Number == nil then nil else v1 + Number
+	local Name: string = InputAction.Name
+	local LayoutOrder = nil
 	
-	if NewNumber == nil then
+	if string.match(Name, "^AbilityAction%d+$") == nil then
+		LayoutOrder = nil
+	else
+		local Number: number? = tonumber((string.sub(Name, 14)))
+		LayoutOrder = if Number == nil then nil else v1 + Number
+	end
+	if LayoutOrder == nil then
 		return nil
 	end
 	local Input = {}
@@ -84,11 +94,8 @@ local function readAction(InputAction)
 			end
 		end
 	end
-	if #Input == 0 and #Input1 == 0 then
-		return nil
-	end
 	local config = {
-		label = "CoreScripts.InGameMenu.GameSettings.Default",
+		label = "InGame.HelpMenu.GenericAction",
 		disabled = not InputAction.Enabled
 	}
 	
@@ -96,7 +103,7 @@ local function readAction(InputAction)
 		config.keyboardInput = {
 			input = Input,
 			group = BindingConfigsModule.ControlGroups.CharacterMovement,
-			layoutOrder = NewNumber
+			layoutOrder = LayoutOrder
 		}
 	end
 	if #Input1 > 0 then
@@ -134,7 +141,7 @@ local function readAbilities(Object)
 			end
 		end
 	end
-	return if next(t) == nil then nil else t
+	return t
 end
 
 local _ = function(Tbl)
@@ -164,8 +171,8 @@ return function(p1)
 		local _ = nil
 		local _ = nil
 		
-		local function v43()
-			-- upvalues: List3 (copy), P4 (upval), refresh (copy), v43 (ref), UseStateResult2 (upval), readAbilities (upval)
+		local function v44()
+			-- upvalues: List3 (copy), P4 (upval), refresh (copy), v44 (ref), UseStateResult2 (upval), readAbilities (upval)
 			for _, Connection in List3 do
 				Connection:Disconnect()
 			end
@@ -189,13 +196,13 @@ return function(p1)
 				if InputAction:IsA("InputAction") and string.match(InputAction.Name, "^AbilityAction%d+$") then
 					table.insert(List3, InputAction.Changed:Connect(refresh))
 					table.insert(List3, InputAction.ChildAdded:Connect(function()
-						-- upvalues: v43 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
-						v43()
+						-- upvalues: v44 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
+						v44()
 						UseStateResult2((readAbilities(P4)))
 					end))
 					table.insert(List3, InputAction.ChildRemoved:Connect(function()
-						-- upvalues: v43 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
-						v43()
+						-- upvalues: v44 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
+						v44()
 						UseStateResult2((readAbilities(P4)))
 					end))
 					
@@ -208,8 +215,8 @@ return function(p1)
 			end
 		end
 		
-		local function v44()
-			-- upvalues: List1 (copy), List2 (copy), List3 (copy), P4 (upval), v44 (ref), UseStateResult2 (upval), readAbilities (upval), refresh (copy), v43 (ref)
+		local function v45()
+			-- upvalues: List1 (copy), List2 (copy), List3 (copy), P4 (upval), v45 (ref), UseStateResult2 (upval), readAbilities (upval), refresh (copy), v44 (ref)
 			for _, Connection in List1 do
 				Connection:Disconnect()
 			end
@@ -228,13 +235,13 @@ return function(p1)
 			
 			if InputContexts == nil then return end
 			table.insert(List1, InputContexts.ChildAdded:Connect(function()
-				-- upvalues: v44 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
-				v44()
+				-- upvalues: v45 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
+				v45()
 				UseStateResult2((readAbilities(P4)))
 			end))
 			table.insert(List1, InputContexts.ChildRemoved:Connect(function()
-				-- upvalues: v44 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
-				v44()
+				-- upvalues: v45 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
+				v45()
 				UseStateResult2((readAbilities(P4)))
 			end))
 			local v2 = nil
@@ -254,36 +261,36 @@ return function(p1)
 			if v2 ~= nil then
 				table.insert(List2, v2.Changed:Connect(refresh))
 				table.insert(List2, v2.ChildAdded:Connect(function()
-					-- upvalues: v43 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
-					v43()
+					-- upvalues: v44 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
+					v44()
 					UseStateResult2((readAbilities(P4)))
 				end))
 				table.insert(List2, v2.ChildRemoved:Connect(function()
-					-- upvalues: v43 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
-					v43()
+					-- upvalues: v44 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
+					v44()
 					UseStateResult2((readAbilities(P4)))
 				end))
-				v43()
+				v44()
 				
 				return
 			end
 		end
 		
 		table.insert(List, P4.ChildAdded:Connect(function(Child)
-			-- upvalues: v44 (ref), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
+			-- upvalues: v45 (ref), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
 			if Child.Name == "InputContexts" then
-				v44()
+				v45()
 				UseStateResult2((readAbilities(P4)))
 			end
 		end))
 		table.insert(List, P4.ChildRemoved:Connect(function(Child)
-			-- upvalues: v44 (ref), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
+			-- upvalues: v45 (ref), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
 			if Child.Name == "InputContexts" then
-				v44()
+				v45()
 				UseStateResult2((readAbilities(P4)))
 			end
 		end))
-		v44()
+		v45()
 		UseStateResult2((readAbilities(P4)))
 		
 		return function()

@@ -1,15 +1,11 @@
 ﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
 local MomentsCommonModule = require(MomentsCreation.Parent.MomentsCommon)
 local LoggerModule = require(MomentsCreation.Logger)
-local FFlagMomentsRealtimeSessionTelemetry = MomentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
 
 return function(AssetId, p1)
-	-- upvalues: FFlagMomentsRealtimeSessionTelemetry (copy), MomentsCommonModule (copy), LoggerModule (copy)
+	-- upvalues: MomentsCommonModule (copy), LoggerModule (copy)
 	p1.uploadStore.setSuccess(AssetId)
-	
-	if FFlagMomentsRealtimeSessionTelemetry then
-		MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "success")
-	end
+	MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "success")
 	local FeedStore = p1.feedStore
 	
 	if FeedStore then

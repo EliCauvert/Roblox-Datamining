@@ -1,9 +1,7 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local _ = require(Parent.Signals)
-local MomentsCommonModule = require(Parent.MomentsCommon)
-local Analytics = MomentsCommonModule.Analytics
-local FFlagMomentsRealtimeSessionTelemetry = MomentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
+local Analytics = require(Parent.MomentsCommon).Analytics
 local ConstantsModule = require(Moments.Constants)
 local EmitRecommendationImpressionModule = require(Moments.Analytics.emitRecommendationImpression)
 local EmitRecommendationActionModule = require(Moments.Analytics.emitRecommendationAction)
@@ -33,7 +31,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: EmitRecommendationImpressionModule (copy), config (copy), FFlagMomentsRealtimeSessionTelemetry (copy), config1 (copy), Analytics (copy), EmitRecommendationActionModule (copy), FFlagMomentsComments (copy)
+	-- upvalues: EmitRecommendationImpressionModule (copy), config (copy), config1 (copy), Analytics (copy), EmitRecommendationActionModule (copy), FFlagMomentsComments (copy)
 	local GetMomentsSessionIdFunction = p1.getMomentsSessionId
 	local SignalTracker = p1.signalTracker
 	
@@ -53,18 +51,16 @@ return function(p1)
 			end
 		end,
 		logAction = function(p2, p3, p4)
-			-- upvalues: config (upval), FFlagMomentsRealtimeSessionTelemetry (upval), config1 (upval), Analytics (upval), EmitRecommendationActionModule (upval), FFlagMomentsComments (upval), GetMomentsSessionIdFunction (copy), SignalTracker (copy)
+			-- upvalues: config (upval), config1 (upval), Analytics (upval), EmitRecommendationActionModule (upval), FFlagMomentsComments (upval), GetMomentsSessionIdFunction (copy), SignalTracker (copy)
 			local Entry = config[p2]
 			
 			if Entry == nil then
 				return nil
 			end
-			if FFlagMomentsRealtimeSessionTelemetry then
-				local Entry1 = config1[p2]
-				
-				if Entry1 ~= nil then
-					Analytics.reportMomentsEngagement(Entry1)
-				end
+			local Entry1 = config1[p2]
+			
+			if Entry1 ~= nil then
+				Analytics.reportMomentsEngagement(Entry1)
 			end
 			local EmitRecommendationActionModuleResult = EmitRecommendationActionModule({
 				itemId = p3.itemId,

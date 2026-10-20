@@ -42,8 +42,6 @@ local FFlagMomentsCreationFeatureGate = SharedFlagsModule.FFlagMomentsCreationFe
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local FFlagMomentsPassFeedItemIdToBackendApis = SharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 local FFlagMomentsAvatarLookTryOn = SharedFlagsModule.FFlagMomentsAvatarLookTryOn
-local FFlagMomentsRealtimeSessionTelemetry = MomentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
-local FFlagMomentsSessionHeartbeat = MomentsCommonModule.Flags.FFlagMomentsSessionHeartbeat
 local Analytics = MomentsCommonModule.Analytics
 local EventNames = Analytics.EventNames
 local FunnelEventNames = Analytics.FunnelEventNames
@@ -61,7 +59,7 @@ local function PushedFeedSafeAreaProvider(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), CreateMomentsStoreModule (copy), FFlagEnableArgus (copy), CreateSignalTrackerFunction (copy), FFlagMomentsOptimisticProfilePending (copy), FFlagMomentsFlyoutCreateButtonModule (copy), UseCreationEntryModule (copy), UseUploadHostModule (copy), LogCreateIntentModule (copy), FunnelEventNames (copy), FFlagMomentsCreationFeatureGate (copy), UseMomentsGatingFunction (copy), ImmersiveFeedKind (copy), GetDeepLinkStoreModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), CreateUserMomentsFeedSourceModule (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceFunction (copy), CreateMomentsFeedSourceModule (copy), CreateRecommendationTelemetryFunction (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsExperienceJoinActionTextIxpLayerModule (copy), Moments (copy), FireAnalyticsEventFunction (copy), EventNames (copy), FFlagMomentsRealtimeSessionTelemetry (copy), Analytics (copy), FFlagMomentsSessionHeartbeat (copy), UseNavigationFocusFunction (copy), UseSignalStateFunction (copy), FeedPlaybackSuspension (copy), GetMomentsPreferencesStoreModule (copy), ReportModalCovering (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), UseNavigationFunction (copy), RoactNavigationModule (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), MomentsImmersiveNavigationMenu (copy), MomentsBackHeaderModule (copy), MomentsFeedSurfaceModule (copy), PushedFeedSafeAreaProvider (copy), View (copy), ConstantsModule (copy), CreationFlowScreen (copy), FTUXEducationScreenModule (copy), MomentsHostShellModule (copy), FFlagMomentsAvatarLookTryOn (copy)
+	-- upvalues: ReactModule (copy), CreateMomentsStoreModule (copy), FFlagEnableArgus (copy), CreateSignalTrackerFunction (copy), FFlagMomentsOptimisticProfilePending (copy), FFlagMomentsFlyoutCreateButtonModule (copy), UseCreationEntryModule (copy), UseUploadHostModule (copy), LogCreateIntentModule (copy), FunnelEventNames (copy), FFlagMomentsCreationFeatureGate (copy), UseMomentsGatingFunction (copy), ImmersiveFeedKind (copy), GetDeepLinkStoreModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), CreateUserMomentsFeedSourceModule (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceFunction (copy), CreateMomentsFeedSourceModule (copy), CreateRecommendationTelemetryFunction (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsExperienceJoinActionTextIxpLayerModule (copy), Moments (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Analytics (copy), UseNavigationFocusFunction (copy), UseSignalStateFunction (copy), FeedPlaybackSuspension (copy), GetMomentsPreferencesStoreModule (copy), ReportModalCovering (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), UseNavigationFunction (copy), RoactNavigationModule (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), MomentsImmersiveNavigationMenu (copy), MomentsBackHeaderModule (copy), MomentsFeedSurfaceModule (copy), PushedFeedSafeAreaProvider (copy), View (copy), ConstantsModule (copy), CreationFlowScreen (copy), FTUXEducationScreenModule (copy), MomentsHostShellModule (copy), FFlagMomentsAvatarLookTryOn (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	
@@ -137,7 +135,7 @@ return ReactModule.memo(function(p1)
 	end, { FeedKind, Current, Current1 })
 	local SessionSource = p1.sessionSource
 	ReactModule.useEffect(function()
-		-- upvalues: Current (copy), SessionSource (copy), LogMomentsLayerExposureFunction (upval), FStringMomentsExperienceJoinActionTextIxpLayerModule (upval), Moments (upval), FireAnalyticsEventFunction (upval), EventNames (upval), FFlagMomentsRealtimeSessionTelemetry (upval), Analytics (upval), FFlagMomentsSessionHeartbeat (upval)
+		-- upvalues: Current (copy), SessionSource (copy), LogMomentsLayerExposureFunction (upval), FStringMomentsExperienceJoinActionTextIxpLayerModule (upval), Moments (upval), FireAnalyticsEventFunction (upval), EventNames (upval), Analytics (upval)
 		Current.setSessionSource(SessionSource)
 		LogMomentsLayerExposureFunction(FStringMomentsExperienceJoinActionTextIxpLayerModule)
 		
@@ -148,17 +146,14 @@ return ReactModule.memo(function(p1)
 			moments_session_id = Current.getMomentsSessionId(false),
 			source = SessionSource
 		})
-		
-		if FFlagMomentsRealtimeSessionTelemetry then
-			Analytics.reportMomentsSessionStarted(SessionSource)
-		end
-		local MomentsSessionHeartbeat = if FFlagMomentsSessionHeartbeat then Analytics.createMomentsSessionHeartbeat() else nil
+		Analytics.reportMomentsSessionStarted(SessionSource)
+		local MomentsSessionHeartbeat = Analytics.createMomentsSessionHeartbeat()
 		
 		if MomentsSessionHeartbeat ~= nil then
 			MomentsSessionHeartbeat.start(SessionSource)
 		end
 		return function()
-			-- upvalues: MomentsSessionHeartbeat (copy), Current (upval), FireAnalyticsEventFunction (upval), EventNames (upval), SessionSource (upval), FFlagMomentsRealtimeSessionTelemetry (upval), Analytics (upval)
+			-- upvalues: MomentsSessionHeartbeat (copy), Current (upval), FireAnalyticsEventFunction (upval), EventNames (upval), SessionSource (upval), Analytics (upval)
 			if MomentsSessionHeartbeat ~= nil then
 				MomentsSessionHeartbeat.stop()
 			end
@@ -167,10 +162,7 @@ return ReactModule.memo(function(p1)
 				source = SessionSource,
 				duration_seconds = tostring((math.floor(os.clock() - Current.getSessionStartTime(false))))
 			})
-			
-			if FFlagMomentsRealtimeSessionTelemetry then
-				Analytics.reportMomentsSessionEnded(SessionSource)
-			end
+			Analytics.reportMomentsSessionEnded(SessionSource)
 		end
 	end, { SessionSource, Current })
 	local UseNavigationFocusResult = UseNavigationFocusFunction()

@@ -9,7 +9,6 @@ local MediaSurfaceContextModule = require(MomentsCommon.Media.Components.MediaSu
 local UseMomentMediaControllerModule = require(MomentsCommon.Media.Components.useMomentMediaController)
 local UseHasPresentedFrameModule = require(MomentsCommon.Media.useHasPresentedFrame)
 local GetSmartFillScaleTypeModule = require(MomentsCommon.Utils.getSmartFillScaleType)
-local FFlagMomentsTextOverlayAfterVideoLoadedModule = require(MomentsCommon.Flags.FFlagMomentsTextOverlayAfterVideoLoaded)
 local FFlagMomentsSmartVideoFillModule = require(MomentsCommon.Flags.FFlagMomentsSmartVideoFill)
 local Skeleton = FoundationModule.Skeleton
 local View = FoundationModule.View
@@ -18,7 +17,7 @@ local UseSignalBindingFunction = SignalsReactModule.useSignalBinding
 local Frozen = table.freeze({})
 
 return function(Frame)
-	-- upvalues: UseMomentMediaControllerModule (copy), ReactModule (copy), SignalsModule (copy), MediaSurfaceContextModule (copy), FFlagMomentsSmartVideoFillModule (copy), GetSmartFillScaleTypeModule (copy), UseSignalBindingFunction (copy), UseSignalStateFunction (copy), FFlagMomentsTextOverlayAfterVideoLoadedModule (copy), UseHasPresentedFrameModule (copy), Frozen (copy), View (copy), Skeleton (copy), FoundationModule (copy)
+	-- upvalues: UseMomentMediaControllerModule (copy), ReactModule (copy), SignalsModule (copy), MediaSurfaceContextModule (copy), FFlagMomentsSmartVideoFillModule (copy), GetSmartFillScaleTypeModule (copy), UseSignalBindingFunction (copy), UseSignalStateFunction (copy), UseHasPresentedFrameModule (copy), Frozen (copy), View (copy), Skeleton (copy), FoundationModule (copy)
 	local UseMomentMediaControllerModuleResult = UseMomentMediaControllerModule(Frame.momentId)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval)
@@ -70,18 +69,15 @@ return function(Frame)
 	end, { UseMomentMediaControllerModuleResult })
 	local UseSignalStateResult = UseSignalStateFunction(UseMemoResult11)
 	local IsReady = UseSignalStateResult == "Ready"
-	local v1 = nil
-	
-	if FFlagMomentsTextOverlayAfterVideoLoadedModule then
-		local HasVideoPreview = UseMomentMediaControllerModuleResult ~= nil and UseMomentMediaControllerModuleResult.getHasVideoPreview()
-		v1 = UseSignalBindingFunction((ReactModule.useMemo(function()
-			-- upvalues: SignalsModule (upval), HasVideoPreview (copy), UseMemoResult11 (copy)
-			return SignalsModule.createComputed(function(p1): boolean
-				-- upvalues: HasVideoPreview (upval), UseMemoResult11 (upval)
-				return not HasVideoPreview or UseMemoResult11(p1) == "Ready"
-			end)
-		end, { HasVideoPreview, UseMemoResult11 })))
-	end
+	local UseSignalBindingResult1 = nil
+	local HasVideoPreview = UseMomentMediaControllerModuleResult ~= nil and UseMomentMediaControllerModuleResult.getHasVideoPreview()
+	UseSignalBindingResult1 = UseSignalBindingFunction((ReactModule.useMemo(function()
+		-- upvalues: SignalsModule (upval), HasVideoPreview (copy), UseMemoResult11 (copy)
+		return SignalsModule.createComputed(function(p1): boolean
+			-- upvalues: HasVideoPreview (upval), UseMemoResult11 (upval)
+			return not HasVideoPreview or UseMemoResult11(p1) == "Ready"
+		end)
+	end, { HasVideoPreview, UseMemoResult11 })))
 	local UseHasPresentedFrameModuleResult = UseHasPresentedFrameModule(UseMomentMediaControllerModuleResult, Frame.holdPosterUntilPlaying)
 	local NoUseHasPresentedFrameModuleResult: boolean = if Frame.holdPosterUntilPlaying then not UseHasPresentedFrameModuleResult else not IsReady
 	local UseSignalStateResult1 = UseSignalStateFunction((ReactModule.useMemo(function()
@@ -92,7 +88,7 @@ return function(Frame)
 		end)
 	end, { UseMomentMediaControllerModuleResult })))
 	local Copy = table.clone((ReactModule.useMemo(function()
-		-- upvalues: UseMomentMediaControllerModuleResult (copy), UseSignalStateResult1 (copy), UseMemoResult1 (copy), UseSignalBindingResult (copy), GetScaleType (ref), CornerRadius (copy), ReactModule (upval), View (upval), FFlagMomentsTextOverlayAfterVideoLoadedModule (upval), v1 (ref)
+		-- upvalues: UseMomentMediaControllerModuleResult (copy), UseSignalStateResult1 (copy), UseMemoResult1 (copy), UseSignalBindingResult (copy), GetScaleType (ref), CornerRadius (copy), ReactModule (upval), View (upval), UseSignalBindingResult1 (ref)
 		local Elements = {}
 		
 		if UseMomentMediaControllerModuleResult ~= nil then
@@ -100,7 +96,7 @@ return function(Frame)
 				local Id: string = value.id
 				Elements[`layer_{Id}`] = ReactModule.createElement(View, {
 					tag = "size-full",
-					Visible = if FFlagMomentsTextOverlayAfterVideoLoadedModule and string.sub(Id, 1, 5) == "text:" then v1 else nil,
+					Visible = if string.sub(Id, 1, 5) == "text:" then UseSignalBindingResult1 else nil,
 					ZIndex = value.zIndex + 2
 				}, {
 					Surface = value.render({
@@ -125,7 +121,7 @@ return function(Frame)
 	end, {
 		UseMomentMediaControllerModuleResult, UseSignalStateResult1, UseMemoResult1,
 		UseSignalBindingResult, GetScaleType, CornerRadius or false,
-		if FFlagMomentsTextOverlayAfterVideoLoadedModule then v1 else nil
+		UseSignalBindingResult1
 	})))
 	
 	if Frame.showLoadingSkeleton == true and UseSignalStateResult ~= "Ready" then

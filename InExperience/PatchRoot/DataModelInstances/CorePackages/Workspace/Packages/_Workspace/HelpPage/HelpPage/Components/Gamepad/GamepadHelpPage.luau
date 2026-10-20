@@ -201,6 +201,8 @@ return ReactModule.memo(function(p2)
 		testId = "Gamepad",
 		diagramTestId = "VRGamepadInstructions",
 		layout = {
+			diagramOffsetY = nil,
+			bottomPadding = nil,
 			leftAnchor = UseMemoResult4,
 			leftPosition = UseMemoResult2_1,
 			rightAnchor = UseMemoResult3_1,

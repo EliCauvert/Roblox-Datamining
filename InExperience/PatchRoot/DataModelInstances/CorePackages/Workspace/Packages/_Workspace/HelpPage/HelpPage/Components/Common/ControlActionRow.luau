@@ -7,7 +7,8 @@ return ReactModule.memo(function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), ActionTextModule (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "row align-y-center gap-small size-full-0 auto-y",
-		LayoutOrder = p1.layoutOrder
+		LayoutOrder = p1.layoutOrder,
+		testId = p1.testId .. "Row"
 	}, {
 		ActionTextContainer = ReactModule.createElement(FoundationModule.View, {
 			tag = "auto-y",
@@ -17,6 +18,7 @@ return ReactModule.memo(function(p1)
 		}, {
 			ActionText = ReactModule.createElement(ActionTextModule, {
 				actionLabels = p1.actionLabels,
+				textVariant = p1.textVariant,
 				textXAlignment = if p1.layoutOrderReversed then Enum.TextXAlignment.Left else Enum.TextXAlignment.Right,
 				testId = p1.testId
 			})

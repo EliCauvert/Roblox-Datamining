@@ -11,10 +11,9 @@ local LuaAppSduiEdpHideSystemBarOnPeekViewMount = game:DefineFastFlag("LuaAppSdu
 local LuaAppSduiEdpHideSystemBarOnPeekViewMount1 = game:DefineFastFlag("EnableExperienceDetailsBottomSheet2", false) and LuaAppSduiEdpHideSystemBarOnPeekViewMount
 local EnableMeTabProfile = game:DefineFastFlag("EnableMeTabProfile", false)
 local EnableMeTabMarketplaceNav = game:DefineFastFlag("EnableMeTabMarketplaceNav", false)
-local SduiApiStoreExposeGetInputData = game:DefineFastFlag("SduiApiStoreExposeGetInputData", false)
-local SduiApiStoreExposeGetInputData1 = game:DefineFastFlag("SduiUseInputData", false) and SduiApiStoreExposeGetInputData
+local SduiUseInputData = game:DefineFastFlag("SduiUseInputData", false)
 local SduiPageEntryPointResolvedSlot = game:DefineFastFlag("SduiPageEntryPointResolvedSlot", false)
-local SduiPageEntryPointResolvedSlot1 = game:DefineFastFlag("SduiSearchResultsPageEnabled", false) and (SduiApiStoreExposeGetInputData1 and SduiPageEntryPointResolvedSlot)
+local SduiPageEntryPointResolvedSlot1 = game:DefineFastFlag("SduiSearchResultsPageEnabled", false) and (SduiUseInputData and SduiPageEntryPointResolvedSlot)
 local SduiChartsPlaceholderMergeStrategySupport = game:DefineFastFlag("SduiChartsPlaceholderMergeStrategySupport", false)
 local SduiVerticalFeedProgressiveFillOnScroll2 = game:DefineFastFlag("SduiVerticalFeedProgressiveFillOnScroll2", false)
 local SduiDismissPromptAction = game:DefineFastFlag("SduiDismissPromptAction", false)
@@ -190,7 +189,6 @@ return {
 	FFlagEnableGameLeftMessage = require(script.FFlagEnableGameLeftMessage),
 	FFlagEnableAppRatingPromptLua = require(script.FFlagEnableAppRatingPromptLua),
 	FFlagEnableAndroidAppRatingPromptLua = require(script.FFlagEnableAndroidAppRatingPromptLua),
-	FFlagUseNewDiscoverabilityModal = game:DefineFastFlag("UseNewDiscoverabilityModal_v2", false),
 	FFlagAXWearTimeSupport = require(script.FFlagAXWearTimeSupport),
 	FFlagAXMISWithBlackbird = require(script.FFlagAXMISWithBlackbird),
 	GetFFlagSystemTrayEnabled = require(script.GetFFlagSystemTrayEnabled),
@@ -1783,7 +1781,6 @@ return {
 	FFlagLuaAppSduiStreamingChunkedResponses = require(script.FFlagLuaAppSduiStreamingChunkedResponses),
 	FFlagLuaAppSduiStreamingFirstDataTiming = require(script.FFlagLuaAppSduiStreamingFirstDataTiming),
 	FFlagMediaGalleryVideoVisiblePercent = game:DefineFastFlag("MediaGalleryVideoVisiblePercent", false),
-	FFlagSduiApiStoreExposeGetInputData = SduiApiStoreExposeGetInputData,
 	FFlagSduiApiStoreUpdateInputData = game:DefineFastFlag("SduiApiStoreUpdateInputData", false),
 	FFlagHomeSduiOfflineCache = game:DefineFastFlag("HomeSduiOfflineCache", false),
 	FFlagSduiEdpTemplatePrewarm = game:DefineFastFlag("SduiEdpTemplatePrewarm", false) and SduiEdpClientTemplateCache,
@@ -1792,7 +1789,7 @@ return {
 	FFlagSduiAdvertiseRuntimeSupportSets = SduiAdvertiseRuntimeSupportSets,
 	FFlagSduiExtendedCapabilitiesDiscovery = SduiAdvertiseRuntimeSupportSets1,
 	FFlagSduiExtendedCapabilitiesPrompts = game:DefineFastFlag("SduiExtendedCapabilitiesPrompts", false) and SduiAdvertiseRuntimeSupportSets1,
-	FFlagSduiUseInputData = SduiApiStoreExposeGetInputData1,
+	FFlagSduiUseInputData = SduiUseInputData,
 	FFlagSduiPageEntryPointResolvedSlot = SduiPageEntryPointResolvedSlot,
 	FFlagSduiSrpScrollAway = game:DefineFastFlag("SduiSrpScrollAway", false),
 	FFlagSduiSrpShowNavOnNewSearch = game:DefineFastFlag("SduiSrpShowNavOnNewSearch", false),

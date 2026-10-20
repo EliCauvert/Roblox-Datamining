@@ -6,6 +6,8 @@ local ResponsiveModule = require(Parent1.Responsive)
 local KeyboardHelpPageModule = require(Parent.Components.Keyboard.KeyboardHelpPage)
 local GamepadHelpPageModule = require(Parent.Components.Gamepad.GamepadHelpPage)
 local TouchHelpPageModule = require(Parent.Components.Touch.TouchHelpPage)
+local CCLTouchHelpPageContainerModule = require(Parent.Components.Touch.CCLTouchHelpPage.CCLTouchHelpPageContainer)
+local FFlagHelpPageCCLModule = require(Parent.Flags.FFlagHelpPageCCL)
 local HelpPageTelemetryModule = require(Parent.Telemetry.HelpPageTelemetry)
 local _ = require(Parent1.RobloxAppEnums)
 local View = require(Parent1.Foundation).View
@@ -23,7 +25,7 @@ local function _(Directional, p1, p2)
 end
 
 return ReactModule.memo(function()
-	-- upvalues: ResponsiveModule (copy), InputTypesEnumModule (copy), UseDeviceOrientationFunction (copy), ReactModule (copy), HelpPageTelemetryModule (copy), KeyboardHelpPageModule (copy), GamepadHelpPageModule (copy), TouchHelpPageModule (copy), View (copy)
+	-- upvalues: ResponsiveModule (copy), InputTypesEnumModule (copy), UseDeviceOrientationFunction (copy), ReactModule (copy), HelpPageTelemetryModule (copy), KeyboardHelpPageModule (copy), GamepadHelpPageModule (copy), FFlagHelpPageCCLModule (copy), CCLTouchHelpPageContainerModule (copy), TouchHelpPageModule (copy), View (copy)
 	local UsePreferredInputResult = ResponsiveModule.usePreferredInput()
 	local UseLastInputResult = ResponsiveModule.useLastInput()
 	local SPATIALGAMEPAD = nil
@@ -47,5 +49,5 @@ return ReactModule.memo(function()
 	
 	return if SPATIALGAMEPAD == InputTypesEnumModule.InputType.KEYBOARD then ReactModule.createElement(KeyboardHelpPageModule) elseif SPATIALGAMEPAD == InputTypesEnumModule.InputType.GAMEPAD or SPATIALGAMEPAD == InputTypesEnumModule.InputType.SPATIAL_GAMEPAD then ReactModule.createElement(GamepadHelpPageModule, {
 		isSpatial = SPATIALGAMEPAD == InputTypesEnumModule.InputType.SPATIAL_GAMEPAD
-	}) elseif SPATIALGAMEPAD == InputTypesEnumModule.InputType.TOUCH then ReactModule.createElement(TouchHelpPageModule) else ReactModule.createElement(View, nil, {})
+	}) elseif SPATIALGAMEPAD == InputTypesEnumModule.InputType.TOUCH then ReactModule.createElement(if FFlagHelpPageCCLModule then CCLTouchHelpPageContainerModule else TouchHelpPageModule) else ReactModule.createElement(View, nil, {})
 end)

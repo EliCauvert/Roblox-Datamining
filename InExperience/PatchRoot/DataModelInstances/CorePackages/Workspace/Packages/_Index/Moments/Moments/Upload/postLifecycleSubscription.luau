@@ -6,7 +6,6 @@ local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local MomentsGetMomentsUserStoreModule = require(Parent.DataHydration.MomentsGetMomentsUserStore)
 local GetLocalUserIdModule = require(Moments.Utils.getLocalUserId)
-local FFlagMomentsRealtimeSessionTelemetry = MomentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
 local MomentsPostReviewTelemetry = game:DefineFastFlag("MomentsPostReviewTelemetry", false)
 local Signal, Signal2 = require(Parent.Signals).createSignal({})
 
@@ -22,12 +21,12 @@ local MomentsPostLifecycleV1 = nil
 local OnUnhideConnection = nil
 
 local function onPostLifecycleEvent(p1)
-	-- upvalues: GetLocalUserIdModule (copy), FFlagMomentsRealtimeSessionTelemetry (copy), MomentsPostReviewTelemetry (copy), t (copy), MomentsCommonModule (copy), SharedFlagsModule (copy), Signal (copy), Signal2 (copy), MomentsGetMomentsUserStoreModule (copy)
+	-- upvalues: GetLocalUserIdModule (copy), MomentsPostReviewTelemetry (copy), t (copy), MomentsCommonModule (copy), SharedFlagsModule (copy), Signal (copy), Signal2 (copy), MomentsGetMomentsUserStoreModule (copy)
 	if type(p1) ~= "table" or p1.type ~= "PostStatusChanged" or p1.status ~= "Published" and p1.status ~= "Rejected" or (type(p1.postAssetId) ~= "string" or p1.postAssetId == "") then return end
 	local LocalUserIdModule = GetLocalUserIdModule()
 	
 	if LocalUserIdModule == nil then return end
-	if FFlagMomentsRealtimeSessionTelemetry and MomentsPostReviewTelemetry and p1.isNewPost == true then
+	if MomentsPostReviewTelemetry and p1.isNewPost == true then
 		local Text = p1.postAssetId .. ":" .. p1.status
 		
 		if not t[Text] then

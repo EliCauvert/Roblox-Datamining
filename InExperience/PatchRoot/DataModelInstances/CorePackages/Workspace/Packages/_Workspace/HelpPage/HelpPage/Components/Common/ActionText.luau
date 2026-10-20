@@ -31,8 +31,12 @@ return (ReactModule.memo(function(Frame)
 		table.insert(List, EscapeRichTextModuleResult)
 	end
 	return ReactModule.createElement(Text, {
-		tag = "size-full-0 auto-y text-title-large text-wrap",
 		RichText = true,
+		tag = {
+			["size-full-0 auto-y text-wrap"] = true,
+			["text-label-small"] = Frame.textVariant == "label-small",
+			["text-title-large"] = Frame.textVariant ~= "label-small"
+		},
 		Text = table.concat(List, " / "),
 		TextXAlignment = Frame.textXAlignment or Enum.TextXAlignment.Center,
 		LayoutOrder = Frame.LayoutOrder,
