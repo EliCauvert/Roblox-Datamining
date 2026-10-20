@@ -191,6 +191,8 @@ Roblox.LangDynamic["Feature.GroupManagement"] = {
     "Message.LowestRoleAutoGrantWarning": "This role is automatically granted upon joining this group. Permissions granted to this role apply to newly joining users. Review them carefully.",
     "Heading.ConfirmLowestRoleReorder": "Change the lowest role?",
     "Message.ConfirmLowestRoleReorder": "The new lowest role will automatically be granted upon joining this group. Permissions granted to this role will apply to newly joining users. Are you sure you want to continue?",
-    "Group.UniverseBansManager.Subtext": "Access read-only chat (must be 18+) and manage experience bans."
+    "Group.UniverseBansManager.Subtext": "Access read-only chat (must be 18+) and manage experience bans.",
+    "Group.OAuthApplicationManager.Label": "Manage OAuth 2.0 applications",
+    "Group.OAuthApplicationManager.Subtext": "Includes submitting the application for review to be published."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.GroupManagement");
