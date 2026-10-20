@@ -23,6 +23,10 @@ return {
 	SduiErrors = SduiCoreSystemModule.SduiErrors,
 	SduiLogger = SduiCoreSystemModule.SduiLogger,
 	SduiDiscoveryDependencyUpdater = require(script.System.SduiDiscoveryDependencyUpdater),
+	registerDiscoveryUiComponents = require(script.Content.registerDiscoveryUiComponents),
+	registerDiscoveryActions = require(script.Actions.registerDiscoveryActions),
+	registerDiscoveryImpressions = require(script.Impressions.registerDiscoveryImpressions),
+	registerDiscoveryActionTelemetryHandlers = require(script.Actions.TelemetryHandlers.registerDiscoveryActionTelemetryHandlers),
 	SearchPageTabSwitchBridge = require(script.System.SearchPageTabSwitchBridge),
 	OpenSearchResultsWithQueryBridge = require(script.System.OpenSearchResultsWithQueryBridge),
 	ItemHeightMode = require(script.Content.Collections.ItemHeightMode)

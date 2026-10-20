@@ -1,13 +1,12 @@
 ﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
 local DiscountType = require(PurchasePrompt.Parent.IAPExperience).DiscountType
 local FFlagNormalizePriceDiscountAcceptLowercaseModule = require(PurchasePrompt.Flags.FFlagNormalizePriceDiscountAcceptLowercase)
-local FFlagPurchasePromptCartPricingEnabledModule = require(PurchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
 local config = {
 	[DiscountType.BlackbirdSubscription] = true,
 	[DiscountType.RobloxPlusSubscription] = true
 }
 
-local function isValidRawDiscount(p1): boolean --[[ Line: 16 ]]
+local function isValidRawDiscount(p1): boolean --[[ Line: 14 ]]
 	-- upvalues: FFlagNormalizePriceDiscountAcceptLowercaseModule (copy)
 	if type(p1) ~= "table" then
 		return false
@@ -34,8 +33,8 @@ local function isValidRawDiscount(p1): boolean --[[ Line: 16 ]]
 	return true
 end
 
-return function(List) --[[ Line: 50 | Named "normalizePriceDiscountDetails" ]]
-	-- upvalues: isValidRawDiscount (copy), FFlagNormalizePriceDiscountAcceptLowercaseModule (copy), config (copy), DiscountType (copy), FFlagPurchasePromptCartPricingEnabledModule (copy)
+return function(List) --[[ Line: 48 | Named "normalizePriceDiscountDetails" ]]
+	-- upvalues: isValidRawDiscount (copy), FFlagNormalizePriceDiscountAcceptLowercaseModule (copy), config (copy), DiscountType (copy)
 	if type(List) ~= "table" or #List == 0 then
 		return {}
 	end
@@ -51,14 +50,14 @@ return function(List) --[[ Line: 50 | Named "normalizePriceDiscountDetails" ]]
 				type = if config[Type] then Type else DiscountType.Uncategorized,
 				amountInRobux = value.AmountInRobux or value.amountInRobux,
 				percent = value.Percent or value.percent,
-				localizedDiscountAttribution = if FFlagPurchasePromptCartPricingEnabledModule then value.LocalizedDiscountAttribution else nil
+				localizedDiscountAttribution = value.LocalizedDiscountAttribution
 			})
 		else
 			table.insert(List1, {
 				type = if config[value.Type] then value.Type else DiscountType.Uncategorized,
 				amountInRobux = value.AmountInRobux,
 				percent = value.Percent,
-				localizedDiscountAttribution = if FFlagPurchasePromptCartPricingEnabledModule then value.LocalizedDiscountAttribution else nil
+				localizedDiscountAttribution = value.LocalizedDiscountAttribution
 			})
 		end
 	end

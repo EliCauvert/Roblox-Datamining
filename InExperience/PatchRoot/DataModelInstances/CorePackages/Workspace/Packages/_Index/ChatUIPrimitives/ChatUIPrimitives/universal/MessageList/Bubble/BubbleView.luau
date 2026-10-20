@@ -2,20 +2,23 @@
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local _ = require(script.Parent.Types)
+local GetBubblePaddingXFunction = require(script.Parent.useBubbleMaxWidth).getBubblePaddingX
+local UseBubbleContentMaxWidthFunction = require(script.Parent.useBubbleMaxWidth).useBubbleContentMaxWidth
 local IndexBindableFunction = FoundationModule.Utility.indexBindable
 
-return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 24 | Named "BubbleView" ]]
-	-- upvalues: FoundationModule (copy), ReactModule (copy), IndexBindableFunction (copy)
+return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 26 | Named "BubbleView" ]]
+	-- upvalues: FoundationModule (copy), GetBubblePaddingXFunction (copy), UseBubbleContentMaxWidthFunction (copy), ReactModule (copy), IndexBindableFunction (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
-	local Medium = UseTokensResult.Padding.Medium
+	local BubblePaddingX = GetBubblePaddingXFunction(UseTokensResult)
 	local Small = UseTokensResult.Padding.Small
 	local Size1000 = UseTokensResult.Size.Size_1000
+	local UseBubbleContentMaxWidthResult = UseBubbleContentMaxWidthFunction()
 	local CornerRadii = Frame.cornerRadii
 	
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "col align-y-center auto-xy",
-		backgroundStyle = Frame.accentColor,
-		cornerRadius = ReactModule.useMemo(function() --[[ Line: 31 ]]
+		backgroundStyle = Frame.backgroundStyle,
+		cornerRadius = ReactModule.useMemo(function() --[[ Line: 34 ]]
 			-- upvalues: IndexBindableFunction (upval), CornerRadii (copy)
 			return {
 				topLeft = IndexBindableFunction(CornerRadii, "topLeft"),
@@ -24,22 +27,22 @@ return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 24 | Named "Bubble
 				bottomRight = IndexBindableFunction(CornerRadii, "bottomRight")
 			}
 		end, { CornerRadii }),
-		padding = ReactModule.useMemo(function() --[[ Line: 40 ]]
-			-- upvalues: Small (copy), Medium (copy)
+		padding = ReactModule.useMemo(function() --[[ Line: 43 ]]
+			-- upvalues: Small (copy), BubblePaddingX (copy)
 			return {
 				top = UDim.new(0, Small),
 				bottom = UDim.new(0, Small),
-				left = UDim.new(0, Medium),
-				right = UDim.new(0, Medium)
+				left = UDim.new(0, BubblePaddingX),
+				right = UDim.new(0, BubblePaddingX)
 			}
-		end, { Medium, Small }),
-		sizeConstraint = ReactModule.useMemo(function() --[[ Line: 50 ]]
-			-- upvalues: Size1000 (copy), Small (copy)
+		end, { BubblePaddingX, Small }),
+		sizeConstraint = ReactModule.useMemo(function() --[[ Line: 55 ]]
+			-- upvalues: Size1000 (copy), Small (copy), UseBubbleContentMaxWidthResult (copy)
 			return {
-				MaxSize = nil,
-				MinSize = Vector2.new(0, Size1000 - Small * 2)
+				MinSize = Vector2.new(0, Size1000 - Small * 2),
+				MaxSize = Vector2.new(UseBubbleContentMaxWidthResult, 1e999)
 			}
-		end, { Size1000, Small }),
+		end, { Size1000, Small, UseBubbleContentMaxWidthResult }),
 		LayoutOrder = Frame.LayoutOrder,
 		Visible = Frame.Visible,
 		testId = Frame.testId,

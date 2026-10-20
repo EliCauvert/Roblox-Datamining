@@ -59,10 +59,9 @@ game:DefineFastFlag("DisableNonSchematizedInGameRobuxUpsellEvent", false)
 local FixUnifiedUpsellCompletionModal = game:DefineFastFlag("FixUnifiedUpsellCompletionModal", false)
 local _ = require(Parent1.ProductPurchase.PricingTypes)
 local _ = require(Parent1.ProductPurchase.v3.UnifiedProductPurchaseModalTypes)
-local FFlagPurchasePromptFetchCartPricing = require(Parent2.SharedFlags).FFlagPurchasePromptFetchCartPricing
 local _ = require(Parent1.Api.PaymentsGateway.GetUpsellSuggestionsTypes)
 
-function ExtendResult.init(p1) --[[ Line: 182 ]]
+function ExtendResult.init(p1) --[[ Line: 181 ]]
 	-- upvalues: HttpService (copy)
 	local Props = p1.props
 	p1.state = {
@@ -71,7 +70,7 @@ function ExtendResult.init(p1) --[[ Line: 182 ]]
 		isDelayedInput = Props.isDelayedInput
 	}
 	
-	function p1.closeModal() --[[ Line: 192 ]]
+	function p1.closeModal() --[[ Line: 191 ]]
 		-- upvalues: p1 (copy)
 		local Props = p1.props
 		p1:reportUserInput("Cancel")
@@ -81,7 +80,7 @@ function ExtendResult.init(p1) --[[ Line: 182 ]]
 	end
 end
 
-function ExtendResult.didMount(p1) --[[ Line: 202 ]]
+function ExtendResult.didMount(p1) --[[ Line: 201 ]]
 	-- upvalues: FFlagAddPerformanceMetricsToUnifiedPurchaseModal (copy), IntervalPerformanceTracker (copy), FIntLegacyPurchaseFPSTrackingTimeout (copy), GetTTIEventNameFunction (copy), ProductPurchaseSurface (copy), TimeToInteractiveTracker (copy), FIntTTIUnifiedPurchaseSamplingRate (copy)
 	if FFlagAddPerformanceMetricsToUnifiedPurchaseModal and (p1.props or {}).eventPrefix == "UACatalog" then
 		IntervalPerformanceTracker:startTracking("PurchaseModal_RobuxUpsellModalShown_Catalog", FIntLegacyPurchaseFPSTrackingTimeout, nil, true, true)
@@ -92,7 +91,7 @@ function ExtendResult.didMount(p1) --[[ Line: 202 ]]
 	end
 end
 
-function ExtendResult.didUpdate(p1, p2, _) --[[ Line: 231 ]]
+function ExtendResult.didUpdate(p1, p2, _) --[[ Line: 230 ]]
 	local Props = p1.props
 	
 	if p2.purchaseState ~= Props.purchaseState then
@@ -101,21 +100,21 @@ function ExtendResult.didUpdate(p1, p2, _) --[[ Line: 231 ]]
 	end
 end
 
-function ExtendResult.UnbindActions(p1) --[[ Line: 240 ]]
+function ExtendResult.UnbindActions(p1) --[[ Line: 239 ]]
 	-- upvalues: GetEnableCentralOverlayForUpsellPromptModule (copy), ContextActionService (copy), ConstantsModule (copy)
 	if GetEnableCentralOverlayForUpsellPromptModule() and p1.props.dispatchCentralOverlay then
 		ContextActionService:UnbindAction(ConstantsModule.CLOSE_MODAL_ACTION)
 	end
 end
 
-function ExtendResult.BindCancelAction(p1) --[[ Line: 246 ]]
+function ExtendResult.BindCancelAction(p1) --[[ Line: 245 ]]
 	-- upvalues: GetEnableCentralOverlayForUpsellPromptModule (copy), ContextActionService (copy), ConstantsModule (copy)
 	if GetEnableCentralOverlayForUpsellPromptModule() and p1.props.dispatchCentralOverlay then
 		ContextActionService:BindAction(ConstantsModule.CLOSE_MODAL_ACTION, p1.closeModal, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Escape)
 	end
 end
 
-function ExtendResult.closeCentralOverlay(p1) --[[ Line: 262 ]]
+function ExtendResult.closeCentralOverlay(p1) --[[ Line: 261 ]]
 	-- upvalues: GetEnableCentralOverlayForUpsellPromptModule (copy)
 	local Props = p1.props
 	
@@ -124,8 +123,8 @@ function ExtendResult.closeCentralOverlay(p1) --[[ Line: 262 ]]
 	end
 end
 
-function ExtendResult.constructRobuxUpsellPromptAnimatorObj(p1) --[[ Line: 270 ]]
-	-- upvalues: RobuxUpsellFlowStateModule (copy), FFlagAddCenterDialogForUnifiedPurchaseModal (copy), GetAppContextModule (copy), RoactModule (copy), UnifiedRobuxUpsellModalV2Module (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), FFlagPurchasePromptFetchCartPricing (copy), UnifiedRobuxUpsellModalModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), OverlayInGameMenuModule (copy), RobuxUpsellModalMultiplePackageModule (copy), ShouldShowNewUpsellModalExperimentModule (copy), DesktopUpsellExperimentModule (copy), RobuxUpsellModalModule (copy), RobuxUpsellPromptModule (copy), FFlagMobilePopularItemBadgingExperimentEnabledModule (copy)
+function ExtendResult.constructRobuxUpsellPromptAnimatorObj(p1) --[[ Line: 269 ]]
+	-- upvalues: RobuxUpsellFlowStateModule (copy), FFlagAddCenterDialogForUnifiedPurchaseModal (copy), GetAppContextModule (copy), RoactModule (copy), UnifiedRobuxUpsellModalV2Module (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), UnifiedRobuxUpsellModalModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), OverlayInGameMenuModule (copy), RobuxUpsellModalMultiplePackageModule (copy), ShouldShowNewUpsellModalExperimentModule (copy), DesktopUpsellExperimentModule (copy), RobuxUpsellModalModule (copy), RobuxUpsellPromptModule (copy), FFlagMobilePopularItemBadgingExperimentEnabledModule (copy)
 	local Props = p1.props
 	local State = p1.state
 	p1:BindCancelAction()
@@ -134,10 +133,10 @@ function ExtendResult.constructRobuxUpsellPromptAnimatorObj(p1) --[[ Line: 270 ]
 		shouldAnimate = Props.shouldAnimate,
 		shouldShow = Props.purchaseState == RobuxUpsellFlowStateModule.PurchaseModal,
 		skipAnimation = Props.useUnifiedProductPurchaseModal,
-		onShown = Props.isDelayedInput and function() --[[ Line: 282 ]]
+		onShown = Props.isDelayedInput and function() --[[ Line: 281 ]]
 			-- upvalues: p1 (copy), Props (copy)
 			p1:setState({ enableInputDelayed = true })
-			delay(3, function() --[[ Line: 286 ]]
+			delay(3, function() --[[ Line: 285 ]]
 				-- upvalues: p1 (upval), Props (upval)
 				p1:setState({ isDelayedInput = false, enableInputDelayed = false })
 				
@@ -146,15 +145,15 @@ function ExtendResult.constructRobuxUpsellPromptAnimatorObj(p1) --[[ Line: 270 ]
 				end
 			end)
 		end or nil,
-		onHidden = Props.isDelayedInput and function() --[[ Line: 296 ]]
+		onHidden = Props.isDelayedInput and function() --[[ Line: 295 ]]
 			-- upvalues: p1 (copy), Props (copy)
 			p1:setState({
 				enableInputDelayed = false,
 				isDelayedInput = Props.isDelayedInput
 			})
 		end or nil,
-		renderChildren = function() --[[ Line: 302 ]]
-			-- upvalues: Props (copy), FFlagAddCenterDialogForUnifiedPurchaseModal (upval), GetAppContextModule (upval), RoactModule (upval), UnifiedRobuxUpsellModalV2Module (upval), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (upval), FFlagPurchasePromptFetchCartPricing (upval), p1 (copy), State (copy), UnifiedRobuxUpsellModalModule (upval), FFlagLuaAppsEnablePromptVIPServerPurchase (upval), OverlayInGameMenuModule (upval), RobuxUpsellModalMultiplePackageModule (upval), ShouldShowNewUpsellModalExperimentModule (upval), DesktopUpsellExperimentModule (upval), RobuxUpsellModalModule (upval), RobuxUpsellPromptModule (upval), FFlagMobilePopularItemBadgingExperimentEnabledModule (upval)
+		renderChildren = function() --[[ Line: 301 ]]
+			-- upvalues: Props (copy), FFlagAddCenterDialogForUnifiedPurchaseModal (upval), GetAppContextModule (upval), RoactModule (upval), UnifiedRobuxUpsellModalV2Module (upval), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (upval), p1 (copy), State (copy), UnifiedRobuxUpsellModalModule (upval), FFlagLuaAppsEnablePromptVIPServerPurchase (upval), OverlayInGameMenuModule (upval), RobuxUpsellModalMultiplePackageModule (upval), ShouldShowNewUpsellModalExperimentModule (upval), DesktopUpsellExperimentModule (upval), RobuxUpsellModalModule (upval), RobuxUpsellPromptModule (upval), FFlagMobilePopularItemBadgingExperimentEnabledModule (upval)
 			return if Props.useUnifiedProductPurchaseModal then if FFlagAddCenterDialogForUnifiedPurchaseModal and GetAppContextModule() == "UA" then RoactModule.createElement(UnifiedRobuxUpsellModalV2Module, {
 				product = {
 					model = Props.model,
@@ -171,16 +170,16 @@ function ExtendResult.constructRobuxUpsellPromptAnimatorObj(p1) --[[ Line: 270 ]
 				purchaseModalType = Props.unifiedProductPurchaseModalType,
 				onBuyItemButtonMounted = Props.onBuyItemButtonMounted,
 				hideUserRobuxBalance = if FFlagUnifiedPurchaseFlowMarketplaceUIImprovements then Props.hideUserRobuxBalance else nil,
-				cartPricingResponse = if FFlagPurchasePromptFetchCartPricing then Props.cartPricingResponse else nil,
-				collectibleItemId = if FFlagPurchasePromptFetchCartPricing then Props.collectibleItemId else nil,
-				isCartPricingLoading = if FFlagPurchasePromptFetchCartPricing then Props.isCartPricingLoading else nil,
-				onCartOfferAppliedChanged = if FFlagPurchasePromptFetchCartPricing then Props.onCartOfferAppliedChanged else nil,
-				postPurchaseActions = if FFlagPurchasePromptFetchCartPricing then Props.postPurchaseActions else nil,
-				setPostPurchaseActions = if FFlagPurchasePromptFetchCartPricing then Props.setPostPurchaseActions else nil,
+				cartPricingResponse = Props.cartPricingResponse,
+				collectibleItemId = Props.collectibleItemId,
+				isCartPricingLoading = Props.isCartPricingLoading,
+				onCartOfferAppliedChanged = Props.onCartOfferAppliedChanged,
+				postPurchaseActions = Props.postPurchaseActions,
+				setPostPurchaseActions = Props.setPostPurchaseActions,
 				onRobloxPlusButtonActivated = Props.onRobloxPlusButtonActivated,
 				robloxPlusDiscountPercentage = Props.robloxPlusDiscountPercentage,
 				buttons = {
-					buyItemActivated = function() --[[ Line: 344 ]]
+					buyItemActivated = function() --[[ Line: 331 ]]
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Buy")
 						Props.purchaseRobux()
@@ -189,7 +188,7 @@ function ExtendResult.constructRobuxUpsellPromptAnimatorObj(p1) --[[ Line: 270 ]
 					buyItemControllerIcon = Props.acceptControllerIcon,
 					buyItemisDelayedInput = State.isDelayedInput,
 					buyItemEnableInputDelayed = State.enableInputDelayed and GetAppContextModule() == "IN_EXPERIENCE",
-					cancelPurchaseActivated = function() --[[ Line: 352 ]]
+					cancelPurchaseActivated = function() --[[ Line: 339 ]]
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Cancel")
 						Props.cancelPurchase()
@@ -197,7 +196,7 @@ function ExtendResult.constructRobuxUpsellPromptAnimatorObj(p1) --[[ Line: 270 ]
 					end,
 					cancelControllerIcon = Props.cancelControllerIcon
 				},
-				termsOfUseActivated = Props.showTermsOfUse and function() --[[ Line: 359 ]]
+				termsOfUseActivated = Props.showTermsOfUse and function() --[[ Line: 346 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("TermsOfService")
 					Props.showTermsOfUse()
@@ -227,7 +226,7 @@ function ExtendResult.constructRobuxUpsellPromptAnimatorObj(p1) --[[ Line: 270 ]
 				robloxPlusDiscountPercentage = Props.robloxPlusDiscountPercentage,
 				isMonthlyPrice = if FFlagLuaAppsEnablePromptVIPServerPurchase then Props.isMonthlyPrice else nil,
 				buttons = {
-					buyItemActivated = function() --[[ Line: 392 ]]
+					buyItemActivated = function() --[[ Line: 379 ]]
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Buy")
 						Props.purchaseRobux()
@@ -236,7 +235,7 @@ function ExtendResult.constructRobuxUpsellPromptAnimatorObj(p1) --[[ Line: 270 ]
 					buyItemControllerIcon = Props.acceptControllerIcon,
 					buyItemisDelayedInput = State.isDelayedInput,
 					buyItemEnableInputDelayed = State.enableInputDelayed and GetAppContextModule() == "IN_EXPERIENCE",
-					cancelPurchaseActivated = function() --[[ Line: 402 ]]
+					cancelPurchaseActivated = function() --[[ Line: 389 ]]
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Cancel")
 						Props.cancelPurchase()
@@ -244,7 +243,7 @@ function ExtendResult.constructRobuxUpsellPromptAnimatorObj(p1) --[[ Line: 270 ]
 					end,
 					cancelControllerIcon = Props.cancelControllerIcon
 				},
-				termsOfUseActivated = Props.showTermsOfUse and function() --[[ Line: 409 ]]
+				termsOfUseActivated = Props.showTermsOfUse and function() --[[ Line: 396 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("TermsOfService")
 					Props.showTermsOfUse()
@@ -264,7 +263,7 @@ function ExtendResult.constructRobuxUpsellPromptAnimatorObj(p1) --[[ Line: 270 ]
 				selectedUpsellIndex = Props.selectedUpsellIndex,
 				onUpsellSuggestionsSelected = Props.onUpsellSuggestionsSelected,
 				buttons = {
-					buyItemActivated = function() --[[ Line: 431 ]]
+					buyItemActivated = function() --[[ Line: 418 ]]
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Buy")
 						Props.purchaseRobux()
@@ -273,7 +272,7 @@ function ExtendResult.constructRobuxUpsellPromptAnimatorObj(p1) --[[ Line: 270 ]
 					buyItemControllerIcon = Props.acceptControllerIcon,
 					buyItemisDelayedInput = State.isDelayedInput,
 					buyItemEnableInputDelayed = State.enableInputDelayed,
-					cancelPurchaseActivated = function() --[[ Line: 441 ]]
+					cancelPurchaseActivated = function() --[[ Line: 428 ]]
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Cancel")
 						Props.cancelPurchase()
@@ -299,7 +298,7 @@ function ExtendResult.constructRobuxUpsellPromptAnimatorObj(p1) --[[ Line: 270 ]
 					robuxPurchaseAmountBeforeBonus = Props.iapRobuxAmountBeforeBonus
 				},
 				buttons = {
-					buyItemActivated = function() --[[ Line: 469 ]]
+					buyItemActivated = function() --[[ Line: 456 ]]
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Buy")
 						Props.purchaseRobux()
@@ -308,7 +307,7 @@ function ExtendResult.constructRobuxUpsellPromptAnimatorObj(p1) --[[ Line: 270 ]
 					buyItemControllerIcon = Props.acceptControllerIcon,
 					buyItemisDelayedInput = State.isDelayedInput,
 					buyItemEnableInputDelayed = State.enableInputDelayed,
-					cancelPurchaseActivated = function() --[[ Line: 479 ]]
+					cancelPurchaseActivated = function() --[[ Line: 466 ]]
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Cancel")
 						Props.cancelPurchase()
@@ -319,7 +318,7 @@ function ExtendResult.constructRobuxUpsellPromptAnimatorObj(p1) --[[ Line: 270 ]
 				},
 				isQuest = Props.isQuest,
 				isVng = Props.isVng,
-				termsOfUseActivated = Props.showTermsOfUse and function() --[[ Line: 490 ]]
+				termsOfUseActivated = Props.showTermsOfUse and function() --[[ Line: 477 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("TermsOfService")
 					Props.showTermsOfUse()
@@ -339,19 +338,19 @@ function ExtendResult.constructRobuxUpsellPromptAnimatorObj(p1) --[[ Line: 270 ]
 				buyItemControllerIcon = Props.acceptControllerIcon,
 				cancelControllerIcon = Props.cancelControllerIcon,
 				itemProductId = FFlagMobilePopularItemBadgingExperimentEnabledModule and tostring(Props.itemProductId) or nil,
-				buyItemActivated = function() --[[ Line: 514 ]]
+				buyItemActivated = function() --[[ Line: 501 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Buy")
 					Props.purchaseRobux()
 					p1:closeCentralOverlay()
 				end,
-				cancelPurchaseActivated = function() --[[ Line: 519 ]]
+				cancelPurchaseActivated = function() --[[ Line: 506 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Cancel")
 					Props.cancelPurchase()
 					p1:closeCentralOverlay()
 				end,
-				termsOfUseActivated = Props.showTermsOfUse and function() --[[ Line: 524 ]]
+				termsOfUseActivated = Props.showTermsOfUse and function() --[[ Line: 511 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("TermsOfService")
 					Props.showTermsOfUse()
@@ -363,7 +362,7 @@ function ExtendResult.constructRobuxUpsellPromptAnimatorObj(p1) --[[ Line: 270 ]
 	}
 end
 
-function ExtendResult.constructU13ConfirmPromptAnimatorObj(p1) --[[ Line: 535 ]]
+function ExtendResult.constructU13ConfirmPromptAnimatorObj(p1) --[[ Line: 522 ]]
 	-- upvalues: RobuxUpsellFlowStateModule (copy), RoactModule (copy), U13ConfirmPromptModule (copy)
 	local Props = p1.props
 	p1:BindCancelAction()
@@ -371,20 +370,20 @@ function ExtendResult.constructU13ConfirmPromptAnimatorObj(p1) --[[ Line: 535 ]]
 	return {
 		shouldAnimate = Props.shouldAnimate,
 		shouldShow = Props.purchaseState == RobuxUpsellFlowStateModule.PurchaseWarning,
-		renderChildren = function() --[[ Line: 543 ]]
+		renderChildren = function() --[[ Line: 530 ]]
 			-- upvalues: RoactModule (upval), U13ConfirmPromptModule (upval), Props (copy), p1 (copy)
 			return RoactModule.createElement(U13ConfirmPromptModule, {
 				screenSize = Props.screenSize,
 				modalType = Props.u13ConfirmType,
 				doneControllerIcon = Props.acceptControllerIcon,
 				cancelControllerIcon = Props.cancelControllerIcon,
-				doneActivated = function() --[[ Line: 552 ]]
+				doneActivated = function() --[[ Line: 539 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Confirm")
 					Props.acceptPurchaseWarning()
 					p1:closeCentralOverlay()
 				end,
-				cancelActivated = function() --[[ Line: 557 ]]
+				cancelActivated = function() --[[ Line: 544 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Cancel")
 					Props.cancelPurchase()
@@ -395,7 +394,7 @@ function ExtendResult.constructU13ConfirmPromptAnimatorObj(p1) --[[ Line: 535 ]]
 	}
 end
 
-function ExtendResult.constructPurchaseErrorPromptAnimatorObj(p1) --[[ Line: 567 ]]
+function ExtendResult.constructPurchaseErrorPromptAnimatorObj(p1) --[[ Line: 554 ]]
 	-- upvalues: RobuxUpsellFlowStateModule (copy), PurchaseErrorTypeModule (copy), FFlagAddCenterDialogForUnifiedPurchaseModal (copy), RoactModule (copy), UnifiedRobuxUpsellModalTooExpensiveV2Module (copy), UnifiedRobuxUpsellModalTooExpensiveModule (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), ShouldShowNewUpsellModalExperimentModule (copy), DesktopUpsellExperimentModule (copy), RobuxUpsellModalTooExpensiveFallbackModule (copy), PurchaseErrorPromptModule (copy)
 	local Props = p1.props
 	p1:BindCancelAction()
@@ -403,7 +402,7 @@ function ExtendResult.constructPurchaseErrorPromptAnimatorObj(p1) --[[ Line: 567
 	return {
 		shouldAnimate = Props.shouldAnimate,
 		shouldShow = Props.purchaseState == RobuxUpsellFlowStateModule.Error,
-		renderChildren = function() --[[ Line: 575 ]]
+		renderChildren = function() --[[ Line: 562 ]]
 			-- upvalues: Props (copy), PurchaseErrorTypeModule (upval), FFlagAddCenterDialogForUnifiedPurchaseModal (upval), RoactModule (upval), UnifiedRobuxUpsellModalTooExpensiveV2Module (upval), p1 (copy), UnifiedRobuxUpsellModalTooExpensiveModule (upval), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (upval), ShouldShowNewUpsellModalExperimentModule (upval), DesktopUpsellExperimentModule (upval), RobuxUpsellModalTooExpensiveFallbackModule (upval), PurchaseErrorPromptModule (upval)
 			return if Props.errorType == PurchaseErrorTypeModule.NotEnoughRobuxInApp then if FFlagAddCenterDialogForUnifiedPurchaseModal then RoactModule.createElement(UnifiedRobuxUpsellModalTooExpensiveV2Module, {
 				product = {
@@ -414,14 +413,14 @@ function ExtendResult.constructPurchaseErrorPromptAnimatorObj(p1) --[[ Line: 567
 				},
 				balanceAmount = Props.beforeRobuxBalance,
 				buttons = {
-					buyItemActivated = function() --[[ Line: 589 ]]
+					buyItemActivated = function() --[[ Line: 576 ]]
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Buy Robux")
 						Props.openBuyRobux()
 						Props.flowComplete()
 						p1:closeCentralOverlay()
 					end,
-					cancelPurchaseActivated = function() --[[ Line: 595 ]]
+					cancelPurchaseActivated = function() --[[ Line: 582 ]]
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Cancel")
 						Props.flowComplete()
@@ -440,14 +439,14 @@ function ExtendResult.constructPurchaseErrorPromptAnimatorObj(p1) --[[ Line: 567
 				balanceAmount = Props.beforeRobuxBalance,
 				hideUserRobuxBalance = if FFlagUnifiedPurchaseFlowMarketplaceUIImprovements then Props.hideUserRobuxBalance else nil,
 				buttons = {
-					buyItemActivated = function() --[[ Line: 620 ]]
+					buyItemActivated = function() --[[ Line: 607 ]]
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Buy Robux")
 						Props.openBuyRobux()
 						Props.flowComplete()
 						p1:closeCentralOverlay()
 					end,
-					cancelPurchaseActivated = function() --[[ Line: 627 ]]
+					cancelPurchaseActivated = function() --[[ Line: 614 ]]
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Cancel")
 						Props.flowComplete()
@@ -465,7 +464,7 @@ function ExtendResult.constructPurchaseErrorPromptAnimatorObj(p1) --[[ Line: 567
 					itemRobuxCost = Props.itemRobuxCost
 				},
 				balanceAmount = Props.beforeRobuxBalance,
-				doneActivated = function() --[[ Line: 652 ]]
+				doneActivated = function() --[[ Line: 639 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Done")
 					Props.flowComplete()
@@ -479,7 +478,7 @@ function ExtendResult.constructPurchaseErrorPromptAnimatorObj(p1) --[[ Line: 567
 				errorType = Props.errorType,
 				economicRestrictionError = Props.economicRestrictionError,
 				doneControllerIcon = Props.acceptControllerIcon,
-				doneActivated = function() --[[ Line: 670 ]]
+				doneActivated = function() --[[ Line: 657 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Done")
 					Props.flowComplete()
@@ -490,7 +489,7 @@ function ExtendResult.constructPurchaseErrorPromptAnimatorObj(p1) --[[ Line: 567
 	}
 end
 
-function ExtendResult.constructTwoStepRequiredAnimatorObj(p1) --[[ Line: 680 ]]
+function ExtendResult.constructTwoStepRequiredAnimatorObj(p1) --[[ Line: 667 ]]
 	-- upvalues: RobuxUpsellFlowStateModule (copy), RoactModule (copy), TwoStepReqPromptModule (copy)
 	local Props = p1.props
 	p1:BindCancelAction()
@@ -498,19 +497,19 @@ function ExtendResult.constructTwoStepRequiredAnimatorObj(p1) --[[ Line: 680 ]]
 	return {
 		shouldAnimate = Props.shouldAnimate,
 		shouldShow = Props.purchaseState == RobuxUpsellFlowStateModule.TwoStepRequired,
-		renderChildren = function() --[[ Line: 688 ]]
+		renderChildren = function() --[[ Line: 675 ]]
 			-- upvalues: RoactModule (upval), TwoStepReqPromptModule (upval), Props (copy), p1 (copy)
 			return RoactModule.createElement(TwoStepReqPromptModule, {
 				screenSize = Props.screenSize,
 				doneControllerIcon = Props.acceptControllerIcon,
-				openSecuritySettings = function() --[[ Line: 694 ]]
+				openSecuritySettings = function() --[[ Line: 681 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("GoToSecuritySettings")
 					Props.openSecuritySettings()
 					Props.flowComplete()
 					p1:closeCentralOverlay()
 				end,
-				closePrompt = function() --[[ Line: 700 ]]
+				closePrompt = function() --[[ Line: 687 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Cancel")
 					Props.flowComplete()
@@ -521,7 +520,7 @@ function ExtendResult.constructTwoStepRequiredAnimatorObj(p1) --[[ Line: 680 ]]
 	}
 end
 
-function ExtendResult.constructRobuxUpsellSuccessPromptAnimatorObj(p1) --[[ Line: 710 ]]
+function ExtendResult.constructRobuxUpsellSuccessPromptAnimatorObj(p1) --[[ Line: 697 ]]
 	-- upvalues: RobuxUpsellFlowStateModule (copy), FixUnifiedUpsellCompletionModal (copy), GetAppContextModule (copy), RoactModule (copy), UnifiedPurchaseCompletionModalV2Module (copy), UnifiedPurchaseModalTypeEnumModule (copy), UnifiedPurchaseCompletionModalModule (copy), RobuxUpsellSuccessPromptModule (copy)
 	local Props = p1.props
 	p1:BindCancelAction()
@@ -529,14 +528,14 @@ function ExtendResult.constructRobuxUpsellSuccessPromptAnimatorObj(p1) --[[ Line
 	return {
 		shouldAnimate = Props.shouldAnimate,
 		shouldShow = Props.purchaseState == RobuxUpsellFlowStateModule.Success,
-		renderChildren = function() --[[ Line: 718 ]]
+		renderChildren = function() --[[ Line: 705 ]]
 			-- upvalues: Props (copy), FixUnifiedUpsellCompletionModal (upval), GetAppContextModule (upval), RoactModule (upval), UnifiedPurchaseCompletionModalV2Module (upval), p1 (copy), UnifiedPurchaseModalTypeEnumModule (upval), UnifiedPurchaseCompletionModalModule (upval), RobuxUpsellSuccessPromptModule (upval)
 			local BeforeRobuxBalanceDelta = Props.beforeRobuxBalance - Props.itemRobuxCost
 			local NewBeforeRobuxBalanceDelta = if BeforeRobuxBalanceDelta < 0 then BeforeRobuxBalanceDelta + Props.iapRobuxAmount else BeforeRobuxBalanceDelta
 			
 			return if Props.useUnifiedProductPurchaseModal then if FixUnifiedUpsellCompletionModal and GetAppContextModule() == "UA" then RoactModule.createElement(UnifiedPurchaseCompletionModalV2Module, {
 				buttons = {
-					onActivated = function() --[[ Line: 729 ]]
+					onActivated = function() --[[ Line: 716 ]]
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Done")
 						Props.flowComplete()
@@ -547,7 +546,7 @@ function ExtendResult.constructRobuxUpsellSuccessPromptAnimatorObj(p1) --[[ Line
 				itemName = Props.itemName
 			}) else RoactModule.createElement(UnifiedPurchaseCompletionModalModule, {
 				buttons = {
-					onActivated = function() --[[ Line: 741 ]]
+					onActivated = function() --[[ Line: 728 ]]
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Done")
 						Props.flowComplete()
@@ -564,13 +563,13 @@ function ExtendResult.constructRobuxUpsellSuccessPromptAnimatorObj(p1) --[[ Line
 				balance = NewBeforeRobuxBalanceDelta,
 				confirmControllerIcon = Props.acceptControllerIcon,
 				cancelControllerIcon = Props.cancelControllerIcon,
-				doneActivated = function() --[[ Line: 760 ]]
+				doneActivated = function() --[[ Line: 747 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Done")
 					Props.flowComplete()
 					p1:closeCentralOverlay()
 				end,
-				equipActivated = Props.equipItem and function() --[[ Line: 765 ]]
+				equipActivated = Props.equipItem and function() --[[ Line: 752 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Equip")
 					Props.equipItem()
@@ -581,7 +580,7 @@ function ExtendResult.constructRobuxUpsellSuccessPromptAnimatorObj(p1) --[[ Line
 	}
 end
 
-function ExtendResult.constructInsufficientRobuxAnimatorObj(p1) --[[ Line: 775 ]]
+function ExtendResult.constructInsufficientRobuxAnimatorObj(p1) --[[ Line: 762 ]]
 	-- upvalues: RobuxUpsellFlowStateModule (copy), ShouldShowNewUpsellModalExperimentModule (copy), DesktopUpsellExperimentModule (copy), RoactModule (copy), RobuxUpsellModalTooExpensiveModule (copy), InsufficientRobuxPromptModule (copy)
 	local Props = p1.props
 	p1:BindCancelAction()
@@ -589,7 +588,7 @@ function ExtendResult.constructInsufficientRobuxAnimatorObj(p1) --[[ Line: 775 ]
 	return {
 		shouldAnimate = Props.shouldAnimate,
 		shouldShow = Props.purchaseState == RobuxUpsellFlowStateModule.GenericPurchaseModal,
-		renderChildren = function() --[[ Line: 783 ]]
+		renderChildren = function() --[[ Line: 770 ]]
 			-- upvalues: ShouldShowNewUpsellModalExperimentModule (upval), DesktopUpsellExperimentModule (upval), RoactModule (upval), RobuxUpsellModalTooExpensiveModule (upval), Props (copy), p1 (copy), InsufficientRobuxPromptModule (upval)
 			return if ShouldShowNewUpsellModalExperimentModule() or DesktopUpsellExperimentModule.shouldShowNewModal() then RoactModule.createElement(RobuxUpsellModalTooExpensiveModule, {
 				product = {
@@ -600,7 +599,7 @@ function ExtendResult.constructInsufficientRobuxAnimatorObj(p1) --[[ Line: 775 ]
 				},
 				balanceAmount = Props.beforeRobuxBalance,
 				buttons = {
-					buyItemActivated = function() --[[ Line: 795 ]]
+					buyItemActivated = function() --[[ Line: 782 ]]
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Buy Robux")
 						Props.openBuyRobux()
@@ -608,7 +607,7 @@ function ExtendResult.constructInsufficientRobuxAnimatorObj(p1) --[[ Line: 775 ]
 						p1:closeCentralOverlay()
 					end,
 					buyItemControllerIcon = Props.acceptControllerIcon,
-					cancelPurchaseActivated = function() --[[ Line: 803 ]]
+					cancelPurchaseActivated = function() --[[ Line: 790 ]]
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Cancel")
 						Props.flowComplete()
@@ -621,14 +620,14 @@ function ExtendResult.constructInsufficientRobuxAnimatorObj(p1) --[[ Line: 775 ]
 			}) else RoactModule.createElement(InsufficientRobuxPromptModule, {
 				screenSize = Props.screenSize,
 				robuxBalance = Props.beforeRobuxBalance,
-				buyRobux = function() --[[ Line: 819 ]]
+				buyRobux = function() --[[ Line: 806 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Buy Robux")
 					Props.openBuyRobux()
 					Props.flowComplete()
 					p1:closeCentralOverlay()
 				end,
-				closePrompt = function() --[[ Line: 825 ]]
+				closePrompt = function() --[[ Line: 812 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Cancel")
 					Props.flowComplete()
@@ -639,7 +638,7 @@ function ExtendResult.constructInsufficientRobuxAnimatorObj(p1) --[[ Line: 775 ]
 	}
 end
 
-function ExtendResult.constructInsufficientRobuxProductAnimatorObj(p1) --[[ Line: 835 ]]
+function ExtendResult.constructInsufficientRobuxProductAnimatorObj(p1) --[[ Line: 822 ]]
 	-- upvalues: RobuxUpsellFlowStateModule (copy), RoactModule (copy), InsufficientRobuxProductPromptModule (copy)
 	local Props = p1.props
 	p1:BindCancelAction()
@@ -647,7 +646,7 @@ function ExtendResult.constructInsufficientRobuxProductAnimatorObj(p1) --[[ Line
 	return {
 		shouldAnimate = Props.shouldAnimate,
 		shouldShow = Props.purchaseState == RobuxUpsellFlowStateModule.LargeRobuxPurchaseModal,
-		renderChildren = function() --[[ Line: 843 ]]
+		renderChildren = function() --[[ Line: 830 ]]
 			-- upvalues: RoactModule (upval), InsufficientRobuxProductPromptModule (upval), Props (copy), p1 (copy)
 			return RoactModule.createElement(InsufficientRobuxProductPromptModule, {
 				screenSize = Props.screenSize,
@@ -658,13 +657,13 @@ function ExtendResult.constructInsufficientRobuxProductAnimatorObj(p1) --[[ Line
 				balanceAmount = Props.beforeRobuxBalance,
 				acceptControllerIcon = Props.acceptControllerIcon,
 				cancelControllerIcon = Props.cancelControllerIcon,
-				robuxStoreActivated = function() --[[ Line: 856 ]]
+				robuxStoreActivated = function() --[[ Line: 843 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Go to Robux store")
 					Props.openBuyRobux()
 					p1:closeCentralOverlay()
 				end,
-				cancelPurchaseActivated = function() --[[ Line: 861 ]]
+				cancelPurchaseActivated = function() --[[ Line: 848 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Cancel")
 					Props.flowComplete()
@@ -675,7 +674,7 @@ function ExtendResult.constructInsufficientRobuxProductAnimatorObj(p1) --[[ Line
 	}
 end
 
-function ExtendResult.constructLeaveRobloxPromptAnimatorObj(p1) --[[ Line: 871 ]]
+function ExtendResult.constructLeaveRobloxPromptAnimatorObj(p1) --[[ Line: 858 ]]
 	-- upvalues: RobuxUpsellFlowStateModule (copy), RoactModule (copy), LeaveRobloxPromptModule (copy)
 	local Props = p1.props
 	p1:BindCancelAction()
@@ -683,15 +682,15 @@ function ExtendResult.constructLeaveRobloxPromptAnimatorObj(p1) --[[ Line: 871 ]
 	return {
 		shouldAnimate = Props.shouldAnimate,
 		shouldShow = Props.purchaseState == RobuxUpsellFlowStateModule.LeaveRobloxWarning,
-		renderChildren = function() --[[ Line: 879 ]]
+		renderChildren = function() --[[ Line: 866 ]]
 			-- upvalues: RoactModule (upval), LeaveRobloxPromptModule (upval), Props (copy), p1 (copy)
 			return RoactModule.createElement(LeaveRobloxPromptModule, {
 				screenSize = Props.screenSize,
-				cancelActivated = function() --[[ Line: 883 ]]
+				cancelActivated = function() --[[ Line: 870 ]]
 					-- upvalues: p1 (upval)
 					p1:closeCentralOverlay()
 				end,
-				continueActivated = function() --[[ Line: 886 ]]
+				continueActivated = function() --[[ Line: 873 ]]
 					-- upvalues: Props (upval)
 					Props.openVngShop()
 				end
@@ -700,7 +699,7 @@ function ExtendResult.constructLeaveRobloxPromptAnimatorObj(p1) --[[ Line: 871 ]
 	}
 end
 
-function ExtendResult.constructPurchaseVPCPromptAnimatorObj(p1) --[[ Line: 894 ]]
+function ExtendResult.constructPurchaseVPCPromptAnimatorObj(p1) --[[ Line: 881 ]]
 	-- upvalues: RobuxUpsellFlowStateModule (copy), RoactModule (copy), VerifiedParentalConsentDialog (copy)
 	local Props = p1.props
 	p1:BindCancelAction()
@@ -708,19 +707,19 @@ function ExtendResult.constructPurchaseVPCPromptAnimatorObj(p1) --[[ Line: 894 ]
 	return {
 		shouldAnimate = Props.shouldAnimate,
 		shouldShow = Props.purchaseState == RobuxUpsellFlowStateModule.PurchaseVPCModal,
-		renderChildren = function() --[[ Line: 902 ]]
+		renderChildren = function() --[[ Line: 889 ]]
 			-- upvalues: RoactModule (upval), VerifiedParentalConsentDialog (upval), Props (copy), p1 (copy)
 			return RoactModule.createElement(VerifiedParentalConsentDialog, {
 				screenSize = Props.screenSize,
 				isActionable = Props.openSettingsPage ~= nil,
 				modalType = Props.purchaseVPCType,
-				onAction = Props.openSettingsPage and function() --[[ Line: 907 ]]
+				onAction = Props.openSettingsPage and function() --[[ Line: 894 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Confirm")
 					Props.openSettingsPage()
 					Props.flowComplete()
 				end,
-				onDismiss = function() --[[ Line: 912 ]]
+				onDismiss = function() --[[ Line: 899 ]]
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Cancel")
 					Props.cancelPurchase()
@@ -731,7 +730,7 @@ function ExtendResult.constructPurchaseVPCPromptAnimatorObj(p1) --[[ Line: 894 ]
 	}
 end
 
-function ExtendResult.dispatchCentralOverlayAndRenderModal(p1, Props) --[[ Line: 924 ]]
+function ExtendResult.dispatchCentralOverlayAndRenderModal(p1, Props) --[[ Line: 911 ]]
 	-- upvalues: GetEnableCentralOverlayForUpsellPromptModule (copy), RobuxUpsellFlowStateModule (copy), ConstantsModule (copy)
 	if not GetEnableCentralOverlayForUpsellPromptModule() or not Props.dispatchCentralOverlay then return end
 	local PurchaseState = Props.purchaseState
@@ -767,7 +766,7 @@ function ExtendResult.dispatchCentralOverlayAndRenderModal(p1, Props) --[[ Line:
 	end
 end
 
-function ExtendResult.reportModalShown(p1) --[[ Line: 1005 ]]
+function ExtendResult.reportModalShown(p1) --[[ Line: 992 ]]
 	-- upvalues: GetModalShownEventDataModule (copy), RobuxUpsellFlowStateModule (copy), HttpService (copy)
 	local Props = p1.props
 	local State = p1.state
@@ -787,7 +786,7 @@ function ExtendResult.reportModalShown(p1) --[[ Line: 1005 ]]
 	end
 end
 
-function ExtendResult.reportUserInput(p1, Input_type) --[[ Line: 1034 ]]
+function ExtendResult.reportUserInput(p1, Input_type) --[[ Line: 1021 ]]
 	-- upvalues: GetUserInputEventDataModule (copy), RobuxUpsellFlowStateModule (copy), HttpService (copy), Players (copy), Default (copy), InGameRobuxUpsellEventModule (copy)
 	local Props = p1.props
 	local RobuxUpsell = GetUserInputEventDataModule(p1.state.analyticId, Props.eventPrefix, "RobuxUpsell", RobuxUpsellFlowStateModule.toRawValue(Props.purchaseState), Input_type, HttpService:JSONEncode({
@@ -816,12 +815,12 @@ function ExtendResult.reportUserInput(p1, Input_type) --[[ Line: 1034 ]]
 	})
 end
 
-function ExtendResult:purchaseStateToOverlayState(PurchaseState) --[[ Line: 1078 ]]
+function ExtendResult:purchaseStateToOverlayState(PurchaseState) --[[ Line: 1065 ]]
 	-- upvalues: RobuxUpsellFlowStateModule (copy), LoadingOverlayStateModule (copy)
 	return if PurchaseState == RobuxUpsellFlowStateModule.Loading then LoadingOverlayStateModule.Loading elseif PurchaseState == RobuxUpsellFlowStateModule.RobuxPurchasePending then LoadingOverlayStateModule.PurchasingRobux elseif PurchaseState == RobuxUpsellFlowStateModule.RobuxGrantPending then LoadingOverlayStateModule.WaitingForRobux elseif PurchaseState == RobuxUpsellFlowStateModule.ItemPurchasePending then LoadingOverlayStateModule.PurchasingItem elseif PurchaseState == RobuxUpsellFlowStateModule.None then nil else LoadingOverlayStateModule.None
 end
 
-function ExtendResult.getChildrenElements(p1) --[[ Line: 1095 ]]
+function ExtendResult.getChildrenElements(p1) --[[ Line: 1082 ]]
 	-- upvalues: RoactModule (copy), AnimatorModule (copy)
 	return {
 		RobuxUpsellPromptAnimator = RoactModule.createElement(AnimatorModule, p1:constructRobuxUpsellPromptAnimatorObj()),
@@ -835,7 +834,7 @@ function ExtendResult.getChildrenElements(p1) --[[ Line: 1095 ]]
 	}
 end
 
-function ExtendResult.render(p1) --[[ Line: 1114 ]]
+function ExtendResult.render(p1) --[[ Line: 1101 ]]
 	-- upvalues: GetEnableCentralOverlayForUpsellPromptModule (copy), RoactModule (copy), LoadingOverlayModule (copy)
 	local Props = p1.props
 	

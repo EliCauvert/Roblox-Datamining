@@ -5,20 +5,20 @@ local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScre
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local UseHasAtLeastOneCatalogOfferModule = require(script.Parent.useHasAtLeastOneCatalogOffer)
 
-local function _(p1): boolean --[[ Line: 55 | Named "isFree" ]]
+local function _(p1): boolean --[[ Line: 54 | Named "isFree" ]]
 	local PriceInRobux: number = p1.priceInRobux
 	
 	return PriceInRobux == nil or PriceInRobux <= 0
 end
 
-local _ = function(p1): boolean --[[ Line: 60 | Named "isLimitedCollectible" ]]
+local _ = function(p1): boolean --[[ Line: 59 | Named "isLimitedCollectible" ]]
 	-- upvalues: ItemRestrictions (copy)
 	local ItemRestrictions1 = p1.itemRestrictions
 	
 	return ItemRestrictions1 ~= nil and (ItemRestrictions1[ItemRestrictions.Limited] == true or (ItemRestrictions1[ItemRestrictions.LimitedUnique] == true or ItemRestrictions1[ItemRestrictions.Collectible] == true))
 end
 
-return function(p1) --[[ Line: 70 | Named "useShouldFetchCartPricingForPurchasePrompt" ]]
+return function(p1) --[[ Line: 69 | Named "useShouldFetchCartPricingForPurchasePrompt" ]]
 	-- upvalues: UseHasAtLeastOneCatalogOfferModule (copy), UseNavigationFunction (copy), AvatarExperienceFlagsModule (copy), ItemRestrictions (copy), AvatarScreen (copy)
 	local UseHasAtLeastOneCatalogOfferModuleResult = UseHasAtLeastOneCatalogOfferModule()
 	local UseNavigationResult = UseNavigationFunction()

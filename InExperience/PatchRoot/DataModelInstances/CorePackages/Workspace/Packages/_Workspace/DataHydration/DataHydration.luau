@@ -27,6 +27,7 @@ return {
 	MarketplaceAsset = require(script.MarketplaceAsset),
 	MarketplaceBundle = require(script.MarketplaceBundle),
 	MarketplaceLook = require(script.MarketplaceLook),
+	MarketplaceItemFavorite = require(script.MarketplaceItemFavorite),
 	CollectibleItem = require(script.CollectibleItem),
 	Song = require(script.Song),
 	UserSettings = require(script.UserSettings),

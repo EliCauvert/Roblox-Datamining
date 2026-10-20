@@ -3831,6 +3831,7 @@ Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,ページヘッダーのタイトル
 Feature.Moments.Title.ReportPost,投稿の規約違反を報告
 Feature.Moments.Tooltip.Creation,バーチャル空間内の全員があなたのモーメントを見ることができます。
+Feature.Moments.Tooltip.PostInsightsTitle,モーメントのインサイトはこちら
 Feature.Moments.Tooltip.ShareFirstMomentBody,切り抜きからモーメントを作成します
 Feature.Moments.Tooltip.ShareFirstMomentTitle,最初のモーメントをシェア
 Feature.NativeAds.Label.Ad,

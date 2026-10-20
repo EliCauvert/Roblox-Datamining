@@ -13,13 +13,12 @@ local _ = require(PurchasePrompt.types)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = SharedFlagsModule.FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow
 local FFlagPurchasePromptSubtitleForTimedOptions = SharedFlagsModule.FFlagPurchasePromptSubtitleForTimedOptions
-local FFlagPurchasePromptCartPricingEnabledModule = require(PurchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
 local _ = require(PurchasePrompt.types)
 
-return function(p1) --[[ Line: 34 | Named "UnifiedPurchasePrompt" ]]
-	-- upvalues: ReactModule (copy), SetProductPayloadModule (copy), SetPurchaseCallbacksModule (copy), SetPostPurchaseActionsModule (copy), SetPurchaseAnalyticsMetadataModule (copy), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), SetPurchaseOptionsModule (copy), DispatchPurchaseForProductPayloadModule (copy), PurchasePromptAppModule (copy), FFlagPurchasePromptCartPricingEnabledModule (copy), FFlagPurchasePromptSubtitleForTimedOptions (copy)
+return function(p1) --[[ Line: 32 | Named "UnifiedPurchasePrompt" ]]
+	-- upvalues: ReactModule (copy), SetProductPayloadModule (copy), SetPurchaseCallbacksModule (copy), SetPostPurchaseActionsModule (copy), SetPurchaseAnalyticsMetadataModule (copy), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), SetPurchaseOptionsModule (copy), DispatchPurchaseForProductPayloadModule (copy), PurchasePromptAppModule (copy), FFlagPurchasePromptSubtitleForTimedOptions (copy)
 	local Store = p1.store
-	ReactModule.useEffect(function() --[[ Line: 36 ]]
+	ReactModule.useEffect(function() --[[ Line: 34 ]]
 		-- upvalues: p1 (copy), Store (copy), SetProductPayloadModule (upval), SetPurchaseCallbacksModule (upval), SetPostPurchaseActionsModule (upval), SetPurchaseAnalyticsMetadataModule (upval), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (upval), SetPurchaseOptionsModule (upval), DispatchPurchaseForProductPayloadModule (upval)
 		local ProductPayload = p1.productPayload
 		Store:dispatch(SetProductPayloadModule(ProductPayload))
@@ -39,7 +38,7 @@ return function(p1) --[[ Line: 34 | Named "UnifiedPurchasePrompt" ]]
 		if FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow and p1.purchaseOptions then
 			Store:dispatch(SetPurchaseOptionsModule(p1.purchaseOptions))
 		end
-		DispatchPurchaseForProductPayloadModule(function(p2) --[[ Line: 60 ]]
+		DispatchPurchaseForProductPayloadModule(function(p2) --[[ Line: 58 ]]
 			-- upvalues: Store (upval)
 			Store:dispatch(p2)
 		end, ProductPayload, nil, false)
@@ -51,7 +50,7 @@ return function(p1) --[[ Line: 34 | Named "UnifiedPurchasePrompt" ]]
 	
 	return ReactModule.createElement(PurchasePromptAppModule, {
 		store = Store,
-		network = if FFlagPurchasePromptCartPricingEnabledModule then p1.network else nil,
+		network = p1.network,
 		subtitleView = if FFlagPurchasePromptSubtitleForTimedOptions then p1.subtitleView else nil
 	})
 end

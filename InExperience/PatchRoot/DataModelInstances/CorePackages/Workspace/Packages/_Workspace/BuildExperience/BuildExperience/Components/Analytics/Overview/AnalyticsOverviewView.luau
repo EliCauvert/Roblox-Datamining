@@ -32,8 +32,11 @@ return function(p1) --[[ Line: 66 | Named "AnalyticsOverviewView" ]]
 	local Sheet = p1.sheet
 	
 	return ReactModule.createElement(View, {
-		tag = "col gap-xxlarge size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder,
+		tag = {
+			["col gap-xxlarge size-full-0 auto-y"] = true,
+			["padding-bottom-xlarge"] = FFlagBuildAnalyticsGoalsModule
+		},
 		testId = TestId
 	}, {
 		Overview = ReactModule.createElement(View, {

@@ -3832,6 +3832,8 @@ Feature.Moments.Title.MomentRemoved,Moment removed
 Feature.Moments.Title.PostInsights,Page header title
 Feature.Moments.Title.ReportPost,Report post
 Feature.Moments.Tooltip.Creation,Everyone in the experience can view your Moments.
+Feature.Moments.Tooltip.PostInsightsBody,"Check views, watch time, and how the Moment landed with your audience."
+Feature.Moments.Tooltip.PostInsightsTitle,Your Moment insights are here
 Feature.Moments.Tooltip.ShareFirstMomentBody,Create a Moment from your captures
 Feature.Moments.Tooltip.ShareFirstMomentTitle,Share your first Moment
 Feature.NativeAds.Label.Ad,

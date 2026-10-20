@@ -3832,6 +3832,7 @@ Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,페이지 헤더 제목
 Feature.Moments.Title.ReportPost,게시물 신고
 Feature.Moments.Tooltip.Creation,체험에 참여하는 모든 사람이 내 모멘트를 볼 수 있습니다.
+Feature.Moments.Tooltip.PostInsightsTitle,모멘트 인사이트를 확인하세요
 Feature.Moments.Tooltip.ShareFirstMomentBody,캡처에서 모멘트를 만드세요
 Feature.Moments.Tooltip.ShareFirstMomentTitle,첫 모멘트를 공유하세요
 Feature.NativeAds.Label.Ad,

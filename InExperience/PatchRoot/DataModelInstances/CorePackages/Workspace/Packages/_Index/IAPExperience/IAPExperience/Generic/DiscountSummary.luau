@@ -5,7 +5,6 @@ local FoundationModule = require(Parent.Foundation)
 local Accordion = FoundationModule.Accordion
 local View = FoundationModule.View
 local Divider = FoundationModule.Divider
-local IconName = FoundationModule.Enums.IconName
 local FormatNumberModule = require(IAPExperience.Utility.formatNumber)
 local LocalizationService = game:GetService("LocalizationService")
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
@@ -14,18 +13,17 @@ local UseDiscountAccordionConfigModule = require(IAPExperience.Generic.Hooks.use
 local DiscountType = require(IAPExperience.ProductPurchase.PricingTypes).DiscountType
 local DiscountRowModule = require(IAPExperience.Generic.DiscountRow)
 local PriceLineItemModule = require(IAPExperience.Generic.PriceLineItem)
-local FFlagPurchasePromptFetchCartPricing = require(Parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
 local Character = utf8.char(57346)
 
-return function(p1) --[[ Line: 37 | Named "DiscountSummary" ]]
-	-- upvalues: LocalizationService (copy), UseRobuxTextModule (copy), ReactModule (copy), DiscountRowModule (copy), FFlagPurchasePromptFetchCartPricing (copy), UseLocalizationFunction (copy), Character (copy), FormatNumberModule (copy), DiscountType (copy), UseDiscountAccordionConfigModule (copy), PriceLineItemModule (copy), View (copy), Accordion (copy), IconName (copy), Divider (copy)
+return function(p1) --[[ Line: 32 | Named "DiscountSummary" ]]
+	-- upvalues: LocalizationService (copy), UseRobuxTextModule (copy), ReactModule (copy), DiscountRowModule (copy), UseLocalizationFunction (copy), Character (copy), FormatNumberModule (copy), DiscountType (copy), UseDiscountAccordionConfigModule (copy), PriceLineItemModule (copy), View (copy), Accordion (copy), Divider (copy)
 	local ItemPrice = p1.itemPrice
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
 	local Discounts = ItemPrice.discounts
 	local UseRobuxTextModuleResult = UseRobuxTextModule(ItemPrice.basePriceInRobux)
 	local UseRobuxTextModuleResult1 = UseRobuxTextModule(ItemPrice.priceInRobux)
-	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 45 ]]
-		-- upvalues: Discounts (copy), ReactModule (upval), DiscountRowModule (upval), FFlagPurchasePromptFetchCartPricing (upval)
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 40 ]]
+		-- upvalues: Discounts (copy), ReactModule (upval), DiscountRowModule (upval)
 		local NewAmountInRobux = 0
 		local Elements = {}
 		
@@ -34,7 +32,7 @@ return function(p1) --[[ Line: 37 | Named "DiscountSummary" ]]
 				NewAmountInRobux += discount.amountInRobux
 				Elements["DiscountRow_" .. tostring(i)] = ReactModule.createElement(DiscountRowModule, {
 					discount = discount,
-					label = if FFlagPurchasePromptFetchCartPricing then discount.localizedDiscountAttribution else nil,
+					label = discount.localizedDiscountAttribution,
 					LayoutOrder = i + 1
 				})
 			end
@@ -50,31 +48,23 @@ return function(p1) --[[ Line: 37 | Named "DiscountSummary" ]]
 			savingsAmount = FormatNumberModule(RobloxLocaleId, UseMemoResult)
 		}
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function(): boolean --[[ Line: 72 ]]
-		-- upvalues: Discounts (copy), DiscountType (upval)
-		for _, discount in ipairs(Discounts) do
-			if discount.type == DiscountType.BlackbirdSubscription or discount.type == DiscountType.RobloxPlusSubscription then
-				return true
+	local UseDiscountAccordionConfigModuleResult = UseDiscountAccordionConfigModule({
+		itemPrice = ItemPrice,
+		hasSubscriptionDiscount = ReactModule.useMemo(function(): boolean --[[ Line: 67 ]]
+			-- upvalues: Discounts (copy), DiscountType (upval)
+			for _, discount in ipairs(Discounts) do
+				if discount.type == DiscountType.BlackbirdSubscription or discount.type == DiscountType.RobloxPlusSubscription then
+					return true
+				end
 			end
-		end
-		return false
-	end, { Discounts })
-	local ShowAccordion = nil
-	local AccordionHeaderText = nil
-	local AccordionLeadingIcon = nil
-	
-	if FFlagPurchasePromptFetchCartPricing then
-		local UseDiscountAccordionConfigModuleResult = UseDiscountAccordionConfigModule({
-			itemPrice = ItemPrice,
-			hasSubscriptionDiscount = UseMemoResult1,
-			blackbirdSummaryText = UseLocalizationResult.BlackbirdSummary,
-			savingsSummary = p1.savingsSummary
-		})
-		ShowAccordion = UseDiscountAccordionConfigModuleResult.showAccordion
-		AccordionHeaderText = UseDiscountAccordionConfigModuleResult.accordionHeaderText
-		AccordionLeadingIcon = UseDiscountAccordionConfigModuleResult.accordionLeadingIcon
-	end
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 98 ]]
+			return false
+		end, { Discounts }),
+		blackbirdSummaryText = UseLocalizationResult.BlackbirdSummary,
+		savingsSummary = p1.savingsSummary
+	})
+	local AccordionHeaderText = UseDiscountAccordionConfigModuleResult.accordionHeaderText
+	local AccordionLeadingIcon = UseDiscountAccordionConfigModuleResult.accordionLeadingIcon
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 89 ]]
 		-- upvalues: ReactModule (upval), PriceLineItemModule (upval), UseLocalizationResult (copy), UseRobuxTextModuleResult (copy), UseMemoResult2 (copy)
 		local config = {
 			SubtotalRow = ReactModule.createElement(PriceLineItemModule, {
@@ -94,11 +84,8 @@ return function(p1) --[[ Line: 37 | Named "DiscountSummary" ]]
 		UseMemoResult2
 	})
 	
-	return if FFlagPurchasePromptFetchCartPricing and not ShowAccordion then nil elseif FFlagPurchasePromptFetchCartPricing or UseMemoResult1 and ItemPrice.basePriceInRobux ~= ItemPrice.priceInRobux then ReactModule.createElement(View, {
-		tag = {
-			["size-full-0 auto-y padding-x-small stroke-default radius-medium"] = FFlagPurchasePromptFetchCartPricing,
-			["size-full-0 auto-y stroke-default radius-medium padding-x-small"] = not FFlagPurchasePromptFetchCartPricing
-		}
+	return if UseDiscountAccordionConfigModuleResult.showAccordion then ReactModule.createElement(View, {
+		tag = "size-full-0 auto-y padding-x-small stroke-default radius-medium"
 	}, {
 		AccordionContent = ReactModule.createElement(Accordion.Root, { size = "Small", width = UDim.new(1, 0) }, {
 			SavingsItem = ReactModule.createElement(Accordion.Item, {
@@ -106,21 +93,13 @@ return function(p1) --[[ Line: 37 | Named "DiscountSummary" ]]
 				isExpanded = false,
 				hasDivider = false,
 				LayoutOrder = 1,
-				leadingIcon = if FFlagPurchasePromptFetchCartPricing then AccordionLeadingIcon else IconName.RobloxPlus,
-				text = if FFlagPurchasePromptFetchCartPricing then AccordionHeaderText else UseLocalizationResult.BlackbirdSummary
-			}, ReactModule.createElement(View, {
-				tag = {
-					["col gap-xsmall size-full-0 auto-y"] = FFlagPurchasePromptFetchCartPricing,
-					["col size-full-0 auto-y gap-xsmall"] = not FFlagPurchasePromptFetchCartPricing
-				}
-			}, {
+				leadingIcon = AccordionLeadingIcon,
+				text = AccordionHeaderText
+			}, ReactModule.createElement(View, { tag = "col gap-xsmall size-full-0 auto-y" }, {
 				BreakdownSection = ReactModule.createElement(View, {
 					LayoutOrder = 1,
-					tag = {
-						["col gap-xsmall size-full-0 auto-y padding-y-xsmall"] = FFlagPurchasePromptFetchCartPricing,
-						["col size-full-0 auto-y gap-xsmall padding-y-xsmall"] = not FFlagPurchasePromptFetchCartPricing
-					}
-				}, UseMemoResult3),
+					tag = "col gap-xsmall size-full-0 auto-y padding-y-xsmall"
+				}, UseMemoResult1),
 				BreakdownDivider = ReactModule.createElement(Divider, { LayoutOrder = 2 }),
 				TotalRow = ReactModule.createElement(PriceLineItemModule, {
 					textStyle = "text-caption-medium",

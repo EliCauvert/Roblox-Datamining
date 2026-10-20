@@ -7,7 +7,7 @@ local _ = require(Parent1.Utils.createCoachmarkImpressionCache)
 local UsePersistentCoachmarkViewModelModule = require(Parent.usePersistentCoachmarkViewModel)
 local EducationalTooltip = FoundationModule.EducationalTooltip
 
-return function(p1) --[[ Line: 39 | Named "PersistentCoachmark" ]]
+return function(p1) --[[ Line: 42 | Named "PersistentCoachmark" ]]
 	-- upvalues: UsePersistentCoachmarkViewModelModule (copy), ReactModule (copy), EducationalTooltip (copy), FoundationModule (copy)
 	local UsePersistentCoachmarkViewModelModuleResult = UsePersistentCoachmarkViewModelModule({
 		impressionCache = p1.impressionCache,
@@ -21,7 +21,7 @@ return function(p1) --[[ Line: 39 | Named "PersistentCoachmark" ]]
 	
 	return ReactModule.createElement(EducationalTooltip, {
 		LayoutOrder = p1.layoutOrder,
-		isOpen = UsePersistentCoachmarkViewModelModuleResult.isOpen,
+		isOpen = UsePersistentCoachmarkViewModelModuleResult.isOpen and not p1.hidden,
 		onClose = UsePersistentCoachmarkViewModelModuleResult.onClose,
 		side = p1.side or FoundationModule.Enums.PopoverSide.Bottom,
 		align = p1.align or FoundationModule.Enums.PopoverAlign.End,

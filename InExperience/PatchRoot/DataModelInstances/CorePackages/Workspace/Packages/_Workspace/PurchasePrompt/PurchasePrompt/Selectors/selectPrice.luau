@@ -2,12 +2,11 @@
 local Parent = PurchasePrompt.Parent
 local _ = require(Parent.IAPExperience)
 local FFlagFixResaleDisplayPriceModule = require(PurchasePrompt.Flags.FFlagFixResaleDisplayPrice)
-local FFlagPurchasePromptCartPricingEnabledModule = require(PurchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
 local FFlagAXFixMISUpsellDiscountSummary = require(Parent.SharedFlags).FFlagAXFixMISUpsellDiscountSummary
 local SelectCartPricingOverrideModule = require(script.Parent.selectCartPricingOverride)
 
-return function(p1) --[[ Line: 33 | Named "selectPrice" ]]
-	-- upvalues: FFlagFixResaleDisplayPriceModule (copy), FFlagPurchasePromptCartPricingEnabledModule (copy), SelectCartPricingOverrideModule (copy), FFlagAXFixMISUpsellDiscountSummary (copy)
+return function(p1) --[[ Line: 32 | Named "selectPrice" ]]
+	-- upvalues: FFlagFixResaleDisplayPriceModule (copy), SelectCartPricingOverrideModule (copy), FFlagAXFixMISUpsellDiscountSummary (copy)
 	local ProductInfo = p1.productInfo
 	local Price = ProductInfo.price or 0
 	local BasePrice = ProductInfo.basePrice or Price
@@ -25,15 +24,13 @@ return function(p1) --[[ Line: 33 | Named "selectPrice" ]]
 			end
 		end
 	end
-	if FFlagPurchasePromptCartPricingEnabledModule then
-		local SelectCartPricingOverrideModuleResult = SelectCartPricingOverrideModule(p1)
+	local SelectCartPricingOverrideModuleResult = SelectCartPricingOverrideModule(p1)
+	
+	if SelectCartPricingOverrideModuleResult ~= nil then
+		Price = SelectCartPricingOverrideModuleResult.priceInRobux
 		
-		if SelectCartPricingOverrideModuleResult ~= nil then
-			Price = SelectCartPricingOverrideModuleResult.priceInRobux
-			
-			if SelectCartPricingOverrideModuleResult.basePriceInRobux ~= nil then
-				BasePrice = SelectCartPricingOverrideModuleResult.basePriceInRobux
-			end
+		if SelectCartPricingOverrideModuleResult.basePriceInRobux ~= nil then
+			BasePrice = SelectCartPricingOverrideModuleResult.basePriceInRobux
 		end
 	end
 	return {

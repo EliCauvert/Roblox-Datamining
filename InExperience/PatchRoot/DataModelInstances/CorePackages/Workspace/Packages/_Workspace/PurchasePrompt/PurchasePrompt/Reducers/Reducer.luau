@@ -2,9 +2,7 @@
 local Parent = PurchasePrompt.Parent
 local CurrentToastMessagesReducer = require(Parent.ToastLite).Reducers.CurrentToastMessagesReducer
 local PurchaseOptionsReducerModule = require(script.Parent.PurchaseOptionsReducer)
-local CartPricingReducerModule = require(script.Parent.CartPricingReducer)
 local FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = require(PurchasePrompt.Parent.SharedFlags).FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow
-local FFlagPurchasePromptCartPricingEnabledModule = require(PurchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
 
 return (require(Parent.PurchasePromptDeps).Rodux.combineReducers({
 	promptRequest = require(script.Parent.PromptRequestReducer),
@@ -32,5 +30,5 @@ return (require(Parent.PurchasePromptDeps).Rodux.combineReducers({
 	purchaseAnalyticsMetadata = require(script.Parent.PurchaseAnalyticsMetadataReducer),
 	purchaseOptions = if FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then PurchaseOptionsReducerModule else nil,
 	robloxSubscriptionProducts = require(script.Parent.RobloxSubscriptionProductsReducer),
-	cartPricing = if FFlagPurchasePromptCartPricingEnabledModule then CartPricingReducerModule else nil
+	cartPricing = require(script.Parent.CartPricingReducer)
 }))

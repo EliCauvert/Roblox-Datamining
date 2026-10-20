@@ -3787,6 +3787,7 @@ Feature.Moments.Title.MomentRemoved,An kaldırıldı
 Feature.Moments.Title.PostInsights,Sayfa başlığı
 Feature.Moments.Title.ReportPost,Paylaşımı raporla
 Feature.Moments.Tooltip.Creation,"Deneyimdeki herkes, Anlarını görüntüleyebilir."
+Feature.Moments.Tooltip.PostInsightsTitle,An analizlerin burada
 Feature.Moments.Tooltip.ShareFirstMomentBody,Yakaladığın görüntülerden bir An oluştur
 Feature.Moments.Tooltip.ShareFirstMomentTitle,İlk Anını paylaş
 Feature.NativeAds.Label.Ad,

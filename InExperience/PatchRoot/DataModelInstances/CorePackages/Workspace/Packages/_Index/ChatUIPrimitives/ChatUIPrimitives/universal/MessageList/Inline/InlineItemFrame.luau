@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local MessageInlineItemMetricsModule = require(script.Parent.MessageInlineItemMetrics)
 
-return function(p1) --[[ Line: 15 | Named "InlineItemFrame" ]]
+return function(p1) --[[ Line: 16 | Named "InlineItemFrame" ]]
 	-- upvalues: ReactModule (copy), FoundationModule (copy), MessageInlineItemMetricsModule (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "col size-full-0 auto-y",

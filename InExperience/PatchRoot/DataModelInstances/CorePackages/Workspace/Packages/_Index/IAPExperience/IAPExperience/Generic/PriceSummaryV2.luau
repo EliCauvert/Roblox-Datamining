@@ -11,11 +11,10 @@ local UsePlaceholderLocalizationModule = require(Parent.Generic.Hooks.usePlaceho
 local PriceLineItemModule = require(Parent.Generic.PriceLineItem)
 local DiscountRowModule = require(Parent.Generic.DiscountRow)
 local FFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(Parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
-local FFlagPurchasePromptFetchCartPricing = require(Parent.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
 local _ = require(Parent.ProductPurchase.PricingTypes)
 local PriceSummaryV2UseLocalizedBreakdown = game:DefineFastFlag("PriceSummaryV2UseLocalizedBreakdown", false)
 
-local function _(p1): boolean --[[ Line: 45 | Named "shouldShowPriceBreakdown" ]]
+local function _(p1): boolean --[[ Line: 42 | Named "shouldShowPriceBreakdown" ]]
 	if p1 then
 		local BasePriceInRobux = p1.basePriceInRobux
 		local PriceInRobux = p1.priceInRobux
@@ -26,8 +25,8 @@ local function _(p1): boolean --[[ Line: 45 | Named "shouldShowPriceBreakdown" ]
 	end
 end
 
-return function(p1) --[[ Line: 56 | Named "PriceSummaryV2" ]]
-	-- upvalues: UseLocalizationFunction (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), UsePlaceholderLocalizationModule (copy), PriceSummaryV2UseLocalizedBreakdown (copy), UseRobuxTextModule (copy), ReactModule (copy), PriceLineItemModule (copy), DiscountRowModule (copy), FFlagPurchasePromptFetchCartPricing (copy), View (copy), Divider (copy), Text (copy)
+return function(p1) --[[ Line: 53 | Named "PriceSummaryV2" ]]
+	-- upvalues: UseLocalizationFunction (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), UsePlaceholderLocalizationModule (copy), PriceSummaryV2UseLocalizedBreakdown (copy), UseRobuxTextModule (copy), ReactModule (copy), PriceLineItemModule (copy), DiscountRowModule (copy), View (copy), Divider (copy), Text (copy)
 	local ItemPrice = p1.itemPrice
 	local PriceInRobux = if ItemPrice then ItemPrice.priceInRobux else p1.amount
 	local v1 = nil
@@ -108,12 +107,11 @@ return function(p1) --[[ Line: 56 | Named "PriceSummaryV2" ]]
 	
 	for i, discount in ipairs(ItemPrice.discounts) do
 		if discount.amountInRobux > 0 then
-			local config1 = {
+			config["DiscountRow_" .. tostring(i)] = ReactModule.createElement(DiscountRowModule, {
 				discount = discount,
-				label = if FFlagPurchasePromptFetchCartPricing then discount.localizedDiscountAttribution else nil
-			}
-			config1.LayoutOrder = NewLayoutOrder
-			config["DiscountRow_" .. tostring(i)] = ReactModule.createElement(DiscountRowModule, config1)
+				label = discount.localizedDiscountAttribution,
+				LayoutOrder = NewLayoutOrder
+			})
 			NewLayoutOrder += 1
 		end
 	end

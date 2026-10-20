@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("Moments").Parent.MomentsCommon.createCoachmarkImpressionCache)({ coachmarkId = "post_insights", dismissedValue = -1 })

@@ -10,5 +10,9 @@
 		averageCompletion = "Feature.Moments.Label.AverageCompletion",
 		gameJoinConversion = "Feature.Moments.Label.GameJoinConversion",
 		totalReactions = "Feature.Moments.Label.TotalReactions"
+	}),
+	TOOLTIP_KEYS = table.freeze({
+		title = "Feature.Moments.Tooltip.PostInsightsTitle",
+		text = "Feature.Moments.Tooltip.PostInsightsBody"
 	})
 })

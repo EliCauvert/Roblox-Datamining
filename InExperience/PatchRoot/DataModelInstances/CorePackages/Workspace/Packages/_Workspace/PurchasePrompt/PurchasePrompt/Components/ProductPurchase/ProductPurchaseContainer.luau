@@ -74,7 +74,6 @@ local LoggingProtocolModule = require(Parent.LoggingProtocol)
 local PurchaseFlowUUIDTelemetryModule = require(PurchasePrompt.Events.PurchaseFlowUUIDTelemetry)
 local UnifiedPurchaseTelemetryModule = require(PurchasePrompt.Events.UnifiedPurchaseTelemetry)
 local AppContextModule = require(PurchasePrompt.Utils.AppContext)
-local FFlagPurchasePromptCartPricingEnabledModule = require(PurchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
 local FFlagEnableInExperienceOffersPurchaseFlow = SharedFlagsModule.FFlagEnableInExperienceOffersPurchaseFlow
 local FetchCartPricingModule = require(PurchasePrompt.Thunks.fetchCartPricing)
 local FetchInGameItemCartPricingModule = require(PurchasePrompt.Thunks.fetchInGameItemCartPricing)
@@ -111,17 +110,17 @@ local FFlagSetMenuOnPurchasePromptModule = require(PurchasePrompt.Flags.FFlagSet
 local FFlagSkipBuyDelayForExperienceShopModule = require(PurchasePrompt.Flags.FFlagSkipBuyDelayForExperienceShop)
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 
-local function isRelevantRequestType(RequestType, PurchaseFlow, InitializingPurchase): boolean --[[ Line: 176 ]]
+local function isRelevantRequestType(RequestType, PurchaseFlow, InitializingPurchase): boolean --[[ Line: 175 ]]
 	-- upvalues: FFlagUnifiedPurchaseAddSkeleton (copy), PromptStateModule (copy), PurchaseFlowModule (copy), RequestTypeModule (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy)
 	return FFlagUnifiedPurchaseAddSkeleton and InitializingPurchase == PromptStateModule.InitializingPurchase and PurchaseFlow == PurchaseFlowModule.RobuxUpsellV2 or PurchaseFlow ~= PurchaseFlowModule.RobuxUpsellV2 and PurchaseFlow ~= PurchaseFlowModule.LargeRobuxUpsell and (RequestType == RequestTypeModule.Asset or (RequestType == RequestTypeModule.Bundle or (RequestType == RequestTypeModule.GamePass or (RequestType == RequestTypeModule.Product or (RequestType == RequestTypeModule.AvatarCreationFee or (RequestType == RequestTypeModule.Experience or (RequestType == RequestTypeModule.Look or (FFlagEnableUnifiedPurchaseFlowForDevSubs and RequestType == RequestTypeModule.DeveloperSubscription or FFlagLuaAppsEnablePromptVIPServerPurchase and RequestType == RequestTypeModule.VIPServer))))))))
 end
 
-local function _(DeveloperSubscription, p1, p2): boolean --[[ Line: 200 | Named "getIsFiatProduct" ]]
+local function _(DeveloperSubscription, p1, p2): boolean --[[ Line: 199 | Named "getIsFiatProduct" ]]
 	-- upvalues: FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), RequestTypeModule (copy)
 	return if FFlagEnableUnifiedPurchaseFlowForDevSubs and DeveloperSubscription == RequestTypeModule.DeveloperSubscription then p1.displayPrice ~= nil and p2 == 0 else false
 end
 
-local _ = function(p1) --[[ Line: 208 | Named "promptStateToViewName" ]]
+local _ = function(p1) --[[ Line: 207 | Named "promptStateToViewName" ]]
 	-- upvalues: PromptStateModule (copy)
 	return ({
 		[PromptStateModule.RobuxUpsell] = "PurchaseModal",
@@ -129,7 +128,7 @@ local _ = function(p1) --[[ Line: 208 | Named "promptStateToViewName" ]]
 	})[p1]
 end
 
-function ExtendResult.init(p1) --[[ Line: 216 ]]
+function ExtendResult.init(p1) --[[ Line: 215 ]]
 	-- upvalues: HttpService (copy), FFlagEnablePurchaseFlowUUIDMigrationModule (copy), LoggingProtocolModule (copy), PurchaseFlowUUIDTelemetryModule (copy), CachedPolicyServiceModule (copy), PromptStateModule (copy), FFlagPurchasePromptUnifiedEventsUseOfferAdjustedPrice (copy), FFlagUnifiedPurchaseGamepassAddProductUniverseId (copy), SendUnifiedPurchaseEventLogModule (copy), RemoveDelayedInputForUnifiedPurchaseModal (copy), FFlagSkipBuyDelayForExperienceShopModule (copy), AppContextModule (copy), Players (copy), isRelevantRequestType (copy), LogUnifiedPurchaseTelemetryCounterModule (copy), UnifiedPurchaseTelemetryModule (copy), UnifiedPurchaseEventNameEnumModule (copy), PurchaseErrorModule (copy), IsGenericChallengeResponseModule (copy), RequestTypeModule (copy), PublishAssetAnalyticsModule (copy), FFlagEnableLaunchAfterPurchase (copy), ExperienceService (copy), WindowStateModule (copy), ContextActionService (copy), VPCModalTypeModule (copy), FFlagAddPerformanceMetricsToUnifiedPurchaseModal (copy), EmitPerformanceMetricsModule (copy), ConstantsModule (copy)
 	p1.state = {
 		isLuobu = false,
@@ -141,14 +140,14 @@ function ExtendResult.init(p1) --[[ Line: 216 ]]
 		p1.props.setPurchaseFlowUUID(HttpService:GenerateGUID(false))
 		LoggingProtocolModule.default:logRobloxTelemetryCounter(PurchaseFlowUUIDTelemetryModule.ProductPurchaseContainerMigrationCounter, 1, { method = "ProductPurchaseContainerInit" })
 	end
-	coroutine.wrap(function() --[[ Line: 235 ]]
+	coroutine.wrap(function() --[[ Line: 234 ]]
 		-- upvalues: CachedPolicyServiceModule (upval), p1 (copy)
 		if CachedPolicyServiceModule:IsSubjectToChinaPolicies() then
 			p1:setState({ isLuobu = true })
 		end
 	end)()
 	
-	function p1.emitPurchaseFlowEvent(Purchase_event_type, Input_type) --[[ Line: 246 ]]
+	function p1.emitPurchaseFlowEvent(Purchase_event_type, Input_type) --[[ Line: 245 ]]
 		-- upvalues: p1 (copy), PromptStateModule (upval), HttpService (upval)
 		local Entry = ({
 			[PromptStateModule.RobuxUpsell] = "PurchaseModal",
@@ -176,7 +175,7 @@ function ExtendResult.init(p1) --[[ Line: 216 ]]
 		end
 	end
 	
-	function p1.emitUnifiedProductPurchaseFlowEvent(Event_name) --[[ Line: 270 ]]
+	function p1.emitUnifiedProductPurchaseFlowEvent(Event_name) --[[ Line: 269 ]]
 		-- upvalues: p1 (copy), FFlagPurchasePromptUnifiedEventsUseOfferAdjustedPrice (upval), FFlagUnifiedPurchaseGamepassAddProductUniverseId (upval), SendUnifiedPurchaseEventLogModule (upval)
 		local PurchaseAnalyticsMetadata = p1.props.purchaseAnalyticsMetadata or {}
 		SendUnifiedPurchaseEventLogModule({
@@ -193,19 +192,19 @@ function ExtendResult.init(p1) --[[ Line: 216 ]]
 		})
 	end
 	
-	function p1.changeScreenSize(Frame: Frame) --[[ Line: 297 ]]
+	function p1.changeScreenSize(Frame: Frame) --[[ Line: 296 ]]
 		-- upvalues: p1 (copy)
 		if p1.state.screenSize ~= Frame.AbsoluteSize then
 			p1:setState({ screenSize = Frame.AbsoluteSize })
 		end
 	end
 	
-	function p1.isFromShopSkip(): boolean --[[ Line: 305 ]]
+	function p1.isFromShopSkip(): boolean --[[ Line: 304 ]]
 		-- upvalues: p1 (copy)
 		return p1.props.productPayload ~= nil and p1.props.productPayload.isFromInExperienceShop == true
 	end
 	
-	function p1.hasDelayedInput(): boolean --[[ Line: 309 ]]
+	function p1.hasDelayedInput(): boolean --[[ Line: 308 ]]
 		-- upvalues: RemoveDelayedInputForUnifiedPurchaseModal (upval), p1 (copy), PromptStateModule (upval), FFlagSkipBuyDelayForExperienceShopModule (upval)
 		if RemoveDelayedInputForUnifiedPurchaseModal or not p1.props.isTestPurchase then
 			local PromptState = p1.props.promptState
@@ -216,14 +215,14 @@ function ExtendResult.init(p1) --[[ Line: 216 ]]
 		end
 	end
 	
-	function p1.isWindowShowAndDoneAnimating(): boolean --[[ Line: 363 ]]
+	function p1.isWindowShowAndDoneAnimating(): boolean --[[ Line: 362 ]]
 		-- upvalues: p1 (copy)
 		return p1.state.isAnimating == false
 	end
 	
 	p1.buyButtonUsesFoundationInputDelay = AppContextModule.get() == AppContextModule.Enum.IN_EXPERIENCE
 	
-	function p1.canConfirmInput() --[[ Line: 372 ]]
+	function p1.canConfirmInput() --[[ Line: 371 ]]
 		-- upvalues: Players (upval), p1 (copy)
 		if Players.LocalPlayer.GameplayPaused then
 			return false
@@ -239,13 +238,13 @@ function ExtendResult.init(p1) --[[ Line: 216 ]]
 		end
 	end
 	
-	function p1.getConfirmButtonAction(PromptState, RequestType, PurchaseError) --[[ Line: 397 ]]
+	function p1.getConfirmButtonAction(PromptState, RequestType, PurchaseError) --[[ Line: 396 ]]
 		-- upvalues: PromptStateModule (upval), isRelevantRequestType (upval), p1 (copy), LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), UnifiedPurchaseEventNameEnumModule (upval), PurchaseErrorModule (upval), IsGenericChallengeResponseModule (upval)
 		if PromptState == PromptStateModule.None or not isRelevantRequestType(RequestType) then
 			return nil
 		end
 		if PromptState ~= PromptStateModule.PromptPurchase and PromptState ~= PromptStateModule.PurchaseInProgress then
-			return if PromptState == PromptStateModule.RobuxUpsell or PromptState == PromptStateModule.UpsellInProgress or PromptState == PromptStateModule.LeaveRobloxWarning then p1.props.onRobuxUpsell elseif PromptState == PromptStateModule.U13PaymentModal or PromptState == PromptStateModule.U13MonthlyThreshold1Modal or PromptState == PromptStateModule.U13MonthlyThreshold2Modal or PromptState == PromptStateModule.ParentalConsentWarningPaymentModal13To17 then p1.props.onScaryModalConfirm elseif PromptState == PromptStateModule.Error and PurchaseError == PurchaseErrorModule.TwoFactorNeededSettings then p1.props.onOpenSecuritySettings elseif IsGenericChallengeResponseModule(PurchaseError) then function() --[[ Line: 429 ]]
+			return if PromptState == PromptStateModule.RobuxUpsell or PromptState == PromptStateModule.UpsellInProgress or PromptState == PromptStateModule.LeaveRobloxWarning then p1.props.onRobuxUpsell elseif PromptState == PromptStateModule.U13PaymentModal or PromptState == PromptStateModule.U13MonthlyThreshold1Modal or PromptState == PromptStateModule.U13MonthlyThreshold2Modal or PromptState == PromptStateModule.ParentalConsentWarningPaymentModal13To17 then p1.props.onScaryModalConfirm elseif PromptState == PromptStateModule.Error and PurchaseError == PurchaseErrorModule.TwoFactorNeededSettings then p1.props.onOpenSecuritySettings elseif IsGenericChallengeResponseModule(PurchaseError) then function() --[[ Line: 428 ]]
 				-- upvalues: p1 (upval), PurchaseError (copy)
 				p1.props.onOpenSecuritySettings(PurchaseError)
 			end else p1.props.hideWindow
@@ -258,12 +257,12 @@ function ExtendResult.init(p1) --[[ Line: 216 ]]
 		return p1.props.onBuy
 	end
 	
-	function p1.getCancelButtonAction(PromptState, RequestType) --[[ Line: 437 ]]
+	function p1.getCancelButtonAction(PromptState, RequestType) --[[ Line: 436 ]]
 		-- upvalues: PromptStateModule (upval), isRelevantRequestType (upval), p1 (copy)
 		return if PromptState == PromptStateModule.None or not isRelevantRequestType(RequestType) then nil else p1.props.hideWindow
 	end
 	
-	function p1.confirmButtonPressed() --[[ Line: 445 ]]
+	function p1.confirmButtonPressed() --[[ Line: 444 ]]
 		-- upvalues: p1 (copy), RequestTypeModule (upval), PromptStateModule (upval), PublishAssetAnalyticsModule (upval)
 		if p1.props.requestType == RequestTypeModule.AvatarCreationFee and p1.props.promptState == PromptStateModule.PromptPurchase then
 			PublishAssetAnalyticsModule.sendButtonClicked(PublishAssetAnalyticsModule.Section.BuyItemModal, PublishAssetAnalyticsModule.Element.Buy)
@@ -275,18 +274,18 @@ function ExtendResult.init(p1) --[[ Line: 216 ]]
 		end
 	end
 	
-	function p1.launchAfterPurchaseButtonShown() --[[ Line: 463 ]]
+	function p1.launchAfterPurchaseButtonShown() --[[ Line: 462 ]]
 		-- upvalues: p1 (copy), UnifiedPurchaseEventNameEnumModule (upval)
 		p1.emitUnifiedProductPurchaseFlowEvent(UnifiedPurchaseEventNameEnumModule.LaunchAfterPurchaseButtonShown)
 	end
 	
-	function p1.launchAfterPurchaseButtonPressed() --[[ Line: 470 ]]
+	function p1.launchAfterPurchaseButtonPressed() --[[ Line: 469 ]]
 		-- upvalues: p1 (copy), UnifiedPurchaseEventNameEnumModule (upval), FFlagEnableLaunchAfterPurchase (upval), ExperienceService (upval)
 		p1.emitUnifiedProductPurchaseFlowEvent(UnifiedPurchaseEventNameEnumModule.LaunchAfterPurchaseButtonClicked)
 		local LaunchAfterPurchaseRootPlaceId = p1.props.launchAfterPurchaseRootPlaceId
 		local OnLaunchAfterPurchase = if FFlagEnableLaunchAfterPurchase then p1.props.purchaseCallbacks and p1.props.purchaseCallbacks.onLaunchAfterPurchase else nil
 		p1.confirmButtonPressed()
-		task.defer(function() --[[ Line: 479 ]]
+		task.defer(function() --[[ Line: 478 ]]
 			-- upvalues: LaunchAfterPurchaseRootPlaceId (copy), ExperienceService (upval), p1 (upval), UnifiedPurchaseEventNameEnumModule (upval), OnLaunchAfterPurchase (copy)
 			local Number: number? = tonumber(LaunchAfterPurchaseRootPlaceId)
 			
@@ -300,7 +299,7 @@ function ExtendResult.init(p1) --[[ Line: 216 ]]
 		end)
 	end
 	
-	function p1.cancelButtonPressed() --[[ Line: 494 ]]
+	function p1.cancelButtonPressed() --[[ Line: 493 ]]
 		-- upvalues: p1 (copy), RequestTypeModule (upval), PromptStateModule (upval), PublishAssetAnalyticsModule (upval), LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval)
 		if p1.props.requestType == RequestTypeModule.AvatarCreationFee and p1.props.promptState == PromptStateModule.PromptPurchase then
 			PublishAssetAnalyticsModule.sendButtonClicked(PublishAssetAnalyticsModule.Section.BuyItemModal, PublishAssetAnalyticsModule.Element.Cancel)
@@ -315,16 +314,16 @@ function ExtendResult.init(p1) --[[ Line: 216 ]]
 		end
 	end
 	
-	function p1.configContextActionService(WindowState) --[[ Line: 519 ]]
+	function p1.configContextActionService(WindowState) --[[ Line: 518 ]]
 		-- upvalues: WindowStateModule (upval), ContextActionService (upval), p1 (copy)
 		if WindowState == WindowStateModule.Shown then
-			ContextActionService:BindCoreAction("ProductPurchaseConfirmButtonBind", function(_, UserInputState, _) --[[ Line: 521 ]]
+			ContextActionService:BindCoreAction("ProductPurchaseConfirmButtonBind", function(_, UserInputState, _) --[[ Line: 520 ]]
 				-- upvalues: p1 (upval)
 				if UserInputState == Enum.UserInputState.Begin then
 					p1.confirmButtonPressed()
 				end
 			end, false, Enum.KeyCode.ButtonA)
-			ContextActionService:BindCoreAction("ProductPurchaseCancelButtonBind", function(_, UserInputState, _) --[[ Line: 526 ]]
+			ContextActionService:BindCoreAction("ProductPurchaseCancelButtonBind", function(_, UserInputState, _) --[[ Line: 525 ]]
 				-- upvalues: p1 (upval)
 				if UserInputState == Enum.UserInputState.Begin then
 					p1.cancelButtonPressed()
@@ -338,12 +337,12 @@ function ExtendResult.init(p1) --[[ Line: 216 ]]
 		end
 	end
 	
-	function p1.getVPCModalType(PromptState) --[[ Line: 537 ]]
+	function p1.getVPCModalType(PromptState) --[[ Line: 536 ]]
 		-- upvalues: PromptStateModule (upval), VPCModalTypeModule (upval)
 		return if PromptState == PromptStateModule.EnablePurchaseVPCModal then VPCModalTypeModule.toRawValue(VPCModalTypeModule.EnablePurchase) else VPCModalTypeModule.toRawValue(VPCModalTypeModule.None)
 	end
 	
-	function p1.onBuyItemButtonMounted(p2) --[[ Line: 544 ]]
+	function p1.onBuyItemButtonMounted(p2) --[[ Line: 543 ]]
 		-- upvalues: p1 (copy), LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), UnifiedPurchaseEventNameEnumModule (upval), FFlagAddPerformanceMetricsToUnifiedPurchaseModal (upval), EmitPerformanceMetricsModule (upval), ConstantsModule (upval)
 		local PurchaseAnalyticsMetadata = p1.props.purchaseAnalyticsMetadata or {}
 		LogUnifiedPurchaseTelemetryCounterModule(UnifiedPurchaseTelemetryModule.UnifiedProductPurchaseModalShownCounter, PurchaseAnalyticsMetadata.surface, PurchaseAnalyticsMetadata.productType)
@@ -358,7 +357,7 @@ function ExtendResult.init(p1) --[[ Line: 216 ]]
 	end
 end
 
-function ExtendResult.didMount(p1) --[[ Line: 570 ]]
+function ExtendResult.didMount(p1) --[[ Line: 569 ]]
 	-- upvalues: WindowStateModule (copy), isRelevantRequestType (copy), GuiService (copy)
 	local PurchaseFlow = p1.props.purchaseFlow
 	local RequestType = p1.props.requestType
@@ -370,13 +369,13 @@ function ExtendResult.didMount(p1) --[[ Line: 570 ]]
 	end
 end
 
-function ExtendResult.willUpdate(p1, p2) --[[ Line: 584 ]]
+function ExtendResult.willUpdate(p1, p2) --[[ Line: 583 ]]
 	if p1.props.expectedPrice ~= p2.expectedPrice then
 		p1:setState({})
 	end
 end
 
-function ExtendResult.didUpdate(p1, p2, _) --[[ Line: 590 ]]
+function ExtendResult.didUpdate(p1, p2, _) --[[ Line: 589 ]]
 	-- upvalues: FFlagEnablePurchaseFlowUUIDMigrationModule (copy), PromptStateModule (copy), HttpService (copy), LoggingProtocolModule (copy), PurchaseFlowUUIDTelemetryModule (copy), FFlagPurchasePromptGamePausedOnlyHideShownWindowModule (copy), Players (copy), WindowStateModule (copy), isRelevantRequestType (copy), GuiService (copy), RequestTypeModule (copy), PublishAssetAnalyticsModule (copy)
 	if not FFlagEnablePurchaseFlowUUIDMigrationModule and p1.props.promptState ~= p2.promptState and p1.props.promptState == PromptStateModule.None then
 		p1.props.setPurchaseFlowUUID((HttpService:GenerateGUID(false)))
@@ -411,7 +410,7 @@ function ExtendResult.didUpdate(p1, p2, _) --[[ Line: 590 ]]
 	end
 end
 
-function ExtendResult.getMessageKeysFromPromptState(p1) --[[ Line: 656 ]]
+function ExtendResult.getMessageKeysFromPromptState(p1) --[[ Line: 655 ]]
 	-- upvalues: PromptStateModule (copy), PurchaseErrorModule (copy), LocalizationServiceModule (copy), IsGenericChallengeResponseModule (copy)
 	local PromptState = p1.props.promptState
 	local ProductInfo = p1.props.productInfo
@@ -484,8 +483,8 @@ function ExtendResult.getMessageKeysFromPromptState(p1) --[[ Line: 656 ]]
 	}
 end
 
-function ExtendResult.determinePrompt(p1) --[[ Line: 725 ]]
-	-- upvalues: WindowStateModule (copy), PromptStateModule (copy), isRelevantRequestType (copy), FFlagUnifiedPurchaseAddSkeleton (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), RequestTypeModule (copy), PurchaseClientSessionIdType (copy), RobloxSubscriptionPurchaseAppModule (copy), RobloxSubscriptionFlowCompleteReason (copy), FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal (copy), SurfaceName (copy), AppContextModule (copy), SurfaceContext (copy), FFlagPurchasePromptCartPricingEnabledModule (copy), DeriveCartPricingViewFunction (copy), GetUnifiedPurchaseModalTypeModule (copy), UnifiedPurchaseModalTypeEnum (copy), ShouldShowBlackbirdUpsellModule (copy), FFlagBlackbirdUpsellGateResaleAndTimedOptionModule (copy), GetBlackbirdUpsellBannerProductInfoModule (copy), FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry (copy), UnifiedPurchaseEventNameEnumModule (copy), FFlagEnableBlackbirdUpsellImpressionGating (copy), BlackbirdUpsellImpressionTrackerModule (copy), FFlagEnableInExperienceOffersPurchaseFlow (copy), FFlagAddCenterDialogForUnifiedPurchaseModal (copy), Roact (copy), UnifiedProductPurchaseModalV2 (copy), FFlagPurchasePromptSubtitleForTimedOptions (copy), FFlagSkipBuyDelayForExperienceShopModule (copy), UnifiedProductPurchaseModal (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), ProductPurchaseSurface (copy), DesktopUpsellExperiment (copy), ProductPurchaseModal (copy), ProductPurchase (copy), RobuxUpsellModal (copy), ProductPurchaseRobuxUpsell (copy), GetFFlagOpenVngTosForVngRobuxUpsellFunction (copy), GetAppFeaturePoliciesFunction (copy), LeaveRobloxAlert (copy), InteractiveAlert (copy), RobloxTranslatorModule (copy), ButtonType (copy), PurchaseErrorModule (copy), IsGenericChallengeResponseModule (copy), ReactModule (copy), ProductPurchasePromptModule (copy), Images (copy), FFlagAddSurfaceAndProductTypeToPromptCounterModule (copy), Animator (copy), VerifiedParentalConsentDialog (copy), RobuxUpsellModalTooExpensiveFallback (copy), FFlagEnableLaunchAfterPurchase (copy), FFlagPurchaseModalTimedOptionExtension (copy)
+function ExtendResult.determinePrompt(p1) --[[ Line: 724 ]]
+	-- upvalues: WindowStateModule (copy), PromptStateModule (copy), isRelevantRequestType (copy), FFlagUnifiedPurchaseAddSkeleton (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), RequestTypeModule (copy), PurchaseClientSessionIdType (copy), RobloxSubscriptionPurchaseAppModule (copy), RobloxSubscriptionFlowCompleteReason (copy), FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal (copy), SurfaceName (copy), AppContextModule (copy), SurfaceContext (copy), DeriveCartPricingViewFunction (copy), GetUnifiedPurchaseModalTypeModule (copy), UnifiedPurchaseModalTypeEnum (copy), ShouldShowBlackbirdUpsellModule (copy), FFlagBlackbirdUpsellGateResaleAndTimedOptionModule (copy), GetBlackbirdUpsellBannerProductInfoModule (copy), FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry (copy), UnifiedPurchaseEventNameEnumModule (copy), FFlagEnableBlackbirdUpsellImpressionGating (copy), BlackbirdUpsellImpressionTrackerModule (copy), FFlagEnableInExperienceOffersPurchaseFlow (copy), FFlagAddCenterDialogForUnifiedPurchaseModal (copy), Roact (copy), UnifiedProductPurchaseModalV2 (copy), FFlagPurchasePromptSubtitleForTimedOptions (copy), FFlagSkipBuyDelayForExperienceShopModule (copy), UnifiedProductPurchaseModal (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), ProductPurchaseSurface (copy), DesktopUpsellExperiment (copy), ProductPurchaseModal (copy), ProductPurchase (copy), RobuxUpsellModal (copy), ProductPurchaseRobuxUpsell (copy), GetFFlagOpenVngTosForVngRobuxUpsellFunction (copy), GetAppFeaturePoliciesFunction (copy), LeaveRobloxAlert (copy), InteractiveAlert (copy), RobloxTranslatorModule (copy), ButtonType (copy), PurchaseErrorModule (copy), IsGenericChallengeResponseModule (copy), ReactModule (copy), ProductPurchasePromptModule (copy), Images (copy), FFlagAddSurfaceAndProductTypeToPromptCounterModule (copy), Animator (copy), VerifiedParentalConsentDialog (copy), RobuxUpsellModalTooExpensiveFallback (copy), FFlagEnableLaunchAfterPurchase (copy), FFlagPurchaseModalTimedOptionExtension (copy)
 	local PurchaseFlow = p1.props.purchaseFlow
 	local PromptState = p1.props.promptState
 	local RequestType = p1.props.requestType
@@ -496,12 +495,148 @@ function ExtendResult.determinePrompt(p1) --[[ Line: 725 ]]
 	
 	if p1.props.windowState ~= WindowStateModule.Shown then
 		return nil
-	end
-	if PromptState == PromptStateModule.None or not isRelevantRequestType(RequestType, PurchaseFlow, if FFlagUnifiedPurchaseAddSkeleton then PromptState else nil) then
+	elseif PromptState == PromptStateModule.None or not isRelevantRequestType(RequestType, PurchaseFlow, if FFlagUnifiedPurchaseAddSkeleton then PromptState else nil) then
 		return nil
-	end
-	if PromptState == PromptStateModule.PromptPurchase or PromptState == PromptStateModule.PurchaseInProgress or FFlagUnifiedPurchaseAddSkeleton and PromptState == PromptStateModule.InitializingPurchase then
-		if not p1.props.isUserEligibleForUnifiedPurchaseFlow then
+	elseif PromptState == PromptStateModule.PromptPurchase or PromptState == PromptStateModule.PurchaseInProgress or FFlagUnifiedPurchaseAddSkeleton and PromptState == PromptStateModule.InitializingPurchase then
+		if p1.props.isUserEligibleForUnifiedPurchaseFlow then
+			local ProductPrice = p1.props.productPrice
+			local IsProductPriceMatch: boolean = if FFlagEnableUnifiedPurchaseFlowForDevSubs and RequestType == RequestTypeModule.DeveloperSubscription then ProductInfo.displayPrice ~= nil and ProductPrice == 0 else false
+			
+			local function OnBlackbirdUpsellActivated() --[[ Line: 763 ]]
+				-- upvalues: p1 (copy), PromptStateModule (upval), WindowStateModule (upval), PurchaseClientSessionIdType (upval), RobloxSubscriptionPurchaseAppModule (upval), RobloxSubscriptionFlowCompleteReason (upval), FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal (upval), SurfaceName (upval), AppContextModule (upval), SurfaceContext (upval)
+				p1.props.setPromptState(PromptStateModule.BlackbirdUpsellInProgress)
+				p1.props.setWindowState(WindowStateModule.Suspended)
+				local PurchaseFlowUUID = p1.props.purchaseFlowUUID
+				local PurchaseFlowUUID1 = if PurchaseFlowUUID and PurchaseFlowUUID ~= "" then PurchaseFlowUUID else nil
+				local Config = if PurchaseFlowUUID1 then {
+					clientSessionIdType = PurchaseClientSessionIdType.PurchaseFlowUUID,
+					clientSessionId = PurchaseFlowUUID1
+				} else nil
+				RobloxSubscriptionPurchaseAppModule.initiateRobloxSubscriptionPurchase({ showBackButton = true }, {
+					onFlowComplete = function(UpsellDismissed) --[[ Line: 782 ]]
+						-- upvalues: RobloxSubscriptionFlowCompleteReason (upval), FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal (upval), p1 (upval)
+						if UpsellDismissed == RobloxSubscriptionFlowCompleteReason.UpsellPurchaseSucceeded then
+							if FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal and p1.props.purchaseCallbacks and p1.props.purchaseCallbacks.onRobloxSubscriptionUpsellSuccess then
+								p1.props.purchaseCallbacks.onRobloxSubscriptionUpsellSuccess()
+							end
+							p1.props.retryPurchaseAfterUpsell()
+							
+							return
+						elseif UpsellDismissed == RobloxSubscriptionFlowCompleteReason.UpsellDismissed then
+							p1.props.completeRequest()
+							
+							return
+						else
+							if UpsellDismissed == RobloxSubscriptionFlowCompleteReason.UpsellPurchaseFailed then
+								p1.props.completeRequest()
+								
+								return
+							else
+								p1.props.completeRequest()
+							end
+						end
+					end,
+					onBackButtonActivated = function() --[[ Line: 804 ]]
+						-- upvalues: p1 (upval), PromptStateModule (upval), WindowStateModule (upval)
+						p1.props.setPromptState(PromptStateModule.PromptPurchase)
+						p1.props.setWindowState(WindowStateModule.Shown)
+					end
+				}, nil, SurfaceName.UnifiedProductPurchaseModal, if AppContextModule.get() == AppContextModule.Enum.IN_APP then SurfaceContext.InApp else SurfaceContext.InGame, nil, if Config then { clientSessionId = Config } else nil)
+			end
+			
+			local Price = if IsProductPriceMatch then nil else p1.props.price
+			local DeriveCartPricingViewResult = DeriveCartPricingViewFunction(p1.props.cartPricingResponse)
+			local UnifiedPurchaseModalTypeModule = GetUnifiedPurchaseModalTypeModule(RequestType)
+			local ProductPrice1 = if IsProductPriceMatch or DeriveCartPricingViewResult == nil or UnifiedPurchaseModalTypeModule ~= UnifiedPurchaseModalTypeEnum.MultiItem then p1.props.productPrice else DeriveCartPricingViewResult.priceAfterDiscount
+			local BlackbirdUpsellBannerProductInfoModule = if ShouldShowBlackbirdUpsellModule(Price, p1.props.requestType, IsProductPriceMatch, if FFlagBlackbirdUpsellGateResaleAndTimedOptionModule then p1.props.productPayload else nil) and p1.props.robloxSubscriptionProducts then GetBlackbirdUpsellBannerProductInfoModule(p1.props.robloxSubscriptionProducts) else nil
+			
+			local function v145(p2) --[[ Line: 848 ]]
+				-- upvalues: p1 (copy), FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry (upval), BlackbirdUpsellBannerProductInfoModule (copy), UnifiedPurchaseEventNameEnumModule (upval), FFlagEnableBlackbirdUpsellImpressionGating (upval), BlackbirdUpsellImpressionTrackerModule (upval)
+				p1.onBuyItemButtonMounted(p2)
+				
+				if FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry and BlackbirdUpsellBannerProductInfoModule then
+					p1.emitUnifiedProductPurchaseFlowEvent(UnifiedPurchaseEventNameEnumModule.SubscriptionUpsellBannerShown)
+				end
+				if FFlagEnableBlackbirdUpsellImpressionGating and BlackbirdUpsellBannerProductInfoModule then
+					BlackbirdUpsellImpressionTrackerModule.incrementImpressionCount()
+				end
+			end
+			
+			local OnBuyItemButtonMounted = if FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry or FFlagEnableBlackbirdUpsellImpressionGating then v145 else p1.onBuyItemButtonMounted
+			
+			local function OnCartOfferAppliedChanged(_, p2) --[[ Line: 863 ]]
+				-- upvalues: p1 (copy), FFlagEnableInExperienceOffersPurchaseFlow (upval), RequestTypeModule (upval)
+				if p2 ~= nil then
+					local RequestType = p1.props.requestType
+					
+					if FFlagEnableInExperienceOffersPurchaseFlow and (RequestType == RequestTypeModule.GamePass or RequestType == RequestTypeModule.Product) then
+						p1.props.fetchInGameItemCartPricing(p2)
+						
+						return
+					end
+					p1.props.fetchCartPricing(p2)
+				end
+			end
+			
+			return if FFlagAddCenterDialogForUnifiedPurchaseModal and AppContextModule.get() == AppContextModule.Enum.IN_APP then Roact.createElement(UnifiedProductPurchaseModalV2, {
+				product = {
+					itemIcon = ProductInfo.imageUrl,
+					itemName = ProductInfo.name,
+					itemRobuxCost = if IsProductPriceMatch then nil else ProductPrice1,
+					itemDisplayPrice = if IsProductPriceMatch then ProductInfo.displayPrice else nil,
+					itemPrice = Price,
+					model = p1.props.humanoidModel
+				},
+				subtitleView = if FFlagPurchasePromptSubtitleForTimedOptions then p1.props.subtitleView else nil,
+				buttons = {
+					buyItemActivated = p1.confirmButtonPressed,
+					buyItemEnableInputDelayed = p1.isWindowShowAndDoneAnimating() and (p1.buyButtonUsesFoundationInputDelay and not (FFlagSkipBuyDelayForExperienceShopModule and p1.isFromShopSkip())),
+					cancelActivated = p1.cancelButtonPressed,
+					isDisabled = PromptState == PromptStateModule.PurchaseInProgress
+				},
+				postPurchaseActions = p1.props.postPurchaseActions,
+				setPostPurchaseActions = p1.props.setPostPurchaseActions,
+				onBuyItemButtonMounted = OnBuyItemButtonMounted,
+				purchaseModalType = GetUnifiedPurchaseModalTypeModule(p1.props.requestType),
+				robuxBalanceAmount = AccountInfo.balance,
+				isTestPurchase = IsTestPurchase,
+				isLoading = if FFlagUnifiedPurchaseAddSkeleton then PromptState == PromptStateModule.InitializingPurchase else nil,
+				isCartPricingLoading = p1.props.isCartPricingLoading,
+				onBlackbirdUpsellActivated = OnBlackbirdUpsellActivated,
+				BlackbirdUpsellBannerProductInfo = BlackbirdUpsellBannerProductInfoModule,
+				cartPricingResponse = p1.props.cartPricingResponse,
+				onCartOfferAppliedChanged = OnCartOfferAppliedChanged
+			}) else Roact.createElement(UnifiedProductPurchaseModal, {
+				product = {
+					itemIcon = ProductInfo.imageUrl,
+					itemName = ProductInfo.name,
+					itemRobuxCost = if IsProductPriceMatch then nil else p1.props.productPrice,
+					itemDisplayPrice = if IsProductPriceMatch then ProductInfo.displayPrice else nil,
+					itemPrice = Price,
+					model = p1.props.humanoidModel
+				},
+				buttons = {
+					buyItemActivated = p1.confirmButtonPressed,
+					buyItemEnableInputDelayed = p1.isWindowShowAndDoneAnimating() and (p1.buyButtonUsesFoundationInputDelay and not (FFlagSkipBuyDelayForExperienceShopModule and p1.isFromShopSkip())),
+					cancelActivated = p1.cancelButtonPressed,
+					isDisabled = PromptState == PromptStateModule.PurchaseInProgress
+				},
+				postPurchaseActions = p1.props.postPurchaseActions,
+				setPostPurchaseActions = p1.props.setPostPurchaseActions,
+				onBuyItemButtonMounted = OnBuyItemButtonMounted,
+				purchaseModalType = GetUnifiedPurchaseModalTypeModule(p1.props.requestType),
+				robuxBalanceAmount = AccountInfo.balance,
+				isTestPurchase = IsTestPurchase,
+				isMonthlyPrice = if FFlagLuaAppsEnablePromptVIPServerPurchase then ProductInfo.isMonthlyPrice else nil,
+				isFreeWithRobloxPlus = if FFlagLuaAppsEnablePromptVIPServerPurchase then ProductInfo.isFreeWithRobloxPlus else nil,
+				isCartPricingLoading = p1.props.isCartPricingLoading,
+				onBlackbirdUpsellActivated = OnBlackbirdUpsellActivated,
+				BlackbirdUpsellBannerProductInfo = BlackbirdUpsellBannerProductInfoModule,
+				cartPricingResponse = p1.props.cartPricingResponse,
+				onCartOfferAppliedChanged = OnCartOfferAppliedChanged,
+				hideUserRobuxBalance = IsProductPriceMatch or (if FFlagUnifiedPurchaseFlowMarketplaceUIImprovements then p1.props.purchaseAnalyticsMetadata and p1.props.purchaseAnalyticsMetadata.surface == ProductPurchaseSurface.Catalog else nil)
+			})
+		else
 			return if DesktopUpsellExperiment.shouldShowNewModal() then Roact.createElement(ProductPurchaseModal, {
 				screenSize = p1.state.screenSize,
 				product = {
@@ -538,146 +673,6 @@ function ExtendResult.determinePrompt(p1) --[[ Line: 725 ]]
 				isLuobu = p1.state.isLuobu
 			})
 		end
-		local ProductPrice = p1.props.productPrice
-		local IsProductPriceMatch: boolean = if FFlagEnableUnifiedPurchaseFlowForDevSubs and RequestType == RequestTypeModule.DeveloperSubscription then ProductInfo.displayPrice ~= nil and ProductPrice == 0 else false
-		
-		local function OnBlackbirdUpsellActivated() --[[ Line: 764 ]]
-			-- upvalues: p1 (copy), PromptStateModule (upval), WindowStateModule (upval), PurchaseClientSessionIdType (upval), RobloxSubscriptionPurchaseAppModule (upval), RobloxSubscriptionFlowCompleteReason (upval), FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal (upval), SurfaceName (upval), AppContextModule (upval), SurfaceContext (upval)
-			p1.props.setPromptState(PromptStateModule.BlackbirdUpsellInProgress)
-			p1.props.setWindowState(WindowStateModule.Suspended)
-			local PurchaseFlowUUID = p1.props.purchaseFlowUUID
-			local PurchaseFlowUUID1 = if PurchaseFlowUUID and PurchaseFlowUUID ~= "" then PurchaseFlowUUID else nil
-			local Config = if PurchaseFlowUUID1 then {
-				clientSessionIdType = PurchaseClientSessionIdType.PurchaseFlowUUID,
-				clientSessionId = PurchaseFlowUUID1
-			} else nil
-			RobloxSubscriptionPurchaseAppModule.initiateRobloxSubscriptionPurchase({ showBackButton = true }, {
-				onFlowComplete = function(UpsellDismissed) --[[ Line: 783 ]]
-					-- upvalues: RobloxSubscriptionFlowCompleteReason (upval), FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal (upval), p1 (upval)
-					if UpsellDismissed == RobloxSubscriptionFlowCompleteReason.UpsellPurchaseSucceeded then
-						if FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal and p1.props.purchaseCallbacks and p1.props.purchaseCallbacks.onRobloxSubscriptionUpsellSuccess then
-							p1.props.purchaseCallbacks.onRobloxSubscriptionUpsellSuccess()
-						end
-						p1.props.retryPurchaseAfterUpsell()
-						
-						return
-					elseif UpsellDismissed == RobloxSubscriptionFlowCompleteReason.UpsellDismissed then
-						p1.props.completeRequest()
-						
-						return
-					else
-						if UpsellDismissed == RobloxSubscriptionFlowCompleteReason.UpsellPurchaseFailed then
-							p1.props.completeRequest()
-							
-							return
-						else
-							p1.props.completeRequest()
-						end
-					end
-				end,
-				onBackButtonActivated = function() --[[ Line: 805 ]]
-					-- upvalues: p1 (upval), PromptStateModule (upval), WindowStateModule (upval)
-					p1.props.setPromptState(PromptStateModule.PromptPurchase)
-					p1.props.setWindowState(WindowStateModule.Shown)
-				end
-			}, nil, SurfaceName.UnifiedProductPurchaseModal, if AppContextModule.get() == AppContextModule.Enum.IN_APP then SurfaceContext.InApp else SurfaceContext.InGame, nil, if Config then { clientSessionId = Config } else nil)
-		end
-		
-		local Price = if IsProductPriceMatch then nil else p1.props.price
-		local ProductPrice1 = nil
-		
-		if FFlagPurchasePromptCartPricingEnabledModule then
-			local DeriveCartPricingViewResult = DeriveCartPricingViewFunction(p1.props.cartPricingResponse)
-			local UnifiedPurchaseModalTypeModule = GetUnifiedPurchaseModalTypeModule(RequestType)
-			ProductPrice1 = if IsProductPriceMatch or DeriveCartPricingViewResult == nil or UnifiedPurchaseModalTypeModule ~= UnifiedPurchaseModalTypeEnum.MultiItem then p1.props.productPrice else DeriveCartPricingViewResult.priceAfterDiscount
-		end
-		local BlackbirdUpsellBannerProductInfoModule = if ShouldShowBlackbirdUpsellModule(Price, p1.props.requestType, IsProductPriceMatch, if FFlagBlackbirdUpsellGateResaleAndTimedOptionModule then p1.props.productPayload else nil) and p1.props.robloxSubscriptionProducts then GetBlackbirdUpsellBannerProductInfoModule(p1.props.robloxSubscriptionProducts) else nil
-		
-		local function v146(p2) --[[ Line: 852 ]]
-			-- upvalues: p1 (copy), FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry (upval), BlackbirdUpsellBannerProductInfoModule (copy), UnifiedPurchaseEventNameEnumModule (upval), FFlagEnableBlackbirdUpsellImpressionGating (upval), BlackbirdUpsellImpressionTrackerModule (upval)
-			p1.onBuyItemButtonMounted(p2)
-			
-			if FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry and BlackbirdUpsellBannerProductInfoModule then
-				p1.emitUnifiedProductPurchaseFlowEvent(UnifiedPurchaseEventNameEnumModule.SubscriptionUpsellBannerShown)
-			end
-			if FFlagEnableBlackbirdUpsellImpressionGating and BlackbirdUpsellBannerProductInfoModule then
-				BlackbirdUpsellImpressionTrackerModule.incrementImpressionCount()
-			end
-		end
-		
-		local OnBuyItemButtonMounted = if FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry or FFlagEnableBlackbirdUpsellImpressionGating then v146 else p1.onBuyItemButtonMounted
-		local OnCartOfferAppliedChanged = if FFlagPurchasePromptCartPricingEnabledModule then function(_, p2) --[[ Line: 869 ]]
-			-- upvalues: p1 (copy), FFlagEnableInExperienceOffersPurchaseFlow (upval), RequestTypeModule (upval)
-			if p2 ~= nil then
-				local RequestType = p1.props.requestType
-				
-				if FFlagEnableInExperienceOffersPurchaseFlow and (RequestType == RequestTypeModule.GamePass or RequestType == RequestTypeModule.Product) then
-					p1.props.fetchInGameItemCartPricing(p2)
-					
-					return
-				end
-				p1.props.fetchCartPricing(p2)
-			end
-		end else nil
-		
-		return if FFlagAddCenterDialogForUnifiedPurchaseModal and AppContextModule.get() == AppContextModule.Enum.IN_APP then Roact.createElement(UnifiedProductPurchaseModalV2, {
-			product = {
-				itemIcon = ProductInfo.imageUrl,
-				itemName = ProductInfo.name,
-				itemRobuxCost = if IsProductPriceMatch then nil elseif FFlagPurchasePromptCartPricingEnabledModule then ProductPrice1 else p1.props.productPrice,
-				itemDisplayPrice = if IsProductPriceMatch then ProductInfo.displayPrice else nil,
-				itemPrice = Price,
-				model = p1.props.humanoidModel
-			},
-			subtitleView = if FFlagPurchasePromptSubtitleForTimedOptions then p1.props.subtitleView else nil,
-			buttons = {
-				buyItemActivated = p1.confirmButtonPressed,
-				buyItemEnableInputDelayed = p1.isWindowShowAndDoneAnimating() and (p1.buyButtonUsesFoundationInputDelay and not (FFlagSkipBuyDelayForExperienceShopModule and p1.isFromShopSkip())),
-				cancelActivated = p1.cancelButtonPressed,
-				isDisabled = PromptState == PromptStateModule.PurchaseInProgress
-			},
-			postPurchaseActions = p1.props.postPurchaseActions,
-			setPostPurchaseActions = p1.props.setPostPurchaseActions,
-			onBuyItemButtonMounted = OnBuyItemButtonMounted,
-			purchaseModalType = GetUnifiedPurchaseModalTypeModule(p1.props.requestType),
-			robuxBalanceAmount = AccountInfo.balance,
-			isTestPurchase = IsTestPurchase,
-			isLoading = if FFlagUnifiedPurchaseAddSkeleton then PromptState == PromptStateModule.InitializingPurchase else nil,
-			isCartPricingLoading = if FFlagPurchasePromptCartPricingEnabledModule then p1.props.isCartPricingLoading else nil,
-			onBlackbirdUpsellActivated = OnBlackbirdUpsellActivated,
-			BlackbirdUpsellBannerProductInfo = BlackbirdUpsellBannerProductInfoModule,
-			cartPricingResponse = if FFlagPurchasePromptCartPricingEnabledModule then p1.props.cartPricingResponse else nil,
-			onCartOfferAppliedChanged = if FFlagPurchasePromptCartPricingEnabledModule then OnCartOfferAppliedChanged else nil
-		}) else Roact.createElement(UnifiedProductPurchaseModal, {
-			product = {
-				itemIcon = ProductInfo.imageUrl,
-				itemName = ProductInfo.name,
-				itemRobuxCost = if IsProductPriceMatch then nil else p1.props.productPrice,
-				itemDisplayPrice = if IsProductPriceMatch then ProductInfo.displayPrice else nil,
-				itemPrice = Price,
-				model = p1.props.humanoidModel
-			},
-			buttons = {
-				buyItemActivated = p1.confirmButtonPressed,
-				buyItemEnableInputDelayed = p1.isWindowShowAndDoneAnimating() and (p1.buyButtonUsesFoundationInputDelay and not (FFlagSkipBuyDelayForExperienceShopModule and p1.isFromShopSkip())),
-				cancelActivated = p1.cancelButtonPressed,
-				isDisabled = PromptState == PromptStateModule.PurchaseInProgress
-			},
-			postPurchaseActions = p1.props.postPurchaseActions,
-			setPostPurchaseActions = p1.props.setPostPurchaseActions,
-			onBuyItemButtonMounted = OnBuyItemButtonMounted,
-			purchaseModalType = GetUnifiedPurchaseModalTypeModule(p1.props.requestType),
-			robuxBalanceAmount = AccountInfo.balance,
-			isTestPurchase = IsTestPurchase,
-			isMonthlyPrice = if FFlagLuaAppsEnablePromptVIPServerPurchase then ProductInfo.isMonthlyPrice else nil,
-			isFreeWithRobloxPlus = if FFlagLuaAppsEnablePromptVIPServerPurchase then ProductInfo.isFreeWithRobloxPlus else nil,
-			isCartPricingLoading = p1.props.isCartPricingLoading,
-			onBlackbirdUpsellActivated = OnBlackbirdUpsellActivated,
-			BlackbirdUpsellBannerProductInfo = BlackbirdUpsellBannerProductInfoModule,
-			cartPricingResponse = p1.props.cartPricingResponse,
-			onCartOfferAppliedChanged = OnCartOfferAppliedChanged,
-			hideUserRobuxBalance = IsProductPriceMatch or (if FFlagUnifiedPurchaseFlowMarketplaceUIImprovements then p1.props.purchaseAnalyticsMetadata and p1.props.purchaseAnalyticsMetadata.surface == ProductPurchaseSurface.Catalog else nil)
-		})
 	elseif PromptState == PromptStateModule.RobuxUpsell or PromptState == PromptStateModule.UpsellInProgress then
 		return if DesktopUpsellExperiment.shouldShowNewModal() then Roact.createElement(RobuxUpsellModal, {
 			screenSize = p1.state.screenSize,
@@ -694,7 +689,7 @@ function ExtendResult.determinePrompt(p1) --[[ Line: 725 ]]
 				robuxPurchaseCost = p1.props.robuxPurchaseCost
 			},
 			buttons = {
-				buyItemActivated = function() --[[ Line: 1041 ]]
+				buyItemActivated = function() --[[ Line: 1024 ]]
 					-- upvalues: p1 (copy)
 					p1.confirmButtonPressed()
 					p1.emitPurchaseFlowEvent("UserInput", "Buy")
@@ -703,7 +698,7 @@ function ExtendResult.determinePrompt(p1) --[[ Line: 725 ]]
 				buyItemControllerIcon = if p1.props.isGamepadEnabled then "rbxasset://textures/ui/Controls/DesignSystem/ButtonA.png" else nil,
 				buyItemisDelayedInput = p1.hasDelayedInput(),
 				buyItemEnableInputDelayed = p1.isWindowShowAndDoneAnimating() and not (FFlagSkipBuyDelayForExperienceShopModule and p1.isFromShopSkip()),
-				cancelPurchaseActivated = function() --[[ Line: 1051 ]]
+				cancelPurchaseActivated = function() --[[ Line: 1034 ]]
 					-- upvalues: p1 (copy)
 					p1.cancelButtonPressed()
 					p1.emitPurchaseFlowEvent("UserInput", "Cancel")
@@ -725,12 +720,12 @@ function ExtendResult.determinePrompt(p1) --[[ Line: 725 ]]
 			enableInputDelayed = p1.isWindowShowAndDoneAnimating() and not (FFlagSkipBuyDelayForExperienceShopModule and p1.isFromShopSkip()),
 			buyItemControllerIcon = if p1.props.isGamepadEnabled then "rbxasset://textures/ui/Controls/DesignSystem/ButtonA.png" else nil,
 			cancelControllerIcon = if p1.props.isGamepadEnabled then "rbxasset://textures/ui/Controls/DesignSystem/ButtonB.png" else nil,
-			buyItemActivated = function() --[[ Line: 1080 ]]
+			buyItemActivated = function() --[[ Line: 1063 ]]
 				-- upvalues: p1 (copy)
 				p1.confirmButtonPressed()
 				p1.emitPurchaseFlowEvent("UserInput", "Buy")
 			end,
-			cancelPurchaseActivated = function() --[[ Line: 1084 ]]
+			cancelPurchaseActivated = function() --[[ Line: 1067 ]]
 				-- upvalues: p1 (copy)
 				p1.cancelButtonPressed()
 				p1.emitPurchaseFlowEvent("UserInput", "Cancel")
@@ -783,20 +778,20 @@ function ExtendResult.determinePrompt(p1) --[[ Line: 725 ]]
 		return Roact.createElement(Animator, {
 			shouldAnimate = true,
 			shouldShow = PromptState == PromptStateModule.EnablePurchaseVPCModal,
-			renderChildren = function() --[[ Line: 1144 ]]
+			renderChildren = function() --[[ Line: 1127 ]]
 				-- upvalues: Roact (upval), VerifiedParentalConsentDialog (upval), p1 (copy), PromptState (copy)
 				return Roact.createElement(VerifiedParentalConsentDialog, {
 					isActionable = false,
 					screenSize = p1.state.screenSize,
 					modalType = p1.getVPCModalType(PromptState),
-					onDismiss = function() --[[ Line: 1149 ]]
+					onDismiss = function() --[[ Line: 1132 ]]
 						-- upvalues: p1 (upval)
 						p1.confirmButtonPressed()
 					end
 				})
 			end
 		})
-	elseif PromptState == PromptStateModule.Error and (PurchaseError == PurchaseErrorModule.NotEnoughRobuxXbox and DesktopUpsellExperiment.shouldShowNewModal()) then
+	elseif PromptState == PromptStateModule.Error and PurchaseError == PurchaseErrorModule.NotEnoughRobuxXbox and DesktopUpsellExperiment.shouldShowNewModal() then
 		return Roact.createElement(RobuxUpsellModalTooExpensiveFallback, {
 			screenSize = p1.state.screenSize,
 			product = {
@@ -805,7 +800,7 @@ function ExtendResult.determinePrompt(p1) --[[ Line: 725 ]]
 				itemRobuxCost = p1.props.productPrice
 			},
 			balanceAmount = AccountInfo.balance,
-			doneActivated = function() --[[ Line: 1170 ]]
+			doneActivated = function() --[[ Line: 1153 ]]
 				-- upvalues: p1 (copy)
 				p1.cancelButtonPressed()
 				p1.emitPurchaseFlowEvent("UserInput", "Cancel")
@@ -837,7 +832,7 @@ function ExtendResult.determinePrompt(p1) --[[ Line: 725 ]]
 	end
 end
 
-function ExtendResult.render(p1) --[[ Line: 1220 ]]
+function ExtendResult.render(p1) --[[ Line: 1203 ]]
 	-- upvalues: FFlagSetMenuOnPurchasePromptModule (copy), GuiService (copy), Roact (copy), AnimatorModule (copy), WindowStateModule (copy), RequestTypeModule (copy), PromptStateModule (copy), PublishAssetAnalyticsModule (copy), ExternalEventConnectionModule (copy), CoreGui (copy)
 	local PromptState = p1.props.promptState
 	local DeterminePromptResult = p1:determinePrompt()
@@ -855,14 +850,14 @@ function ExtendResult.render(p1) --[[ Line: 1220 ]]
 	}, {
 		Animator = Roact.createElement(AnimatorModule, {
 			shouldShow = p1.props.windowState == WindowStateModule.Shown,
-			onShown = function() --[[ Line: 1238 ]]
+			onShown = function() --[[ Line: 1221 ]]
 				-- upvalues: p1 (copy), RequestTypeModule (upval), PromptState (copy), PromptStateModule (upval), PublishAssetAnalyticsModule (upval)
 				if p1.props.requestType == RequestTypeModule.AvatarCreationFee and PromptState == PromptStateModule.PromptPurchase then
 					PublishAssetAnalyticsModule.sendPageLoad(PublishAssetAnalyticsModule.Section.BuyItemModal)
 				end
 				p1:setState({ isAnimating = false, doneAnimatingTime = os.clock() })
 			end,
-			onHidden = function() --[[ Line: 1250 ]]
+			onHidden = function() --[[ Line: 1233 ]]
 				-- upvalues: p1 (copy)
 				p1:setState({ isAnimating = nil, doneAnimatingTime = nil })
 			end,
@@ -878,7 +873,7 @@ function ExtendResult.render(p1) --[[ Line: 1220 ]]
 		}),
 		OnCoreGuiMenuOpened = Roact.createElement(ExternalEventConnectionModule, {
 			event = GuiService.MenuOpened,
-			callback = function() --[[ Line: 1269 ]]
+			callback = function() --[[ Line: 1252 ]]
 				-- upvalues: FFlagSetMenuOnPurchasePromptModule (upval), p1 (copy)
 				if FFlagSetMenuOnPurchasePromptModule and p1.menuOpenedBySelf then
 					p1.menuOpenedBySelf = false
@@ -892,7 +887,7 @@ function ExtendResult.render(p1) --[[ Line: 1220 ]]
 		}),
 		OnUserGuiRenderingChanged = Roact.createElement(ExternalEventConnectionModule, {
 			event = CoreGui.UserGuiRenderingChanged,
-			callback = function(p2, p3) --[[ Line: 1281 ]]
+			callback = function(p2, p3) --[[ Line: 1264 ]]
 				-- upvalues: p1 (copy)
 				if not p2 or not p3 then
 					p1.props.hideWindow()
@@ -902,8 +897,8 @@ function ExtendResult.render(p1) --[[ Line: 1220 ]]
 	})
 end
 
-return (ConnectToStoreModule(function(p1) --[[ Line: 1291 | Named "mapStateToProps" ]]
-	-- upvalues: IsMockingPurchasesModule (copy), SelectedRobuxPackageModule (copy), SelectProductPriceModule (copy), SelectPriceModule (copy), FFlagPurchasePromptSubtitleForTimedOptions (copy), FFlagPurchaseModalTimedOptionExtension (copy), FFlagEnableLaunchAfterPurchase (copy), FFlagBlackbirdUpsellGateResaleAndTimedOptionModule (copy), FFlagSkipBuyDelayForExperienceShopModule (copy), FFlagPurchasePromptCartPricingEnabledModule (copy), SelectCartPricingResponseModule (copy), SelectIsCartPricingFetchingModule (copy)
+return (ConnectToStoreModule(function(p1) --[[ Line: 1274 | Named "mapStateToProps" ]]
+	-- upvalues: IsMockingPurchasesModule (copy), SelectedRobuxPackageModule (copy), SelectProductPriceModule (copy), SelectPriceModule (copy), FFlagPurchasePromptSubtitleForTimedOptions (copy), FFlagPurchaseModalTimedOptionExtension (copy), FFlagEnableLaunchAfterPurchase (copy), FFlagBlackbirdUpsellGateResaleAndTimedOptionModule (copy), FFlagSkipBuyDelayForExperienceShopModule (copy), SelectCartPricingResponseModule (copy), SelectIsCartPricingFetchingModule (copy)
 	return {
 		purchaseFlowUUID = p1.purchaseFlowUUID,
 		purchaseFlow = p1.purchaseFlow,
@@ -933,29 +928,29 @@ return (ConnectToStoreModule(function(p1) --[[ Line: 1291 | Named "mapStateToPro
 		launchAfterPurchaseRootPlaceId = if FFlagEnableLaunchAfterPurchase and p1.purchaseOptions and p1.purchaseOptions.launchAfterPurchaseRootPlaceId ~= nil and p1.purchaseOptions.launchAfterPurchaseRootPlaceId ~= "" then p1.purchaseOptions.launchAfterPurchaseRootPlaceId else nil,
 		robloxSubscriptionProducts = p1.robloxSubscriptionProducts,
 		productPayload = if FFlagBlackbirdUpsellGateResaleAndTimedOptionModule or FFlagSkipBuyDelayForExperienceShopModule then p1.productPayload else nil,
-		cartPricingResponse = if FFlagPurchasePromptCartPricingEnabledModule then SelectCartPricingResponseModule(p1) else nil,
-		isCartPricingLoading = if FFlagPurchasePromptCartPricingEnabledModule then SelectIsCartPricingFetchingModule(p1) else nil
+		cartPricingResponse = SelectCartPricingResponseModule(p1),
+		isCartPricingLoading = SelectIsCartPricingFetchingModule(p1)
 	}
-end, function(Callback) --[[ Line: 1343 | Named "mapDispatchToProps" ]]
-	-- upvalues: SetPurchaseFlowUUIDModule (copy), PurchaseItemModule (copy), CompletePurchaseModule (copy), LaunchRobuxUpsellModule (copy), OpenSecuritySettingsModule (copy), InitiateUserPurchaseSettingsPrecheckModule (copy), HideWindowModule (copy), RetryPurchaseAfterUpsellModule (copy), SetWindowStateModule (copy), FFlagAddCursorProviderToPurchasePromptApp (copy), GuiService (copy), CompleteRequestModule (copy), SendEventModule (copy), SetPostPurchaseActionsModule (copy), SetPromptStateModule (copy), FFlagPurchasePromptCartPricingEnabledModule (copy), FetchCartPricingModule (copy), FFlagEnableInExperienceOffersPurchaseFlow (copy), FetchInGameItemCartPricingModule (copy)
+end, function(Callback) --[[ Line: 1324 | Named "mapDispatchToProps" ]]
+	-- upvalues: SetPurchaseFlowUUIDModule (copy), PurchaseItemModule (copy), CompletePurchaseModule (copy), LaunchRobuxUpsellModule (copy), OpenSecuritySettingsModule (copy), InitiateUserPurchaseSettingsPrecheckModule (copy), HideWindowModule (copy), RetryPurchaseAfterUpsellModule (copy), SetWindowStateModule (copy), FFlagAddCursorProviderToPurchasePromptApp (copy), GuiService (copy), CompleteRequestModule (copy), SendEventModule (copy), SetPostPurchaseActionsModule (copy), SetPromptStateModule (copy), FetchCartPricingModule (copy), FFlagEnableInExperienceOffersPurchaseFlow (copy), FetchInGameItemCartPricingModule (copy)
 	return {
-		setPurchaseFlowUUID = function(p1) --[[ Line: 1345 ]]
+		setPurchaseFlowUUID = function(p1) --[[ Line: 1326 ]]
 			-- upvalues: Callback (copy), SetPurchaseFlowUUIDModule (upval)
 			Callback(SetPurchaseFlowUUIDModule(p1))
 		end,
-		onBuy = function() --[[ Line: 1348 ]]
+		onBuy = function() --[[ Line: 1329 ]]
 			-- upvalues: Callback (copy), PurchaseItemModule (upval)
 			Callback(PurchaseItemModule())
 		end,
-		completePurchase = function() --[[ Line: 1351 ]]
+		completePurchase = function() --[[ Line: 1332 ]]
 			-- upvalues: Callback (copy), CompletePurchaseModule (upval)
 			Callback(CompletePurchaseModule())
 		end,
-		onScaryModalConfirm = function() --[[ Line: 1354 ]]
+		onScaryModalConfirm = function() --[[ Line: 1335 ]]
 			-- upvalues: Callback (copy), LaunchRobuxUpsellModule (upval)
 			Callback(LaunchRobuxUpsellModule())
 		end,
-		onOpenSecuritySettings = function(p1) --[[ Line: 1357 ]]
+		onOpenSecuritySettings = function(p1) --[[ Line: 1338 ]]
 			-- upvalues: Callback (copy), OpenSecuritySettingsModule (upval)
 			if p1 then
 				Callback(OpenSecuritySettingsModule(p1))
@@ -965,46 +960,46 @@ end, function(Callback) --[[ Line: 1343 | Named "mapDispatchToProps" ]]
 				Callback(OpenSecuritySettingsModule())
 			end
 		end,
-		onRobuxUpsell = function() --[[ Line: 1364 ]]
+		onRobuxUpsell = function() --[[ Line: 1345 ]]
 			-- upvalues: Callback (copy), InitiateUserPurchaseSettingsPrecheckModule (upval)
 			Callback(InitiateUserPurchaseSettingsPrecheckModule())
 		end,
-		hideWindow = function() --[[ Line: 1367 ]]
+		hideWindow = function() --[[ Line: 1348 ]]
 			-- upvalues: Callback (copy), HideWindowModule (upval)
 			Callback(HideWindowModule())
 		end,
-		retryPurchaseAfterUpsell = function() --[[ Line: 1370 ]]
+		retryPurchaseAfterUpsell = function() --[[ Line: 1351 ]]
 			-- upvalues: Callback (copy), RetryPurchaseAfterUpsellModule (upval)
 			Callback(RetryPurchaseAfterUpsellModule())
 		end,
-		setWindowState = function(p1) --[[ Line: 1373 ]]
+		setWindowState = function(p1) --[[ Line: 1354 ]]
 			-- upvalues: Callback (copy), SetWindowStateModule (upval)
 			Callback(SetWindowStateModule(p1))
 		end,
-		completeRequest = function() --[[ Line: 1376 ]]
+		completeRequest = function() --[[ Line: 1357 ]]
 			-- upvalues: FFlagAddCursorProviderToPurchasePromptApp (upval), GuiService (upval), Callback (copy), CompleteRequestModule (upval)
 			if FFlagAddCursorProviderToPurchasePromptApp then
 				GuiService.SelectedCoreObject = nil
 			end
 			Callback(CompleteRequestModule())
 		end,
-		onAnalyticEvent = function(p1, p2) --[[ Line: 1382 ]]
+		onAnalyticEvent = function(p1, p2) --[[ Line: 1363 ]]
 			-- upvalues: Callback (copy), SendEventModule (upval)
 			Callback(SendEventModule(p1, p2))
 		end,
-		setPostPurchaseActions = function(p1) --[[ Line: 1385 ]]
+		setPostPurchaseActions = function(p1) --[[ Line: 1366 ]]
 			-- upvalues: Callback (copy), SetPostPurchaseActionsModule (upval)
 			Callback(SetPostPurchaseActionsModule(p1))
 		end,
-		setPromptState = function(p1) --[[ Line: 1388 ]]
+		setPromptState = function(p1) --[[ Line: 1369 ]]
 			-- upvalues: Callback (copy), SetPromptStateModule (upval)
 			Callback(SetPromptStateModule(p1))
 		end,
-		fetchCartPricing = if FFlagPurchasePromptCartPricingEnabledModule then function(p1) --[[ Line: 1392 ]]
+		fetchCartPricing = function(p1) --[[ Line: 1372 ]]
 			-- upvalues: Callback (copy), FetchCartPricingModule (upval)
 			Callback(FetchCartPricingModule(p1))
-		end else nil,
-		fetchInGameItemCartPricing = if FFlagEnableInExperienceOffersPurchaseFlow then function(p1) --[[ Line: 1397 ]]
+		end,
+		fetchInGameItemCartPricing = if FFlagEnableInExperienceOffersPurchaseFlow then function(p1) --[[ Line: 1376 ]]
 			-- upvalues: Callback (copy), FetchInGameItemCartPricingModule (upval)
 			Callback(FetchInGameItemCartPricingModule(p1))
 		end else nil

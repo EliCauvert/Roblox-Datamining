@@ -38,7 +38,6 @@ local GetFFlagEnableToastLiteRenderModule = require(PurchasePrompt.Flags.GetFFla
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagAddCursorProviderToPurchasePromptApp = SharedFlagsModule.FFlagAddCursorProviderToPurchasePromptApp
 local FFlagPurchasePromptSubtitleForTimedOptions = SharedFlagsModule.FFlagPurchasePromptSubtitleForTimedOptions
-local FFlagPurchasePromptCartPricingEnabledModule = require(PurchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
 local RequestTypeModule = require(PurchasePrompt.Enums.RequestType)
 local PromptStateModule = require(PurchasePrompt.Enums.PromptState)
 local PurchasePromptAppConditionalFocusNavigation = game:DefineFastFlag("PurchasePromptAppConditionalFocusNavigation", false)
@@ -46,7 +45,7 @@ local PurchasePromptAppTrackRenderPerformance = game:DefineFastFlag("PurchasePro
 local PurchasePromptAppFixStyleLink = game:DefineFastFlag("PurchasePromptAppFixStyleLink", false)
 local PurchasePromptApp = Roact.Component:extend("PurchasePromptApp")
 
-function PurchasePromptApp.init(p1) --[[ Line: 65 ]]
+function PurchasePromptApp.init(p1) --[[ Line: 63 ]]
 	-- upvalues: ExternalSettingsModule (copy)
 	p1.state = {
 		isTenFootInterface = ExternalSettingsModule.new().isTenFootInterface()
@@ -55,7 +54,7 @@ function PurchasePromptApp.init(p1) --[[ Line: 65 ]]
 	p1.lastRenderTime = 0
 end
 
-function PurchasePromptApp.hasAnyActivePrompt(p1): boolean --[[ Line: 77 ]]
+function PurchasePromptApp.hasAnyActivePrompt(p1): boolean --[[ Line: 75 ]]
 	-- upvalues: PurchasePromptAppConditionalFocusNavigation (copy), PromptStateModule (copy), RequestTypeModule (copy)
 	if not PurchasePromptAppConditionalFocusNavigation then
 		return true
@@ -69,7 +68,7 @@ function PurchasePromptApp.hasAnyActivePrompt(p1): boolean --[[ Line: 77 ]]
 	end
 end
 
-function PurchasePromptApp.trackRenderPerformance(p1) --[[ Line: 96 ]]
+function PurchasePromptApp.trackRenderPerformance(p1) --[[ Line: 94 ]]
 	-- upvalues: PurchasePromptAppTrackRenderPerformance (copy), LoggingProtocolModule (copy), FocusNavigationOptimizationTelemetryModule (copy), PurchasePromptAppConditionalFocusNavigation (copy)
 	if not PurchasePromptAppTrackRenderPerformance then return end
 	p1.renderCount += 1
@@ -84,24 +83,22 @@ function PurchasePromptApp.trackRenderPerformance(p1) --[[ Line: 96 ]]
 	p1.lastRenderTime = CurrentTime
 end
 
-function PurchasePromptApp:renderWithStyle(p1) --[[ Line: 120 ]]
+function PurchasePromptApp:renderWithStyle(p1) --[[ Line: 118 ]]
 	-- upvalues: RenderWithCoreScriptsStyleProviderModule (copy)
 	return RenderWithCoreScriptsStyleProviderModule(p1)
 end
 
-function PurchasePromptApp.render(p1) --[[ Line: 124 ]]
-	-- upvalues: ProvideRobloxLocaleModule (copy), Roact (copy), LocaleProvider (copy), LocalizationService (copy), ProductPurchaseContainerModule (copy), FFlagPurchasePromptSubtitleForTimedOptions (copy), FFlagPurchasePromptCartPricingEnabledModule (copy), RobuxUpsellContainerModule (copy), PremiumUpsellContainerModule (copy), SubscriptionPurchaseContainerModule (copy), EventConnectionsModule (copy), GetFFlagEnableToastLiteRenderModule (copy), Toast (copy), FFlagAddCursorProviderToPurchasePromptApp (copy), PurchasePromptAppFixStyleLink (copy), SelectionCursorProvider (copy), ReactFocusNavigationModule (copy), NewResult (copy), Provider (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), RoactRodux (copy), LayoutValuesProviderModule (copy), PurchasePromptPolicyModule (copy)
-	return ProvideRobloxLocaleModule(function() --[[ Line: 125 ]]
-		-- upvalues: Roact (upval), LocaleProvider (upval), LocalizationService (upval), ProductPurchaseContainerModule (upval), FFlagPurchasePromptSubtitleForTimedOptions (upval), p1 (copy), FFlagPurchasePromptCartPricingEnabledModule (upval), RobuxUpsellContainerModule (upval), PremiumUpsellContainerModule (upval), SubscriptionPurchaseContainerModule (upval), EventConnectionsModule (upval), GetFFlagEnableToastLiteRenderModule (upval), Toast (upval), FFlagAddCursorProviderToPurchasePromptApp (upval), PurchasePromptAppFixStyleLink (upval), SelectionCursorProvider (upval), ReactFocusNavigationModule (upval), NewResult (upval), Provider (upval), FocusRoot (upval), FocusNavigableSurfaceIdentifierEnum (upval), RoactRodux (upval), LayoutValuesProviderModule (upval), PurchasePromptPolicyModule (upval)
+function PurchasePromptApp.render(p1) --[[ Line: 122 ]]
+	-- upvalues: ProvideRobloxLocaleModule (copy), Roact (copy), LocaleProvider (copy), LocalizationService (copy), ProductPurchaseContainerModule (copy), FFlagPurchasePromptSubtitleForTimedOptions (copy), RobuxUpsellContainerModule (copy), PremiumUpsellContainerModule (copy), SubscriptionPurchaseContainerModule (copy), EventConnectionsModule (copy), GetFFlagEnableToastLiteRenderModule (copy), Toast (copy), FFlagAddCursorProviderToPurchasePromptApp (copy), PurchasePromptAppFixStyleLink (copy), SelectionCursorProvider (copy), ReactFocusNavigationModule (copy), NewResult (copy), Provider (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), RoactRodux (copy), LayoutValuesProviderModule (copy), PurchasePromptPolicyModule (copy)
+	return ProvideRobloxLocaleModule(function() --[[ Line: 123 ]]
+		-- upvalues: Roact (upval), LocaleProvider (upval), LocalizationService (upval), ProductPurchaseContainerModule (upval), FFlagPurchasePromptSubtitleForTimedOptions (upval), p1 (copy), RobuxUpsellContainerModule (upval), PremiumUpsellContainerModule (upval), SubscriptionPurchaseContainerModule (upval), EventConnectionsModule (upval), GetFFlagEnableToastLiteRenderModule (upval), Toast (upval), FFlagAddCursorProviderToPurchasePromptApp (upval), PurchasePromptAppFixStyleLink (upval), SelectionCursorProvider (upval), ReactFocusNavigationModule (upval), NewResult (upval), Provider (upval), FocusRoot (upval), FocusNavigableSurfaceIdentifierEnum (upval), RoactRodux (upval), LayoutValuesProviderModule (upval), PurchasePromptPolicyModule (upval)
 		local Folder = {
 			LocaleProvider = Roact.createElement(LocaleProvider, { locale = LocalizationService.RobloxLocaleId }, {
 				ProductPurchaseContainer = Roact.createElement(ProductPurchaseContainerModule, {
 					subtitleView = if FFlagPurchasePromptSubtitleForTimedOptions then p1.props.subtitleView else nil,
-					network = if FFlagPurchasePromptCartPricingEnabledModule then p1.props.network else nil
+					network = p1.props.network
 				}),
-				RobuxUpsellContainer = Roact.createElement(RobuxUpsellContainerModule, {
-					network = if FFlagPurchasePromptCartPricingEnabledModule then p1.props.network else nil
-				}),
+				RobuxUpsellContainer = Roact.createElement(RobuxUpsellContainerModule, { network = p1.props.network }),
 				PremiumUpsellContainer = Roact.createElement(PremiumUpsellContainerModule),
 				SubscriptionPurchaseContainer = Roact.createElement(SubscriptionPurchaseContainerModule)
 			}),

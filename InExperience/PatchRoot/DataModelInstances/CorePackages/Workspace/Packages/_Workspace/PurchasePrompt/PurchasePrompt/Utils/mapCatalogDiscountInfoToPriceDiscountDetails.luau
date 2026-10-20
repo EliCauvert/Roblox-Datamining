@@ -1,7 +1,4 @@
-﻿local FFlagPurchasePromptCartPricingEnabledModule = require(script:FindFirstAncestor("PurchasePrompt").Flags.FFlagPurchasePromptCartPricingEnabled)
-
-return function(p1) --[[ Line: 4 | Named "mapCatalogDiscountInfoToPriceDiscountDetails" ]]
-	-- upvalues: FFlagPurchasePromptCartPricingEnabledModule (copy)
+﻿return function(p1) --[[ Line: 1 | Named "mapCatalogDiscountInfoToPriceDiscountDetails" ]]
 	if type(p1) ~= "table" or type(p1.discounts) ~= "table" or #p1.discounts == 0 then
 		return nil
 	end
@@ -12,7 +9,7 @@ return function(p1) --[[ Line: 4 | Named "mapCatalogDiscountInfoToPriceDiscountD
 			Type = discount.discountCampaign or "",
 			AmountInRobux = discount.robuxDiscountAmount or 0,
 			Percent = discount.robuxDiscountPercentage or 0,
-			LocalizedDiscountAttribution = if FFlagPurchasePromptCartPricingEnabledModule then discount.localizedDiscountAttribution else nil
+			LocalizedDiscountAttribution = discount.localizedDiscountAttribution
 		})
 	end
 	return List

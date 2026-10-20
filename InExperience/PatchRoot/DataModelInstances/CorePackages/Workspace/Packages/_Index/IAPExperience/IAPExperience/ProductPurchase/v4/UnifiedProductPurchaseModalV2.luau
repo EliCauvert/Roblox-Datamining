@@ -8,7 +8,7 @@ local Dialog = FoundationModule.Dialog
 local Checkbox = FoundationModule.Checkbox
 local View = FoundationModule.View
 local DialogSize = FoundationModule.Enums.DialogSize
-local ProductDetailsContainerModule = require(Parent.Generic.ProductDetailsContainer)
+local _ = require(Parent.Generic.ProductDetailsContainer)
 local CartPricingProductDetailsModule = require(script.Parent.CartPricingProductDetails)
 local BuildCartPricingOfferCheckboxesModule = require(script.Parent.buildCartPricingOfferCheckboxes)
 local UseCartPricingModule = require(script.Parent.useCartPricing)
@@ -25,12 +25,11 @@ local UnifiedPurchaseModalTypeEnumModule = require(Parent.Enums.UnifiedPurchaseM
 local FFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(Parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
 local FFlagUnifiedPurchaseAddSkeleton = require(Parent.Parent.SharedFlags).FFlagUnifiedPurchaseAddSkeleton
 local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(Parent.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
-local FFlagPurchasePromptFetchCartPricing = require(Parent.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
 local FFlagOffersOnlyAffordableLock = require(Parent.Parent.SharedFlags).FFlagOffersOnlyAffordableLock
 local _ = require(script.Parent.cartPricingResponseLineItem)
 
-local function UnifiedProductPurchaseModalV2(p1) --[[ Line: 103 ]]
-	-- upvalues: UseLocalizationFunction (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), UrlBuilder (copy), UnifiedPurchaseModalTypeEnumModule (copy), FFlagPurchasePromptFetchCartPricing (copy), UseCartPricingModule (copy), ReactModule (copy), UseFocusNavigationRefsModule (copy), FFlagUnifiedPurchaseAddSkeleton (copy), FFlagOffersOnlyAffordableLock (copy), Checkbox (copy), SubtitleComponentMapModule (copy), ProductDetailsContainerModule (copy), CartPricingProductDetailsModule (copy), BuildCartPricingOfferCheckboxesModule (copy), View (copy), ButtonVariant (copy), FoundationModule (copy), Dialog (copy), DialogSize (copy), BlackbirdUpsellBanner (copy)
+local function UnifiedProductPurchaseModalV2(p1) --[[ Line: 99 ]]
+	-- upvalues: UseLocalizationFunction (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), UrlBuilder (copy), UnifiedPurchaseModalTypeEnumModule (copy), UseCartPricingModule (copy), ReactModule (copy), UseFocusNavigationRefsModule (copy), FFlagUnifiedPurchaseAddSkeleton (copy), FFlagOffersOnlyAffordableLock (copy), Checkbox (copy), SubtitleComponentMapModule (copy), CartPricingProductDetailsModule (copy), BuildCartPricingOfferCheckboxesModule (copy), View (copy), ButtonVariant (copy), FoundationModule (copy), Dialog (copy), DialogSize (copy), BlackbirdUpsellBanner (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		Buy = "IAPExperience.PurchasePrompt.Action.Buy",
 		Subscribe = "Feature.Subscription.Action.Subscribe",
@@ -49,42 +48,36 @@ local function UnifiedProductPurchaseModalV2(p1) --[[ Line: 103 ]]
 		} else nil
 	})
 	local PerMonth = if FFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == UnifiedPurchaseModalTypeEnumModule.DeveloperSubscription then UseLocalizationResult.PerMonth else nil
-	local UseCartPricingModuleResult = if FFlagPurchasePromptFetchCartPricing then UseCartPricingModule({
+	local UseCartPricingModuleResult = UseCartPricingModule({
 		product = p1.product,
 		purchaseModalType = p1.purchaseModalType,
 		cartPricingResponse = p1.cartPricingResponse,
 		onCartOfferAppliedChanged = p1.onCartOfferAppliedChanged
-	}) else nil
+	})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.postPurchaseActions or {})
 	local PurchaseModalType = p1.purchaseModalType
 	local GetSubscription = if FFlagEnableUnifiedPurchaseFlowForDevSubs and PurchaseModalType == UnifiedPurchaseModalTypeEnumModule.DeveloperSubscription then UseLocalizationResult.GetSubscription elseif PurchaseModalType == UnifiedPurchaseModalTypeEnumModule.MultiItem then UseLocalizationResult.BuyAvatar elseif PurchaseModalType == UnifiedPurchaseModalTypeEnumModule.Experience then UseLocalizationResult.BuyExperience else UseLocalizationResult.BuyItemV2
 	local UseFocusNavigationRefsModuleResult, UseFocusNavigationRefsModuleResult2 = UseFocusNavigationRefsModule(p1.buttons.cancelActivated, p1.onBuyItemButtonMounted)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 161 ]]
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 154 ]]
 		-- upvalues: UseStateResult (copy), p1 (copy)
 		if UseStateResult and p1.setPostPurchaseActions then
 			p1.setPostPurchaseActions(UseStateResult)
 		end
 		p1.buttons.buyItemActivated()
 	end, { p1.buttons.buyItemActivated, UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 169 ]]
+	ReactModule.useEffect(function() --[[ Line: 162 ]]
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(p1.postPurchaseActions or {})
 	end, { p1.postPurchaseActions })
-	local IsDisabled = nil
-	local IsDisabled1 = nil
-	local CountCartPricingOffers = 0
-	
-	if FFlagPurchasePromptFetchCartPricing then
-		IsDisabled = p1.buttons.isDisabled or (FFlagPurchasePromptFetchCartPricing and p1.isCartPricingLoading == true or FFlagUnifiedPurchaseAddSkeleton and p1.isLoading == true)
-		local PriceWithoutOffersDiscounts = UseCartPricingModuleResult.priceWithoutOffersDiscounts
-		local PriceAfterOffersDiscounts = UseCartPricingModuleResult.priceAfterOffersDiscounts
-		local IsRobuxBalanceAmountBelow: boolean = PriceWithoutOffersDiscounts ~= nil and p1.robuxBalanceAmount < PriceWithoutOffersDiscounts
-		local IsPriceAfterOffersDiscountsBelow: boolean = PriceAfterOffersDiscounts ~= nil and PriceAfterOffersDiscounts <= p1.robuxBalanceAmount
-		IsDisabled1 = IsDisabled or IsRobuxBalanceAmountBelow and (not FFlagOffersOnlyAffordableLock or IsPriceAfterOffersDiscountsBelow)
-		CountCartPricingOffers = if UseCartPricingModuleResult.showCartOfferUi then #UseCartPricingModuleResult.cartPricingOffers else 0
-	end
-	local UseMemoResult = if FFlagPurchasePromptFetchCartPricing then ReactModule.useMemo(function() --[[ Line: 231 ]]
-		-- upvalues: UseStateResult (copy), ReactModule (upval), Checkbox (upval), CountCartPricingOffers (ref), IsDisabled (ref), UseStateResult2 (copy)
+	local IsDisabled = p1.buttons.isDisabled or (p1.isCartPricingLoading == true or FFlagUnifiedPurchaseAddSkeleton and p1.isLoading == true)
+	local PriceWithoutOffersDiscounts = UseCartPricingModuleResult.priceWithoutOffersDiscounts
+	local PriceAfterOffersDiscounts = UseCartPricingModuleResult.priceAfterOffersDiscounts
+	local IsRobuxBalanceAmountBelow: boolean = PriceWithoutOffersDiscounts ~= nil and p1.robuxBalanceAmount < PriceWithoutOffersDiscounts
+	local IsPriceAfterOffersDiscountsBelow: boolean = PriceAfterOffersDiscounts ~= nil and PriceAfterOffersDiscounts <= p1.robuxBalanceAmount
+	local IsDisabled1 = IsDisabled or IsRobuxBalanceAmountBelow and (not FFlagOffersOnlyAffordableLock or IsPriceAfterOffersDiscountsBelow)
+	local CountCartPricingOffers: number = if UseCartPricingModuleResult.showCartOfferUi then #UseCartPricingModuleResult.cartPricingOffers else 0
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 190 ]]
+		-- upvalues: UseStateResult (copy), ReactModule (upval), Checkbox (upval), CountCartPricingOffers (copy), IsDisabled (copy), UseStateResult2 (copy)
 		local Elements = {}
 		
 		for i, value in UseStateResult do
@@ -94,9 +87,9 @@ local function UnifiedProductPurchaseModalV2(p1) --[[ Line: 103 ]]
 				label = value.label,
 				isChecked = value.isActionSelected,
 				isDisabled = IsDisabled,
-				onActivated = function() --[[ Line: 240 ]]
+				onActivated = function() --[[ Line: 199 ]]
 					-- upvalues: UseStateResult2 (upval), i (copy), value (copy)
-					UseStateResult2(function(Tbl) --[[ Line: 241 ]]
+					UseStateResult2(function(Tbl) --[[ Line: 200 ]]
 						-- upvalues: i (upval), value (upval)
 						local Copy = table.clone(Tbl)
 						Copy[i] = {
@@ -111,75 +104,32 @@ local function UnifiedProductPurchaseModalV2(p1) --[[ Line: 103 ]]
 			})
 		end
 		return Elements
-	end, { UseStateResult, CountCartPricingOffers, IsDisabled }) else ReactModule.useMemo(function() --[[ Line: 203 ]]
-		-- upvalues: UseStateResult (copy), ReactModule (upval), Checkbox (upval), p1 (copy), FFlagUnifiedPurchaseAddSkeleton (upval), UseStateResult2 (copy)
-		local Elements = {}
-		local Iterator = ipairs
-		local UseStateResult1 = UseStateResult or {}
-		for LayoutOrder, value in Iterator(UseStateResult1) do
-			Elements["PostPurchaseActionCheckBox_" .. tostring(LayoutOrder)] = ReactModule.createElement(Checkbox, {
-				size = "XSmall",
-				LayoutOrder = LayoutOrder,
-				label = value.label,
-				isChecked = value.isActionSelected,
-				isDisabled = p1.buttons.isDisabled or (if FFlagUnifiedPurchaseAddSkeleton then p1.isLoading else nil),
-				onActivated = function() --[[ Line: 214 ]]
-					-- upvalues: UseStateResult2 (upval), LayoutOrder (copy), value (copy)
-					UseStateResult2(function(Tbl) --[[ Line: 215 ]]
-						-- upvalues: LayoutOrder (upval), value (upval)
-						local Copy = table.clone(Tbl)
-						Copy[LayoutOrder] = {
-							label = value.label,
-							isActionSelected = not value.isActionSelected,
-							actionKey = value.actionKey
-						}
-						
-						return Copy
-					end)
-				end
-			})
-		end
-		return Elements
-	end, {
-		UseStateResult,
-		if FFlagUnifiedPurchaseAddSkeleton then p1.isLoading else nil
-	})
-	local SubtitleView = nil
+	end, { UseStateResult, CountCartPricingOffers, IsDisabled })
+	local Element = nil
 	
 	if p1.subtitleView then
 		local SubtitleComponentMapModuleEntry = SubtitleComponentMapModule[p1.subtitleView.componentName]
 		
 		if SubtitleComponentMapModuleEntry then
-			SubtitleView = ReactModule.createElement(SubtitleComponentMapModuleEntry, p1.subtitleView.props)
+			Element = ReactModule.createElement(SubtitleComponentMapModuleEntry, p1.subtitleView.props)
 		end
 	end
-	local Element = if FFlagPurchasePromptFetchCartPricing then ReactModule.createElement(CartPricingProductDetailsModule, {
+	local Element1 = ReactModule.createElement(CartPricingProductDetailsModule, {
 		cartPricing = UseCartPricingModuleResult,
 		purchaseModalType = p1.purchaseModalType,
-		subtitleView = SubtitleView,
+		subtitleView = Element,
 		priceSuffix = PerMonth,
 		isLoading = p1.isLoading,
 		isCartPricingLoading = p1.isCartPricingLoading
-	}) else ReactModule.createElement(ProductDetailsContainerModule, {
-		purchaseModalType = p1.purchaseModalType,
-		product = p1.product,
-		subtitleView = SubtitleView,
-		priceSuffix = PerMonth,
-		isLoading = if FFlagUnifiedPurchaseAddSkeleton then p1.isLoading else nil
 	})
-	local Tbl = nil
-	local v1 = nil
+	local CartPricingOfferCheckboxesModule = BuildCartPricingOfferCheckboxesModule({
+		cartPricing = UseCartPricingModuleResult,
+		isDisabled = IsDisabled1
+	})
+	local Copy = table.clone(CartPricingOfferCheckboxesModule)
 	
-	if FFlagPurchasePromptFetchCartPricing then
-		Tbl = BuildCartPricingOfferCheckboxesModule({
-			cartPricing = UseCartPricingModuleResult,
-			isDisabled = IsDisabled1
-		})
-		v1 = table.clone(Tbl)
-		
-		for i, value in pairs(UseMemoResult) do
-			v1[i] = value
-		end
+	for i, value in pairs(UseMemoResult) do
+		Copy[i] = value
 	end
 	return ReactModule.createElement(Dialog.Root, {
 		disablePortal = false,
@@ -191,18 +141,15 @@ local function UnifiedProductPurchaseModalV2(p1) --[[ Line: 103 ]]
 		DialogContent = ReactModule.createElement(View, {
 			tag = "col gap-medium auto-y size-full-0 align-x-center align-y-center",
 			LayoutOrder = 1
-		}, { ProductDetailsContainer = Element }),
+		}, { ProductDetailsContainer = Element1 }),
 		ActionsSection = ReactModule.createElement(View, {
 			tag = "col size-full-0 auto-y gap-xlarge",
 			LayoutOrder = 3
 		}, {
-			PostPurchaseActions = if FFlagPurchasePromptFetchCartPricing and (next(Tbl) or next(UseMemoResult)) then ReactModule.createElement(View, {
+			PostPurchaseActions = if next(CartPricingOfferCheckboxesModule) or next(UseMemoResult) then ReactModule.createElement(View, {
 				tag = "col gap-medium auto-y size-full-0 align-x-start align-y-start",
 				LayoutOrder = 1
-			}, if FFlagPurchasePromptFetchCartPricing then v1 else { UseMemoResult }) elseif FFlagPurchasePromptFetchCartPricing or not next(UseMemoResult) then nil else ReactModule.createElement(View, {
-				tag = "col gap-medium auto-y size-full-0 align-x-start align-y-start",
-				LayoutOrder = 1
-			}, if FFlagPurchasePromptFetchCartPricing then v1 else { UseMemoResult }),
+			}, Copy) else nil,
 			BuyAndUpsell = ReactModule.createElement(View, {
 				tag = "col size-full-0 auto-y gap-medium",
 				LayoutOrder = 2
@@ -215,7 +162,7 @@ local function UnifiedProductPurchaseModalV2(p1) --[[ Line: 103 ]]
 							text = if FFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == UnifiedPurchaseModalTypeEnumModule.DeveloperSubscription then UseLocalizationResult.Subscribe else UseLocalizationResult.Buy,
 							variant = ButtonVariant.Emphasis,
 							onActivated = UseResult,
-							isDisabled = if FFlagPurchasePromptFetchCartPricing then IsDisabled else p1.buttons.isDisabled or (if FFlagUnifiedPurchaseAddSkeleton then p1.isLoading else nil),
+							isDisabled = IsDisabled,
 							ref = UseFocusNavigationRefsModuleResult2,
 							inputDelay = if p1.buttons.buyItemEnableInputDelayed and not p1.buttons.isDisabled then 2.5 else 0
 						}
@@ -241,7 +188,7 @@ local function UnifiedProductPurchaseModalV2(p1) --[[ Line: 103 ]]
 	})
 end
 
-return function(p2) --[[ Line: 397 | Named "UnifiedProductPurchaseModalV2Container" ]]
+return function(p2) --[[ Line: 337 | Named "UnifiedProductPurchaseModalV2Container" ]]
 	-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), UnifiedProductPurchaseModalV2 (copy)
 	return ReactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)

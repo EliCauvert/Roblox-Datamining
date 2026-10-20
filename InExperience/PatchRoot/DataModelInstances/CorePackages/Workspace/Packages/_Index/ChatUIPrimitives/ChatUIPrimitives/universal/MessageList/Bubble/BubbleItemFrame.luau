@@ -1,6 +1,8 @@
-﻿local ReactModule = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.React)
+﻿local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
 
-return function(p1) --[[ Line: 11 | Named "BubbleItemFrame" ]]
-	-- upvalues: ReactModule (copy)
-	return ReactModule.createElement(ReactModule.Fragment, nil, p1.children)
+return function(p1) --[[ Line: 13 | Named "BubbleItemFrame" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy)
+	return ReactModule.createElement(FoundationModule.View, { tag = "col size-full-0 auto-y padding-x-medium" }, p1.children)
 end
