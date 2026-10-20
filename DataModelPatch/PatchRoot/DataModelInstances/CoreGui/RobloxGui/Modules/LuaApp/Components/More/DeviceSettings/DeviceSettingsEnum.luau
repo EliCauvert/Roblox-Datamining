@@ -1,0 +1,32 @@
+﻿local GetFFlagSystemTrayEnabledFunction = require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).GetFFlagSystemTrayEnabled
+
+return {
+	SettingDescription = "SettingDescription",
+	MasterVolume = "MasterVolume",
+	PartyVoiceVolumeDivider = "PartyVoiceVolumeDivider",
+	PartyVoiceVolume = "PartyVoiceVolume",
+	DeviceLevelThemeDivider = "DeviceLevelThemeDivider",
+	DeviceLevelTheme = "DeviceLevelTheme",
+	PreferredTransparencyDivider = "PreferredTransparencyDivider",
+	PreferredTransparency = "PreferredTransparency",
+	HapticsDivider = "HapticsDivider",
+	Haptics = "Haptics",
+	ReducedMotionDivider = "ReducedMotionDivider",
+	ReducedMotion = "ReducedMotion",
+	PreferredTextSizeDivider = "PreferredTextSizeDivider",
+	PreferredTextSize = "PreferredTextSize",
+	UINavigationKeyBindDivider = "UINavigationKeyBindDivider",
+	UINavigationKeyBind = "UINavigationKeyBind",
+	ReadAloudDivider = "ReadAloudDivider",
+	ReadAloud = "ReadAloud",
+	VREnvironmentSettingDivider = "VREnvironmentSettingDivider",
+	VREnvironmentSetting = "VREnvironmentSetting",
+	RobloxPlusThemeDivider = "RobloxPlusThemeDivider",
+	RobloxPlusTheme = "RobloxPlusTheme",
+	SkyStyleDivider = "SkyStyleDivider",
+	SkyStyle = "SkyStyle",
+	LaunchAtStartupDivider = if GetFFlagSystemTrayEnabledFunction() then "LaunchAtStartupDivider" else nil,
+	LaunchAtStartup = if GetFFlagSystemTrayEnabledFunction() then "LaunchAtStartup" else nil,
+	MinimizeToTrayDivider = if GetFFlagSystemTrayEnabledFunction() then "MinimizeToTrayDivider" else nil,
+	MinimizeToTray = if GetFFlagSystemTrayEnabledFunction() then "MinimizeToTray" else nil
+}

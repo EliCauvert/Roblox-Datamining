@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags).FFlagAXTryOnScreenImprovements and game:DefineFastFlag("AXTryOnScreenFixes", false)

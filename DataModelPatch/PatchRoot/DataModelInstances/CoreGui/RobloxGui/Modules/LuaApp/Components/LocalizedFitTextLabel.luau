@@ -1,0 +1,15 @@
+﻿local CorePackages = game:GetService("CorePackages")
+local Modules = game:GetService("CoreGui").RobloxGui.Modules
+local CryoModule = require(CorePackages.Packages.Cryo)
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactLocalizationModule = require(Modules.LuaApp.Services.RoactLocalization)
+local WithLocalizationModule = require(Modules.LuaApp.withLocalization)
+local FitTextLabelModule = require(Modules.LuaApp.Components.FitTextLabel)
+
+return if require(Modules.LuaApp.Flags.GetFFlagLuaAppUseWithLocalization)() then function(p1)
+	-- upvalues: WithLocalizationModule (copy), RoactModule (copy), FitTextLabelModule (copy), CryoModule (copy)
+	return WithLocalizationModule({ localizedText = p1.Text })(function(p2)
+		-- upvalues: RoactModule (upval), FitTextLabelModule (upval), CryoModule (upval), p1 (copy)
+		return RoactModule.createElement(FitTextLabelModule, CryoModule.Dictionary.join(p1, { Text = p2.localizedText }))
+	end)
+end else RoactLocalizationModule.connect({ "Text" })(FitTextLabelModule)

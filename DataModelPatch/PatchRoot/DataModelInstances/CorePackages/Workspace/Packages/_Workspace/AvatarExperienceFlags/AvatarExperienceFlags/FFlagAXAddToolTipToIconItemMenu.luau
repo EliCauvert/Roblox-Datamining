@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagAXRootSlotBasedEditorFlag) and game:DefineFastFlag("AXAddToolTipToIconItemMenu2", false)

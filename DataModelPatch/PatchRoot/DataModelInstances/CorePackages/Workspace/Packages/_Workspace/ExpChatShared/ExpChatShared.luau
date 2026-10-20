@@ -1,0 +1,21 @@
+﻿return {
+	ActionBindableEvent = require(script.ActionBindableEvent),
+	Actions = require(script.Actions),
+	Analytics = require(script.Analytics),
+	Commands = require(script.Commands),
+	Config = require(script.Config),
+	GlobalCommands = require(script.GlobalCommands),
+	Flags = require(script.Flags),
+	Logger = require(script.Logger),
+	RaiseActionAsEventMiddleware = require(script.RaiseActionAsEventMiddleware),
+	Reducers = require(script.Reducers),
+	TabTypes = require(script.TabTypes),
+	Version = require(script.Version),
+	context = require(script.context),
+	countParticipantsInTextChannel = require(script.countParticipantsInTextChannel),
+	getPresetIconRichText = require(script.getPresetIconRichText),
+	getPresetIconSize = require(script.getPresetIconSize),
+	isPresetMessage = require(script.isPresetMessage),
+	watchForErrors = require(script.watchForErrors),
+	["jest.config"] = script["jest.config"]
+}

@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("ProfileShareLinks").Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue

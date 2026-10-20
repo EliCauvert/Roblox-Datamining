@@ -1,0 +1,47 @@
+﻿local AnimateScrollViewToSelectionHelperModule = require(script.AnimateScrollViewToSelectionHelper)
+local SharedFlagsModule = require(script.Parent.SharedFlags)
+local FFlagLuaAppTextFeedbackFormModal = SharedFlagsModule.FFlagLuaAppTextFeedbackFormModal
+local _ = require(script.MediaGallery.MediaGalleryTypes)
+
+return {
+	CloseOnlyInteractiveAlert = require(script.CloseOnlyInteractiveAlert),
+	ConfirmationDialog = require(script.ConfirmationDialog),
+	LoadingBar = require(script.LoadingBar),
+	InlinePrompt = require(script.InlinePrompt),
+	FullscreenFrame = require(script.FullscreenFrame),
+	FullscreenPageWithSafeArea = require(script.FullscreenPageWithSafeArea),
+	IconWithTooltip = require(script.IconWithTooltip),
+	ImagePile = require(script.ImagePile),
+	InfoPeekView = require(script.InfoPeekView),
+	InfoCarousel = require(script.InfoCarousel),
+	InfoCarouselCell = require(script.InfoCarouselCell),
+	InsetBackground = require(script.InsetBackground),
+	Banner = require(script.Banner),
+	BannerBadge = require(script.Banner.BannerBadge),
+	UpsellModal = require(script.UpsellModal),
+	AnimateScrollViewToSelectionHelper = if SharedFlagsModule.FFlagUseAnimateScrollViewToSelectionHelper then AnimateScrollViewToSelectionHelperModule else nil,
+	ContentPosition = require(script.DetailsPage.ContentPosition),
+	DetailsPageLayout = require(script.DetailsPageLayout),
+	DetailsPageSelector = require(script.DetailsPage.DetailsPageSelector),
+	DetailsPageTemplate = require(script.DetailsPage.DetailsPageTemplate),
+	InfoTable = require(script.InfoTable),
+	InfoTableCell = require(script.InfoTableCell),
+	ScrollingAppCarousel = require(script.ScrollingAppCarousel.ScrollingAppCarousel),
+	CrossFadeAnimatedView = require(script.MediaGallery.CrossFadeAnimatedView),
+	MediaGalleryCarousel = require(script.MediaGallery.MediaGalleryCarousel),
+	MediaGalleryExpandableView = require(script.MediaGallery.MediaGalleryExpandableView),
+	MediaGalleryFullScreen = require(script.MediaGallery.MediaGalleryFullScreen),
+	MediaGalleryPreview = require(script.MediaGallery.MediaGalleryPreview),
+	calcMediaGallerySizesFromWidth = require(script.MediaGallery.calcMediaGallerySizesFromWidth),
+	useAnimateScrollViewToSelection = require(script.useAnimateScrollViewToSelection),
+	ExpandableText = require(script.ExpandableText),
+	CheckboxFeedbackFormModal = require(script.CheckboxFeedbackFormModal),
+	TextFeedbackFormModal = if FFlagLuaAppTextFeedbackFormModal then require(script.TextFeedbackFormModal) else nil,
+	ProvideFeedbackToast = require(script.ProvideFeedbackToast),
+	EmptyTile = require(script.EmptyTile),
+	useCloseWithBackButton = require(script.DetailsPage.Hooks.useCloseWithBackButton),
+	OverflowMenu = require(script.OverflowMenu.OverflowMenu),
+	getOverflowMenuSignalStore = require(script.OverflowMenu.getOverflowMenuSignalStore),
+	useOverflowMenuOpen = require(script.OverflowMenu.useOverflowMenuOpen),
+	["jest.config"] = script["jest.config"]
+}

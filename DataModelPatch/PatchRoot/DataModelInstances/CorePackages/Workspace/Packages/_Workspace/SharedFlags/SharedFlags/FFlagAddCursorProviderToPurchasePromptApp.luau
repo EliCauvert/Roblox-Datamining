@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AddCursorProviderToPurchasePromptAppV5", false)

@@ -1,0 +1,532 @@
+﻿Key,Value
+AccountIdentity.AgeCheck.Action.AcceptNow,지금 수락하기
+AccountIdentity.AgeCheck.Action.AgeVerificationRedoWithIdv,신분증으로 계속 진행
+AccountIdentity.AgeCheck.Action.AgeVerificationUndo,재설정
+AccountIdentity.AgeCheck.Description.AcceptDownageDisclaimer,만 13세 미만임을 확인하면 계정의 이메일 주소와 전화번호가 삭제될 수 있습니다. 신원 인증은 Roblox의 제삼자 서비스 제공업체에서 운영합니다.
+AccountIdentity.AgeCheck.Description.AgeEstimationToFive,{Date}에 사용자 연령이 기본으로 5세로 설정됩니다.
+AccountIdentity.AgeCheck.Description.AgeEstimationUpdate,회원님의 나이가 {deadlineDate}에 {estimatedAge}세로 됩니다. 지금 바로 수락할 수도 있습니다.
+AccountIdentity.AgeCheck.Description.AgeVerificationUndo,올바르게 설정되지 않은 경우 신분증으로 생년월일을 인증하거나 나이 확인 절차로 재설정할 수 있습니다.
+AccountIdentity.AgeCheck.Description.AgeVerificationUndoConfirmation,일부 기능은 나이 확인을 새로 해야 사용하실 수 있습니다. 재설정은 한 번만 가능합니다.
+AccountIdentity.AgeCheck.Description.AgeVerificationUndoError,나이 확인을 재설정할 수 없습니다.
+AccountIdentity.AgeCheck.Description.BirthdayVerificationUndo,그렇지 않은 경우 인증을 재설정할 수 있습니다. 이렇게 하면 나이 확인도 재설정됩니다.
+AccountIdentity.AgeCheck.Description.BirthdayVerificationUndoError,생년월일 인증을 재설정할 수 없습니다.
+AccountIdentity.AgeCheck.Description.CompleteNewAgeCheckIdRequired,연령 인증이 유효하지 않습니다. 더 많은 기능을 이용하려면 신분증으로 연령을 인증하세요.
+AccountIdentity.AgeCheck.Description.FacialAgeEstimate,예상 나이:
+AccountIdentity.AgeCheck.Description.IDVerificationRedo,연령 그룹을 확인했습니다. 이제 신분증을 사용해 생년월일을 인증할 수 있습니다.
+AccountIdentity.AgeCheck.Description.PendingDate,{deadlineDate}까지 보류
+AccountIdentity.AgeCheck.Description.StreamNotificationAgeCheck,"이 정보가 올바르지 않다면, 설정 > 계정 정보에서 생년월일을 수정할 수 있습니다."
+AccountIdentity.AgeCheck.Description.UpdateBirthdateID,"이 정보가 올바르지 않다면, 신분증을 사용해 정확한 생년월일을 인증할 수 있습니다."
+AccountIdentity.AgeCheck.Description.UpdatedAge,나이를 만 {estimatedAge}세로 업데이트했습니다
+AccountIdentity.AgeCheck.Heading.AgeVerificationUndo,연령 그룹이 올바르게 설정되었나요?
+AccountIdentity.AgeCheck.Heading.AgeVerificationUndoConfirmation,나이 확인 절차를 통해 재설정하시겠어요?
+AccountIdentity.AgeCheck.Heading.BirthdayVerificationUndo,생년월일이 정확하게 입력되었나요?
+AccountIdentity.AgeCheck.Heading.BirthdayVerificationUndoConfirmation,생년월일 인증을 재설정하시겠어요?
+AccountIdentity.AgeCheck.Heading.IDReverificationRequired,신분증을 사용하여 연령을 인증하세요
+AccountIdentity.AgeCheck.Label.AgeBandOver13,13세 이상
+AccountIdentity.AgeCheck.Label.AgeBandOver13Checked,나이가 13세 이상으로 확인되었습니다
+AccountIdentity.AgeCheck.Label.AgeBandOver18,18세 이상
+AccountIdentity.AgeCheck.Label.AgeBandOver18Checked,나이가 18세 이상으로 확인되었습니다
+AccountIdentity.AgeCheck.Label.AgeBandUnder13,13세 미만
+AccountIdentity.AgeCheck.Label.AgeCheckNotValid,연령을 다시 확인하겠습니다.
+AccountIdentity.AgeCheck.Label.AgeGroup13To15,13~15세
+AccountIdentity.AgeCheck.Label.AgeGroup13To15Estimated,만 13~15세
+AccountIdentity.AgeCheck.Label.AgeGroup16To17,16~17세
+AccountIdentity.AgeCheck.Label.AgeGroup16To17Estimated,만 16~17세
+AccountIdentity.AgeCheck.Label.AgeGroup18To20,18~20세
+AccountIdentity.AgeCheck.Label.AgeGroup18To20Estimated,만 18~20세
+AccountIdentity.AgeCheck.Label.AgeGroup18To24,만 18~24세
+AccountIdentity.AgeCheck.Label.AgeGroup18To24Estimated,
+AccountIdentity.AgeCheck.Label.AgeGroup5Estimated,연령 확인을 완료하지 못했습니다
+AccountIdentity.AgeCheck.Label.AgeGroup9To12,9-12
+AccountIdentity.AgeCheck.Label.AgeGroup9To12Estimated,만 9~12세
+AccountIdentity.AgeCheck.Label.AgeGroupOver21,21세 이상
+AccountIdentity.AgeCheck.Label.AgeGroupOver21Estimated,만 21세 이상
+AccountIdentity.AgeCheck.Label.AgeGroupOver25,만 25세 이상
+AccountIdentity.AgeCheck.Label.AgeGroupOver25Estimated,
+AccountIdentity.AgeCheck.Label.AgeGroupUnder9,5~8세
+AccountIdentity.AgeCheck.Label.AgeGroupUnder9Estimated,만 8세 이하
+AccountIdentity.AgeCheck.Label.CompleteNewAgeCheck,연령 확인이 더 이상 유효하지 않다고 판단했습니다.
+AccountIdentity.AgeCheck.Label.CompleteNewAgeCheckIdRequired,나이 인증이 유효하지 않습니다. 더 많은 기능을 이용하려면 신분증으로 나이를 인증하세요.
+Amp.AccountSettingsUpsell.Email.Button.Cancel,취소
+Amp.AccountSettingsUpsell.Email.Button.Settings,설정
+Amp.AccountSettingsUpsell.Email.Modal.ContentText,"이 체험을 이용하려면 이메일 인증을 진행하세요.
+
+1. 설정 메뉴에서 계정 정보로 이동합니다.
+2. 이메일 주소 추가를 선택합니다.
+3. 인증 절차를 진행합니다.
+"
+Amp.AccountSettingsUpsell.Email.Modal.Title,이메일 인증 필요
+Amp.AccountSettingsUpsell.Phone.Button.Cancel,
+Amp.AccountSettingsUpsell.Phone.Button.Settings,
+Amp.AccountSettingsUpsell.Phone.Modal.ContentText,"이 체험을 이용하려면 휴대폰 인증을 진행하세요.
+
+1. 설정 메뉴에서 계정 정보로 이동합니다.
+2. 휴대폰 번호 추가를 선택합니다.
+3. 인증 절차를 완료합니다."
+Amp.AccountSettingsUpsell.Phone.Modal.Title,휴대폰 인증 필요
+Amp.ErrorScreen.BodyText,액세스 상태를 가져오지 못했습니다
+Amp.ErrorScreen.Cancel,
+Amp.ErrorScreen.Retry,다시 시도
+Amp.ErrorScreen.Title,오류가 발생했어요
+Amp.ErrorScreen.UserMismatchBody,다른 계정의 QR 코드를 스캔하셨습니다. 계속하려면 계정을 전환하고 다시 스캔하세요.
+Amp.ErrorScreen.UserMismatchTitle,잘못된 계정입니다
+Amp.FAEUpsell.Label.AgeCheckBenefit,더 많은 콘텐츠와 기능을 즐기려면 나이 확인을 완료하세요.
+Amp.FAEUpsell.Label.DownloadAppFallback,모바일 기기에서 Roblox 앱을 다운로드하고 설정 > 계정 정보로 이동하세요.
+Amp.FAEUpsell.Label.NotScanning,스캔하지 않으시겠어요?
+Amp.FAEUpsell.Label.ScanQRCodeToAgeCheck,휴대폰 또는 태블릿 카메라로 이 QR 코드를 스캔하여 나이 확인 절차를 완료하세요.
+Amp.FAEUpsell.Modal.ExternalLink.ButtonCancel,
+Amp.FAEUpsell.Modal.ExternalLink.ButtonStart,계속하기
+Amp.FAEUpsell.Modal.ExternalLink.Text,이렇게 하면 더 많은 게임과 채팅 같은 기능을 이용할 수 있습니다.
+Amp.FAEUpsell.Modal.ExternalLink.Title,나이 확인
+Amp.FAEUpsell.Modal.Failed.ButtonClose,닫기
+Amp.FAEUpsell.Modal.Failed.ButtonRetry,
+Amp.FAEUpsell.Modal.Failed.Text,오류가 발생했어요. 나중에 다시 시도하세요.
+Amp.FAEUpsell.Modal.Failed.Title,나이 확인 오류
+Amp.FAEUpsell.Modal.Loading.ButtonCancel,
+Amp.FAEUpsell.Modal.Loading.Text,이 과정에는 다소 시간이 걸릴 수 있습니다. 취소하시면 나이가 확인되지 않을 수도 있습니다.
+Amp.FAEUpsell.Modal.Loading.Title,나이 확인 중
+Amp.FAEUpsell.Modal.QRCode.Description,나이 확인을 완료하여 더 많은 게임과 기능을 이용하세요. 휴대폰 또는 태블릿으로 이 QR 코드를 스캔하세요.
+Amp.FAEUpsell.Modal.QRCode.Footer,스캔하지 않으시겠어요? 모바일 기기에서 Roblox 앱을 다운로드하고 설정 > 계정 정보로 이동하세요.
+Amp.FAEUpsell.Modal.QRCode.Title,모바일 앱에서 나이 확인을 완료하세요.
+Amp.IDVErrorScreen.Close,
+Amp.IDVErrorScreen.Declined,죄송합니다. 보안상의 이유로 인증이 거부되었습니다. 다시 시도하려면 며칠 후에 다시 확인하세요.
+Amp.IDVErrorScreen.Retry,문제가 발생했어요. 페이지를 새로 고침하고 다시 시도하세요.
+Amp.IDVErrorScreen.Timeout,죄송합니다. 인증 절차가 만료되었습니다. 페이지를 새로 고침한 후 다시 시도하세요.
+Amp.IDVErrorScreen.Title,인증 실패
+Amp.IDVUpsell.Button.Cancel,
+Amp.IDVUpsell.Button.StartVerification,인증 시작
+Amp.IDVUpsell.Directions.IDBody,"운전면허증, 여권, 신분증, 체류허가증"
+Amp.IDVUpsell.Directions.IDHeader,유효한 신분증을 준비하세요
+Amp.IDVUpsell.Directions.PhoneBody,계속하려면 스마트폰이 필요합니다
+Amp.IDVUpsell.Directions.PhoneHeader,스마트폰을 사용하세요
+Amp.IDVUpsell.Modal.Disclaimer,참고: 제삼자 서비스 제공업체를 통해 본인 인증 절차를 시작하려고 합니다. 본 절차 과정에서 수집되는 정보는 계정 보안 및/또는 Roblox 기능 활성화 목적으로 사용됩니다.
+Amp.IDVUpsell.Modal.PrivacyLinkText,Roblox 개인 생체정보 처리방침
+Amp.IDVUpsell.Modal.QRHeaderText,QR 코드를 스캔해 시작하세요
+Amp.IDVUpsell.Modal.Title,나이 인증 필요
+Amp.IDVUpsell.PrivacyPageHeader,개인정보 처리방침
+Amp.Upsell.Action.AskNow,지금 요청하기
+Amp.Upsell.Description.PrologueEnablePurchase,"지역별 제한으로 인해, 구매에 보호자의 동의가 필요합니다."
+Amp.Upsell.Description.PrologueJoinExperience,이 체험에 참가하려면 보호자의 허락을 받아야 합니다.
+Amp.Upsell.Description.PrologueTextVpc,보호자의 허락을 받아야 합니다.
+Amp.Upsell.Description.PrologueUnblockUser,{displayName} 님을 차단 해제하려면 보호자 동의가 필요합니다
+Amp.Upsell.Message.AlreadyLinked,이미 계정이 이 보호자와 연결되어 있습니다
+Amp.Upsell.Message.EmailSent,{parentEmail}(으)로 이메일이 전송되었습니다
+Amp.Upsell.Message.EmailSentPluralParent,연결된 보호자 이메일 주소로 이메일이 전송되었습니다
+Amp.Upsell.Title.AskYourParent,보호자에게 요청하세요
+Amp.Upsell.Title.RequestSent,요청 전송 완료
+Application.ConnectionError.Action.Ok,확인
+Application.ConnectionError.ErrorCode,오류 코드: {errorCode}
+Application.Deprecation.UWPDeprecationDownloadButton,다운로드
+Application.Logout.Action.Logout,로그아웃
+Application.Logout.Message.Confirmation,정말로 로그아웃할까요?
+Application.Logout.Title.Logout,
+Application.Settings.AccountSettingsTitle,계정 설정
+Application.Settings.AppSettingsTitle,앱 설정
+Application.Settings.VRAccountSettingsExplanation,"개인정보 보호, 보안 제어 등에 액세스하려면
+웹 또는 호환 기기를 이용하세요."
+Application.Settings.VRAccountSettingsSubtitle,웹 또는 호환 기기 이용
+Application.Settings.VolumeSliderDescription,"메뉴 효과, 체험 사운드, 음성 채팅 등 Roblox에서의 전반적인 사운드 볼륨을 조절합니다"
+Authentication.AccountPicker.Button.ContinueAsSignedIn,{displayName}(으)로 계속
+Authentication.AccountPicker.Button.CreateAccount,계정 생성
+Authentication.AccountPicker.Button.Done,완료
+Authentication.AccountPicker.Button.Edit,편집
+Authentication.AccountPicker.Button.MoreOptions,추가 옵션
+Authentication.AccountPicker.Button.SignInAsAccount,{displayName}(으)로 로그인
+Authentication.AccountPicker.Button.SignInToAccount,{displayName}에 로그인
+Authentication.AccountPicker.Button.SignIntoAnotherAccount,다른 계정에 로그인
+Authentication.AccountPicker.Header.EditAccounts,계정 편집
+Authentication.AccountPicker.Header.RemoveAccount,계정 삭제
+Authentication.AccountPicker.Label.AllAccounts,모든 계정
+Authentication.AccountPicker.Label.ChooseAccountToContinue,계속하려면 계정을 선택하세요.
+Authentication.AccountPicker.Label.ChooseAnAccount,계정 선택
+Authentication.AccountPicker.Label.Manage,관리
+Authentication.AccountPicker.Label.ManageAccounts,계정 관리
+Authentication.AccountPicker.Label.MoreOptions,
+Authentication.AccountPicker.Label.RemoveAccount,계정을 삭제할까요?
+Authentication.AccountPicker.Label.RemoveAccountCancel,
+Authentication.AccountPicker.Label.RemoveAccountDescription,다시 로그인하기 전까지 이 기기에서 더는 해당 계정을 볼 수 없습니다.
+Authentication.AccountPicker.Label.RemoveAccountRemove,삭제
+Authentication.AccountPicker.Label.SignInNeeded,로그인 필요
+Authentication.AccountPicker.Label.SignedOut,로그아웃되었습니다
+Authentication.AccountRecovery.Action.AddAPasskey,"네, 새 패스키를 추가합니다"
+Authentication.AccountRecovery.Action.Continue,
+Authentication.AccountRecovery.Action.Delete,제거
+Authentication.AccountRecovery.Action.Next,다음
+Authentication.AccountRecovery.Action.Ok,
+Authentication.AccountRecovery.Action.ResetPassword,비밀번호 재설정
+Authentication.AccountRecovery.Action.Save,유지
+Authentication.AccountRecovery.Action.SendCode,인증 코드 받기
+Authentication.AccountRecovery.Action.SkipAddingPasskey,"아니요, 이 단계를 건너뜁니다"
+Authentication.AccountRecovery.Action.UpdatePassword,비밀번호 업데이트
+Authentication.AccountRecovery.Action.UseAnotherMethod,다른 방법 사용
+Authentication.AccountRecovery.Action.UseBackupCode,백업 코드 사용
+Authentication.AccountRecovery.Action.UseEmail,이메일 사용
+Authentication.AccountRecovery.Action.UseEmailInstead,대신 이메일 사용
+Authentication.AccountRecovery.Action.UseEmailPhone,이메일/전화번호 사용
+Authentication.AccountRecovery.Action.UsePhone,전화번호 사용
+Authentication.AccountRecovery.Action.UsePhoneInstead,대신 전화번호 사용
+Authentication.AccountRecovery.Action.UseUsernameEmailInstead,사용자 이름이나 이메일을 사용하세요
+Authentication.AccountRecovery.Description.CannotRecoverAccount,"보안을 위해, 2단계 인증이 활성화된 계정을 복구하려면 다른 인증 방법이 하나 더 필요합니다. 이 계정에는 안전한 복구를 위한 백업 방법이 없습니다. 기본 2단계 인증 방법을 다시 사용해 보거나, 백업 코드를 사용하여 2단계 인증 챌린지를 건너뛰세요."
+Authentication.AccountRecovery.Description.ChooseAccount,복구하려는 계정을 선택합니다.
+Authentication.AccountRecovery.Description.CreateNewPassword,기존 비밀번호와 다른 강력한 비밀번호를 만드세요.
+Authentication.AccountRecovery.Description.CreateNewPasswordAddEmail,새 비밀번호를 생성하고 이메일을 추가하면 나중에 계정을 보호하는 데 도움이 됩니다.
+Authentication.AccountRecovery.Description.DeviceDoesNotSupportPasskey,강화된 보호 프로그램에 등록되어 있습니다. 계정 보안을 유지하려면 로그인할 때 패스키 또는 보안 키가 필요합니다. 이 기기는 패스키를 지원하지 않으므로 로그인하기 어려울 수 있습니다. 앞으로는 빠른 로그인을 사용하여 다른 로그인 기기에서 로그인할 수 있습니다.
+Authentication.AccountRecovery.Description.EmailCodeSent,제공해 주신 이메일 주소가 계정으로 연결된 경우 해당 주소로 6자리 인증 코드가 발송되었을 것입니다. 스팸 폴더를 포함한 모든 받은 편지함 폴더를 확인하세요.
+Authentication.AccountRecovery.Description.EmailCodeSentForUser,
+Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,강화된 보호 프로그램에 등록되어 있습니다. 계정 보안을 유지하려면 로그인할 때 패스키 또는 보안 키가 필요합니다.{lineBreak}{lineBreak}개인 기기를 사용하는 경우 지금 새 패스키를 설정하는 것을 권장드립니다. 그러면 나중에 이 기기에서 쉽게 로그인할 수 있습니다. 공유 기기 또는 공용 기기를 사용하는 경우 이 단계를 건너뛰세요.
+Authentication.AccountRecovery.Description.EnterABackupCode,이제 저장해 둔 백업 코드를 입력하세요.
+Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,"계정과 연동된 이메일 또는 전화번호를 입력합니다. 만약 이전에 구매한 이력이 있는 경우, 청구 이메일을 사용해 보세요."
+Authentication.AccountRecovery.Description.EnterEmailAddress,이제 이메일 주소를 입력하세요. Roblox에서 구매에 사용한 이메일 주소도 가능합니다.
+Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,"이제 전화번호나 백업 코드, 다른 이메일 주소를 입력하세요. Roblox에서 구매에 사용한 이메일 주소도 가능합니다."
+Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,이제 회원님의 계정과 연결된 전화번호를 입력하세요.
+Authentication.AccountRecovery.Description.EnterPhoneOrAnotherEmail,이제 전화번호나 다른 이메일 주소를 입력하세요. Roblox에서 구매에 사용한 이메일 주소도 가능합니다.
+Authentication.AccountRecovery.Description.KeepTwoStepMethodDynamic,계정에서 {twoStepMethod} 기능을 사용하도록 설정하셨습니다. 계속 액세스할 수 있다면 유지하세요. 다시 로그인하실 때 사용하도록 요청드리겠습니다.
+Authentication.AccountRecovery.Description.PhoneCodeSent,제공해 주신 전화번호가 계정으로 연결된 경우 해당 번호로 6자리 인증 코드가 발송되었을 것입니다. 코드가 WhatsApp 메시지나 SMS 형식으로 전송되었을 수 있습니다.
+Authentication.AccountRecovery.Description.PhoneCodeSentForUser,
+Authentication.AccountRecovery.Description.PlatformNotSupported,해당 플랫폼 및 기기에서는 계정 복구가 지원되지 않습니다. 확인을 선택하여 이 창을 닫고 로그인 페이지로 돌아가세요. 다른 기기에서 계정을 복구하세요. 그런 다음 ‘빠른 로그인’을 선택하고 안내에 따라 이미 로그인된 다른 기기로 안전하게 로그인하세요.
+Authentication.AccountRecovery.Description.SaveTwoStepMethod,계속 액세스할 수 있다면 유지하세요. 다시 로그인하실 때 사용하도록 요청드리겠습니다.
+Authentication.AccountRecovery.Description.SendCodeContactMethodConfirmation,제공해 주신 연락처가 Roblox 계정과 연결된 경우 6자리 인증 코드를 보내드립니다.
+Authentication.AccountRecovery.Description.SomethingWentWrongVerifyAgain,문제가 발생했어요. '계속'을 눌러 다시 시도하세요.
+Authentication.AccountRecovery.Description.TrustedLocationResetPassword,"{username} 님 안녕하세요, 현재 신뢰할 수 있는 위치에서 계정에 액세스하고 있습니다. 지금 비밀번호를 재설정해 Roblox 계정에 대한 액세스를 복구하세요."
+Authentication.AccountRecovery.Description.TrustedLocationResetPasswordSkip2SV,"{username} 님, 안녕하세요. 현재 신뢰할 수 있는 위치에서 계정에 액세스하고 있습니다. 2단계 인증을 건너뛰고 지금 비밀번호를 재설정하여 복구를 완료할 수 있습니다."
+Authentication.AccountRecovery.Description.TrustedLocationSkip2SV,"{username} 님, 안녕하세요. 현재 신뢰할 수 있는 위치에서 계정에 액세스하고 있습니다. 2단계 인증을 건너뛰고 복구를 완료할 수 있습니다."
+Authentication.AccountRecovery.Description.UpdateEmailConfirmation,계정 복구에 다른 이메일을 사용하셨습니다. 이메일 주소를 {email}(으)로 업데이트하겠습니다.
+Authentication.AccountRecovery.Description.VerifyAgain,2단계 인증이 활성화된 계정을 복구하기 전에 본인 인증을 완료해 주세요. '계속'을 눌러 2단계 인증 절차를 다시 시작하세요.
+Authentication.AccountRecovery.Heading.CannotRecoverAccount,계정을 복구할 수 없습니다
+Authentication.AccountRecovery.Heading.ChooseVerificationMethod,인증 방법을 선택하세요
+Authentication.AccountRecovery.Heading.EnhancedProtectionPostRecoveryPasskey,개인 기기인가요?
+Authentication.AccountRecovery.Heading.EnhancedProtectionProgramPostRecoveryNoPasskey,이 기기는 패스키를 지원하지 않으므로 일부 기능이 제한될 수 있습니다.
+Authentication.AccountRecovery.Heading.EnterSecondMethod,2단계 인증 방법 입력
+Authentication.AccountRecovery.Heading.PasskeyUpsellModalSubtitle,"비밀번호를 재설정하기 전에 패스키를 추가해 빠르고 안전하게 로그인하세요. Roblox는 얼굴, 지문 또는 PIN 데이터를 저장하지 않습니다."
+Authentication.AccountRecovery.Heading.PasskeyUpsellModalTitle,"얼굴, 지문 또는 PIN으로 즉시 로그인하세요."
+Authentication.AccountRecovery.Heading.PasskeyUpsellSubtitle,"패스키를 추가해 얼굴, 지문, PIN으로 로그인하세요."
+Authentication.AccountRecovery.Heading.PasskeyUpsellTitle,패스키로 더 빠르게 로그인
+Authentication.AccountRecovery.Heading.ResetPassword,
+Authentication.AccountRecovery.Heading.RobloxAccountRecovery,Roblox 계정 복구
+Authentication.AccountRecovery.Heading.SaveTwoStepMethod,기존 2단계 인증 수단을 유지하시겠어요?
+Authentication.AccountRecovery.Heading.UpdateEmail,이메일 업데이트
+Authentication.AccountRecovery.Heading.UseAnotherDevice,다른 기기 사용
+Authentication.AccountRecovery.HeadingAccountRecovery,
+Authentication.AccountRecovery.Label.AddEmail,이메일 주소 추가
+Authentication.AccountRecovery.Label.AddPasskey,패스키 추가
+Authentication.AccountRecovery.Label.Authenticator2sv,인증 앱 2단계 인증
+Authentication.AccountRecovery.Label.BackupCode,백업 코드
+Authentication.AccountRecovery.Label.ConfirmNewPasswordV2,새 비밀번호 확인
+Authentication.AccountRecovery.Label.DoNotUseOldPassword,이전 비밀번호를 사용하지 마세요
+Authentication.AccountRecovery.Label.Email2sv,이메일 2단계 인증
+Authentication.AccountRecovery.Label.EmailPhone,이메일/전화번호
+Authentication.AccountRecovery.Label.EnterCode,코드 입력
+Authentication.AccountRecovery.Label.EnterYourUsernameEmailPhone,"사용자 이름, 이메일 또는 전화번호를 입력하세요"
+Authentication.AccountRecovery.Label.NewPasswordV2,새 비밀번호
+Authentication.AccountRecovery.Label.Or,또는
+Authentication.AccountRecovery.Label.PasskeyAdded,패스키 추가됨
+Authentication.AccountRecovery.Label.PreviousContactMethodVerification,{contactMethod} 인증 완료
+Authentication.AccountRecovery.Label.ResendCode,코드 다시 보내기
+Authentication.AccountRecovery.Label.ResendCodeTimer,{timeLeft}초 후 코드 다시 보내기
+Authentication.AccountRecovery.Label.SecurityKey2sv,보안 키 2단계 인증
+Authentication.AccountRecovery.Label.SixDigitCode,6자리 코드
+Authentication.AccountRecovery.Label.SkipPasskey,지금은 건너뛰기
+Authentication.AccountRecovery.Label.UsernameEmail,사용자 이름/이메일
+Authentication.AccountRecovery.Label.UsernameEmailPhone,사용자 이름/이메일/전화번호
+Authentication.AccountRecovery.LabelConfirmNewPassword,
+Authentication.AccountRecovery.LabelEmail,이메일
+Authentication.AccountRecovery.LabelNewPassword,
+Authentication.AccountRecovery.LabelPassword,비밀번호
+Authentication.AccountRecovery.LabelPhone,휴대폰
+Authentication.AccountRecovery.LabelTwoStepVerification,2단계 인증
+Authentication.AccountRecovery.Message.Error.AccountNotFound,계정을 찾을 수 없습니다.
+Authentication.AccountRecovery.Message.Error.InvalidCode,유효하지 않은 코드입니다.
+Authentication.AccountRecovery.Message.Error.InvalidEmail,유효하지 않은 이메일.
+Authentication.AccountRecovery.Message.Error.InvalidEmailOrPhone,유효하지 않은 이메일 주소 또는 전화번호입니다.
+Authentication.AccountRecovery.Message.Error.InvalidPassword,유효하지 않은 비밀번호입니다.
+Authentication.AccountRecovery.Message.Error.PasskeyRegistrationError,패스키를 등록할 수 없습니다. 설정 > 계정 정보 > 로그인 방식에서 다시 시도해 보세요.
+Authentication.AccountRecovery.Message.Error.TooManyRequests,요청이 너무 많습니다. 나중에 다시 시도하세요.
+Authentication.AccountRecovery.Message.Error.TryADifferentOne,다른 것을 시도해 보세요.
+Authentication.AccountRecovery.MessageInvalidPassword,유효하지 않은 비밀번호
+Authentication.AccountRecovery.MessagePasswordsDoNotMatch,비밀번호가 일치하지 않습니다.
+Authentication.AccountRecovery.MessageUnknownError,알 수 없는 오류
+Authentication.AccountRecovery.Response.PasswordBadLength,비밀번호는 8자에서 200자 사이여야 합니다.
+Authentication.AccountSwitch.Action.AddAccount,계정 추가
+Authentication.AccountSwitch.Action.AddAnAccount,
+Authentication.AccountSwitch.Action.Continue,
+Authentication.AccountSwitch.Action.ContinueAs,다음으로 계속: {username}
+Authentication.AccountSwitch.Action.CreateNewAccount,새 계정 만들기
+Authentication.AccountSwitch.Action.LogoutAllAccounts,모든 계정에서 로그아웃
+Authentication.AccountSwitch.Action.RemoveAllAccounts,모든 계정을 삭제하시겠어요?
+Authentication.AccountSwitch.Action.SignInToExistingAccount,기존 계정에 로그인
+Authentication.AccountSwitch.Action.SwitchAccount,계정 전환
+Authentication.AccountSwitch.Description.AccountLimit.2,계정 한도에 도달했습니다. 새 계정을 추가하려면 먼저 계정을 삭제하세요.
+Authentication.AccountSwitch.Description.AlwaysContinueAs,항상 선택한 계정으로 계속 진행하고 계정 전환기에 추가합니다.
+Authentication.AccountSwitch.Description.ContinueSignOutOthers,{username} 계정으로 계속 진행하면 다른 계정에서 로그아웃됩니다.
+Authentication.AccountSwitch.Description.ContinuingAsAccount,{username} 계정으로 계속 진행하면 해당 계정이 계정 전환기에 추가됩니다. 언제든지 전환할 수 있습니다.
+Authentication.AccountSwitch.Description.ContinuingWith,{username} 계정으로 계속 진행하면 다른 모든 계정에서 로그아웃됩니다.
+Authentication.AccountSwitch.Description.HaveUpToAccountLimit,최대 {limit}개의 계정을 보유할 수 있습니다. 선택한 계정을 사용하려면 다른 계정 하나를 제거하세요.
+Authentication.AccountSwitch.Description.LogoutConfirmation,새 계정을 추가하려면 먼저 이 기기의 다른 Roblox 계정에서 로그아웃해야 합니다
+Authentication.AccountSwitch.Description.ParentLogoutConfirmation,보호자 권한이 있는 새 계정을 추가하려면 먼저 이 기기의 다른 Roblox 계정에서 로그아웃해야 합니다
+Authentication.AccountSwitch.Description.PleaseTryAgainLater,나중에 다시 시도하세요
+Authentication.AccountSwitch.Description.RemoveAllAccounts,로그아웃하면 이 기기에서 모든 계정이 삭제됩니다.
+Authentication.AccountSwitch.Description.RemoveCurrentAccount,삭제 시에는 다시 로그인하지 않는 한 이 기기에 더 이상 해당 계정이 표시되지 않습니다. 랜딩 페이지로 다시 이동합니다.
+Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,직접 로그인해 보세요
+Authentication.AccountSwitch.Header.CantSwitchAccounts,계정을 전환할 수 없음
+Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,
+Authentication.AccountSwitch.Header.ChooseAnAccount,
+Authentication.AccountSwitch.Header.LogoutAllAccounts,
+Authentication.AccountSwitch.Header.RemoveCurrentAccount,현재 계정을 삭제하시겠어요?
+Authentication.AccountSwitch.Header.SignOutOtherAccounts,다른 계정에서 로그아웃할까요?
+Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
+Authentication.AccountSwitch.Header.TooManyAccounts,계정이 너무 많음
+Authentication.AccountSwitch.Heading.SwitchAccount,
+Authentication.AccountSwitch.Label.AccountLimitReached.2,계정을 추가하려면 먼저 한 계정에서 로그아웃하세요.
+Authentication.AccountSwitch.Label.App,앱
+Authentication.AccountSwitch.Label.Website,웹사이트
+Authentication.CrossDevice.Action.CancelLogin,
+Authentication.CrossDevice.Action.ConfirmLogin,로그인 확인
+Authentication.CrossDevice.Action.Done,
+Authentication.CrossDevice.Action.Enter,입력
+Authentication.CrossDevice.Action.GoBack,돌아가기
+Authentication.CrossDevice.Action.LoginWithDevice,다른 기기로 로그인
+Authentication.CrossDevice.Action.Next,
+Authentication.CrossDevice.Action.TryAgain,
+Authentication.CrossDevice.EnterCodeInstruction,그런 다음 이 코드를 입력하세요
+Authentication.CrossDevice.GoToInstruction,컴퓨터나 휴대폰에서 다음으로 이동하세요.
+Authentication.CrossDevice.Heading.LoginAnotherDevice,다른 기기에 로그인하기
+Authentication.CrossDevice.Heading.LoginCode,빠른 로그인 코드
+Authentication.CrossDevice.Heading.LoginWarning,로그인하려면 다음 사항을 따르세요.
+Authentication.CrossDevice.Heading.QuickLogin,빠른 로그인
+Authentication.CrossDevice.Heading.SigninAnotherDevice,다른 기기에서 로그인
+Authentication.CrossDevice.Heading.SigninInstructions,새로운 기기에서 {username} 계정으로 로그인하는 방법:
+Authentication.CrossDevice.Heading.Warning,주의!
+Authentication.CrossDevice.Label.CodeHeader,옵션 2
+Authentication.CrossDevice.Label.CodeNotVerified,빠른 로그인 코드가 인증되지 않았습니다.
+Authentication.CrossDevice.Label.Confirm,
+Authentication.CrossDevice.Label.ConfirmAndLoginAs,다른 기기에서의 %s 로그인 여부 확인 중
+Authentication.CrossDevice.Label.ConfirmOnDevice,다른 기기에서 로그인을 확인하세요
+Authentication.CrossDevice.Label.ConfirmationMessage1,다음에 로그인하려고 합니다: %s
+Authentication.CrossDevice.Label.ConfirmationMessage2,"이 새로운 기기에서 회원님의 계정, Robux 및 인벤토리에 접근할 수 있게 됩니다."
+Authentication.CrossDevice.Label.ConfirmationMessage3,본인임을 확인해 주세요.
+Authentication.CrossDevice.Label.Continue,
+Authentication.CrossDevice.Label.DevicePrompt,"이미 로그인 중인 다른 기기를 열고 이 코드를 입력한 다음, 체험을 시작하세요."
+Authentication.CrossDevice.Label.EnterCodeTextBox,코드를 입력하세요.
+Authentication.CrossDevice.Label.EnterOtherDeviceCode,다른 기기의 코드 입력
+Authentication.CrossDevice.Label.InvalidLocationError,로그인하려는 기기와 위치가 일치하지 않습니다. 동일한 네트워크에서 다시 시도하세요.
+Authentication.CrossDevice.Label.LogginInAs,%s(으)로 로그인 중
+Authentication.CrossDevice.Label.LoginInstructions,계속하려면 아래 지침을 따르세요.
+Authentication.CrossDevice.Label.LoginInstructionsV2,Roblox 앱을 열고 다음으로 이동하세요.
+Authentication.CrossDevice.Label.LoginLocation,이미 로그인 중인 기기에서 <b>계정 설정 > 빠른 로그인</b> 메뉴를 열고 위 코드를 입력하세요.
+Authentication.CrossDevice.Label.LoginLocationV2,<b>'더 보기' 페이지 > '빠른 로그인'</b>에서 코드를 입력하세요.
+Authentication.CrossDevice.Label.NotAvailableOnNetwork,이 네트워크에서 사용할 수 없는 기능입니다. 나중에 다시 시도하세요.
+Authentication.CrossDevice.Label.OK,
+Authentication.CrossDevice.Label.QrCodeError,"QR 코드를 표시하는 데 문제가 있습니다. 이 페이지를 새로 고침하거나, 아래 지침에 따라 다른 기기에서 로그인하세요."
+Authentication.CrossDevice.Label.QrCodeLogin,QR 코드 로그인
+Authentication.CrossDevice.Label.QrHeader,옵션 1
+Authentication.CrossDevice.Label.QrInstructions,로그인 중인 기기의 카메라로 이 QR 코드를 스캔하세요.
+Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,컴퓨터나 휴대폰에서 <b>roblox.com/quest</b>로 이동해 이 코드를 입력하고 로그인을 완료하세요.
+Authentication.CrossDevice.Label.QuickSignInWarning,보안을 위해 새 기기에서 생성한 코드만 입력해 주세요.
+Authentication.CrossDevice.Label.SigninInstructionHeading,새로운 기기에서 {username} 계정으로 로그인하려면
+Authentication.CrossDevice.Label.SigninInstructionOne,1. 새로운 기기에서 로그인 페이지를 엽니다.
+Authentication.CrossDevice.Label.SigninInstructionThree,3. 아래 입력란에 해당 코드를 입력합니다.
+Authentication.CrossDevice.Label.SigninInstructionTwo,2. '빠른 로그인'을 선택하여 코드를 받습니다.
+Authentication.CrossDevice.Label.Warning1,• 직접 요청한 코드만 입력할 것
+Authentication.CrossDevice.Label.Warning2,• 다른 사용자의 코드를 입력하지 말 것
+Authentication.CrossDevice.Response.InvalidCode,입력한 코드가 유효하지 않습니다. 정확하게 입력했는지 다시 확인해 보세요.
+Authentication.CrossDevice.Response.LoginFail,로그인 실패
+Authentication.CrossDevice.Response.LoginSuccess,로그인 완료
+Authentication.Login.Action.ConnectionError.RetryReady,
+Authentication.Login.Action.ConnectionError.RetryWait,잠시 후 다시 시도: {WaitTime}
+Authentication.Login.Action.ContinueWithPassword,비밀번호 사용
+Authentication.Login.Action.CreateAccountFromSwitcher,
+Authentication.Login.Action.DownloadNow,지금 다운로드
+Authentication.Login.Action.EmailACode,이메일로 로그인 코드 받기
+Authentication.Login.Action.EmailMeAOneTimeCode,이메일로 일회용 코드 받기
+Authentication.Login.Action.EmailOtpWaitTime,{WaitTime}초 후 코드 다시 보내기
+Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,비밀번호 또는 사용자 이름을 잊으셨나요?
+Authentication.Login.Action.ForgotUsername,사용자 이름을 잊어버리셨나요?
+Authentication.Login.Action.LogInCapitalized,로그인
+Authentication.Login.Action.LogInEmailOneTimeCode,
+Authentication.Login.Action.NeedHelp,도움이 필요하세요?
+Authentication.Login.Action.Next,
+Authentication.Login.Action.QQLogin,QQ 로그인
+Authentication.Login.Action.QuickLogin,
+Authentication.Login.Action.QuickSignIn,
+Authentication.Login.Action.RecoverYourAccount,계정을 복구하세요
+Authentication.Login.Action.ResendCode,
+Authentication.Login.Action.SendVerificationEmail,인증 이메일 보내기
+Authentication.Login.Action.SignIn,
+Authentication.Login.Action.SignInToAnotherAccount,
+Authentication.Login.Action.UseAnotherDeviceSentenceCase,
+Authentication.Login.Action.UsePasskey,패스키 사용
+Authentication.Login.Action.UsePasskeyInstead,패스키 대신 사용
+Authentication.Login.Action.WeChatLogin,WeChat 로그인
+Authentication.Login.Authentication.Login.Response.NoLoginMethods,이 계정에 로그인할 수 있는 방법이 없습니다. 계정 복구를 시도하거나 지원 센터에 문의하세요.
+Authentication.Login.Authentication.QuickSignInLowercase,
+Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} 계정으로 전환하려면 Roblox를 종료하세요
+Authentication.Login.Button.SwitchXboxProfile,{externalPlatform} 프로필을 {gamertag}(으)로 전환하세요
+Authentication.Login.Button.UseDifferentRobloxAccount,다른 Roblox 계정 사용
+Authentication.Login.Description.AccountLinkingFailure,회원님의 {robloxUsername} Roblox 계정은 이미 다른 {platformDisplayName} 프로필 {linkedUserPlatformName}에 연결되어 있어 해당 {platformDisplayName} 프로필 {currentUserPlatformName}에서 사용할 수 없습니다.
+Authentication.Login.Description.AccountSelectorHelp,연결된 모든 계정이 여기에 나열됩니다.
+Authentication.Login.Description.DownloadNewVersion,이 버전의 앱은 회원님의 지역에서 더 이상 이용할 수 없습니다. 계속 플레이하려면 새 버전의 Roblox를 다운로드하세요.
+Authentication.Login.Description.EmailCode,이메일로 일회용 코드 전송
+Authentication.Login.Description.EnterOneTimeCodeHelpV2,{email}(으)로 방금 전송된 코드를 입력하세요
+Authentication.Login.Description.GetOneTimeCodeHelp,일회용 코드를 받으려면 계정의 인증된 이메일을 입력하세요.
+Authentication.Login.Description.LinkExpired,클릭한 링크는 더 이상 유효하지 않습니다. 로그인하려면 Roblox로 이동하여 이메일 일회용 코드를 요청하세요.
+Authentication.Login.Description.PasskeyDescription,"이 계정은 비밀번호보다 더욱 안전한 로그인 방식인 패스키를 보유하고 있습니다. 지문, 얼굴, 또는 화면 잠금을 사용해 로그인하세요."
+Authentication.Login.Description.PasskeyLoginIncompatibleDevice,내 기기가 패스키를 지원하는지 확인할 수 없습니다. 다시 시도하거나 '로그인할 수 없음'을 탭하여 이메일 또는 전화번호를 통해 계정을 복구하세요.
+Authentication.Login.Description.RecoverYourAccount,계정에 의심스러운 활동 또는 자격 증명이 침해되었다는 징후가 탐지되었습니다. 계정을 보호하기 위해 일시적으로 잠금 처리했습니다. 다시 접속하려면 계정을 복구하세요.
+Authentication.Login.Description.U13.GetOneTimeCodeHelp,일회용 코드를 받으려면 계정의 이메일을 입력하세요.
+Authentication.Login.Error.PasskeyOnlyAccount,계정에 로그인용 패스키만 설정되어 있습니다. 패스키로 로그인을 시도하거나 계정을 복구하세요.
+Authentication.Login.Error.PlatformAccountConnectionFailure,플랫폼 계정을 인증할 수 없습니다. 나중에 다시 시도하세요.
+Authentication.Login.Header.ChooseAnAccount,
+Authentication.Login.Header.JumpBackIn,체험으로 돌아가기
+Authentication.Login.Header.LinkExpired,링크 만료됨
+Authentication.Login.Header.PickUpWhereYouLeftOff,이전 계정에 로그인해 이어서 진행하세요.
+Authentication.Login.Heading.IncompatibleAccounts,계정이 호환되지 않음
+Authentication.Login.Heading.Login,
+Authentication.Login.Heading.LoginRoblox,Roblox에 로그인
+Authentication.Login.Heading.LoginRobloxAccountSwitching,
+Authentication.Login.Heading.NewAppAvailable,새로운 앱 이용 가능
+Authentication.Login.Heading.SecurityNotification,보안 알림
+Authentication.Login.Heading.SignIn,
+Authentication.Login.Label.AccountSelectorTitle,로그인할 계정 선택
+Authentication.Login.Label.AgedUpUsername,고유한 @사용자 이름을 추가하세요
+Authentication.Login.Label.Boy,소년
+Authentication.Login.Label.ConnectionError.RetryDisabled,"죄송합니다. 서버에 접속하는 동안 문제가 발생했습니다.
+
+재시도가 잠시 비활성화되었습니다. 나중에 다시 시도하세요."
+Authentication.Login.Label.ConnectionError.RetryReady,"죄송합니다. 서버에 접속하는 동안 문제가 발생했습니다.
+
+다시 시도하세요."
+Authentication.Login.Label.ConnectionError.RetryWait,"죄송합니다. 서버에 접속하는 동안 문제가 발생했습니다.
+
+잠시 기다렸다가 다시 시도하세요."
+Authentication.Login.Label.ConnectionError.Title,연결 오류
+Authentication.Login.Label.DontHaveAnAccountCreateOne,계정이 없으신가요? {startTag}계정 만들기{endTag}
+Authentication.Login.Label.Email,
+Authentication.Login.Label.EmailNeedsVerification,이메일 인증이 필요합니다
+Authentication.Login.Label.EmailOrPhone,이메일 또는 전화번호
+Authentication.Login.Label.EmailPhone,
+Authentication.Login.Label.EnterOneTimeCode,일회용 코드 입력
+Authentication.Login.Label.EnterOneTimeCodeLoginHelp,방금 이메일로 전송된 코드를 입력하세요
+Authentication.Login.Label.EnterYourPassword,비밀번호를 입력하세요
+Authentication.Login.Label.ForgotYourPassword,비밀번호를 잊으셨나요?
+Authentication.Login.Label.GetOneTimeCode,일회용 코드 받기
+Authentication.Login.Label.LearnMore,더 알아보기
+Authentication.Login.Label.LinkAccountWarning,"Roblox 계정이 {platform}에서 사용하는 계정에 연결되며, 다음 번 참가 시 자동으로 로그인됩니다! 언제든지 설정 화면에서 연결을 해제할 수 있습니다. 새 계정에 연결하기 전에 잠시 지연이 발생할 수 있습니다."
+Authentication.Login.Label.OrTryAnotherWay,다른 방법으로 로그인하기
+Authentication.Login.Label.PasskeyIncompatible,패스키가 호환되지 않음
+Authentication.Login.Label.Password,
+Authentication.Login.Label.Phone,전화번호
+Authentication.Login.Label.QQUserCancel,QQ에서 로그아웃하셨어요. QQ에 다시 로그인하세요.
+Authentication.Login.Label.TroubleSigningIn,로그인에 문제가 있나요?
+Authentication.Login.Label.UnverifiedEmailInstructions,이메일로 로그인하려면 먼저 인증해야 합니다. 사용자 이름으로도 로그인할 수 있어요.
+Authentication.Login.Label.Username,사용자 이름
+Authentication.Login.Label.UsernameEmailOrPhone,"사용자 이름, 이메일 또는 휴대폰 번호"
+Authentication.Login.Label.UsernameEmailOrPhoneNumber,
+Authentication.Login.Label.UsernameEmailPhone,
+Authentication.Login.Label.UsernameOrEmail,사용자 이름 또는 이메일
+Authentication.Login.Label.UsernameOrPhone,사용자 이름 또는 전화번호
+Authentication.Login.Label.WeChatAntiAddictionText,"건전하지 않은 체험과 저작권 문제가 있는 체험은 방문하지 마시고, 사기 행위에 연루되지 않도록 스스로를 보호하세요. 이곳에서의 체험은 두뇌 발달에 도움이 되지만, 지나치게 오래 방문하는 것은 건강에 좋지 않습니다. 방문 시간을 잘 조절해서 건강한 생활을 유지하세요."
+Authentication.Login.Label.WeChatUserCancel,WeChat에서 로그아웃하셨어요. WeChat에 다시 로그인하세요.
+Authentication.Login.Label.WeChatVersionNotSupported,WeChat 버전이 지원되지 않습니다
+Authentication.Login.LinkIllegalChildAccountLinking,이 Roblox 계정을 Xbox 자녀 계정에 연결할 수 없습니다. 다른 계정을 사용하거나 설정을 확인하세요.
+Authentication.Login.Parameter.PlatformNameXbox,Xbox
+Authentication.Login.Parameter.PlatformNameXboxLive,Xbox Live
+Authentication.Login.QrCodeLoginTitle,QR 코드 스캔으로 로그인
+Authentication.Login.Response.AccountNotFound,계정을 찾을 수 없습니다. 다시 시도하세요.
+Authentication.Login.Response.AlreadyLinked,이 Roblox 계정은 이미 {platform}상의 다른 계정에 연결되어 있습니다. 다른 Roblox 계정으로 로그인해 보세요.
+Authentication.Login.Response.EnterEmailForLoginCode,로그인하려면 이메일 주소를 입력하세요
+Authentication.Login.Response.ErrorUseCorporateNetwork,로그인하려면 회사 네트워크상에 있어야 합니다.
+Authentication.Login.Response.IncorrectEmailOrPassword,이메일 또는 비밀번호가 일치하지 않습니다.
+Authentication.Login.Response.IncorrectOtpCode,올바르지 않은 코드입니다. 코드를 재확인하고 다시 시도하세요.
+Authentication.Login.Response.IncorrectPhoneOrPassword,전화번호 또는 비밀번호가 일치하지 않습니다.
+Authentication.Login.Response.IncorrectUsernamePassword,사용자 이름 또는 비밀번호가 일치하지 않습니다.
+Authentication.Login.Response.InvalidEmail,유효하지 않은 이메일 주소입니다.
+Authentication.Login.Response.InvalidPasskeyCredential,이 패스키로 로그인할 수 없습니다. 액세스를 다시 확보하려면 '비밀번호 또는 사용자 이름 분실'을 이용하세요.
+Authentication.Login.Response.LoginWithUsernameUnknownError,오류가 발생했어요. 사용자 이름으로 로그인하세요.
+Authentication.Login.Response.MoreThanOneUsername,이메일이 1개 이상의 사용자 이름과 연결되어 있습니다. 사용자 이름으로 로그인하세요.
+Authentication.Login.Response.NoLoginMethods,
+Authentication.Login.Response.RelinkingFreeze,지난 90일 동안 {platform}상의 다른 계정에 연결된 Roblox 계정입니다. 다른 Roblox 계정으로 로그인해 보세요.
+Authentication.Login.Response.Require2FA,콘솔에서는 2단계 인증이 지원되지 않습니다. 안전하게 로그인하려면 오른쪽의 안내 사항을 따르세요.
+Authentication.Login.Response.Require2FAGeneric,이 기기에서는 추가적인 필수 인증이 지원되지 않습니다. 안전하게 로그인하려면 오른쪽의 안내 사항을 따르세요.
+Authentication.Login.Response.ServiceUnavailable,서비스 이용 불가. 나중에 다시 시도하세요.
+Authentication.Login.Response.SomethingWentWrong,오류가 발생했어요. 나중에 다시 시도하세요.
+Authentication.Login.Response.TencentLoginFailurePleaseTryAgain,로그인 실패. 다시 시도하세요.
+Authentication.Login.Response.TooManyAttemptsPleaseWait,시도 가능 횟수를 초과했습니다. 잠시 기다려 주세요.
+Authentication.Login.Response.UnableToSignIn,로그인할 수 없습니다.
+Authentication.Login.Response.UnknownError,
+Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,문제가 발생했습니다. 다른 방법으로 로그인하세요.
+Authentication.Login.Response.UnverifiedEmailLoginWithUsername,인증되지 않은 이메일입니다. 사용자 이름으로 로그인하세요.
+Authentication.Login.WeChat.AntiAddictionText,
+Authentication.Login.WeChat.NotInstalled,Wechat이 설치되어 있지 않습니다
+Authentication.LogoutModal.Action.SignIn,
+Authentication.LogoutModal.Body.SignedOutGeneric,로그아웃되었습니다. 계속하려면 다시 로그인한 후 시도해 보세요.
+Authentication.LogoutModal.Body.SignedOutSecurity,보안을 위해 로그아웃되었습니다. 계속하려면 다시 로그인한 후 시도해 보세요.
+Authentication.LogoutModal.Heading.SignedOut,
+Authentication.OneTimePasscode.Action.ChangeEmailV2,이메일 변경
+Authentication.OneTimePasscode.Action.Continue,계속
+Authentication.OneTimePasscode.Action.GetHelp,지원 받기
+Authentication.OneTimePasscode.Action.Resend,재전송
+Authentication.OneTimePasscode.Description.DidntReceiveCode,코드를 받지 못하셨나요?
+Authentication.OneTimePasscode.Description.ReviewAndConsentToTerms,자녀를 대신해 다음 약관을 검토하고 이에 동의해 주세요. 개별 약관에 따라 동의하거나 동의하지 않음을 선택할 수 있습니다. 선택적 약관에 동의하지 않더라도 자녀의 Roblox 이용은 여전히 가능할 수 있습니다. 
+Authentication.OneTimePasscode.Description.SendVerificationCode,회원가입에 필요한 인증 코드를 보호자님께 보내드립니다
+Authentication.OneTimePasscode.Label.CodeSent,코드 전송 완료
+Authentication.OneTimePasscode.Label.ConsentNeeded,동의 필요
+Authentication.OneTimePasscode.Label.ParentConsentNeeded,보호자 동의 필요
+Authentication.OneTimePasscode.Label.SixDigitCode,
+Authentication.Passkey.Action.Continue,
+Authentication.Passkey.Action.CreatePasskey,패스키 생성하기
+Authentication.Passkey.Action.KeepUsingPassword,"아니요, 계속 비밀번호를 쓰겠습니다"
+Authentication.Passkey.Action.TryAgainLaterAcknowledgement,나중에
+Authentication.Passkey.Action.TryAgainNow,지금 시도하기
+Authentication.Passkey.Action.TryAgainNowAcknowledgement,
+Authentication.Passkey.Description.Benefits,패스키는 다른 사람이 재사용하거나 추측할 수 없으므로 더 안전하고 빠른 로그인 방법입니다
+Authentication.Passkey.Description.DataPolicy,Roblox는 사용자의 생체 정보를 저장하지 않습니다
+Authentication.Passkey.Description.Error,귀하의 패스키를 등록할 수 없습니다. 다시 시도해 주세요.
+Authentication.Passkey.Description.Purpose,"Face ID, 지문 또는 디바이스 잠금 해제에 사용하는 PIN으로 Roblox에 로그인하세요"
+Authentication.Passkey.Description.UpsellRegistrationSuccess,"이제 Face ID, 지문 또는 기기 PIN을 사용해 Roblox에 로그인할 수 있습니다."
+Authentication.Passkey.Label.ChromeOnMac,Mac의 Chrome
+Authentication.Passkey.Label.CreateSuccess,패스키가 생성되었습니다!
+Authentication.Passkey.Label.UpsellErrorTitle,다시 시도하기
+Authentication.Passkey.Label.UpsellTitle,
+Authentication.Passkey.Label.UpsellToastPageTitle,패스키 생성 완료!
+Authentication.Passkey.Label.UpsellToastTitle,
+Authentication.ResetPassword.Response.ResetPasswordStarted,계속하기 전에 비밀번호를 재설정해야 합니다.
+Authentication.SignUp.Action.AddAnEmail,이메일 추가
+Authentication.SignUp.Action.AddAnEmailCaps,
+Authentication.SignUp.Action.AddParentalEmail,보호자 복구 이메일 추가
+Authentication.SignUp.Action.AddYourParentsEmail,보호자 이메일 추가
+Authentication.SignUp.Action.AddYourParentsEmailCaps,
+Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.Continue,
+Authentication.SignUp.Action.ContinueWithPassword,
+Authentication.SignUp.Action.CreateAPasskey,패스키 생성
+Authentication.SignUp.Action.CreateAPassword,비밀번호 생성
+Authentication.SignUp.Action.CreateAccount,
+Authentication.SignUp.Action.CreateAccountSentenceCase,
+Authentication.SignUp.Action.EnableFaceId,Face ID 활성화
+Authentication.SignUp.Action.ExitModalLeave,나가기
+Authentication.SignUp.Action.FinishCreatingAccount,계정 생성 마치기
+Authentication.SignUp.Action.FinishSigningUp,가입 마치기
+Authentication.SignUp.Action.IUnderstand,이해했습니다
+Authentication.SignUp.Action.NextWord,
+Authentication.SignUp.Action.SetupLater,나중에 설정
+Authentication.SignUp.Action.StartOver,처음부터 다시 시작
+Authentication.SignUp.Action.UseEmail,이메일 주소 사용
+Authentication.SignUp.Action.UsePhoneNumber,
+Authentication.SignUp.Action.Yes,예
+Authentication.SignUp.Body.PreauthPasskeyComponentBody2,패스키는 타인이 재사용하거나 추측할 수 없으므로 비밀번호보다 안전합니다.
+Authentication.SignUp.Body.PreauthPasskeyComponentBodyText,얼굴이나 지문을 사용해 비밀번호보다 더 빠르게 로그인하려면 패스키를 생성하세요. Roblox는 해당 생체 정보에 접근할 수 없습니다.
+Authentication.SignUp.Body.SignupExitAlmostDone,정말 계정 생성을 중단하시겠어요? 거의 다 왔어요!
+Authentication.SignUp.Button.GenderPreferNotToSay,밝히고 싶지 않음
+Authentication.SignUp.Button.OKCaptialized,
+Authentication.SignUp.Button.Ok,
+Authentication.SignUp.Button.RetryLogIn,로그인 재시도
+Authentication.SignUp.Button.RetrySignIn,
+Authentication.SignUp.Description.AccountAlreadyLinked,{platformAccountName} 계정은 이미 Roblox계정에 연결되어 있습니다. 로그인을 다시 시도하세요.
+Authentication.SignUp.Description.AgreeToTerms,Roblox의 {openTermsTag}이용 약관{closeTermsTag}에 동의하며 {openPrivacyTag}개인정보 처리방침{closePrivacyTag}을 인정합니다.
+Authentication.SignUp.Description.AgreeToTerms.NoParams,Roblox의 이용 약관에 동의하며 개인정보 처리방침을 인정합니다.
+Authentication.SignUp.Description.AgreeToTermsAndArb,Roblox의 {openTermsTag}이용 약관{closeTermsTag}(중재 포함)에 동의하며 {openPrivacyTag}개인정보 처리방침{closePrivacyTag}을 인정합니다.
+Authentication.SignUp.Description.AgreeToTermsAndArb.NoParams,Roblox의 이용 약관(중재 포함)에 동의하며 개인정보 처리방침을 인정합니다.
+Authentication.SignUp.Description.AgreeToTermsWithGuardian,"Roblox의 {openTermsTag}이용 약관{closeTermsTag}(중재 포함)에 동의하며 {openPrivacyTag}개인정보 처리방침{closePrivacyTag}을 인정합니다. 18세 미만인 경우, 이 계정을 생성하는 데 부모 또는 보호자의 동의를 얻었으며 부모 또는 보호자가 {openTermsTag}이용 약관{closeTermsTag}에 동의하였음을 인정합니다."
+Authentication.SignUp.Description.AgreeToTermsWithGuardian.NoParameters,"Roblox 이용 약관(중재 포함)에 동의하며 개인정보 처리방침을 인정합니다. 18세 미만인 경우, 이 계정을 생성하는 데 부모 또는 보호자의 동의를 얻었으며 부모 또는 보호자가 이용 약관에 동의하였음을 인정합니다."
+Authentication.SignUp.Description.BirthdayHelp,나에게 보이는 콘텐츠를 정하는 데 도움이 됩니다. 다른 사람에게는 보이지 않습니다.
+Authentication.SignUp.Description.BirthdayHelp3,이 정보는 관련 콘텐츠를 표시하는 데 도움이 되며 다른 사람과 공유되지 않습니다.

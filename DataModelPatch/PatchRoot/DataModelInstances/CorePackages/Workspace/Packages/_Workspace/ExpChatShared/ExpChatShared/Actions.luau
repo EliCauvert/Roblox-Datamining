@@ -1,0 +1,21 @@
+﻿return {
+	CharacterAdded = require(script.CharacterAdded),
+	ChatInputBarActivatedTeamMode = require(script.ChatInputBarActivatedTeamMode),
+	ChatInputBarActivatedWhisperMode = require(script.ChatInputBarActivatedWhisperMode),
+	ChatInputBarResetTargetChannel = require(script.ChatInputBarResetTargetChannel),
+	ChatWindowMessagesCleared = require(script.ChatWindowMessagesCleared),
+	ClientAppLoaded = require(script.ClientAppLoaded),
+	CommandAliasChanged = require(script.CommandAliasChanged),
+	FriendsChatChannelSelected = require(script.FriendsChatChannelSelected),
+	LocalCharacterLoaded = require(script.LocalCharacterLoaded),
+	LocalTeamChanged = require(script.LocalTeamChanged),
+	LocalTextChannelParticipantRemoved = require(script.LocalTextChannelParticipantRemoved),
+	PlayerAdded = require(script.PlayerAdded),
+	PlayerRemoved = require(script.PlayerRemoved),
+	TargetTextChannelPropertyChanged = require(script.TargetTextChannelPropertyChanged),
+	TextChannelCreated = require(script.TextChannelCreated),
+	TextChannelRemoved = require(script.TextChannelRemoved),
+	UniverseChatChannelSelected = require(script.UniverseChatChannelSelected),
+	UserMuted = require(script.UserMuted),
+	UserUnmuted = require(script.UserUnmuted)
+}

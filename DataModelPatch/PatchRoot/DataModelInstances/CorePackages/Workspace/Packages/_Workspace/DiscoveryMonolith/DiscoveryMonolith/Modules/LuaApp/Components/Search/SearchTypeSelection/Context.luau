@@ -1,0 +1,1 @@
+﻿return (require(script:FindFirstAncestor("DiscoveryMonolith").Parent.React).createContext(nil))

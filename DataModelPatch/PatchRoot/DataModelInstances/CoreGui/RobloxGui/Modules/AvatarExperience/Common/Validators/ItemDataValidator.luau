@@ -1,0 +1,96 @@
+﻿local CorePackages = game:GetService("CorePackages")
+local TModule = require(CorePackages.Packages.t)
+local FFlagFixOffSaleCurrentlyWearingItemNavigation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagFixOffSaleCurrentlyWearingItemNavigation
+local AvatarExperienceFlagsModule = require(CorePackages.Workspace.Packages.AvatarExperienceFlags)
+local FFlagAXInventoryDurablesSupport = AvatarExperienceFlagsModule.FFlagAXInventoryDurablesSupport
+local FFlagAXAddHDRowInItemDetailsPage = AvatarExperienceFlagsModule.FFlagAXAddHDRowInItemDetailsPage
+
+return TModule.strictInterface({
+	receivedCatalogData = TModule.optional(TModule.boolean),
+	receivedRecommendedData = TModule.optional(TModule.boolean),
+	receivedFromRecommendedData = TModule.optional(TModule.boolean),
+	receivedFromBundleItemData = TModule.optional(TModule.boolean),
+	receivedFromInventoryFetch = TModule.optional(TModule.boolean),
+	receivedFromOutfitDetails = TModule.optional(TModule.boolean),
+	receivedFromResaleData = TModule.optional(TModule.boolean),
+	receivedFromSortResults = TModule.optional(TModule.boolean),
+	receivedFromVersionData = TModule.optional(TModule.boolean),
+	receivedBundleDetails = TModule.optional(TModule.boolean),
+	receivedWidgetHydration = TModule.optional(TModule.boolean),
+	name = TModule.string,
+	id = TModule.string,
+	description = TModule.optional(TModule.string),
+	creatorName = TModule.optional(TModule.string),
+	assetType = TModule.optional(TModule.string),
+	bundleType = TModule.optional(TModule.string),
+	itemType = TModule.optional(TModule.string),
+	items = TModule.optional(TModule.array(TModule.strictInterface({
+		owned = TModule.optional(TModule.boolean),
+		id = TModule.string,
+		name = TModule.optional(TModule.string),
+		assetType = TModule.optional(TModule.string),
+		type = TModule.string
+	}))),
+	priceInRobux = TModule.optional(TModule.integer),
+	creator = TModule.optional(TModule.strictInterface({
+		id = TModule.optional(TModule.string),
+		name = TModule.optional(TModule.string),
+		type = TModule.optional(TModule.string),
+		targetId = TModule.optional(TModule.string),
+		hasVerifiedBadge = TModule.optional(TModule.boolean)
+	})),
+	created = TModule.optional(TModule.string),
+	updated = TModule.optional(TModule.string),
+	genres = TModule.optional(TModule.array(TModule.string)),
+	minimumMembershipLevel = TModule.optional(TModule.integer),
+	premiumPricing = TModule.optional(TModule.strictInterface({
+		premiumDiscountPercentage = TModule.optional(TModule.number),
+		premiumPriceInRobux = TModule.optional(TModule.integer)
+	})),
+	product = TModule.optional(TModule.strictInterface({
+		id = TModule.string,
+		type = TModule.optional(TModule.string),
+		isForSale = TModule.optional(TModule.boolean)
+	})),
+	recommendedItemSummaries = TModule.optional(TModule.array(TModule.strictInterface({
+		id = TModule.string,
+		type = TModule.string,
+		subType = TModule.string,
+		gridInformation = TModule.optional(TModule.table)
+	}))),
+	favoriteCount = TModule.optional(TModule.integer),
+	priceStatus = TModule.optional(TModule.string),
+	itemRestrictions = TModule.optional(TModule.map(TModule.string, TModule.boolean)),
+	tileRestrictionsMap = TModule.optional(TModule.map(TModule.userdata, TModule.boolean)),
+	itemStatus = TModule.optional(TModule.array(TModule.string)),
+	lowestPrice = TModule.optional(TModule.integer),
+	lowestResalePrice = TModule.optional(TModule.integer),
+	numberRobloxHasAvailable = TModule.optional(TModule.integer),
+	totalQuantity = TModule.optional(TModule.integer),
+	resellerUserAssetIds = TModule.optional(TModule.array(TModule.string)),
+	soldCount = TModule.optional(TModule.integer),
+	averagePrice = TModule.optional(TModule.integer),
+	originalPrice = TModule.optional(TModule.integer),
+	discountInformation = TModule.optional(TModule.table),
+	isForRent = TModule.optional(TModule.boolean),
+	isOwned = TModule.optional(TModule.boolean),
+	supportsHeadShapes = if AvatarExperienceFlagsModule.FFlagDynamicHeadsMigration then TModule.optional(TModule.boolean) else nil,
+	isPurchasable = TModule.optional(TModule.boolean),
+	isPublicDomain = TModule.optional(TModule.boolean),
+	isHighDefinition = if FFlagAXAddHDRowInItemDetailsPage then TModule.optional(TModule.boolean) else nil,
+	isPBR = TModule.optional(TModule.boolean),
+	expectedSellerId = TModule.optional(TModule.string),
+	collectibleItemId = TModule.optional(TModule.string),
+	saleLocationType = TModule.optional(TModule.string),
+	hasResellers = TModule.optional(TModule.boolean),
+	creatingUniverseId = TModule.optional(TModule.string),
+	isRecolorable = TModule.optional(TModule.boolean),
+	isOffSale = if FFlagFixOffSaleCurrentlyWearingItemNavigation then TModule.optional(TModule.boolean) else nil,
+	variantAttributes = TModule.optional(TModule.table),
+	relatedVariants = TModule.optional(TModule.table),
+	timedOptions = TModule.optional(TModule.table),
+	taxonomy = TModule.optional(TModule.table),
+	moderationStatus = TModule.optional(TModule.enum(Enum.ModerationStatus)),
+	updateCounter = TModule.optional(TModule.number),
+	expirationTime = if FFlagAXInventoryDurablesSupport then TModule.optional(TModule.string) else nil
+})

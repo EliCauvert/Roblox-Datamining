@@ -1,0 +1,1 @@
+﻿return { AutoSync = "AutoSync", CI = "CI" }

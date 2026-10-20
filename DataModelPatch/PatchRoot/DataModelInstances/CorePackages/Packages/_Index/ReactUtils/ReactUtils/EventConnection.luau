@@ -1,0 +1,6 @@
+﻿local UseEventConnectionModule = require(script.Parent.useEventConnection)
+
+return function(p1)
+	-- upvalues: UseEventConnectionModule (copy)
+	UseEventConnectionModule(p1.event, p1.callback, { p1.event, p1.callback })
+end

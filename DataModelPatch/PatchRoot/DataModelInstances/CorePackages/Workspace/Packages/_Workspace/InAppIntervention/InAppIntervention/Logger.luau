@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("InAppIntervention").Parent.RobloxAppLoggers).Logger:new("InAppIntervention")

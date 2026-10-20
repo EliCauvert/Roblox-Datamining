@@ -1,0 +1,1 @@
+﻿return { LOCAL = "local", REMOTE = "remote" }

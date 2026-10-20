@@ -1,0 +1,48 @@
+﻿local Parent = script.Parent
+local Foundation = script:FindFirstAncestor("Foundation")
+local FlagsModule = require(Foundation.Utility.Flags)
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Providers.Style.Tokens)
+local _ = require(Parent.Rules.Types)
+local CreateStyleSheetRulesModule = require(Parent.createStyleSheetRules)
+local GetOverrideAttributesModule = require(Parent.getOverrideAttributes)
+local UseGeneratedRulesModule = require(Foundation.Utility.useGeneratedRules)
+local _ = require(Foundation.Enums.Device)
+local _ = require(Foundation.Enums.Theme)
+
+return ReactModule.memo(function(p1)
+	-- upvalues: ReactModule (copy), UseGeneratedRulesModule (copy), FlagsModule (copy), GetOverrideAttributesModule (copy), CreateStyleSheetRulesModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseRefResult = ReactModule.useRef({})
+	ReactModule.useLayoutEffect(function()
+		-- upvalues: p1 (copy), UseStateResult (copy)
+		if p1.setStyleSheetRef and p1.setStyleSheetRef.current then
+			p1.setStyleSheetRef.current(UseStateResult)
+		end
+	end, { UseStateResult })
+	local UseGeneratedRulesModuleResult = UseGeneratedRulesModule(p1.theme, p1.device)
+	ReactModule.useLayoutEffect(function()
+		-- upvalues: UseStateResult (copy), FlagsModule (upval), p1 (copy)
+		if UseStateResult and not FlagsModule.FoundationDisableStyleProviderDerives then
+			UseStateResult:SetDerives(p1.derives or {})
+		end
+	end, { UseStateResult, p1.derives })
+	local UseMemoResult = ReactModule.useMemo(function()
+		-- upvalues: GetOverrideAttributesModule (upval), p1 (copy)
+		return GetOverrideAttributesModule(p1.theme, p1.device, p1.tokenOverrides)
+	end, { p1.theme, p1.device, p1.tokenOverrides })
+	
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		FoundationStyleSheet = ReactModule.createElement("StyleSheet", { ref = UseStateResult2 }, (ReactModule.useMemo(function()
+			-- upvalues: UseStateResult (copy), CreateStyleSheetRulesModule (upval), UseGeneratedRulesModuleResult (copy), p1 (copy), UseRefResult (copy), UseMemoResult (copy)
+			return if UseStateResult then CreateStyleSheetRulesModule(UseGeneratedRulesModuleResult, p1.tags, UseStateResult, UseRefResult.current, p1.scale, UseMemoResult) else nil
+		end, {
+			UseStateResult,
+			UseGeneratedRulesModuleResult,
+			p1.tags,
+			p1.scale,
+			UseMemoResult
+		}))),
+		FoundationStyleLink = ReactModule.createElement("StyleLink", { StyleSheet = UseStateResult })
+	})
+end)

@@ -1,0 +1,3 @@
+﻿local FFlagAddNewPlayerListMobileFocusNavModule = require(script.Parent.FFlagAddNewPlayerListMobileFocusNav)
+
+return game:DefineFastFlag("PlayerListUseMobileOnSmallDisplay2", false) and FFlagAddNewPlayerListMobileFocusNavModule

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("LuaAppEdpBackendV2HydrateLegacyDefault9", false)

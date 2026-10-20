@@ -1,0 +1,3 @@
+﻿local FFlagAXMigrateAllTabToSduiDevModule = require(script.Parent.FFlagAXMigrateAllTabToSduiDev)
+
+return game:DefineFastFlag("AXSduiWidgetsTTITracking", false) and FFlagAXMigrateAllTabToSduiDevModule

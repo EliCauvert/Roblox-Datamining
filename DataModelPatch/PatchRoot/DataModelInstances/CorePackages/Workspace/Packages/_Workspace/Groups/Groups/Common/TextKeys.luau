@@ -1,0 +1,21 @@
+﻿return {
+	HeadingGroups = "Feature.Groups.Heading.Groups",
+	HeadingPrimary = "Feature.Groups.Heading.Primary",
+	HeadingMyGroups = "Feature.Groups.Heading.MyGroups",
+	ActionSeeAll = "Feature.Groups.Action.SeeAll",
+	ActionCreateGroup = "Feature.Groups.Action.CreateGroup",
+	LabelSearchMyGroups = "Feature.Groups.Label.SearchMyGroups",
+	MessageLoadGroupListError = "Feature.Groups.Message.LoadGroupListError",
+	MessageNotInAnyGroups = "Feature.Groups.Message.NotInAnyGroups",
+	MessageNoGroupsFound = "Feature.Groups.Message.NoGroupsFound",
+	LabelOwned = "Feature.Groups.Label.Owned",
+	Community = "Feature.Groups.Heading.Community",
+	LabelMember = "Feature.Groups.Label.Member",
+	LabelMemberLowerCase = "Feature.Groups.Label.MemberLowerCase",
+	LabelMemberCapitalPlural = "Feature.Groups.Label.MemberCapitalPlural",
+	LabelMemberLowerCasePlural = "Feature.Groups.Label.MemberLowerCasePlural",
+	LabelFollowerCapital = "Feature.Groups.Label.FollowerCapital",
+	LabelFollower = "Feature.Groups.Label.Follower",
+	LabelFollowerCapitalPlural = "Feature.Groups.Label.FollowerCapitalPlural",
+	LabelFollowerPlural = "Feature.Groups.Label.FollowerPlural"
+}

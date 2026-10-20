@@ -1,0 +1,1 @@
+﻿return { Email = 10, Phone = 11, BackupCode = 12 }

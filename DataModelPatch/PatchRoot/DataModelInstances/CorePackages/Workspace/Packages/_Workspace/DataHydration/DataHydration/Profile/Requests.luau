@@ -1,0 +1,1 @@
+﻿return { GetUserProfileCTA = require(script.GetUserProfileCTA) }

@@ -1,0 +1,10 @@
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local TutilsModule = require(CorePackages.Packages.tutils)
+local InventoryItemCardModule = require(script.Parent.InventoryItemCard)
+local UseInventoryItemCardPropsModule = require(script.Parent.useInventoryItemCardProps)
+
+return ReactModule.memo(function(p1)
+	-- upvalues: UseInventoryItemCardPropsModule (copy), ReactModule (copy), InventoryItemCardModule (copy)
+	return ReactModule.createElement(InventoryItemCardModule, (UseInventoryItemCardPropsModule(p1)))
+end, if game:DefineFastFlag("AXInventoryItemCardPerf", false) then TutilsModule.deepEqual else nil)

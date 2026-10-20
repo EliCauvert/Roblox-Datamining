@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnableUnifiedProductPurchaseFlowV37", false) and game:GetEngineFeature("AllowPurchasesOutsideExperience")

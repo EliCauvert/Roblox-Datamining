@@ -1,0 +1,8 @@
+﻿local ProfileShareLinks = script:FindFirstAncestor("ProfileShareLinks")
+local ConfiguredRoduxNetworkingModule = require(ProfileShareLinks.Networking.configuredRoduxNetworking)
+require(ProfileShareLinks.Parent.Dev.JestGlobals).beforeAll(function()
+	-- upvalues: ConfiguredRoduxNetworkingModule (copy)
+	ConfiguredRoduxNetworkingModule.setNetworkImpl(function(p1)
+		error(string.format("🔥 Should have replaced network implementation for url: %s", (tostring(p1))))
+	end)
+end)

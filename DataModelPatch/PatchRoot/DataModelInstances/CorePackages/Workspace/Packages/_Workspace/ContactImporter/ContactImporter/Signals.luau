@@ -1,0 +1,1 @@
+﻿return { autoPromptStatus = require(script.autoPromptStatus) }

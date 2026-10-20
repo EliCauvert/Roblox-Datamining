@@ -1,0 +1,1 @@
+﻿return "  interface User {\n    id: ID!\n    displayName: String!\n  }\n\n  type Player implements User {\n    id: ID!\n    displayName: String!\n    avatarHeadshot: String!\n  }\n\n  type Query {\n    me: User!\n    user(id: ID!): User!\n  }\n"

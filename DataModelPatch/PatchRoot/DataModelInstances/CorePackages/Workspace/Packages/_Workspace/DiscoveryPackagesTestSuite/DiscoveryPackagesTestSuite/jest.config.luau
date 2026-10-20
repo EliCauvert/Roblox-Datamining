@@ -1,0 +1,45 @@
+﻿_G.__TESTEZ_RUNNING_TEST__ = true
+local Parent = script.Parent.Parent
+
+return {
+	projects = {
+		require(Parent.AppLaunchTracker)["jest.config"],
+		require(Parent.CollectionViews)["jest.config"],
+		require(Parent.DetailsPageComponents)["jest.config"],
+		require(Parent.Badges)["jest.config"], require(Parent.DevStore)["jest.config"],
+		require(Parent.DiscoveryAnalytics)["jest.config"],
+		require(Parent.DiscoveryHeroUnit)["jest.config"],
+		require(Parent.DiscoveryMonolith)["jest.config"],
+		require(Parent.DiscoveryRouting)["jest.config"],
+		require(Parent.DiscoveryTypes)["jest.config"],
+		require(Parent.DiscoveryUtils)["jest.config"],
+		require(Parent.FetchStatusRodux)["jest.config"],
+		require(Parent.GameCollections)["jest.config"],
+		require(Parent.GameDetail)["jest.config"],
+		require(Parent.GameDetailRodux)["jest.config"],
+		require(Parent.GameFilters)["jest.config"],
+		require(Parent.GameIconRodux)["jest.config"],
+		require(Parent.GameInfosRodux)["jest.config"],
+		require(Parent.GameLaunch)["jest.config"],
+		require(Parent.GameModels)["jest.config"],
+		require(Parent.GamePlayButton)["jest.config"],
+		require(Parent.GameProductInfoRodux)["jest.config"],
+		require(Parent.GameTile)["jest.config"],
+		require(Parent.GameVotesRodux)["jest.config"],
+		require(Parent.MediaGallery)["jest.config"],
+		require(Parent.NextDataExpirationTimeRodux)["jest.config"],
+		require(Parent.OmniFeedService)["jest.config"],
+		require(Parent.PlayabilityRodux)["jest.config"],
+		require(Parent.ScrollTelemetry)["jest.config"],
+		require(Parent.SduiLandingPage)["jest.config"],
+		require(Parent.SearchResults)["jest.config"],
+		require(Parent.ServerDrivenUi)["jest.config"],
+		require(Parent.SocialContextToasts)["jest.config"],
+		require(Parent.TopicContentsRodux)["jest.config"],
+		require(Parent.TopicInfosRodux)["jest.config"],
+		require(Parent.UnifiedLogging)["jest.config"],
+		require(Parent.UserSignals)["jest.config"],
+		require(Parent.VariableItemWidthCarousel)["jest.config"],
+		require(Parent.VideoUtils)["jest.config"]
+	}
+}

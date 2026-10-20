@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("ParentLinkAmpNameSpace", "account_management/ParentLink")

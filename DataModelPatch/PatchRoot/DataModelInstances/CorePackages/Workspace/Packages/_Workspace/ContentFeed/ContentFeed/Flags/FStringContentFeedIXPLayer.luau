@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("ContentFeedIXPLayer", "Social.ContentFeed")

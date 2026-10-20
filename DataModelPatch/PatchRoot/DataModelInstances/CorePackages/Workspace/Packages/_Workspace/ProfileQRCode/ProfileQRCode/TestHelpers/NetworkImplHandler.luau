@@ -1,0 +1,8 @@
+﻿local ProfileQRCode = script:FindFirstAncestor("ProfileQRCode")
+local ConfiguredRoduxNetworkingModule = require(ProfileQRCode.Networking.configuredRoduxNetworking)
+require(ProfileQRCode.Parent.Dev.JestGlobals).beforeAll(function()
+	-- upvalues: ConfiguredRoduxNetworkingModule (copy)
+	ConfiguredRoduxNetworkingModule.setNetworkImpl(function(p1)
+		error(string.format("🔥 Should have replaced network implementation for url: %s", (tostring(p1))))
+	end)
+end)

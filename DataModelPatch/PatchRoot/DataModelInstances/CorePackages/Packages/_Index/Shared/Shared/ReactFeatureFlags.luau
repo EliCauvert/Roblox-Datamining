@@ -1,0 +1,42 @@
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local SafeFlagsModule = require(Parent.SafeFlags)
+local ReactCatchYieldingInDEV = SafeFlagsModule.createGetFFlag("ReactCatchYieldingInDEV")
+local ReactFilterInternalStackFrames = SafeFlagsModule.createGetFFlag("ReactFilterInternalStackFrames")
+
+return {
+	enableDebugTracing = false,
+	enableSchedulingProfiler = SafeFlagsModule.createGetFFlag("ReactEnableSchedulingProfiler")() or ReactGlobalsModule.__PROFILE__ and ReactGlobalsModule.__EXPERIMENTAL__,
+	catchYieldingInDEV = ReactGlobalsModule.__DEV__ and ReactCatchYieldingInDEV(),
+	debugRenderPhaseSideEffectsForStrictMode = ReactGlobalsModule.__DEV__,
+	replayFailedUnitOfWorkWithInvokeGuardedCallback = ReactGlobalsModule.__DEV__,
+	warnAboutDeprecatedLifecycles = true,
+	enableProfilerTimer = ReactGlobalsModule.__PROFILE__,
+	enableProfilerCommitHooks = ReactGlobalsModule.__PROFILE__,
+	enableSchedulerTracing = ReactGlobalsModule.__PROFILE__,
+	enableSuspenseServerRenderer = ReactGlobalsModule.__EXPERIMENTAL__,
+	enableBlocksAPI = ReactGlobalsModule.__EXPERIMENTAL__,
+	enableLazyElements = ReactGlobalsModule.__EXPERIMENTAL__,
+	enableSchedulerDebugging = false,
+	enableFundamentalAPI = false,
+	enableScopeAPI = false,
+	enableCreateEventHandleAPI = false,
+	warnAboutUnmockedScheduler = false,
+	enableSuspenseCallback = false,
+	warnAboutDefaultPropsOnFunctionComponents = false,
+	warnAboutSpreadingKeyToJSX = true,
+	enableComponentStackLocations = true,
+	enableNewReconciler = true,
+	skipUnmountedBoundaries = true,
+	deletedTreeCleanUpLevel = SafeFlagsModule.createGetFInt("ReactDeletedTreeCleanUpLevel", 1)(),
+	enableNewTreeCleanupPath = SafeFlagsModule.createGetFFlag("ReactEnableNewTreeCleanupPath", false)(),
+	filterInternalStackFrames = ReactGlobalsModule.__DEV__ and ReactFilterInternalStackFrames(),
+	warnAboutStringRefs = false,
+	disableLegacyContext = false,
+	disableModulePatternComponents = false,
+	warnUnstableRenderSubtreeIntoContainer = false,
+	deferRenderPhaseUpdateToNextBatch = false,
+	decoupleUpdatePriorityFromScheduler = true,
+	enableEagerRootListeners = false,
+	enableDoubleInvokingEffects = false
+}

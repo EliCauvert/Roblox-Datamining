@@ -1,0 +1,12 @@
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+
+return require(CorePackages.Packages.Rodux).createReducer({ nextPageCursor = nil, hasMoreRows = nil }, {
+	[require(game:GetService("CoreGui").RobloxGui.Modules.AvatarExperience.Catalog.Actions.SetResellerCursor).name] = function(p1, p2)
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, {
+			nextPageCursor = p2.cursor,
+			hasMoreRows = p2.cursor ~= nil
+		})
+	end
+})

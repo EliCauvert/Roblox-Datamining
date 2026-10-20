@@ -1,0 +1,21 @@
+﻿return {
+	EnterSquadButtonPressed = "enterSquadButtonPressed",
+	MultiInviteMenuActionStatus = "multiInviteMenuActionStatus",
+	NoResponseInviteAgainOrAddOthers = "noResponseInviteAgainOrAddOthers",
+	PartySheetAction = "partySheetAction",
+	PartyCoplay = "partyCoplay",
+	ScheduledSquadAction = "scheduledSquadAction",
+	SquadInvitePageNavSource = "squadInvitePageNavSource",
+	SquadTopBannerClicked = "squadTopBannerClicked",
+	SquadExperienceInviteApiCall = "squadExperienceInviteApiCall",
+	SquadExperienceInviteStateChange = "squadExperienceInviteStateChange",
+	SquadInvite = "squadInvite",
+	SquadToastActions = "squadToastActions",
+	SquadVoteApiCall = "squadVoteApiCall",
+	SquadPromptResponded = "squadPromptResponded",
+	SquadCreateOrJoinFromRCC = "squadCreateOrJoinFromRCC",
+	SquadRegroupButtonClicked = "squadRegroupButtonClicked",
+	SquadRegroupPromptShown = "squadRegroupPromptShown",
+	SquadRegroupPromptClicked = "squadRegroupPromptClicked",
+	SquadExperienceInviteImpression = "squadExperienceInviteImpression"
+}

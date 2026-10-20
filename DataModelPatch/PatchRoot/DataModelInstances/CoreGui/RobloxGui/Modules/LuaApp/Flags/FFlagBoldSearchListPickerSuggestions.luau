@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("BoldSearchListPickerSuggestions2", false)

@@ -1,0 +1,22 @@
+﻿return {
+	SELECTED_TITLE_PLAYER_ID = -1,
+	HEADER_HEIGHT = 36,
+	COLUMN_HEADER_HEIGHT = 22,
+	ROW_HEIGHT = 26,
+	ROW_PITCH = 30,
+	STAT_COLUMN_WIDTH = 53,
+	PEOPLE_MIN_WIDTH = 127,
+	PLATFORM_RANK_WIDTH = 40,
+	PLATFORM_SCORE_WIDTH = 80,
+	PLATFORM_ROW_HEIGHT = 30,
+	PLATFORM_HEADER_HEIGHT = 24,
+	STATE_PANEL_TAG = "col fill size-full-0 padding-large gap-medium align-x-center align-y-center bg-over-media-0",
+	DESKTOP_MAX_STAT_COLUMNS = 3,
+	MOBILE_MAX_STAT_COLUMNS = 2,
+	PANEL_SIZE_MIN_CAP = 500,
+	PANEL_SIZE_MAX_CAP = 600,
+	PANEL_BORDER = 24,
+	TEAM_LAYOUT_MULTIPLIER = 10000,
+	ROW_FLEX_TAG = "row align-y-center padding-x-large gap-xsmall",
+	PLATFORM_ROW_FLEX_TAG = "row align-y-center padding-x-large gap-xlarge"
+}

@@ -1,0 +1,23 @@
+﻿return {
+	Opened = "opened",
+	Closed = "closed",
+	Clicked = "clicked",
+	ShouldRequest = "ShouldRequest",
+	BackendRequested = "BackendRequested",
+	BackendSuccess = "BackendSuccess",
+	BackendFailed = "BackendFailed",
+	RequestFailed = "RequestFailed",
+	RequestSuccess = "RequestSuccess",
+	Cancel = "cancel",
+	Confirm = "confirm",
+	ModalContext = "uenUpsellModal",
+	ModalContextPushEduUpsell = "pushEduUpsell",
+	ModalContextSysUpsell = "pushSysUpsell",
+	OptInEventName = "experienceNotificationClientPromptOptInEvent",
+	OptInPushEventName = "pushNotificationClientPromptOptInEvent",
+	OptInPushUpsellEventName = "pushUpsellNotificationClientEvent",
+	ActionType = "actionType",
+	Button = "btn",
+	UniverseId = "universeId",
+	EntryPoint = "entryPoint"
+}

@@ -1,0 +1,25 @@
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.FocusNavigation)
+local FocusNavigationContextModule = require(script.Parent.FocusNavigationContext)
+local UseComposedRefModule = require(script.Parent.useComposedRef)
+local UseEventLifecycleRefModule = require(script.Parent.useEventLifecycleRef)
+
+return function(p1, p2)
+	-- upvalues: ReactModule (copy), FocusNavigationContextModule (copy), UseEventLifecycleRefModule (copy), UseComposedRefModule (copy)
+	local UseContextResult = ReactModule.useContext(FocusNavigationContextModule)
+	
+	return UseComposedRefModule(UseEventLifecycleRefModule(ReactModule.useCallback(function(Gui)
+		-- upvalues: UseContextResult (copy), p1 (copy)
+		if UseContextResult then
+			assert(Gui:IsA("GuiObject"), "EventMaps can only be mapped to GuiObjects")
+			UseContextResult:registerEventMap(Gui, p1)
+		end
+	end, { UseContextResult, p1 }), (ReactModule.useCallback(function(Gui)
+		-- upvalues: UseContextResult (copy), p1 (copy)
+		if UseContextResult then
+			assert(Gui:IsA("GuiObject"), "EventMaps can only be mapped to GuiObjects")
+			UseContextResult:deregisterEventMap(Gui, p1)
+		end
+	end, { UseContextResult, p1 }))), p2)
+end

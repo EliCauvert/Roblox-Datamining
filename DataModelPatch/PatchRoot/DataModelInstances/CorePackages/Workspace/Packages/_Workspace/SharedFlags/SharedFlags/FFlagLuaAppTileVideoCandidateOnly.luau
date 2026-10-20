@@ -1,0 +1,3 @@
+﻿local FFlagLuaAppHomeTouchAutoplayModule = require(script.Parent.FFlagLuaAppHomeTouchAutoplay)
+
+return game:DefineFastFlag("LuaAppTileVideoCandidateOnly", false) and FFlagLuaAppHomeTouchAutoplayModule

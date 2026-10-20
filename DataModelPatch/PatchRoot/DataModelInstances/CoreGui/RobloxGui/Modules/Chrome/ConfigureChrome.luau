@@ -1,0 +1,125 @@
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+
+if not require(CorePackages.Workspace.Packages.Chrome).Enabled() then
+	return nil
+end
+local ServiceModule = require(Chrome.Service)
+local ConstantsModule = require(Chrome.Integrations.Party.Constants)
+local IsConnectUnibarEnabledModule = require(Chrome.Integrations.Connect.isConnectUnibarEnabled)
+local IsConnectDropdownEnabledModule = require(Chrome.Integrations.Connect.isConnectDropdownEnabled)
+local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
+local ConfigureShortcutsModule: () -> () = require(Chrome.ChromeShared.Shortcuts.ConfigureShortcuts)
+local ConstantsModule1 = require(Chrome.ChromeShared.Unibar.Constants)
+local BuildMenuOrderModule = require(Chrome.ChromeShared.Unibar.buildMenuOrder)
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local GetFFlagDebugEnableUnibarDummyIntegrationsFunction = SharedFlagsModule.GetFFlagDebugEnableUnibarDummyIntegrations
+local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpControls
+local FFlagEnableInExperienceAvatarSwitcher = SharedFlagsModule.FFlagEnableInExperienceAvatarSwitcher
+local FFlagAddMapToNineDot = SharedFlagsModule.FFlagAddMapToNineDot
+local FFlagEnableInExperienceShop = SharedFlagsModule.FFlagEnableInExperienceShop
+local FFlagAppNavMyStatsTab = SharedFlagsModule.FFlagAppNavMyStatsTab
+local ArgoPartyExperimentation = require(CorePackages.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
+local FFlagRemoveFriendsChatUnibarEntrypoints = SharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints
+local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
+local FFlagReverseUnibarModule = require(Chrome.Flags.FFlagReverseUnibar)
+local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial
+
+local function _()
+	-- upvalues: Chrome (copy)
+	require(Chrome.Integrations)
+end
+
+local _ = function()
+	-- upvalues: ConfigureShortcutsModule (copy)
+	ConfigureShortcutsModule()
+end
+
+local function configureUnibar()
+	-- upvalues: FFlagAddMapToNineDot (copy), BuildMenuOrderModule (copy), IsConnectDropdownEnabledModule (copy), FFlagRemoveFriendsChatUnibarEntrypoints (copy), FFlagExpChatEnableFriendsTab (copy), ArgoPartyExperimentation (copy), FFlagReverseUnibarModule (copy), GetFFlagDebugEnableUnibarDummyIntegrationsFunction (copy), IsConnectUnibarEnabledModule (copy), ConstantsModule (copy), FFlagAppNavMyStatsTab (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), ServiceModule (copy), FFlagEnableInExperienceAvatarSwitcher (copy), ConstantsModule1 (copy), GuiService (copy), FFlagEnableInExperienceShop (copy)
+	local MenuOrderModule = nil
+	if FFlagAddMapToNineDot then
+		MenuOrderModule = BuildMenuOrderModule()
+	else
+		MenuOrderModule = { "leaderboard", "emotes", "backpack" }
+		table.insert(MenuOrderModule, "respawn")
+		table.insert(MenuOrderModule, 1, "trust_and_safety")
+		
+		if IsConnectDropdownEnabledModule() and (not FFlagRemoveFriendsChatUnibarEntrypoints or not FFlagExpChatEnableFriendsTab or not ArgoPartyExperimentation.getIsRenameEnabled()) then
+			table.insert(MenuOrderModule, 1, "connect_dropdown")
+		end
+	end
+	local List = { "nine_dot", "chat", "toggle_mic_mute" }
+	
+	if FFlagReverseUnibarModule then
+		table.insert(List, 3, "join_voice")
+		
+		if GetFFlagDebugEnableUnibarDummyIntegrationsFunction() then
+			table.insert(List, "dummy_window")
+			table.insert(List, "dummy_window_2")
+		end
+		if IsConnectUnibarEnabledModule() then
+			table.insert(List, if ArgoPartyExperimentation.getIsRenameEnabled() then "party_entrypoint" else "connect_unibar")
+		end
+		local FoundIndex: number? = table.find(List, "toggle_mic_mute")
+		
+		if FoundIndex then
+			table.insert(List, FoundIndex, ConstantsModule.TOGGLE_MIC_INTEGRATION_ID)
+		end
+	else
+		List = { "toggle_mic_mute", "chat", "nine_dot" }
+		table.insert(List, 2, "join_voice")
+		
+		if GetFFlagDebugEnableUnibarDummyIntegrationsFunction() then
+			table.insert(List, 1, "dummy_window")
+			table.insert(List, 1, "dummy_window_2")
+		end
+		if IsConnectUnibarEnabledModule() then
+			table.insert(List, 1, if ArgoPartyExperimentation.getIsRenameEnabled() then "party_entrypoint" else "connect_unibar")
+		end
+		local FoundIndex: number? = table.find(List, "toggle_mic_mute")
+		
+		if FoundIndex then
+			table.insert(List, FoundIndex + 1, ConstantsModule.TOGGLE_MIC_INTEGRATION_ID)
+		end
+	end
+	if FFlagAppNavMyStatsTab then
+		table.insert(List, "assistant_build")
+	end
+	if IsInExperienceUIVREnabled and IsSpatialFunction() then
+		ServiceModule:configureMenu({ { "vr_toggle_button", "vr_safety_bubble" }, List })
+	else
+		ServiceModule:configureMenu({ List })
+	end
+	if not FFlagAddMapToNineDot then
+		if IsInExperienceUIVREnabled then
+			if not IsSpatialFunction() then
+				table.insert(MenuOrderModule, 2, "camera_entrypoint")
+				table.insert(MenuOrderModule, 2, "selfie_view")
+			end
+		else
+			table.insert(MenuOrderModule, 2, "camera_entrypoint")
+			table.insert(MenuOrderModule, 2, "selfie_view")
+		end
+		if FFlagEnableInExperienceAvatarSwitcher then
+			table.insert(MenuOrderModule, 3, ConstantsModule1.AVATAR_SWITCHER_ID)
+		end
+		if not IsSpatialFunction() and not GuiService:IsTenFootInterface() then
+			table.insert(MenuOrderModule, 4, "music_entrypoint")
+		end
+		if FFlagEnableInExperienceShop then
+			table.insert(MenuOrderModule, 2, ConstantsModule1.IN_EXPERIENCE_SHOP_ID)
+		end
+	end
+	ServiceModule:configureSubMenu("nine_dot", MenuOrderModule)
+end
+
+require(Chrome.Integrations)
+
+if FFlagEnableConsoleExpControls then
+	ConfigureShortcutsModule()
+end
+configureUnibar()
+
+return nil

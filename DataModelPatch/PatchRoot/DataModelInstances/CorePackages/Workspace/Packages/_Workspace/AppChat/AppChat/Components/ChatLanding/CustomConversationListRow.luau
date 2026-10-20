@@ -1,0 +1,104 @@
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local FFlagAppChatRemoveConversationListDividerModule = require(AppChat.Flags.FFlagAppChatRemoveConversationListDivider)
+local UseCustomConversationListRowPresentationModule = require(script.useCustomConversationListRowPresentation)
+
+return ReactModule.memo(function(p1)
+	-- upvalues: UseCustomConversationListRowPresentationModule (copy), FoundationModule (copy), ReactModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), FFlagAppChatRemoveConversationListDividerModule (copy)
+	local UseCustomConversationListRowPresentationModuleResult = UseCustomConversationListRowPresentationModule({
+		entryHeight = p1.entryHeight,
+		onActivated = p1.onActivated
+	})
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	
+	return ReactModule.createElement(FoundationModule.View, {
+		BorderSizePixel = 0,
+		backgroundStyle = UseTokensResult.Color.None,
+		Size = UDim2.new(1, 0, 0, UseCustomConversationListRowPresentationModuleResult.entryHeight),
+		testId = if FFlagDebugAppChatEnableDomLocatorsModule then p1.testId else nil
+	}, {
+		customCell = ReactModule.createElement(FoundationModule.View, {
+			Name = "customCell",
+			tag = "size-full bg-surface-0",
+			Size = UDim2.fromScale(1, 1),
+			selection = { Selectable = true },
+			onActivated = UseCustomConversationListRowPresentationModuleResult.onActivated,
+			stateLayer = {
+				affordance = FoundationModule.Enums.StateLayerAffordance.Background
+			}
+		}, {
+			content = ReactModule.createElement(FoundationModule.View, {
+				tag = "row align-y-center gap-small size-full",
+				Size = UDim2.fromScale(1, 1),
+				padding = {
+					left = UDim.new(0, UseCustomConversationListRowPresentationModuleResult.pagePaddingLeft),
+					right = UDim.new(0, UseCustomConversationListRowPresentationModuleResult.pagePaddingRight)
+				}
+			}, {
+				icon = ReactModule.createElement(FoundationModule.View, {
+					tag = "row align-x-center align-y-center size-1000-1000",
+					LayoutOrder = 0
+				}, {
+					iconTile = ReactModule.createElement(FoundationModule.View, {
+						tag = "row align-x-center align-y-center size-900-900 radius-medium bg-surface-100"
+					}, {
+						icon = ReactModule.createElement(FoundationModule.Icon, {
+							name = p1.entryIcon,
+							size = FoundationModule.Enums.IconSize.Medium,
+							style = UseTokensResult.Color.Content.Emphasis
+						})
+					})
+				}),
+				body = ReactModule.createElement(FoundationModule.View, {
+					tag = "col fill size-0-full clip",
+					Name = "body",
+					LayoutOrder = 1
+				}, {
+					mainContent = ReactModule.createElement(FoundationModule.View, {
+						tag = "row align-y-center fill gap-small size-full-0 clip",
+						Name = "mainContent",
+						LayoutOrder = 1
+					}, {
+						info = ReactModule.createElement(FoundationModule.View, {
+							tag = "col align-y-center fill gap-xxsmall size-0-full clip",
+							LayoutOrder = 1
+						}, {
+							title = ReactModule.createElement(FoundationModule.Text, {
+								tag = "size-full-0 auto-y text-title-large text-align-x-left text-truncate-end content-default",
+								Name = "title",
+								LayoutOrder = 1,
+								Text = p1.titleText or ""
+							}),
+							subtitle = ReactModule.createElement(FoundationModule.Text, {
+								tag = "size-full-0 auto-y text-body-small text-align-x-left text-truncate-end content-default",
+								Name = "subTitle",
+								LayoutOrder = 2,
+								Text = p1.subTitleText or ""
+							})
+						}),
+						chevron = ReactModule.createElement(FoundationModule.View, {
+							tag = "row align-x-center align-y-center size-1200-full",
+							LayoutOrder = 2
+						}, {
+							icon = ReactModule.createElement(FoundationModule.Icon, {
+								name = FoundationModule.Enums.IconName.ChevronLargeRight,
+								size = FoundationModule.Enums.IconSize.Medium,
+								style = UseTokensResult.Color.Content.Emphasis
+							})
+						})
+					}),
+					divider = if FFlagAppChatRemoveConversationListDividerModule then nil else ReactModule.createElement(FoundationModule.View, {
+						tag = "size-full-0 auto-y",
+						Name = "divider",
+						LayoutOrder = 2
+					}, {
+						line = ReactModule.createElement(FoundationModule.Divider)
+					})
+				})
+			})
+		})
+	})
+end)

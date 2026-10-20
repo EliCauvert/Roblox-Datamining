@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXMigrateBuilderIcons2", false)

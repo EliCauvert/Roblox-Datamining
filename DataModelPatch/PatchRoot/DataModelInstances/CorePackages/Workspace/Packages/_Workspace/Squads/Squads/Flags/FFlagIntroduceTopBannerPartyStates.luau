@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("Squads").dependencies).SocialExperiments.SquadCoordinationUIChangesExperimentation.getPartyCoordinationUiChangesEnabled()

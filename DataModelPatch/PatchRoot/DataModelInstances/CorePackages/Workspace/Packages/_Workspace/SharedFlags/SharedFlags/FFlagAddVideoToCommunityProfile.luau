@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AddVideoToCommunityProfile_v7", false)

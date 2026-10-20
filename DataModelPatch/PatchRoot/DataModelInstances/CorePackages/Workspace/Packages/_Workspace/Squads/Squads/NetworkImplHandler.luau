@@ -1,0 +1,8 @@
+﻿local Squads = script:FindFirstAncestor("Squads")
+local DependenciesModule = require(Squads.dependencies)
+require(Squads.devDependencies).JestGlobals.beforeAll(function(_)
+	-- upvalues: DependenciesModule (copy)
+	DependenciesModule.RoduxNetworking.setNetworkImpl(function(p1)
+		error(string.format("Should have replaced network implementation for url: %s", (tostring(p1))))
+	end)
+end)

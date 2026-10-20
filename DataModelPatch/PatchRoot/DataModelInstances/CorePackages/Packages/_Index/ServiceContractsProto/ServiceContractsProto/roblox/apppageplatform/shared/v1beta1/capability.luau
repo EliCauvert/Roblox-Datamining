@@ -1,0 +1,18 @@
+﻿local _ = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local _ = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+
+return {
+	Capability = ({
+		Capability = {
+			fromNumber = function(p1)
+				return if p1 == 0 then "CAPABILITY_INVALID" elseif p1 == 2000 then "CAPABILITY_SUPPORTS_EDP_PERSISTENT_ACTION_BAR_PLAY_BUTTON" elseif p1 == 3000 then "CAPABILITY_SUPPORTS_OPEN_EXPERIENCE_STORE_SEE_ALL_WITH_WEBVIEW_FALLBACK_ACTION" else nil
+			end,
+			toNumber = function(p1)
+				return if p1 == "CAPABILITY_INVALID" then 0 elseif p1 == "CAPABILITY_SUPPORTS_EDP_PERSISTENT_ACTION_BAR_PLAY_BUTTON" then 2000 elseif p1 == "CAPABILITY_SUPPORTS_OPEN_EXPERIENCE_STORE_SEE_ALL_WITH_WEBVIEW_FALLBACK_ACTION" then 3000 else p1
+			end,
+			fromName = function(p1)
+				return if p1 == "CAPABILITY_INVALID" then "CAPABILITY_INVALID" elseif p1 == "CAPABILITY_SUPPORTS_EDP_PERSISTENT_ACTION_BAR_PLAY_BUTTON" then "CAPABILITY_SUPPORTS_EDP_PERSISTENT_ACTION_BAR_PLAY_BUTTON" elseif p1 == "CAPABILITY_SUPPORTS_OPEN_EXPERIENCE_STORE_SEE_ALL_WITH_WEBVIEW_FALLBACK_ACTION" then "CAPABILITY_SUPPORTS_OPEN_EXPERIENCE_STORE_SEE_ALL_WITH_WEBVIEW_FALLBACK_ACTION" else nil
+			end
+		}
+	}).Capability
+}

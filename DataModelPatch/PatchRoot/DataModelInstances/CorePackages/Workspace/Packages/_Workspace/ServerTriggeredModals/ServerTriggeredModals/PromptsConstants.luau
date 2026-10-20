@@ -1,0 +1,1 @@
+﻿return { HOMEPAGE_PROMPTS_CONFIG_KEY = "HomepagePrompts" }
