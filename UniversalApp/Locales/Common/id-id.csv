@@ -4186,6 +4186,7 @@ Feature.Moments.Label.DeleteMomentBody,Kamu tidak bisa memulihkan Moment setelah
 Feature.Moments.Label.DeleteMomentTitle,Hapus Moment?
 Feature.Moments.Label.DeleteVoiceoverBody,Ini akan menghapus teks dan voiceover-mu. Kamu dapat memulai dari awal kapan saja.
 Feature.Moments.Label.DeleteVoiceoverTitle,Hapus voiceover?
+Feature.Moments.Label.DragHereToDelete,Tarik ke sini untuk menghapus
 Feature.Moments.Label.DurationSeconds,{seconds} dtk
 Feature.Moments.Label.Engagement,Interaksi
 Feature.Moments.Label.Error,

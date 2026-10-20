@@ -4171,6 +4171,7 @@ Feature.Moments.Label.DeleteMomentBody,คุณไม่สามารถก�
 Feature.Moments.Label.DeleteMomentTitle,ลบโมเมนต์ใช่ไหม?
 Feature.Moments.Label.DeleteVoiceoverBody,การดำเนินการนี้จะล้างข้อความและเสียงบรรยายของคุณ คุณสามารถเริ่มต้นใหม่ได้ทุกเมื่อ
 Feature.Moments.Label.DeleteVoiceoverTitle,ลบเสียงบรรยายใช่ไหม?
+Feature.Moments.Label.DragHereToDelete,ลากมาที่นี่เพื่อลบ
 Feature.Moments.Label.DurationSeconds,{seconds} วินาที
 Feature.Moments.Label.Engagement,การมีส่วนร่วม
 Feature.Moments.Label.Error,

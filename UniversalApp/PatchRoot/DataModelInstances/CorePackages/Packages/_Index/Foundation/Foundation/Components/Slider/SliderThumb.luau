@@ -56,13 +56,13 @@ return function(Frame: Frame)
 		-- upvalues: Frame (copy)
 		return if Frame.isVertical then Vector2.new(0.5, 1 - X) else Vector2.new(X, 0.5)
 	end) else Vector2.new(0.5, 0.5)
-	local Element = ReactModule.createElement(KnobModule, {
+	local Element = if Frame.knobAppearance then ReactModule.createElement(KnobModule, {
 		size = Frame.knobAppearance.size,
 		style = Frame.knobAppearance.style,
 		stroke = Frame.knobAppearance.stroke,
 		hasShadow = Frame.knobAppearance.hasShadow,
 		testId = `{Frame.testId}--knob`
-	})
+	}) else nil
 	
 	return ReactModule.createElement(ViewModule, WithCommonPropsModule({
 		AnchorPoint = Frame.AnchorPoint or MapResult1,

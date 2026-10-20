@@ -476,6 +476,7 @@ Authentication.SignUp.Description.EnterParentEmail,Enter your parent's email add
 Authentication.SignUp.Description.FaceIdPromo,Face ID is the most secure and easiest way to sign in on Roblox.
 Authentication.SignUp.Description.GenderHelp2,This helps us pick a relevant avatar for you.
 Authentication.SignUp.Description.OneMoreStep,One more step
+Authentication.SignUp.Description.OptInMarketingEmailConsent,I’d like to receive emails from Roblox about news and offers.
 Authentication.SignUp.Description.Or,
 Authentication.SignUp.Description.ParentEmailDisclaimer,"We ask for your parent's email for account recovery purposes, subject to the Roblox Privacy Policy"
 Authentication.SignUp.Description.PasskeyTryAgain,"Sorry, something went wrong with registering your passkey. Please try signing up again with a different username."
@@ -4195,6 +4196,7 @@ Feature.Moments.Label.DeleteMomentBody,You can't recover a Moment once it's gone
 Feature.Moments.Label.DeleteMomentTitle,Delete Moment?
 Feature.Moments.Label.DeleteVoiceoverBody,This clears your text and voiceover. You can start over anytime.
 Feature.Moments.Label.DeleteVoiceoverTitle,Delete voiceover?
+Feature.Moments.Label.DragHereToDelete,Drag here to delete
 Feature.Moments.Label.DurationSeconds,{seconds} sec
 Feature.Moments.Label.Engagement,Engagement
 Feature.Moments.Label.Error,

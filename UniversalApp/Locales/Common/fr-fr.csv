@@ -4188,6 +4188,7 @@ Feature.Moments.Label.DeleteMomentBody,"Une fois disparu, un moment ne peut plus
 Feature.Moments.Label.DeleteMomentTitle,Supprimer le moment ?
 Feature.Moments.Label.DeleteVoiceoverBody,Ton texte et ta voix off seront effacés. Tu peux recommencer à tout moment.
 Feature.Moments.Label.DeleteVoiceoverTitle,Supprimer la voix off ?
+Feature.Moments.Label.DragHereToDelete,Fais glisser ici pour supprimer
 Feature.Moments.Label.DurationSeconds,{seconds} s
 Feature.Moments.Label.Engagement,Engagement
 Feature.Moments.Label.Error,Un problème s'est produit. Essaie à nouveau.

@@ -467,6 +467,7 @@ Authentication.SignUp.Description.EnterParentEmail,输入你家长的电子邮�
 Authentication.SignUp.Description.FaceIdPromo,面容 ID 是登录 Roblox 最安全便捷的方式。
 Authentication.SignUp.Description.GenderHelp2,这将帮助我们为你挑选一个相关的虚拟形象。
 Authentication.SignUp.Description.OneMoreStep,还有一步
+Authentication.SignUp.Description.OptInMarketingEmailConsent,
 Authentication.SignUp.Description.Or,
 Authentication.SignUp.Description.ParentEmailDisclaimer,根据 Roblox 隐私政策的规定，我们需要你提供家长的电子邮件地址，用于帐户恢复
 Authentication.SignUp.Description.PasskeyTryAgain,对不起，注册你的通行密钥出错。请尝试使用不同的用户名再次注册。
@@ -4184,6 +4185,7 @@ Feature.Moments.Label.DeleteMomentBody,精彩瞬间一旦删除，便无法恢�
 Feature.Moments.Label.DeleteMomentTitle,是否删除精彩瞬间？
 Feature.Moments.Label.DeleteVoiceoverBody,此操作将清除你的文本和旁白。你可以随时重新开始。
 Feature.Moments.Label.DeleteVoiceoverTitle,要删除旁白吗？
+Feature.Moments.Label.DragHereToDelete,拖动到此处以删除
 Feature.Moments.Label.DurationSeconds,{seconds} 秒
 Feature.Moments.Label.Engagement,参与度
 Feature.Moments.Label.Error,

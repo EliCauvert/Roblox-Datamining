@@ -33,7 +33,7 @@ local SHADOWIMAGE = ConstantsModule.SHADOW_IMAGE
 local SHADOWSIZE = ConstantsModule.SHADOW_SIZE
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseOverlayModule (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UsePreferencesModule (copy), UseScaledValueModule (copy), DIALOGSIZES (copy), ReactModule (copy), UseAnimatedBindingFunction (copy), ChildrenHasFullBleedModule (copy), OtterModule (copy), DashModule (copy), SheetTypeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), TypesModule (copy), SheetContextModule (copy), ElevationOwnerScope (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), ReactRobloxModule (copy), FlagsModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseOverlayModule (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UsePreferencesModule (copy), UseScaledValueModule (copy), DIALOGSIZES (copy), ReactModule (copy), UseAnimatedBindingFunction (copy), ChildrenHasFullBleedModule (copy), OtterModule (copy), DashModule (copy), SheetTypeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), TypesModule (copy), SheetContextModule (copy), ElevationOwnerScope (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy), FlagsModule (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), ReactRobloxModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseOverlayModuleResult = UseOverlayModule()
 	local UseTokensModuleResult = UseTokensModule()
@@ -219,7 +219,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			testId = `{WithDefaultsModuleResult.testId}--close-affordance`
 		})
 	})
-	local Element1 = ReactModule.createElement(ImageModule, {
+	local Element1 = if FlagsModule.FoundationCenterSheetOverlayShadow then ReactModule.createElement(ViewModule, {
+		tag = "shadow-overlay-300 radius-large",
+		ZIndex = 1,
+		Size = UseBindingResult6:map(function(YOffset): UDim2
+			return UDim2.new(1, 0, 0, YOffset)
+		end),
+		testId = `{WithDefaultsModuleResult.testId}--shadow`
+	}) else ReactModule.createElement(ImageModule, {
 		ZIndex = 1,
 		tag = "anchor-center-left",
 		Image = SHADOWIMAGE,
@@ -241,7 +248,36 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			ZIndex = UseElevationModuleResult.zIndex,
 			testId = `{WithDefaultsModuleResult.testId}--surface`
 		}, {
-			SheetContainer = ReactModule.createElement(ViewModule, {
+			ShadowHost = if FlagsModule.FoundationCenterSheetOverlayShadow then ReactModule.createElement(ViewModule, {
+				ZIndex = 2,
+				tag = "anchor-center-center size-full",
+				sizeConstraint = {
+					MaxSize = Vector2.new(UseScaledValueModuleResult + math.max(0, UseTokensModuleResult.Size.Size_1400 - UseTokensModuleResult.Padding.Medium) * 2, UseScaledValueModuleResult1 + math.max(0, UseTokensModuleResult.Size.Size_1400 - UseTokensModuleResult.Padding.Medium) + math.max(0, UseTokensModuleResult.Size.Size_1400 + UseTokensModuleResult.Size.Size_1200 - UseTokensModuleResult.Padding.Medium))
+				},
+				Position = UseAnimatedBindingResult1:map(function(YOffset): UDim2
+					return UDim2.new(0.5, 0, 0.5, YOffset)
+				end),
+				GroupTransparency = UseAnimatedBindingResult1:map(function(p2)
+					-- upvalues: Size800 (copy)
+					return p2 / Size800
+				end)
+			}, {
+				SheetContainer = ReactModule.createElement(ViewModule, {
+					ZIndex = 2,
+					tag = "col align-y-center anchor-center-center size-full padding-medium",
+					ref = UseResult,
+					sizeConstraint = {
+						MaxSize = Vector2.new(UseScaledValueModuleResult, UseScaledValueModuleResult1)
+					},
+					Position = UDim2.fromScale(0.5, 0.5),
+					testId = `{WithDefaultsModuleResult.testId}--center-sheet-container`,
+					onAbsoluteSizeChanged = if FlagsModule.FoundationCenterSheetHeightFix or WithDefaultsModuleResult.centerSheetHeight and UseBindingResult2 then function(Frame)
+						-- upvalues: UseTokensModuleResult (copy), UseBindingResult2 (copy), UseScaledValueModuleResult1 (copy)
+						UseBindingResult2((math.min(Frame.AbsoluteSize.Y - UseTokensModuleResult.Margin.Medium * 2, UseScaledValueModuleResult1)))
+					end else nil
+				}, nil)
+			}) else nil,
+			SheetContainer = if FlagsModule.FoundationCenterSheetOverlayShadow then nil else ReactModule.createElement(ViewModule, {
 				ZIndex = 2,
 				tag = "col align-y-center anchor-center-center size-full padding-medium",
 				ref = UseResult,

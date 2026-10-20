@@ -4166,6 +4166,7 @@ Feature.Moments.Label.DeleteMomentBody,精彩瞬间一旦删除，便无法恢�
 Feature.Moments.Label.DeleteMomentTitle,是否删除精彩瞬间？
 Feature.Moments.Label.DeleteVoiceoverBody,此操作将清除你的文本和旁白。你可以随时重新开始。
 Feature.Moments.Label.DeleteVoiceoverTitle,要删除旁白吗？
+Feature.Moments.Label.DragHereToDelete,拖动到此处以删除
 Feature.Moments.Label.DurationSeconds,{seconds} 秒
 Feature.Moments.Label.Engagement,参与度
 Feature.Moments.Label.Error,

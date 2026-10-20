@@ -4168,6 +4168,7 @@ Feature.Moments.Label.DeleteMomentBody,"कोई Moment मिट जाने 
 Feature.Moments.Label.DeleteMomentTitle,Moment डिलीट करना है?
 Feature.Moments.Label.DeleteVoiceoverBody,इससे आपका टेक्स्ट और वॉइसओवर मिट जाएगा. कभी भी फिर से शुरू करें.
 Feature.Moments.Label.DeleteVoiceoverTitle,वॉइसओवर डिलीट करना है?
+Feature.Moments.Label.DragHereToDelete,डिलीट करने के लिए यहाँ ड्रैग करें
 Feature.Moments.Label.DurationSeconds,{seconds} सेकंड
 Feature.Moments.Label.Engagement,इंगेजमेंट
 Feature.Moments.Label.Error,

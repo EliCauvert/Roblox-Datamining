@@ -4188,6 +4188,7 @@ Feature.Moments.Label.DeleteMomentBody,Bạn không thể khôi phục một Kho
 Feature.Moments.Label.DeleteMomentTitle,Xóa Khoảnh khắc?
 Feature.Moments.Label.DeleteVoiceoverBody,Thao tác này sẽ xóa văn bản và phần thuyết minh hiện tại. Bạn có thể làm lại từ đầu bất cứ lúc nào.
 Feature.Moments.Label.DeleteVoiceoverTitle,Xóa lời thuyết minh?
+Feature.Moments.Label.DragHereToDelete,Kéo vào đây để xóa
 Feature.Moments.Label.DurationSeconds,{seconds} giây
 Feature.Moments.Label.Engagement,Mức độ tương tác
 Feature.Moments.Label.Error,Đã xảy ra sự cố. Vui lòng thử lại.

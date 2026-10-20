@@ -4170,6 +4170,7 @@ Feature.Moments.Label.DeleteMomentBody,Je kunt een moment dat is verwijderd niet
 Feature.Moments.Label.DeleteMomentTitle,Moment verwijderen?
 Feature.Moments.Label.DeleteVoiceoverBody,Hierdoor worden je tekst en je voice-over gewist. Je kunt op elk moment opnieuw beginnen.
 Feature.Moments.Label.DeleteVoiceoverTitle,Voice-over verwijderen?
+Feature.Moments.Label.DragHereToDelete,Hierheen slepen om te verwijderen
 Feature.Moments.Label.DurationSeconds,{seconds} sec
 Feature.Moments.Label.Engagement,Betrokkenheid
 Feature.Moments.Label.Error,

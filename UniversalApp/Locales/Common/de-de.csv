@@ -4181,6 +4181,7 @@ Feature.Moments.Label.DeleteMomentBody,"Du kannst einen Moment nicht wiederherst
 Feature.Moments.Label.DeleteMomentTitle,Moment löschen?
 Feature.Moments.Label.DeleteVoiceoverBody,Dadurch werden dein Text und dein Voiceover gelöscht. Du kannst jederzeit von vorne anfangen.
 Feature.Moments.Label.DeleteVoiceoverTitle,Voiceover löschen?
+Feature.Moments.Label.DragHereToDelete,Zum Löschen hierher ziehen
 Feature.Moments.Label.DurationSeconds,{seconds} Sek.
 Feature.Moments.Label.Engagement,Engagement
 Feature.Moments.Label.Error,

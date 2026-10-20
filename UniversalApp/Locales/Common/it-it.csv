@@ -4170,6 +4170,7 @@ Feature.Moments.Label.DeleteMomentBody,"Una volta confermato, non sarà possibil
 Feature.Moments.Label.DeleteMomentTitle,Eliminare il Momento?
 Feature.Moments.Label.DeleteVoiceoverBody,Questa operazione cancella il testo e la voce fuori campo. Puoi ricominciare in qualsiasi momento.
 Feature.Moments.Label.DeleteVoiceoverTitle,Eliminare la voce fuori campo?
+Feature.Moments.Label.DragHereToDelete,Trascina qui per eliminare
 Feature.Moments.Label.DurationSeconds,{seconds} s
 Feature.Moments.Label.Engagement,Coinvolgimento
 Feature.Moments.Label.Error,

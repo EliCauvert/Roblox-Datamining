@@ -4188,6 +4188,7 @@ Feature.Moments.Label.DeleteMomentBody,削除したモーメントは復元で�
 Feature.Moments.Label.DeleteMomentTitle,モーメントを削除しますか？
 Feature.Moments.Label.DeleteVoiceoverBody,これにより、テキストとボイスオーバーが消去されます。この操作はいつでもやり直せます。
 Feature.Moments.Label.DeleteVoiceoverTitle,ボイスオーバーを削除しますか？
+Feature.Moments.Label.DragHereToDelete,ここにドラッグして削除
 Feature.Moments.Label.DurationSeconds,{seconds}秒
 Feature.Moments.Label.Engagement,エンゲージメント
 Feature.Moments.Label.Error,

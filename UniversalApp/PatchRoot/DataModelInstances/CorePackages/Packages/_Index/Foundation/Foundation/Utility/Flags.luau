@@ -1,5 +1,4 @@
 ﻿local SafeFlagsModule = require(script:FindFirstAncestor("Foundation").Parent.SafeFlags)
-local FoundationStyleRulePseudoName = SafeFlagsModule.createGetFFlag("FoundationStyleRulePseudoName")()
 local FoundationFixColorOnScrubbableNumberInput = SafeFlagsModule.createGetFFlag("FoundationFixColorOnScrubbableNumberInput")()
 local FoundationEducationalTooltipRefresh = SafeFlagsModule.createGetFFlag("FoundationEducationalTooltipRefresh2")()
 local FoundationEducationalTooltipMinMediaWidth = SafeFlagsModule.createGetFFlag("FoundationEducationalTooltipMinMediaWidth3")()
@@ -13,7 +12,6 @@ return {
 	FoundationPopoverPluginOverlayMeasurement = SafeFlagsModule.createGetFFlag("FoundationPopoverPluginOverlayMeasurement2")(),
 	FoundationBaseMenuSubmenuMaxHeight = SafeFlagsModule.createGetFFlag("FoundationBaseMenuSubmenuMaxHeight")(),
 	FoundationViewMemoizationChanges = SafeFlagsModule.createGetFFlag("FoundationViewMemoizationChanges")(),
-	FoundationOptionSelectorGroupFixes = SafeFlagsModule.createGetFFlag("FoundationOptionSelectorGroupFixes")(),
 	FoundationWidgetManagerSnapshotFlush = SafeFlagsModule.createGetFFlag("FoundationWidgetManagerSnapshotFlush")(),
 	FoundationSegmentedControlBeta = SafeFlagsModule.createGetFFlag("FoundationSegmentedControlBeta")(),
 	FoundationTooltipPressedOutside = SafeFlagsModule.createGetFFlag("FoundationTooltipPressedOutside")(),
@@ -21,21 +19,16 @@ return {
 	FoundationListItemDecoupledInput = SafeFlagsModule.createGetFFlag("FoundationListItemDecoupledInput")(),
 	FoundationListStableContextValue = SafeFlagsModule.createGetFFlag("FoundationListStableContextValue")(),
 	FoundationPopoverPluginAnchorRefresh = SafeFlagsModule.createGetFFlag("FoundationPopoverPluginAnchorRefresh")(),
-	FoundationSkeletonCommonShimmerToken = SafeFlagsModule.createGetFFlag("FoundationSkeletonCommonShimmerToken")(),
-	FoundationDateTimePickerBetaUpdate = SafeFlagsModule.createGetFFlag("FoundationDateTimePickerBetaUpdate")(),
 	FoundationListItemTypographySpacing = SafeFlagsModule.createGetFFlag("FoundationListItemTypographySpacing")(),
-	FoundationOptionSelectorGroupBeta = SafeFlagsModule.createGetFFlag("FoundationOptionSelectorGroupBeta")(),
 	FoundationPopoverClickOutsideInGuiShadow = SafeFlagsModule.createGetFFlag("FoundationPopoverClickOutsideInGuiShadow")(),
 	FoundationPopoverContentAnchorFix = SafeFlagsModule.createGetFFlag("FoundationPopoverContentAnchorFix")(),
 	FoundationPopoverRecomputeContentSize = SafeFlagsModule.createGetFFlag("FoundationPopoverRecomputeContentSize")(),
-	FoundationProgressCircleRoundCaps = SafeFlagsModule.createGetFFlag("FoundationProgressCircleRoundCaps")(),
 	FoundationAnimatedHighlightSettling = SafeFlagsModule.createGetFFlag("FoundationAnimatedHighlightSettling")(),
 	FoundationNumberInputScrubCallbackProps = SafeFlagsModule.createGetFFlag("FoundationNumberInputScrubCallbackProps2")(),
 	FoundationPopoverPluginFocusable = SafeFlagsModule.createGetFFlag("FoundationPopoverPluginFocusable")(),
 	FoundationTooltipBeta = SafeFlagsModule.createGetFFlag("FoundationTooltipBeta3")(),
 	FoundationProviderStableEmptyTable = SafeFlagsModule.createGetFFlag("FoundationProviderStableEmptyTable")(),
-	FoundationStyleRulePseudoName = FoundationStyleRulePseudoName,
-	FoundationKnobRaisedShadow = FoundationStyleRulePseudoName and SafeFlagsModule.createGetFFlag("FoundationKnobRaisedShadow")(),
+	FoundationKnobRaisedShadow = SafeFlagsModule.createGetFFlag("FoundationKnobRaisedShadow")(),
 	FoundationStatusIndicatorMask = SafeFlagsModule.createGetFFlag("FoundationStatusIndicatorMask")(),
 	FoundationAccordionBeta = SafeFlagsModule.createGetFFlag("FoundationAccordionBeta")(),
 	FoundationSystemEmphasisNonActions = SafeFlagsModule.createGetFFlag("FoundationSystemEmphasisNonActions")(),
@@ -58,5 +51,9 @@ return {
 	FoundationStatusIndicatorDesignUpdate = SafeFlagsModule.createGetFFlag("FoundationStatusIndicatorDesignUpdate")(),
 	FoundationUnifiedScrimScrolling = SafeFlagsModule.createGetFFlag("FoundationUnifiedScrimScrolling2")(),
 	FoundationFixChipAccessoryLayout = SafeFlagsModule.createGetFFlag("FoundationFixChipAccessoryLayout")(),
-	FoundationRemoveDeprecatedSemanticTokens = SafeFlagsModule.createGetFFlag("FoundationRemoveDeprecatedSemanticTokens")()
+	FoundationRemoveDeprecatedSemanticTokens = SafeFlagsModule.createGetFFlag("FoundationRemoveDeprecatedSemanticTokens")(),
+	FoundationBottomSheetOverlayShadow = SafeFlagsModule.createGetFFlag("FoundationBottomSheetOverlayShadow")(),
+	FoundationCenterSheetOverlayShadow = SafeFlagsModule.createGetFFlag("FoundationCenterSheetOverlayShadow")(),
+	FoundationDialogOverlayShadow = SafeFlagsModule.createGetFFlag("FoundationDialogOverlayShadow")(),
+	FoundationPopoverOverlayShadow = SafeFlagsModule.createGetFFlag("FoundationPopoverOverlayShadow")()
 }

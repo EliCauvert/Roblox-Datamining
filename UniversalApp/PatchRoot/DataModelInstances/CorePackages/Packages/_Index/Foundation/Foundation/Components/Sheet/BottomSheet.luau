@@ -515,7 +515,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 				Content = ReactModule.createElement(SheetContextModule.Provider, { value = UseMemoResult11 }, ReactModule.createElement(ElevationOwnerScope, { owner = UseElevationModuleResult }, WithDefaultsModuleResult.children))
 			})
 		}),
-		Shadow = ReactModule.createElement(ImageModule, {
+		Shadow = if FlagsModule.FoundationBottomSheetOverlayShadow then ReactModule.createElement(ViewModule, {
+			tag = "shadow-overlay-300 radius-large",
+			ZIndex = 2,
+			Size = UDim2.new(1, 0, 0, Smallest1 + 200),
+			Position = UDim2.new(0, 0, 1, -Smallest1),
+			testId = `{WithDefaultsModuleResult.testId}--shadow`
+		}) else ReactModule.createElement(ImageModule, {
 			ZIndex = 2,
 			Image = SHADOWIMAGE,
 			Size = UDim2.new(1, SHADOWSIZE * 2, 0, Smallest1 + 200 + SHADOWSIZE * 2),

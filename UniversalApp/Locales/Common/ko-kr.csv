@@ -4191,6 +4191,7 @@ Feature.Moments.Label.DeleteMomentBody,모멘트가 삭제되면 복구할 수 �
 Feature.Moments.Label.DeleteMomentTitle,모멘트를 삭제할까요?
 Feature.Moments.Label.DeleteVoiceoverBody,계속하면 텍스트와 보이스오버가 지워집니다. 언제든지 다시 시작할 수 있습니다.
 Feature.Moments.Label.DeleteVoiceoverTitle,보이스오버를 삭제하시겠습니까?
+Feature.Moments.Label.DragHereToDelete,삭제하려면 여기로 끌어다 놓으세요
 Feature.Moments.Label.DurationSeconds,{seconds}초
 Feature.Moments.Label.Engagement,참여도
 Feature.Moments.Label.Error,

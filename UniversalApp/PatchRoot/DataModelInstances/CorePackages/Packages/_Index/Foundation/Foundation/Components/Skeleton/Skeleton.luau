@@ -3,7 +3,6 @@ local Parent = Foundation.Parent
 local ReactModule = require(Parent.React)
 local UseClockFunction = require(Parent.ReactUtils).useClock
 local Components = Foundation.Components
-local FlagsModule = require(Foundation.Utility.Flags)
 local _ = require(Components.Types)
 local ViewModule = require(Components.View)
 local RadiusModule = require(Foundation.Enums.Radius)
@@ -20,19 +19,19 @@ local config = {
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseClockFunction (copy), UsePulseBindingModule (copy), UseTokensModule (copy), UsePreferencesModule (copy), RadiusModule (copy), FlagsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), LerpModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseClockFunction (copy), UsePulseBindingModule (copy), UseTokensModule (copy), UsePreferencesModule (copy), RadiusModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), LerpModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseClockResult = UseClockFunction()
 	local UsePulseBindingModuleResult = UsePulseBindingModule(2)
 	local UseTokensModuleResult = UseTokensModule()
 	local UsePreferencesModuleResult = UsePreferencesModule()
-	local Shimmer = if FlagsModule.FoundationSkeletonCommonShimmerToken then UseTokensModuleResult.Color.Common.Shimmer else UseTokensModuleResult.Color.Shift.Shift_300
+	local Shimmer = UseTokensModuleResult.Color.Common.Shimmer
 	
 	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		cornerRadius = if WithDefaultsModuleResult.radius == RadiusModule.None then nil else UDim.new(0, UseTokensModuleResult.Radius[WithDefaultsModuleResult.radius]),
 		backgroundStyle = if UsePreferencesModuleResult.reducedMotion then UsePulseBindingModuleResult:map(function(p2)
-			-- upvalues: FlagsModule (upval), Shimmer (copy), UseTokensModuleResult (copy), LerpModule (upval)
-			local Transparency = if FlagsModule.FoundationSkeletonCommonShimmerToken then Shimmer.Transparency else UseTokensModuleResult.Color.Extended.White.White_10.Transparency
+			-- upvalues: Shimmer (copy), LerpModule (upval)
+			local Transparency: number = Shimmer.Transparency
 			
 			return {
 				Color3 = Shimmer.Color3,

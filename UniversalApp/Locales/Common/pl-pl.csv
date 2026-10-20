@@ -4188,6 +4188,7 @@ Feature.Moments.Label.DeleteMomentBody,Po usunięciu momentu nie będzie go moż
 Feature.Moments.Label.DeleteMomentTitle,Usunąć moment?
 Feature.Moments.Label.DeleteVoiceoverBody,Spowoduje to usunięcie tekstu i lektora. Możesz zacząć od nowa w dowolnym momencie.
 Feature.Moments.Label.DeleteVoiceoverTitle,Usunąć lektora?
+Feature.Moments.Label.DragHereToDelete,"Przeciągnij tutaj, aby usunąć"
 Feature.Moments.Label.DurationSeconds,{seconds} s
 Feature.Moments.Label.Engagement,Zaangażowanie
 Feature.Moments.Label.Error,

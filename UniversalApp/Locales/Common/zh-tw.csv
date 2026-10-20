@@ -4187,6 +4187,7 @@ Feature.Moments.Label.DeleteMomentBody,美好時光一經刪除即無法復原�
 Feature.Moments.Label.DeleteMomentTitle,要刪除美好時光嗎？
 Feature.Moments.Label.DeleteVoiceoverBody,此操作會清除你的文字和旁白。你可以隨時重新開始。
 Feature.Moments.Label.DeleteVoiceoverTitle,要刪除旁白嗎？
+Feature.Moments.Label.DragHereToDelete,拖曳到此處即可刪除
 Feature.Moments.Label.DurationSeconds,{seconds} 秒
 Feature.Moments.Label.Engagement,互動
 Feature.Moments.Label.Error,

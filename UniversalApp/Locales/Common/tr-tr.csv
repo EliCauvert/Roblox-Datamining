@@ -4144,6 +4144,7 @@ Feature.Moments.Label.DeleteMomentBody,Bir An silindikten sonra onu kurtarmak m�
 Feature.Moments.Label.DeleteMomentTitle,An silinsin mi?
 Feature.Moments.Label.DeleteVoiceoverBody,"Bu, işlem metnini ve seslendirmeni siler. İstediğin zaman baştan başlayabilirsin."
 Feature.Moments.Label.DeleteVoiceoverTitle,Seslendirme silinsin mi?
+Feature.Moments.Label.DragHereToDelete,Silmek için buraya sürükle
 Feature.Moments.Label.DurationSeconds,{seconds} sn.
 Feature.Moments.Label.Engagement,Etkileşim
 Feature.Moments.Label.Error,

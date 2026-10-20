@@ -37,7 +37,7 @@ local SHADOWIMAGE = ConstantsModule.SHADOW_IMAGE
 local SHADOWSIZE = ConstantsModule.SHADOW_SIZE
 
 return ReactModule.forwardRef(function(p1, p2)
-	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), PopoverContextModule (copy), UseOverlayModule (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UsePointerPositionModule (copy), UseFloatingModule (copy), IsPointInGuiObjectBoundsModule (copy), FlagsModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), DashModule (copy), config1 (copy), ElevationOwnerScope (copy), ReactRobloxModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), PopoverContextModule (copy), UseOverlayModule (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UsePointerPositionModule (copy), UseFloatingModule (copy), IsPointInGuiObjectBoundsModule (copy), FlagsModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), config1 (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), DashModule (copy), ElevationOwnerScope (copy), ReactRobloxModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseContextResult = ReactModule.useContext(PopoverContextModule)
 	local IsInstance = typeof(UseContextResult.anchor) == "Instance"
@@ -116,7 +116,16 @@ return ReactModule.forwardRef(function(p1, p2)
 			ref = UseResult,
 			testId = `{UseContextResult.testId}--backdrop`
 		}) else nil,
-		Shadow = ReactModule.createElement(ImageModule, {
+		Shadow = if FlagsModule.FoundationPopoverOverlayShadow then ReactModule.createElement(ViewModule, {
+			ZIndex = 2,
+			AnchorPoint = UseFloatingModuleResult6,
+			Size = UseFloatingModuleResult3,
+			Position = UseFloatingModuleResult:map(function(Vector): UDim2
+				return UDim2.fromOffset(Vector.X, Vector.Y)
+			end),
+			tag = `shadow-overlay-300 {config1[WithDefaultsModuleResult.radius]}`,
+			testId = `{UseContextResult.testId}--shadow`
+		}) else ReactModule.createElement(ImageModule, {
 			ZIndex = 2,
 			AnchorPoint = UseFloatingModuleResult6,
 			Image = SHADOWIMAGE,
