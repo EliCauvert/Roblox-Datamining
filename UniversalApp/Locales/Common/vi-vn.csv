@@ -4134,6 +4134,7 @@ Feature.Moments.Action.Retry,
 Feature.Moments.Action.RetryLoadingComments,Thử tải lại bình luận
 Feature.Moments.Action.Return,Quay lại Thư viện
 Feature.Moments.Action.ReturnToEditing,Quay lại Bản chỉnh sửa
+Feature.Moments.Action.Save,
 Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,Hiển thị chi tiết
 Feature.Moments.Action.ShowMore,

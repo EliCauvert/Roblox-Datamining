@@ -2427,6 +2427,8 @@ Feature.Build.Description.GameConfiguration,更改你销售道具和推广游戏
 Feature.Build.Description.GameCreationDone,我已完成游戏的创建和发布。你可以打开它进行游戏测试。
 Feature.Build.Description.GameSavedPlaytest,我已完成游戏的创建并保存了新版本。你可以打开它进行游戏测试。
 Feature.Build.Description.HubSettings,在创作者中心管理所有设置
+Feature.Build.Description.InternalSpec,
+Feature.Build.Description.InternalTesting,
 Feature.Build.Description.InviteFriendLimit,在你创建时，邀请最多 {MAX_INVITES} 位好友一起游玩。
 Feature.Build.Description.LongAdCampaign,有更多时间触达新玩家，并让他们持续回归。
 Feature.Build.Description.MakeAudienceAvail,面向此受众群体发布你的体验。
@@ -2529,6 +2531,8 @@ Feature.Build.Label.IconThumbnails,标志和缩略图
 Feature.Build.Label.Images2D,2D 图像
 Feature.Build.Label.InProgress,进行中
 Feature.Build.Label.InputNeeded,需要输入内容
+Feature.Build.Label.InternalSpec,
+Feature.Build.Label.InternalTesting,
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,受限
 Feature.Build.Label.Live,已发布
@@ -2758,6 +2762,7 @@ Feature.Build.Notification.Title.Finished,构建已完成
 Feature.Build.Notification.Title.NeedInput,构建需要你的输入
 Feature.Build.Placeholder.DescribeProduct,描述你想出售的内容
 Feature.Build.Placeholder.DescribeProductUpdate,描述一项更新
+Feature.Build.Placeholder.InternalSpec,
 Feature.Build.Prompt.CreateDeveloperProduct,帮助我创建开发者产品，将其接入游戏，验证并发布更改，供玩家购买。
 Feature.Build.Title.AdActive,广告活动已启动
 Feature.Build.Title.AdCampaignDuration,{durationDays} 天广告活动
@@ -4131,6 +4136,7 @@ Feature.Moments.Action.Retry,
 Feature.Moments.Action.RetryLoadingComments,重新加载评论
 Feature.Moments.Action.Return,返回图库
 Feature.Moments.Action.ReturnToEditing,返回编辑
+Feature.Moments.Action.Save,
 Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,显示详情
 Feature.Moments.Action.ShowMore,

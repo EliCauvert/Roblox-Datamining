@@ -4132,6 +4132,7 @@ Feature.Moments.Action.Retry,
 Feature.Moments.Action.RetryLoadingComments,Coba load komentar lagi
 Feature.Moments.Action.Return,Kembali ke Galeri
 Feature.Moments.Action.ReturnToEditing,Kembali ke Pengeditan
+Feature.Moments.Action.Save,
 Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,Tampilkan detail
 Feature.Moments.Action.ShowMore,

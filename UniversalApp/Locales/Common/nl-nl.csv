@@ -4116,6 +4116,7 @@ Feature.Moments.Action.Retry,
 Feature.Moments.Action.RetryLoadingComments,Opnieuw proberen reacties te laden
 Feature.Moments.Action.Return,Terug naar galerij
 Feature.Moments.Action.ReturnToEditing,Terug naar bewerken
+Feature.Moments.Action.Save,
 Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,Details weergeven
 Feature.Moments.Action.ShowMore,

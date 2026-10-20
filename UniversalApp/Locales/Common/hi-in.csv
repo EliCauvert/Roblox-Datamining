@@ -4114,6 +4114,7 @@ Feature.Moments.Action.Retry,
 Feature.Moments.Action.RetryLoadingComments,कमेंट्स फिर से लोड करने की कोशिश करें
 Feature.Moments.Action.Return,गैलरी पर वापस जाएँ
 Feature.Moments.Action.ReturnToEditing,एडिटिंग पर वापस जाएँ
+Feature.Moments.Action.Save,
 Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,जानकारी दिखाएँ
 Feature.Moments.Action.ShowMore,

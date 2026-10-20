@@ -4060,6 +4060,7 @@ Feature.Moments.Action.Retry,
 Feature.Moments.Action.RetryLoadingComments,إعادة محاولة تحميل التعليقات
 Feature.Moments.Action.Return,الرجوع إلى المعرض
 Feature.Moments.Action.ReturnToEditing,الرجوع إلى التحرير
+Feature.Moments.Action.Save,
 Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,
 Feature.Moments.Action.ShowMore,اعرض المزيد

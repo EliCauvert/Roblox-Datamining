@@ -4116,6 +4116,7 @@ Feature.Moments.Action.Retry,
 Feature.Moments.Action.RetryLoadingComments,Riprova a caricare i commenti
 Feature.Moments.Action.Return,Ritorna alla Galleria
 Feature.Moments.Action.ReturnToEditing,Ritorna alla fase di modifica
+Feature.Moments.Action.Save,
 Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,Mostra dettagli
 Feature.Moments.Action.ShowMore,
